@@ -1,0 +1,21 @@
+{
+  "name": "Yaado Ki Cassette",
+  "short_name": "Yaado Ki Cassette",
+  "description": "80s-90s retro hits, timeless memories — no ads.",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#241a10",
+  "theme_color": "#D9AE5C",
+  "icons": [
+    {
+      "src": "assets/hero-bg.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "assets/hero-bg.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
