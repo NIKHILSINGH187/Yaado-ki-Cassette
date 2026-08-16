@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://nikhilsingh187.github.io/Yaado-ki-Cassette/sitemap.xml
