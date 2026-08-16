@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="hi">
 <head>
@@ -29,15 +30,54 @@
   .stage{
     position:relative;
     min-height:100vh;
-    background-image:
-      linear-gradient(180deg, rgba(15,10,6,0.55) 0%, rgba(15,10,6,0.05) 22%, rgba(15,10,6,0.05) 60%, rgba(10,7,4,0.75) 100%),
-      url('assets/hero-bg.png');
-    background-size:cover;
-    background-position:center;
+    overflow:hidden;
     display:flex;
     flex-direction:column;
     justify-content:space-between;
     padding:22px 24px 28px;
+  }
+
+  /* ===== HERO IMAGE (full quality, no CSS scaling artifacts) ===== */
+  .hero-link{
+    position:absolute;
+    inset:0;
+    z-index:0;
+    display:block;
+  }
+  .hero-img{
+    position:absolute;
+    inset:0;
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    object-position:center;
+    /* keeps the browser from softening the image when scaling */
+    image-rendering:auto;
+  }
+  .hero-overlay{
+    position:absolute;
+    inset:0;
+    z-index:1;
+    pointer-events:none;
+    background-image:
+      linear-gradient(180deg, rgba(15,10,6,0.55) 0%, rgba(15,10,6,0.05) 22%, rgba(15,10,6,0.05) 60%, rgba(10,7,4,0.75) 100%);
+  }
+  .stage > *:not(.hero-link):not(.hero-overlay){
+    position:relative;
+    z-index:2;
+  }
+  .tap-hint{
+    position:absolute;
+    bottom:10px;
+    right:14px;
+    z-index:2;
+    font-size:10px;
+    opacity:0.55;
+    background:var(--glass-bg);
+    border:1px solid var(--glass-border);
+    padding:4px 9px;
+    border-radius:10px;
+    pointer-events:none;
   }
 
   /* ===== TOP BAR ===== */
@@ -72,6 +112,7 @@
     backdrop-filter:blur(6px);
     padding:7px 16px;
     border-radius:20px;
+    z-index:2;
   }
   .live-count .dot{
     width:8px; height:8px; border-radius:50%;
@@ -182,6 +223,17 @@
   .player-wrap{
     align-self:center;
     width:min(560px, 94vw);
+  }
+
+  .yt-player-frame{
+    width:100%;
+    aspect-ratio:16/9;
+    max-height:320px;
+    border-radius:16px;
+    overflow:hidden;
+    border:1px solid var(--glass-border);
+    background:var(--glass-bg);
+    backdrop-filter:blur(12px);
   }
 
   .player-bar{
@@ -340,6 +392,14 @@
 
 <div class="stage">
 
+  <!-- Tapping/clicking anywhere on the background opens the full-resolution
+       source image in a new tab, on desktop AND mobile. -->
+  <a class="hero-link" href="assets/hero-bg.png" target="_blank" rel="noopener" aria-label="Open full resolution background image">
+    <img class="hero-img" src="assets/hero-bg.png" alt="Yaado Ki Cassette background" loading="eager" decoding="async">
+  </a>
+  <div class="hero-overlay"></div>
+  <div class="tap-hint">tap image for full quality</div>
+
   <div class="topbar">
     <div class="clock" id="clock">10:16 PM</div>
 
@@ -382,46 +442,24 @@
     </div>
   </div>
 
-  <div class="browse-panel" id="browsePanel">
-    <div class="browse-head">
-      <span id="browseTitle">Songs</span>
-      <button class="notif-close" id="browseClose">✕</button>
-    </div>
-    <div class="browse-list" id="browseList"></div>
-  </div>
-
+  <!-- Real embedded YouTube playlist player — "yaado ki Cassette" (92 videos) -->
   <div class="player-wrap">
-    <div class="player-bar" id="playerBar">
-      <div class="cover">📻</div>
-      <div class="track-meta">
-        <div class="name" id="trackName">Tuning in...</div>
-        <div class="artist" id="trackArtist">Yaado Ki Cassette Radio</div>
-      </div>
-      <div class="transport">
-        <button aria-label="Previous"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M6 6h2v12H6zm3.5 6l8.5 6V6z"/></svg></button>
-        <button class="play-btn" id="playBtn" aria-label="Play">
-          <svg id="playIcon" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
-          <svg id="pauseIcon" viewBox="0 0 24 24" fill="currentColor" style="display:none"><path d="M6 5h4v14H6zM14 5h4v14h-4z"/></svg>
-        </button>
-        <button aria-label="Next"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M16 6h2v12h-2zM6 6v12l8.5-6z"/></svg></button>
-      </div>
-      <div class="progress-wrap">
-        <div class="scrub-track" id="scrubTrack">
-          <div class="scrub-fill" id="scrubFill"></div>
-        </div>
-        <span class="time" id="timeLabel">0:00 / 0:00</span>
-      </div>
-      <div class="vol">
-        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M3 10v4h4l5 5V5L7 10H3zm13.5 2A4.5 4.5 0 0 0 14 7.97v8.05A4.5 4.5 0 0 0 16.5 12z"/></svg>
-        <input type="range" class="vol-slider" id="volSlider" min="0" max="100" value="70">
-      </div>
+    <div class="yt-player-frame">
+      <iframe
+        id="ytPlayer"
+        width="100%"
+        height="100%"
+        src="https://www.youtube.com/embed/videoseries?list=PLPcvPJDN5yKI&autoplay=0"
+        title="Yaado Ki Cassette Radio"
+        frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen>
+      </iframe>
     </div>
     <div class="contact-line">contact: nikhilsingh.cse07@gmail.com</div>
   </div>
 
 </div>
-
-<audio id="audioEl"></audio>
 
 <script>
   // live clock
@@ -445,117 +483,12 @@
     onlineEl.textContent = online;
   }, 4000);
 
-  // ===== TRACK LIST (placeholder — replace src with real files or Jamendo URLs) =====
-  const tracks = [
-    { name: 'Track 01', artist: 'Add your source', src: '', len: '--:--' },
-    { name: 'Track 02', artist: 'Add your source', src: '', len: '--:--' },
-    { name: 'Track 03', artist: 'Add your source', src: '', len: '--:--' },
-    { name: 'Track 04', artist: 'Add your source', src: '', len: '--:--' },
-    { name: 'Track 05', artist: 'Add your source', src: '', len: '--:--' },
-  ];
-  let currentTrack = 0;
-
-  const audio = document.getElementById('audioEl');
-  const playBtn = document.getElementById('playBtn');
-  const playIcon = document.getElementById('playIcon');
-  const pauseIcon = document.getElementById('pauseIcon');
-  const scrubTrack = document.getElementById('scrubTrack');
-  const scrubFill = document.getElementById('scrubFill');
-  const timeLabel = document.getElementById('timeLabel');
-  const trackName = document.getElementById('trackName');
-  const trackArtist = document.getElementById('trackArtist');
-  const volSlider = document.getElementById('volSlider');
-  const prevBtn = document.querySelector('.transport button[aria-label="Previous"]');
-  const nextBtn = document.querySelector('.transport button[aria-label="Next"]');
-
-  audio.volume = 0.7;
-
-  function fmt(s){
-    if(!isFinite(s)) return '0:00';
-    const m = Math.floor(s/60), sec = Math.floor(s%60);
-    return m + ':' + String(sec).padStart(2,'0');
-  }
-
-  function loadTrack(i, autoplay){
-    currentTrack = (i + tracks.length) % tracks.length;
-    const t = tracks[currentTrack];
-    trackName.textContent = t.name;
-    trackArtist.textContent = t.artist;
-    if(t.src){
-      audio.src = t.src;
-      if(autoplay) audio.play();
-    } else {
-      audio.removeAttribute('src');
-      trackArtist.textContent = 'No source linked yet';
-    }
-    renderBrowseList();
-  }
-
-  playBtn.addEventListener('click', () => {
-    if(!audio.src){
-      trackArtist.textContent = 'Add a track source to play';
-      return;
-    }
-    if(audio.paused){ audio.play(); } else { audio.pause(); }
-  });
-
-  prevBtn.addEventListener('click', () => loadTrack(currentTrack - 1, true));
-  nextBtn.addEventListener('click', () => loadTrack(currentTrack + 1, true));
-
-  audio.addEventListener('play', () => {
-    playIcon.style.display = 'none'; pauseIcon.style.display = 'block';
-  });
-  audio.addEventListener('pause', () => {
-    playIcon.style.display = 'block'; pauseIcon.style.display = 'none';
-  });
-  audio.addEventListener('ended', () => loadTrack(currentTrack + 1, true));
-  audio.addEventListener('timeupdate', () => {
-    const pct = audio.duration ? (audio.currentTime/audio.duration)*100 : 0;
-    scrubFill.style.width = pct + '%';
-    timeLabel.textContent = fmt(audio.currentTime) + ' / ' + fmt(audio.duration);
-  });
-
-  scrubTrack.addEventListener('click', (e) => {
-    if(!audio.duration) return;
-    const rect = scrubTrack.getBoundingClientRect();
-    const pct = (e.clientX - rect.left) / rect.width;
-    audio.currentTime = pct * audio.duration;
-  });
-
-  volSlider.addEventListener('input', () => {
-    audio.volume = volSlider.value / 100;
-  });
-
-  // ===== PLAYLISTS / SONGS BROWSE PANEL =====
-  const browsePanel = document.getElementById('browsePanel');
-  const browseTitle = document.getElementById('browseTitle');
-  const browseList = document.getElementById('browseList');
-  const browseClose = document.getElementById('browseClose');
+  // ===== PLAYLISTS / SONGS — both open the real YouTube playlist =====
+  const YT_PLAYLIST_URL = 'https://www.youtube.com/playlist?list=PLPcvPJDN5yKI';
   const playlistsBtn = document.getElementById('playlistsBtn');
   const songsBtn = document.getElementById('songsBtn');
-
-  function renderBrowseList(){
-    browseList.innerHTML = tracks.map((t, i) => `
-      <div class="browse-row" data-index="${i}">
-        <span class="bnum">${String(i+1).padStart(2,'0')}</span>
-        <span class="bname">${t.name}${i === currentTrack ? ' ▸' : ''}</span>
-        <span class="blen">${t.len}</span>
-      </div>
-    `).join('');
-    browseList.querySelectorAll('.browse-row').forEach(row => {
-      row.addEventListener('click', () => loadTrack(parseInt(row.dataset.index), true));
-    });
-  }
-
-  function openBrowse(title){
-    browseTitle.textContent = title;
-    renderBrowseList();
-    browsePanel.classList.add('open');
-  }
-
-  playlistsBtn.addEventListener('click', () => openBrowse('Playlists — Side A'));
-  songsBtn.addEventListener('click', () => openBrowse('Songs'));
-  browseClose.addEventListener('click', () => browsePanel.classList.remove('open'));
+  playlistsBtn.addEventListener('click', () => window.open(YT_PLAYLIST_URL, '_blank'));
+  songsBtn.addEventListener('click', () => window.open(YT_PLAYLIST_URL, '_blank'));
 
   // ===== NOTIFICATION CARD BUTTONS =====
   document.getElementById('notif1Close').addEventListener('click', (e) => {
@@ -565,7 +498,7 @@
     e.target.closest('.notif-card').style.display = 'none';
   });
 
-  // TODO: replace with your real WhatsApp group invite link
+  // WhatsApp group invite link
   document.getElementById('joinFreeBtn').addEventListener('click', () => {
     window.open('https://chat.whatsapp.com/EMituq2F5HLGZnK8CxME5d', '_blank');
   });
