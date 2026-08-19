@@ -68,4 +68,4 @@ Hosted via **GitHub Pages** directly from this repository. Any change pushed to 
 
 ## 📄 License
 
-This project is for personal/non-commercial use. Song playback is streamed via YouTube's official embeddable player — no audio files are hosted in this repository.'
+This project is for personal/non-commercial use. Song playback is streamed via YouTube's official embeddable player — no audio files are hosted in this repository.
