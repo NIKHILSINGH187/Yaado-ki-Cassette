@@ -2,397 +2,829 @@
 <html lang="hi">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>यादों की कैसेट — Yaado Ki Cassette | Hindi Retro Radio</title>
-<meta name="description" content="Yaado Ki Cassette — a nostalgic Hindi retro radio playing old Bollywood classics and yaadon bhari cassette-era songs, 24/7 online.">
-<meta name="keywords" content="yaado ki cassette, hindi retro radio, old bollywood songs, purane gaane, cassette radio online, hindi songs online radio">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>यादों की कैसेट — Yaado Ki Cassette | Viral Retro Hindi Mixtape Player</title>
+<meta name="description" content="यादों की कैसेट (Yaado Ki Cassette) — An aesthetic, ad-free vintage cassette tape player streaming timeless Hindi classics, 90s nostalgia, ghazals, and soothing lo-fi beats.">
+<meta name="keywords" content="yaado ki cassette, retro hindi player, vintage cassette tape, purane gaane, old bollywood songs, lofi hindi, cassette player online">
 <meta name="author" content="Nikhil Singh">
 <link rel="canonical" href="https://nikhilsingh187.github.io/Yaado-ki-Cassette/">
 
 <meta property="og:type" content="website">
 <meta property="og:title" content="यादों की कैसेट — Yaado Ki Cassette">
-<meta property="og:description" content="A nostalgic Hindi retro radio playing old Bollywood classics, 24/7 online.">
+<meta property="og:description" content="An aesthetic, ad-free retro cassette tape player streaming timeless Hindi classics & nostalgia.">
 <meta property="og:image" content="https://nikhilsingh187.github.io/Yaado-ki-Cassette/assets/hero-bg.png">
 <meta property="og:url" content="https://nikhilsingh187.github.io/Yaado-ki-Cassette/">
 
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="यादों की कैसेट — Yaado Ki Cassette">
-<meta name="twitter:description" content="A nostalgic Hindi retro radio playing old Bollywood classics, 24/7 online.">
+<meta name="twitter:description" content="Play nostalgic Hindi cassette classics in a warm retro walkman aesthetic.">
 <meta name="twitter:image" content="https://nikhilsingh187.github.io/Yaado-ki-Cassette/assets/hero-bg.png">
 <link rel="manifest" href="manifest.json">
-<meta name="theme-color" content="#D9AE5C">
-<meta name="referrer" content="strict-origin-when-cross-origin">
+<meta name="theme-color" content="#c8963e">
+
+<!-- Google Fonts: Special Elite, Kalam (Handwritten Hindi/English), Space Mono -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Special+Elite&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=IBM+Plex+Mono:wght@400;500;600;700&family=Kalam:wght@400;700&family=Special+Elite&display=swap" rel="stylesheet">
+
 <style>
-  :root{
-    --brass:#D9AE5C;
-    --paper:#F1E4C9;
-    --glass-bg:rgba(20,14,8,0.42);
-    --glass-border:rgba(241,228,201,0.18);
-    --green:#3FBF63;
-    --red:#E23B3B;
+  :root {
+    --brass: #d4a359;
+    --brass-glow: rgba(212, 163, 89, 0.4);
+    --gold: #f3c267;
+    --paper: #f4ebd9;
+    --paper-dark: #dfd2b8;
+    --tape-body: #1e1b18;
+    --tape-border: #38322c;
+    --glass-bg: rgba(22, 15, 9, 0.55);
+    --glass-border: rgba(244, 235, 217, 0.18);
+    --red: #e63946;
+    --green: #2a9d8f;
+    --amber-glow: #ffb703;
   }
 
-  *{box-sizing:border-box; margin:0; padding:0;}
+  * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
 
-  html, body{
-    height:100%;
-    font-family:'IBM Plex Mono', monospace;
-    color:var(--paper);
-  }
-
-  .stage{
-    position:relative;
-    min-height:100vh;
-    overflow:hidden;
-    display:flex;
-    flex-direction:column;
-    justify-content:space-between;
-    padding:22px 24px 28px;
+  html, body {
+    width: 100%;
+    min-height: 100vh;
+    font-family: 'IBM Plex Mono', monospace;
+    color: var(--paper);
+    background-color: #0d0906;
+    overflow-x: hidden;
   }
 
-  /* ===== HERO IMAGE (full quality, no CSS scaling artifacts) ===== */
-  .hero-link{
-    position:absolute;
-    inset:0;
-    z-index:0;
-    display:block;
-  }
-  .hero-img{
-    position:absolute;
-    inset:0;
-    width:100%;
-    height:100%;
-    object-fit:cover;
-    object-position:center;
-    /* keeps the browser from softening the image when scaling */
-    image-rendering:auto;
-  }
-  .hero-overlay{
-    position:absolute;
-    inset:0;
-    z-index:1;
-    pointer-events:none;
-    background-image:
-      linear-gradient(180deg, rgba(15,10,6,0.55) 0%, rgba(15,10,6,0.05) 22%, rgba(15,10,6,0.05) 60%, rgba(10,7,4,0.75) 100%);
-  }
-  .stage > *:not(.hero-link):not(.hero-overlay){
-    position:relative;
-    z-index:2;
-  }
-  /* ===== TOP BAR ===== */
-  .topbar{
-    display:flex;
-    justify-content:space-between;
-    align-items:flex-start;
-    flex-wrap:wrap;
-    gap:12px;
+  /* Full-bleed responsive stage */
+  .stage {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 18px 20px 24px;
+    z-index: 1;
   }
 
-  .clock{
-    font-size:15px;
-    letter-spacing:0.08em;
-    background:var(--glass-bg);
-    border:1px solid var(--glass-border);
-    backdrop-filter:blur(6px);
-    padding:8px 14px;
-    border-radius:8px;
+  /* Hero background */
+  .hero-link {
+    position: fixed;
+    inset: 0;
+    z-index: -2;
+    display: block;
+  }
+  .hero-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    filter: brightness(0.65) saturate(1.15);
+  }
+  .hero-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    background: radial-gradient(circle at center, rgba(15, 10, 6, 0.25) 0%, rgba(10, 7, 4, 0.85) 100%),
+                linear-gradient(180deg, rgba(15,10,6,0.6) 0%, rgba(15,10,6,0.1) 40%, rgba(10,7,4,0.9) 100%);
   }
 
-  .live-count{
-    position:absolute;
-    top:22px; left:50%;
-    transform:translateX(-50%);
-    display:flex;
-    align-items:center;
-    gap:8px;
-    font-size:13px;
-    background:var(--glass-bg);
-    border:1px solid var(--glass-border);
-    backdrop-filter:blur(6px);
-    padding:7px 16px;
-    border-radius:20px;
-    z-index:2;
-  }
-  .live-count .dot{
-    width:8px; height:8px; border-radius:50%;
-    background:var(--green);
-    box-shadow:0 0 8px var(--green);
-    animation:pulse 1.6s ease-in-out infinite;
-  }
-  @keyframes pulse{ 0%,100%{opacity:1;} 50%{opacity:0.4;} }
-
-  .top-right{
-    display:flex;
-    flex-direction:column;
-    align-items:flex-end;
-    gap:10px;
+  /* Top Navigation Bar */
+  .topbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+    max-width: 900px;
+    margin: 0 auto 12px auto;
   }
 
-  .stream-links{
-    display:flex;
-    gap:8px;
-  }
-  .pill{
-    display:flex;
-    align-items:center;
-    gap:6px;
-    font-size:12px;
-    font-weight:600;
-    padding:8px 14px;
-    border-radius:20px;
-    border:1px solid var(--glass-border);
-    backdrop-filter:blur(6px);
-    cursor:pointer;
-    text-decoration:none;
-    color:var(--paper);
-  }
-  .pill.spotify{ background:rgba(30,215,96,0.18); }
-  .pill.ytmusic{ background:rgba(255,0,0,0.18); }
-  .pill svg{ width:14px; height:14px; }
-
-  .nav-links{
-    display:flex;
-    gap:8px;
-  }
-  .nav-btn{
-    font-size:12px;
-    padding:8px 14px;
-    border-radius:20px;
-    background:var(--glass-bg);
-    border:1px solid var(--glass-border);
-    backdrop-filter:blur(6px);
-    cursor:pointer;
-    color:var(--paper);
-    display:flex; align-items:center; gap:6px;
-  }
-  .nav-btn svg{ width:13px; height:13px; }
-
-  /* ===== FLOATING NOTIFICATION CARDS ===== */
-  .notifications{
-    align-self:center;
-    display:flex;
-    flex-direction:column;
-    gap:10px;
-    width:min(430px, 90vw);
-    margin-bottom:16px;
+  .clock-badge {
+    font-size: 13px;
+    letter-spacing: 0.08em;
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    backdrop-filter: blur(8px);
+    padding: 6px 14px;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
   }
 
-  .notif-card{
-    display:flex;
-    align-items:center;
-    gap:12px;
-    background:var(--glass-bg);
-    border:1px solid var(--glass-border);
-    backdrop-filter:blur(10px);
-    border-radius:12px;
-    padding:12px 14px;
+  .live-pill {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 12px;
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    backdrop-filter: blur(8px);
+    padding: 6px 14px;
+    border-radius: 20px;
   }
-  .notif-icon{
-    width:34px; height:34px;
-    border-radius:8px;
-    flex-shrink:0;
-    display:flex; align-items:center; justify-content:center;
-    font-size:16px;
+  .live-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: #4ade80;
+    box-shadow: 0 0 8px #4ade80;
+    animation: pulse 1.8s ease-in-out infinite;
   }
-  .notif-icon.wa{ background:#25D366; }
-  .notif-icon.app{ background:var(--brass); color:#241a10; font-family:'Special Elite',monospace; font-weight:700; font-size:13px; }
+  @keyframes pulse { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.4; transform: scale(0.85); } }
 
-  .notif-text{ flex:1; min-width:0; }
-  .notif-text .t1{ font-size:12.5px; font-weight:600; }
-  .notif-text .t2{ font-size:10.5px; opacity:0.65; margin-top:2px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
-
-  .notif-action{
-    font-size:11px;
-    font-weight:600;
-    padding:6px 12px;
-    border-radius:16px;
-    background:var(--green);
-    color:#0f1a10;
-    border:none;
-    cursor:pointer;
-    flex-shrink:0;
+  .top-actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
   }
-  .notif-action.install{ background:var(--brass); color:#241a10; }
-  .notif-action:disabled{ opacity:0.55; cursor:default; }
-  .notif-close{
-    background:none; border:none; color:var(--paper);
-    opacity:0.5; cursor:pointer; font-size:14px; flex-shrink:0;
+  .pill-btn {
+    font-size: 11.5px;
+    font-weight: 600;
+    padding: 6px 12px;
+    border-radius: 20px;
+    border: 1px solid var(--glass-border);
+    background: var(--glass-bg);
+    backdrop-filter: blur(8px);
+    color: var(--paper);
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    transition: all 0.2s ease;
   }
-
-  /* ===== PLAYER BAR ===== */
-  .player-wrap{
-    align-self:center;
-    width:min(560px, 94vw);
+  .pill-btn:hover {
+    background: rgba(212, 163, 89, 0.25);
+    border-color: var(--brass);
   }
-
-  .yt-player-frame{
-    width:100%;
-    aspect-ratio:16/9;
-    max-height:320px;
-    border-radius:16px;
-    overflow:hidden;
-    border:1px solid var(--glass-border);
-    background:var(--glass-bg);
-    backdrop-filter:blur(12px);
+  .pill-btn.wa {
+    background: rgba(37, 211, 102, 0.2);
+    border-color: rgba(37, 211, 102, 0.4);
   }
 
-  .player-bar{
-    display:flex;
-    align-items:center;
-    gap:14px;
-    background:var(--glass-bg);
-    border:1px solid var(--glass-border);
-    backdrop-filter:blur(12px);
-    border-radius:16px;
-    padding:12px 18px;
+  /* ===== MAIN CASSETTE DECK SECTION ===== */
+  .player-stage {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    max-width: 650px;
+    margin: 0 auto;
+    width: 100%;
+    gap: 18px;
   }
 
-  .cover{
-    width:44px; height:44px;
-    border-radius:8px;
-    background:linear-gradient(135deg, #C97B4A, #5E6E3F);
-    flex-shrink:0;
-    display:flex; align-items:center; justify-content:center;
-    font-size:18px;
-    overflow:hidden;
-    position:relative;
-  }
-  .cover img{
-    width:100%; height:100%;
-    object-fit:cover;
+  /* 3D Cassette Container */
+  .cassette-perspective {
+    perspective: 1200px;
+    width: 100%;
+    max-width: 520px;
   }
 
-  .track-meta{
-    min-width:0;
-    width:118px;
-    flex-shrink:0;
+  .cassette-card {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 1.58 / 1;
+    border-radius: 20px;
+    transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    transform-style: preserve-3d;
+    cursor: pointer;
   }
-  .track-meta .name{
-    font-size:13px; font-weight:600;
-    white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
-  }
-  .track-meta .artist{
-    font-size:10.5px; opacity:0.6; margin-top:2px;
-  }
-
-  .transport{
-    display:flex; align-items:center; gap:10px;
-    flex-shrink:0;
-  }
-  .transport button{
-    background:none; border:none; color:var(--paper); cursor:pointer;
-    display:flex; align-items:center; justify-content:center;
-    padding:4px;
-  }
-  .transport svg{ width:16px; height:16px; }
-  .transport .play-btn{
-    width:34px; height:34px;
-    border-radius:50%;
-    background:var(--paper);
-    color:#241a10;
-  }
-  .transport .play-btn svg{ width:14px; height:14px; }
-
-  .progress-wrap{
-    flex:1;
-    min-width:60px;
-    display:flex;
-    align-items:center;
-    gap:10px;
-  }
-  .scrub-track{
-    flex:1;
-    height:4px;
-    background:rgba(241,228,201,0.2);
-    border-radius:2px;
-    cursor:pointer;
-    position:relative;
-  }
-  .scrub-fill{
-    position:absolute; left:0; top:0; bottom:0;
-    width:0%;
-    background:var(--brass);
-    border-radius:2px;
-  }
-  .time{
-    font-size:10.5px;
-    opacity:0.7;
-    white-space:nowrap;
-    flex-shrink:0;
+  .cassette-card.is-flipped {
+    transform: rotateY(180deg);
   }
 
-  .vol{
-    display:flex; align-items:center; gap:6px;
-    flex-shrink:0;
-  }
-  .vol svg{ width:14px; height:14px; opacity:0.75; }
-  .vol-slider{
-    -webkit-appearance:none;
-    width:60px; height:3px;
-    background:rgba(241,228,201,0.2);
-    border-radius:2px;
-  }
-  .vol-slider::-webkit-slider-thumb{
-    -webkit-appearance:none;
-    width:10px; height:10px;
-    border-radius:50%;
-    background:var(--brass);
-    cursor:pointer;
-  }
-
-  .browse-panel{
-    display:none;
-    align-self:center;
-    width:min(430px, 90vw);
-    max-height:260px;
-    overflow-y:auto;
-    background:var(--glass-bg);
-    border:1px solid var(--glass-border);
-    backdrop-filter:blur(10px);
-    border-radius:12px;
-    padding:14px 16px;
-    margin-bottom:16px;
-  }
-  .browse-panel.open{ display:block; }
-  .browse-head{
-    display:flex; justify-content:space-between; align-items:center;
-    font-size:12.5px; font-weight:600;
-    padding-bottom:8px;
-    border-bottom:1px dashed var(--glass-border);
-    margin-bottom:6px;
-  }
-  .browse-row{
-    display:flex; align-items:center; gap:10px;
-    padding:9px 2px;
-    font-size:12px;
-    cursor:pointer;
-    border-bottom:1px dashed rgba(241,228,201,0.1);
-  }
-  .browse-row:last-child{ border-bottom:none; }
-  .browse-row:hover{ opacity:0.75; }
-  .browse-row .bnum{ opacity:0.5; width:16px; flex-shrink:0; }
-  .browse-row .bname{ flex:1; }
-  .browse-row .blen{ opacity:0.5; font-size:10.5px; }
-
-  .contact-line{
-    text-align:center;
-    font-size:10.5px;
-    opacity:0.55;
-    margin-top:14px;
+  .cassette-face {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 20px;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    background: linear-gradient(145deg, #2b2621 0%, #171412 100%);
+    border: 2px solid #4a4138;
+    box-shadow: 0 20px 45px rgba(0, 0, 0, 0.8), inset 0 2px 4px rgba(255, 255, 255, 0.1), 0 0 25px rgba(212, 163, 89, 0.15);
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    overflow: hidden;
   }
 
-  @media (max-width: 640px){
-    .live-count{ position:static; transform:none; margin:10px auto 0; }
-    .topbar{ justify-content:center; }
-    .top-right{ align-items:center; }
-    .player-bar{ flex-wrap:wrap; justify-content:center; }
-    .track-meta{ width:auto; order:1; }
-    .cover{ order:0; }
-    .transport{ order:2; }
-    .progress-wrap{ order:3; width:100%; }
-    .vol{ order:4; }
+  .cassette-face.back-side {
+    transform: rotateY(180deg);
+  }
+
+  /* Corner screws */
+  .screw {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: radial-gradient(circle, #8a7c6f 30%, #3a332d 100%);
+    border: 1px solid #201c18;
+    box-shadow: inset 0 1px 2px rgba(255, 255, 255, 0.2);
+  }
+  .screw::after {
+    content: '';
+    position: absolute;
+    top: 4px; left: 1px; right: 1px;
+    height: 1.5px;
+    background: #181410;
+    transform: rotate(35deg);
+  }
+  .screw.tl { top: 10px; left: 10px; }
+  .screw.tr { top: 10px; right: 10px; }
+  .screw.bl { bottom: 10px; left: 10px; }
+  .screw.br { bottom: 10px; right: 10px; }
+
+  /* Vintage Paper Sticker Label */
+  .tape-sticker {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(180deg, #f7efe1 0%, #e6d7bc 100%);
+    border-radius: 12px;
+    box-shadow: inset 0 0 15px rgba(100, 75, 40, 0.18), 0 2px 6px rgba(0,0,0,0.4);
+    padding: 12px 16px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    color: #241b12;
+    border: 1px solid #c4b397;
+  }
+
+  .sticker-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid #241b12;
+    padding-bottom: 4px;
+  }
+  .side-tag {
+    font-family: 'Special Elite', monospace;
+    font-size: 20px;
+    font-weight: 800;
+    line-height: 1;
+    color: #8b1e0f;
+    border: 2px solid #8b1e0f;
+    padding: 2px 6px;
+    border-radius: 4px;
+    letter-spacing: 1px;
+  }
+  .tape-title {
+    font-family: 'Kalam', cursive, sans-serif;
+    font-size: 22px;
+    font-weight: 700;
+    color: #1a120b;
+    text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding: 0 8px;
+  }
+  .cassette-brand {
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    opacity: 0.75;
+  }
+
+  /* Current Song Display on Label */
+  .handwritten-song {
+    font-family: 'Caveat', cursive;
+    font-size: 21px;
+    font-weight: 700;
+    color: #152438; /* Ink blue */
+    text-align: center;
+    margin: 4px 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .handwritten-artist {
+    font-family: 'Kalam', cursive;
+    font-size: 13px;
+    color: #5c4d3c;
+    text-align: center;
+  }
+
+  /* Tape Window with Dual Rotating Reels */
+  .tape-window {
+    position: relative;
+    width: 82%;
+    height: 64px;
+    margin: 2px auto;
+    background: rgba(18, 14, 11, 0.92);
+    border-radius: 30px;
+    border: 2px solid #3d352e;
+    box-shadow: inset 0 4px 10px rgba(0, 0, 0, 0.9);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+    overflow: hidden;
+  }
+
+  /* Center tape bridge */
+  .tape-bridge {
+    position: absolute;
+    top: 50%;
+    left: 20%;
+    right: 20%;
+    height: 16px;
+    transform: translateY(-50%);
+    background: rgba(30, 20, 10, 0.7);
+    border-top: 1px dashed rgba(255, 255, 255, 0.1);
+    border-bottom: 1px dashed rgba(255, 255, 255, 0.1);
+    z-index: 1;
+    pointer-events: none;
+  }
+
+  /* Left & Right Reels */
+  .tape-spool-wrap {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2;
+  }
+
+  /* Dynamic magnetic tape roll that physically expands/contracts */
+  .tape-roll {
+    position: absolute;
+    border-radius: 50%;
+    background: radial-gradient(circle, #2b1f15 0%, #150f0a 85%, #0d0906 100%);
+    box-shadow: 0 0 6px rgba(0,0,0,0.8);
+    transition: width 0.3s ease, height 0.3s ease;
+  }
+
+  /* Rotating Cogwheel */
+  .cog-wheel {
+    position: relative;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: #e6dfd5;
+    border: 3px solid #8d8070;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .cog-spokes {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+  }
+  .cog-spokes::before, .cog-spokes::after {
+    content: '';
+    position: absolute;
+    background: #5a5043;
+  }
+  .cog-spokes::before {
+    top: 5px; bottom: 5px; left: 50%;
+    width: 3px;
+    transform: translateX(-50%);
+  }
+  .cog-spokes::after {
+    left: 5px; right: 5px; top: 50%;
+    height: 3px;
+    transform: translateY(-50%);
+  }
+  .cog-center-hole {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: #110d0a;
+    border: 2px solid #5a5043;
+    z-index: 2;
+  }
+
+  /* Cog Rotation Animation */
+  @keyframes spinReel {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+  .is-playing .cog-wheel {
+    animation: spinReel 2.8s linear infinite;
+  }
+
+  /* Sticker Footer Info */
+  .sticker-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 9px;
+    font-weight: 600;
+    border-top: 1px solid #7e6c56;
+    padding-top: 3px;
+    color: #4a3c2e;
+    letter-spacing: 0.5px;
+  }
+
+  /* ===== BOOMBOX / WALKMAN CONTROLS DOCK ===== */
+  .deck-controls {
+    width: 100%;
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border-radius: 20px;
+    padding: 16px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.7);
+  }
+
+  /* Deck Header: VU Meter & Tape Counter */
+  .deck-top-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    padding-bottom: 12px;
+    border-bottom: 1px dashed var(--glass-border);
+  }
+
+  /* Glowing Analog Dual VU Meter */
+  .vu-meter-box {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: rgba(10, 7, 4, 0.7);
+    border: 1px solid rgba(212, 163, 89, 0.3);
+    border-radius: 10px;
+    padding: 6px 12px;
+  }
+  .vu-channel {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3px;
+  }
+  .vu-label {
+    font-size: 8px;
+    font-weight: 700;
+    color: var(--brass);
+    letter-spacing: 1px;
+  }
+  .vu-bar-track {
+    width: 60px;
+    height: 8px;
+    background: #1a140f;
+    border-radius: 4px;
+    overflow: hidden;
+    position: relative;
+    border: 1px solid #33271c;
+  }
+  .vu-bar-fill {
+    height: 100%;
+    width: 25%;
+    background: linear-gradient(90deg, #2a9d8f 60%, #e9c46a 85%, #e76f51 100%);
+    box-shadow: 0 0 8px rgba(233, 196, 106, 0.5);
+    transition: width 0.08s ease;
+  }
+
+  /* Digital Tape Counter */
+  .counter-box {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .counter-display {
+    background: #0d0a08;
+    color: #ffb703;
+    font-family: 'Special Elite', monospace;
+    font-size: 16px;
+    font-weight: 700;
+    padding: 4px 10px;
+    border-radius: 6px;
+    border: 1px solid #4a3b25;
+    letter-spacing: 3px;
+    text-shadow: 0 0 8px rgba(255, 183, 3, 0.5);
+  }
+  .counter-reset {
+    background: none;
+    border: none;
+    color: var(--paper);
+    opacity: 0.6;
+    font-size: 10px;
+    cursor: pointer;
+  }
+  .counter-reset:hover { opacity: 1; color: var(--brass); }
+
+  /* Scrub Progress Bar */
+  .scrubber-section {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .scrubber-track {
+    flex: 1;
+    height: 6px;
+    background: rgba(244, 235, 217, 0.15);
+    border-radius: 3px;
+    cursor: pointer;
+    position: relative;
+    border: 1px solid rgba(255, 255, 255, 0.06);
+  }
+  .scrubber-fill {
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 0%;
+    background: linear-gradient(90deg, var(--brass), var(--gold));
+    border-radius: 3px;
+    box-shadow: 0 0 10px var(--brass-glow);
+  }
+  .time-text {
+    font-size: 11px;
+    font-weight: 600;
+    opacity: 0.8;
+    white-space: nowrap;
+  }
+
+  /* Heavy Mechanical Push Buttons (Boombox style) */
+  .buttons-dock {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+  }
+
+  .mech-btn {
+    flex: 1;
+    height: 46px;
+    border-radius: 10px;
+    border: 1px solid #4a3e30;
+    background: linear-gradient(180deg, #2d261e 0%, #1c1712 100%);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5), inset 0 1px 1px rgba(255, 255, 255, 0.12);
+    color: var(--paper);
+    font-size: 11px;
+    font-weight: 700;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 3px;
+    cursor: pointer;
+    transition: all 0.12s ease;
+    user-select: none;
+  }
+  .mech-btn:hover {
+    background: linear-gradient(180deg, #383026 0%, #221c16 100%);
+    border-color: var(--brass);
+    color: var(--gold);
+    transform: translateY(-1px);
+  }
+  .mech-btn:active, .mech-btn.is-active {
+    transform: translateY(2px);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.6), inset 0 2px 4px rgba(0, 0, 0, 0.8);
+    border-color: var(--brass);
+    background: #14100c;
+  }
+
+  .mech-btn.play-master {
+    flex: 1.3;
+    background: linear-gradient(180deg, #b88636 0%, #875c1c 100%);
+    color: #120e09;
+    border-color: #d4a359;
+    box-shadow: 0 4px 14px var(--brass-glow);
+  }
+  .mech-btn.play-master:hover {
+    background: linear-gradient(180deg, #caa049 0%, #9e6d23 100%);
+    color: #000;
+  }
+
+  .btn-label {
+    font-size: 8.5px;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+    opacity: 0.8;
+  }
+
+  /* Extra Controls Row: Tape Hiss, Lo-Fi Mood, Volume */
+  .extras-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    font-size: 11.5px;
+    padding-top: 4px;
+  }
+
+  .toggle-wrap {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .toggle-btn {
+    padding: 4px 10px;
+    border-radius: 14px;
+    border: 1px solid var(--glass-border);
+    background: rgba(255, 255, 255, 0.05);
+    color: var(--paper);
+    cursor: pointer;
+    font-size: 11px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    transition: all 0.2s ease;
+  }
+  .toggle-btn.active {
+    background: var(--brass);
+    color: #1a120b;
+    font-weight: 700;
+    border-color: var(--brass);
+    box-shadow: 0 0 10px var(--brass-glow);
+  }
+
+  /* Volume & Mood */
+  .vol-wrap {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .slider-custom {
+    -webkit-appearance: none;
+    width: 70px;
+    height: 4px;
+    background: rgba(244, 235, 217, 0.2);
+    border-radius: 2px;
+    outline: none;
+  }
+  .slider-custom::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--brass);
+    cursor: pointer;
+    box-shadow: 0 0 6px var(--brass-glow);
+  }
+
+  /* ===== CASSETTE SHELF / TAPE DRAWER (EJECT MODAL) ===== */
+  .tape-shelf-drawer {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(10px);
+    z-index: 100;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+  }
+  .tape-shelf-drawer.open {
+    display: flex;
+  }
+
+  .shelf-content {
+    background: #1d1814;
+    border: 2px solid #5a4b3a;
+    border-radius: 18px;
+    max-width: 500px;
+    width: 100%;
+    max-height: 85vh;
+    overflow-y: auto;
+    padding: 20px;
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.9);
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .shelf-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px dashed #5a4b3a;
+    padding-bottom: 10px;
+  }
+  .shelf-header h3 {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--gold);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .close-shelf-btn {
+    background: none;
+    border: none;
+    color: var(--paper);
+    font-size: 20px;
+    cursor: pointer;
+    opacity: 0.7;
+  }
+  .close-shelf-btn:hover { opacity: 1; }
+
+  .cassette-box-item {
+    background: linear-gradient(145deg, #2c251e 0%, #18130f 100%);
+    border: 1px solid #544434;
+    border-radius: 12px;
+    padding: 12px 16px;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: all 0.2s ease;
+  }
+  .cassette-box-item:hover, .cassette-box-item.selected {
+    border-color: var(--brass);
+    background: #352c24;
+    transform: translateX(4px);
+  }
+  .box-meta .box-title {
+    font-family: 'Kalam', cursive;
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--paper);
+  }
+  .box-meta .box-desc {
+    font-size: 11px;
+    opacity: 0.65;
+    margin-top: 2px;
+  }
+  .box-tag {
+    font-size: 10px;
+    padding: 3px 8px;
+    border-radius: 10px;
+    background: var(--brass);
+    color: #120e09;
+    font-weight: 700;
+  }
+
+  /* Track List Accordion inside Cassette Drawer */
+  .track-list-drawer {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-top: 6px;
+  }
+  .track-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px 12px;
+    border-radius: 8px;
+    font-size: 12px;
+    background: rgba(255, 255, 255, 0.03);
+    cursor: pointer;
+    transition: background 0.15s;
+  }
+  .track-row:hover, .track-row.active-track {
+    background: rgba(212, 163, 89, 0.2);
+    color: var(--gold);
+  }
+  .track-row .num { opacity: 0.5; width: 22px; }
+  .track-row .title { flex: 1; font-weight: 500; }
+  .track-row .dur { opacity: 0.6; font-size: 11px; }
+
+  /* Footer Links */
+  .stage-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    width: 100%;
+    max-width: 900px;
+    margin: 12px auto 0 auto;
+    font-size: 11px;
+    opacity: 0.7;
+  }
+  .footer-links {
+    display: flex;
+    gap: 14px;
+  }
+  .footer-links a {
+    color: var(--paper);
+    text-decoration: none;
+    transition: color 0.15s;
+  }
+  .footer-links a:hover { color: var(--brass); }
+
+  /* Mobile Tweaks */
+  @media (max-width: 580px) {
+    .stage { padding: 12px 14px 16px; }
+    .topbar { flex-wrap: wrap; justify-content: center; }
+    .cassette-perspective { max-width: 100%; }
+    .tape-title { font-size: 18px; }
+    .handwritten-song { font-size: 17px; }
+    .handwritten-artist { font-size: 11.5px; }
+    .tape-window { height: 54px; }
+    .cog-wheel { width: 36px; height: 36px; }
+    .mech-btn { height: 42px; font-size: 10px; }
+    .deck-controls { padding: 14px; border-radius: 16px; }
+    .stage-footer { justify-content: center; text-align: center; }
   }
 </style>
 </head>
@@ -400,295 +832,877 @@
 
 <div class="stage">
 
-  <!-- Tapping/clicking anywhere on the background opens the full-resolution
-       source image in a new tab, on desktop AND mobile. -->
-  <a class="hero-link" href="assets/hero-bg.png" target="_blank" rel="noopener" aria-label="Open full resolution background image">
-    <img class="hero-img" src="assets/hero-bg.png" alt="Yaado Ki Cassette background" loading="eager" decoding="async">
+  <!-- Background Image -->
+  <a class="hero-link" href="assets/hero-bg.png" target="_blank" rel="noopener" aria-label="Open background image">
+    <img class="hero-img" src="assets/hero-bg.png" alt="Yaado Ki Cassette sunset background" loading="eager">
   </a>
   <div class="hero-overlay"></div>
 
-  <div class="topbar">
-    <div class="clock" id="clock">10:16 PM</div>
-
-    <div class="live-count">
-      <span class="dot"></span>
-      <span id="onlineCount">306</span> online
+  <!-- Top Bar -->
+  <header class="topbar">
+    <div class="clock-badge" id="liveClock">
+      <span>📻</span>
+      <span id="clockTime">--:-- --</span>
     </div>
 
-    <div class="top-right">
-      <div class="stream-links">
-        <a class="pill spotify" id="spotifyLink" href="https://open.spotify.com/search/yaado%20ki%20cassette" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.59 14.4c-.19.3-.58.4-.88.2-2.4-1.47-5.43-1.8-9-.98-.34.08-.69-.13-.77-.47-.08-.34.13-.69.47-.77 3.9-.89 7.24-.51 9.93 1.13.3.19.4.58.25.89zm1.22-2.72c-.24.37-.72.49-1.09.26-2.75-1.69-6.94-2.18-10.2-1.19-.42.13-.86-.11-.99-.53-.13-.42.11-.86.53-.99 3.72-1.13 8.35-.58 11.5 1.36.37.23.49.72.25 1.09zm.1-2.83C14.9 8.9 9.15 8.7 5.79 9.71c-.5.15-1.03-.13-1.18-.63-.15-.5.13-1.03.63-1.18 3.86-1.17 10.2-.94 14.24 1.46.45.27.6.85.33 1.3-.27.45-.85.6-1.3.33z"/></svg> Spotify</a>
-        <a class="pill ytmusic" id="ytMusicLink" href="https://music.youtube.com/search?q=yaado%20ki%20cassette" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zM9.5 16.5v-9l7 4.5-7 4.5z"/></svg> YT Music</a>
-      </div>
-      <div class="nav-links">
-        <button class="nav-btn" id="playlistsBtn">Playlists</button>
-        <button class="nav-btn" id="songsBtn">Songs</button>
-        <button class="nav-btn" id="installBtn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M5 20h14v-2H5v2zM19 9h-4V3H9v6H5l7 7 7-7z"/></svg> Install</button>
-      </div>
+    <div class="live-pill">
+      <span class="live-dot"></span>
+      <span id="listenerCount">348</span><span>सुन्ने वाले साथ हैं</span>
     </div>
-  </div>
 
-  <div class="notifications">
-    <div class="notif-card">
-      <div class="notif-icon wa"><svg viewBox="0 0 24 24" width="18" height="18" fill="#fff"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.46 1.32 4.96L2.05 22l5.25-1.38a9.9 9.9 0 0 0 4.74 1.21h.01c5.46 0 9.9-4.45 9.9-9.92 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2zm5.8 14.19c-.24.68-1.4 1.3-1.94 1.38-.5.08-1.13.11-1.82-.12-.42-.13-.96-.31-1.65-.6-2.9-1.25-4.8-4.17-4.94-4.36-.14-.19-1.18-1.57-1.18-3 0-1.42.75-2.12 1.02-2.41.27-.29.58-.36.78-.36.19 0 .39 0 .56.01.18.01.42-.07.65.5.24.58.82 2 .89 2.15.07.14.12.31.02.5-.09.19-.14.31-.28.48-.14.17-.29.37-.42.5-.14.14-.28.29-.12.57.16.28.71 1.17 1.53 1.9 1.05.94 1.94 1.23 2.22 1.37.28.14.44.12.6-.07.16-.19.68-.79.87-1.06.18-.28.36-.23.6-.14.24.09 1.53.72 1.79.85.26.14.44.19.5.31.06.12.06.68-.18 1.35z"/></svg></div>
-      <div class="notif-text">
-        <div class="t1">Get new songs before everyone else</div>
-        <div class="t2">Join the Yaado crew on WhatsApp — fresh drops daily</div>
-      </div>
-      <button class="notif-action" id="joinFreeBtn">Join Free</button>
-      <button class="notif-close" id="notif1Close">✕</button>
+    <div class="top-actions">
+      <a class="pill-btn wa" href="https://chat.whatsapp.com/EMituq2F5HLGZnK8CxME5d" target="_blank" rel="noopener">
+        <span>💬 WhatsApp</span>
+      </a>
+      <button class="pill-btn" id="openDrawerBtn">
+        <span>📼 Tape Shelf</span>
+      </button>
     </div>
-    <div class="notif-card" id="installCard">
-      <div class="notif-icon app">YK</div>
-      <div class="notif-text">
-        <div class="t1">App Coming Soon</div>
-        <div class="t2">We're building the Yaado Ki Cassette app — stay tuned!</div>
-      </div>
-      <button class="notif-action install" id="installCardBtn" disabled>Soon</button>
-      <button class="notif-close" id="notif2Close">✕</button>
-    </div>
-  </div>
+  </header>
 
-  <!-- Your custom player bar — this is what's visible. The actual YouTube
-       playlist plays through a hidden player behind the scenes, controlled
-       by these buttons. No video is shown, only your UI. -->
-  <div class="player-wrap">
-    <div class="player-bar" id="playerBar">
-      <div class="cover" id="coverBox">
-        <span id="coverFallback">📻</span>
-        <img id="coverImg" alt="" style="display:none;">
-      </div>
-      <div class="track-meta">
-        <div class="name" id="trackName">Tuning in...</div>
-        <div class="artist" id="trackArtist">Yaado Ki Cassette Radio</div>
-      </div>
-      <div class="transport">
-        <button aria-label="Previous" id="prevBtn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M6 6h2v12H6zm3.5 6l8.5 6V6z"/></svg></button>
-        <button class="play-btn" id="playBtn" aria-label="Play">
-          <svg id="playIcon" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
-          <svg id="pauseIcon" viewBox="0 0 24 24" fill="currentColor" style="display:none"><path d="M6 5h4v14H6zM14 5h4v14h-4z"/></svg>
-        </button>
-        <button aria-label="Next" id="nextBtn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M16 6h2v12h-2zM6 6v12l8.5-6z"/></svg></button>
-      </div>
-      <div class="progress-wrap">
-        <div class="scrub-track" id="scrubTrack">
-          <div class="scrub-fill" id="scrubFill"></div>
+  <!-- Main Player Stage -->
+  <main class="player-stage">
+
+    <!-- 3D Interactive Cassette -->
+    <div class="cassette-perspective">
+      <div class="cassette-card" id="cassetteBody" title="Click anywhere on cassette to Flip Side A ⇄ Side B">
+        
+        <!-- SIDE A FACE -->
+        <div class="cassette-face front-side">
+          <div class="screw tl"></div>
+          <div class="screw tr"></div>
+          <div class="screw bl"></div>
+          <div class="screw br"></div>
+
+          <div class="tape-sticker">
+            <div class="sticker-header">
+              <span class="side-tag" id="labelSideTag">SIDE A</span>
+              <span class="tape-title" id="labelTapeTitle">यादों की कैसेट</span>
+              <span class="cassette-brand">STEREO 90</span>
+            </div>
+
+            <div>
+              <div class="handwritten-song" id="labelSongTitle">Pal Pal Dil Ke Paas</div>
+              <div class="handwritten-artist" id="labelArtist">Kishore Kumar • Blackmail</div>
+            </div>
+
+            <!-- Tape Window with Reels -->
+            <div class="tape-window">
+              <div class="tape-bridge"></div>
+
+              <!-- Left Spool (shrinks as song plays) -->
+              <div class="tape-spool-wrap">
+                <div class="tape-roll" id="leftTapeRoll" style="width: 60px; height: 60px;"></div>
+                <div class="cog-wheel">
+                  <div class="cog-spokes"></div>
+                  <div class="cog-center-hole"></div>
+                </div>
+              </div>
+
+              <!-- Right Spool (grows as song plays) -->
+              <div class="tape-spool-wrap">
+                <div class="tape-roll" id="rightTapeRoll" style="width: 24px; height: 24px;"></div>
+                <div class="cog-wheel">
+                  <div class="cog-spokes"></div>
+                  <div class="cog-center-hole"></div>
+                </div>
+              </div>
+            </div>
+
+            <div class="sticker-footer">
+              <span>TYPE I (NORMAL) BIAS</span>
+              <span>TAP TO FLIP ⇄</span>
+              <span>HIGH RESOLUTION AUDIO</span>
+            </div>
+          </div>
         </div>
-        <span class="time" id="timeLabel">0:00 / 0:00</span>
-      </div>
-      <div class="vol">
-        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M3 10v4h4l5 5V5L7 10H3zm13.5 2A4.5 4.5 0 0 0 14 7.97v8.05A4.5 4.5 0 0 0 16.5 12z"/></svg>
-        <input type="range" class="vol-slider" id="volSlider" min="0" max="100" value="70">
+
+        <!-- SIDE B FACE -->
+        <div class="cassette-face back-side">
+          <div class="screw tl"></div>
+          <div class="screw tr"></div>
+          <div class="screw bl"></div>
+          <div class="screw br"></div>
+
+          <div class="tape-sticker" style="background: linear-gradient(180deg, #ede2ce 0%, #dacaba 100%);">
+            <div class="sticker-header">
+              <span class="side-tag" style="color: #2b5876; border-color: #2b5876;">SIDE B</span>
+              <span class="tape-title" id="labelTapeTitleB">यादों की कैसेट</span>
+              <span class="cassette-brand">RETRO TDK</span>
+            </div>
+
+            <div>
+              <div class="handwritten-song" id="labelSongTitleB">Humein Tumse Pyar Kitna</div>
+              <div class="handwritten-artist" id="labelArtistB">Kishore Kumar • Kudrat</div>
+            </div>
+
+            <!-- Tape Window with Reels -->
+            <div class="tape-window">
+              <div class="tape-bridge"></div>
+
+              <div class="tape-spool-wrap">
+                <div class="tape-roll" id="leftTapeRollB" style="width: 60px; height: 60px;"></div>
+                <div class="cog-wheel">
+                  <div class="cog-spokes"></div>
+                  <div class="cog-center-hole"></div>
+                </div>
+              </div>
+
+              <div class="tape-spool-wrap">
+                <div class="tape-roll" id="rightTapeRollB" style="width: 24px; height: 24px;"></div>
+                <div class="cog-wheel">
+                  <div class="cog-spokes"></div>
+                  <div class="cog-center-hole"></div>
+                </div>
+              </div>
+            </div>
+
+            <div class="sticker-footer">
+              <span>120µs EQUALIZATION</span>
+              <span>TAP TO FLIP ⇄</span>
+              <span>YAADO KI CASSETTE</span>
+            </div>
+          </div>
+        </div>
+
       </div>
     </div>
-    <div class="contact-line">contact: nikhilsingh.cse07@gmail.com</div>
-  </div>
 
-  <!-- Hidden YouTube player that actually supplies the audio — no video shown -->
-  <div id="ytPlayerHidden" style="position:absolute; width:1px; height:1px; overflow:hidden; opacity:0; pointer-events:none;"></div>
+    <!-- Boombox / Walkman Deck Controls -->
+    <div class="deck-controls">
+      
+      <!-- Top Row: VU Meters & Tape Counter -->
+      <div class="deck-top-row">
+        <!-- Dual Glowing VU Meters -->
+        <div class="vu-meter-box">
+          <div class="vu-channel">
+            <span class="vu-label">VU L</span>
+            <div class="vu-bar-track">
+              <div class="vu-bar-fill" id="vuLeft"></div>
+            </div>
+          </div>
+          <div class="vu-channel">
+            <span class="vu-label">VU R</span>
+            <div class="vu-bar-track">
+              <div class="vu-bar-fill" id="vuRight"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Mechanical Tape Counter -->
+        <div class="counter-box">
+          <div class="counter-display" id="tapeCounter">000</div>
+          <button class="counter-reset" id="resetCounterBtn" title="Reset Counter">RESET</button>
+        </div>
+      </div>
+
+      <!-- Scrubber Progress Bar -->
+      <div class="scrubber-section">
+        <span class="time-text" id="currentTimeLabel">0:00</span>
+        <div class="scrubber-track" id="scrubTrack">
+          <div class="scrubber-fill" id="scrubFill"></div>
+        </div>
+        <span class="time-text" id="totalDurationLabel">0:00</span>
+      </div>
+
+      <!-- Heavy Mechanical Push Buttons -->
+      <div class="buttons-dock">
+        <button class="mech-btn" id="rewindBtn" title="Rewind 10 seconds">
+          <span>◄◄</span>
+          <span class="btn-label">REW</span>
+        </button>
+
+        <button class="mech-btn" id="prevTrackBtn" title="Previous Song">
+          <span>|◄</span>
+          <span class="btn-label">PREV</span>
+        </button>
+
+        <button class="mech-btn play-master" id="playPauseBtn" title="Play / Pause">
+          <span id="playIconSymbol" style="font-size: 16px;">▶</span>
+          <span class="btn-label" id="playBtnLabel">PLAY</span>
+        </button>
+
+        <button class="mech-btn" id="nextTrackBtn" title="Next Song">
+          <span>►|</span>
+          <span class="btn-label">NEXT</span>
+        </button>
+
+        <button class="mech-btn" id="fastFwdBtn" title="Fast Forward 10 seconds">
+          <span>►►</span>
+          <span class="btn-label">FFWD</span>
+        </button>
+
+        <button class="mech-btn" id="flipBtn" title="Flip Side A / Side B">
+          <span>↻</span>
+          <span class="btn-label">FLIP</span>
+        </button>
+
+        <button class="mech-btn" id="ejectBtn" title="Eject / Switch Mixtape">
+          <span>⏏</span>
+          <span class="btn-label">EJECT</span>
+        </button>
+      </div>
+
+      <!-- Extra Controls Row: Tape Hiss, Lo-Fi Mood, Volume -->
+      <div class="extras-row">
+        <!-- Tape Hiss Toggle -->
+        <div class="toggle-wrap">
+          <button class="toggle-btn" id="tapeHissBtn" title="Toggle warm analog tape hiss">
+            <span>📻 Hiss</span>
+          </button>
+          
+          <!-- Slowed + Reverb Mood -->
+          <button class="toggle-btn" id="lofiMoodBtn" title="Toggle dreamy Slowed + Reverb mode">
+            <span>✨ Slowed Lo-Fi</span>
+          </button>
+
+          <!-- Sleep Timer -->
+          <button class="toggle-btn" id="sleepTimerBtn" title="Set sleep timer">
+            <span id="sleepTimerLabel">⏱️ Timer</span>
+          </button>
+        </div>
+
+        <!-- Volume Slider -->
+        <div class="vol-wrap">
+          <span>🔊</span>
+          <input type="range" class="slider-custom" id="volumeSlider" min="0" max="1" step="0.05" value="0.85">
+        </div>
+      </div>
+
+    </div>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="stage-footer">
+    <div>यादों की कैसेट • Old Bollywood, Ghazals & Nostalgia 24/7</div>
+    <div class="footer-links">
+      <a href="https://open.spotify.com/search/yaado%20ki%20cassette" target="_blank" rel="noopener">Spotify</a>
+      <span>•</span>
+      <a href="https://music.youtube.com/search?q=yaado%20ki%20cassette" target="_blank" rel="noopener">YT Music</a>
+      <span>•</span>
+      <a href="https://github.com/NIKHILSINGH187/Yaado-ki-Cassette" target="_blank" rel="noopener">GitHub</a>
+    </div>
+  </footer>
 
 </div>
 
+<!-- Tape Shelf Drawer (Eject / Tape Picker Modal) -->
+<div class="tape-shelf-drawer" id="tapeShelfModal">
+  <div class="shelf-content">
+    <div class="shelf-header">
+      <h3>📼 Your Cassette Shelf</h3>
+      <button class="close-shelf-btn" id="closeShelfBtn">✕</button>
+    </div>
+
+    <p style="font-size: 12px; opacity: 0.75;">Select a curated mixtape cartridge to insert into the deck:</p>
+
+    <div id="mixtapesList" style="display: flex; flex-direction: column; gap: 10px;">
+      <!-- Populated dynamically via JS -->
+    </div>
+
+    <!-- Active Tape Tracklist -->
+    <div style="margin-top: 12px; border-top: 1px dashed #5a4b3a; padding-top: 12px;">
+      <div style="font-size: 13px; font-weight: 700; color: var(--gold); margin-bottom: 8px;">
+        📜 Tracks on Active Tape:
+      </div>
+      <div class="track-list-drawer" id="activeTracklist">
+        <!-- Tracks populated dynamically -->
+      </div>
+    </div>
+
+    <!-- Custom MP3 / Link Loader -->
+    <div style="margin-top: 8px; border-top: 1px dashed #5a4b3a; padding-top: 12px;">
+      <div style="font-size: 12px; font-weight: 600; color: var(--brass); margin-bottom: 6px;">
+        ➕ Play Your Own Song (Custom Tape):
+      </div>
+      <input type="file" id="localMp3Input" accept="audio/*" style="display: none;">
+      <button class="pill-btn" id="loadLocalFileBtn" style="width: 100%; justify-content: center; padding: 8px;">
+        📁 Choose Audio File from Device
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- Native HTML5 Audio Element for Bulletproof, Ad-Free Playback -->
+<audio id="audioEngine" preload="auto"></audio>
+
 <script>
-  // live clock
-  function updateClock(){
-    const now = new Date();
-    let h = now.getHours();
-    const m = String(now.getMinutes()).padStart(2,'0');
-    const ampm = h >= 12 ? 'PM' : 'AM';
-    h = h % 12; if(h === 0) h = 12;
-    document.getElementById('clock').textContent = h + ':' + m + ' ' + ampm;
-  }
-  updateClock();
-  setInterval(updateClock, 1000 * 30);
+  // ===== 1. CURATED NOSTALGIC MIXTAPES DATABASE =====
+  const MIXTAPES = [
+    {
+      id: 'tape-kishore',
+      name: 'Kishore Kumar & 70s Gold',
+      hindiName: 'किशोर कुमार की यादें',
+      desc: 'Evergreen romance & melodies from the golden era',
+      sideA: [
+        {
+          title: 'Pal Pal Dil Ke Paas',
+          artist: 'Kishore Kumar • Blackmail (1973)',
+          src: 'https://archive.org/download/KishoreKumarRomanticsHindyugm/PalPalDilKes.mp3',
+          duration: '5:30'
+        },
+        {
+          title: 'Chukar Mere Man Ko',
+          artist: 'Kishore Kumar • Yaarana (1981)',
+          src: 'https://archive.org/download/KishoreKumarRomanticsHindyugm/ChukarMereManKos.mp3',
+          duration: '4:14'
+        },
+        {
+          title: 'Pyar Diwana Hota Hai',
+          artist: 'Kishore Kumar • Kati Patang (1970)',
+          src: 'https://archive.org/download/KishoreKumarRomanticsHindyugm/PyarDiwanaHotaHai-KatiPatang.mp3',
+          duration: '4:47'
+        }
+      ],
+      sideB: [
+        {
+          title: 'Humein Tumse Pyar Kitna',
+          artist: 'Kishore Kumar • Kudrat (1981)',
+          src: 'https://archive.org/download/KishoreKumarRomanticsHindyugm/HumeinTumsePyarKitnas.mp3',
+          duration: '4:16'
+        },
+        {
+          title: 'Palbhar Ke Liye Koi Hamein',
+          artist: 'Kishore Kumar • Johny Mera Naam (1970)',
+          src: 'https://archive.org/download/KishoreKumarRomanticsHindyugm/PalbharKeLiyeKoiHameins.mp3',
+          duration: '4:47'
+        }
+      ]
+    },
+    {
+      id: 'tape-ghazals',
+      name: 'Late Night Ghazals & Sukoon',
+      hindiName: 'जगजीत सिंह और गज़लें',
+      desc: 'Soulful poetry & acoustic ghazals for quiet nights',
+      sideA: [
+        {
+          title: 'Hothon Se Chhu Lo Tum',
+          artist: 'Jagjit Singh • Prem Geet (1981)',
+          src: 'https://ia800300.us.archive.org/1/items/HothonSeChhuLoTum_201602/Hothon%20Se%20Chhu%20Lo%20Tum.mp3',
+          duration: '4:58'
+        },
+        {
+          title: 'Jhuki Jhuki Si Nazar',
+          artist: 'Jagjit Singh • Arth (1982)',
+          src: 'https://ia800508.us.archive.org/15/items/JhukiJhukiSiNazar_201602/Jhuki%20Jhuki%20Si%20Nazar.mp3',
+          duration: '5:02'
+        }
+      ],
+      sideB: [
+        {
+          title: 'Yeh Daulat Bhi Le Lo',
+          artist: 'Jagjit Singh • Live in Concert',
+          src: 'https://ia800707.us.archive.org/24/items/YehDaulatBhiLeLo_201602/Yeh%20Daulat%20Bhi%20Le%20Lo.mp3',
+          duration: '5:15'
+        },
+        {
+          title: 'Chithi Na Koi Sandesh',
+          artist: 'Jagjit Singh • Dushman (1998)',
+          src: 'https://ia800902.us.archive.org/11/items/ChithiNaKoiSandesh_201602/Chithi%20Na%20Koi%20Sandesh.mp3',
+          duration: '6:42'
+        }
+      ]
+    },
+    {
+      id: 'tape-lofi',
+      name: 'Retro Monsoon Lo-Fi & Beats',
+      hindiName: 'मानसून लो-फाई यादें',
+      desc: 'Relaxing nostalgic Indian acoustic guitar & lo-fi vibes',
+      sideA: [
+        {
+          title: 'Old Delhi Rain & Nostalgia',
+          artist: 'Yaado Ki Cassette Lo-Fi Lab',
+          src: 'https://ia801509.us.archive.org/15/items/chill-lofi-song/Chill%20lofi%20song.mp3',
+          duration: '2:45'
+        },
+        {
+          title: 'Midnight Chai & Memories',
+          artist: 'Acoustic Retro Instrumentals',
+          src: 'https://ia802909.us.archive.org/14/items/lofi-study-chill-relax-instrumental/lofi-study.mp3',
+          duration: '3:12'
+        }
+      ],
+      sideB: [
+        {
+          title: 'Sunset at Marine Drive',
+          artist: 'Tape Hiss & Sitar Chills',
+          src: 'https://ia801509.us.archive.org/15/items/chill-lofi-song/Chill%20lofi%20song.mp3',
+          duration: '2:45'
+        }
+      ]
+    }
+  ];
 
-  // gently drifting online count, for atmosphere only
-  const onlineEl = document.getElementById('onlineCount');
-  let online = 306;
-  setInterval(() => {
-    online += Math.floor(Math.random()*5) - 2;
-    if(online < 250) online = 250;
-    onlineEl.textContent = online;
-  }, 4000);
+  // ===== 2. STATE MANAGEMENT =====
+  let currentTapeIndex = 0;
+  let currentSide = 'A'; // 'A' or 'B'
+  let currentTrackIndex = 0;
+  let isPlaying = false;
+  let tapeCounter = 0;
+  let tapeCounterTimer = null;
+  let tapeHissAudio = null;
+  let isTapeHissOn = false;
+  let isSlowedMoodOn = false;
+  let sleepTimer = null;
+  let sleepTimeRemaining = 0;
 
-  // ===== HIDDEN YOUTUBE PLAYER — drives the custom bar above, no video shown =====
-  const YT_PLAYLIST_ID = 'PLPcvPJDN5yKI';
-  const YT_PLAYLIST_URL = 'https://www.youtube.com/playlist?list=' + YT_PLAYLIST_ID;
-
-  const playBtn = document.getElementById('playBtn');
-  const playIcon = document.getElementById('playIcon');
-  const pauseIcon = document.getElementById('pauseIcon');
-  const prevBtn = document.getElementById('prevBtn');
-  const nextBtn = document.getElementById('nextBtn');
+  // DOM Elements
+  const audio = document.getElementById('audioEngine');
+  const cassetteBody = document.getElementById('cassetteBody');
+  const playPauseBtn = document.getElementById('playPauseBtn');
+  const playIconSymbol = document.getElementById('playIconSymbol');
+  const playBtnLabel = document.getElementById('playBtnLabel');
+  const labelSideTag = document.getElementById('labelSideTag');
+  const labelTapeTitle = document.getElementById('labelTapeTitle');
+  const labelSongTitle = document.getElementById('labelSongTitle');
+  const labelArtist = document.getElementById('labelArtist');
+  const labelTapeTitleB = document.getElementById('labelTapeTitleB');
+  const labelSongTitleB = document.getElementById('labelSongTitleB');
+  const labelArtistB = document.getElementById('labelArtistB');
   const scrubTrack = document.getElementById('scrubTrack');
   const scrubFill = document.getElementById('scrubFill');
-  const timeLabel = document.getElementById('timeLabel');
-  const trackName = document.getElementById('trackName');
-  const trackArtist = document.getElementById('trackArtist');
-  const volSlider = document.getElementById('volSlider');
-  const coverImg = document.getElementById('coverImg');
-  const coverFallback = document.getElementById('coverFallback');
+  const currentTimeLabel = document.getElementById('currentTimeLabel');
+  const totalDurationLabel = document.getElementById('totalDurationLabel');
+  const volumeSlider = document.getElementById('volumeSlider');
+  const vuLeft = document.getElementById('vuLeft');
+  const vuRight = document.getElementById('vuRight');
+  const tapeCounterEl = document.getElementById('tapeCounter');
+  const leftTapeRoll = document.getElementById('leftTapeRoll');
+  const rightTapeRoll = document.getElementById('rightTapeRoll');
+  const leftTapeRollB = document.getElementById('leftTapeRollB');
+  const rightTapeRollB = document.getElementById('rightTapeRollB');
 
-  function fmt(s){
-    if(!isFinite(s)) return '0:00';
-    const m = Math.floor(s/60), sec = Math.floor(s%60);
-    return m + ':' + String(sec).padStart(2,'0');
+  // Format seconds to mm:ss
+  function formatTime(s) {
+    if (isNaN(s) || !isFinite(s)) return '0:00';
+    const mins = Math.floor(s / 60);
+    const secs = Math.floor(s % 60);
+    return `${mins}:${secs < 10 ? '0' : ''}${secs}`;
   }
 
-  let ytPlayer = null;
-  let ytReady = false;
+  // Get current active tracklist
+  function getActiveTracklist() {
+    const tape = MIXTAPES[currentTapeIndex];
+    return currentSide === 'A' ? tape.sideA : tape.sideB;
+  }
 
-  // Load the YouTube IFrame API script
-  const ytScriptTag = document.createElement('script');
-  ytScriptTag.src = 'https://www.youtube.com/iframe_api';
-  document.head.appendChild(ytScriptTag);
+  // Load Track into Player
+  function loadTrack(tapeIdx, side, trackIdx) {
+    currentTapeIndex = tapeIdx;
+    currentSide = side;
+    currentTrackIndex = trackIdx;
 
-  window.onYouTubeIframeAPIReady = function(){
-    ytPlayer = new YT.Player('ytPlayerHidden', {
-      height: '0',
-      width: '0',
-      playerVars: {
-        listType: 'playlist',
-        list: YT_PLAYLIST_ID,
-        autoplay: 0,
-        controls: 0,
-        disablekb: 1
-      },
-      events: {
-        onReady: onYtReady,
-        onStateChange: onYtStateChange,
-        onError: onYtError
+    const tape = MIXTAPES[currentTapeIndex];
+    const tracks = getActiveTracklist();
+    const track = tracks[currentTrackIndex] || tracks[0];
+
+    // Update cassette labels
+    labelTapeTitle.textContent = tape.hindiName || tape.name;
+    labelTapeTitleB.textContent = tape.hindiName || tape.name;
+    labelSideTag.textContent = `SIDE ${currentSide}`;
+
+    labelSongTitle.textContent = track.title;
+    labelArtist.textContent = track.artist;
+    labelSongTitleB.textContent = track.title;
+    labelArtistB.textContent = track.artist;
+
+    // Set Audio Source
+    audio.src = track.src;
+    audio.playbackRate = isSlowedMoodOn ? 0.85 : 1.0;
+    scrubFill.style.width = '0%';
+    currentTimeLabel.textContent = '0:00';
+    totalDurationLabel.textContent = track.duration || '0:00';
+
+    updateCassetteRolls(0);
+    updateActiveTracklistUI();
+  }
+
+  // Mechanical Button Click Audio Effect
+  let audioCtx = null;
+  function playClickSound(pitch = 400) {
+    try {
+      const AudioCtx = window.AudioContext || window.webkitAudioContext;
+      if (!audioCtx && AudioCtx) audioCtx = new AudioCtx();
+      if (!audioCtx) return;
+      if (audioCtx.state === 'suspended') audioCtx.resume();
+
+      const osc = audioCtx.createOscillator();
+      const gain = audioCtx.createGain();
+      osc.type = 'triangle';
+      osc.frequency.setValueAtTime(pitch, audioCtx.currentTime);
+      osc.frequency.exponentialRampToValueAtTime(80, audioCtx.currentTime + 0.03);
+
+      gain.gain.setValueAtTime(0.3, audioCtx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.035);
+
+      osc.connect(gain);
+      gain.connect(audioCtx.destination);
+      osc.start();
+      osc.stop(audioCtx.currentTime + 0.04);
+    } catch (e) {}
+  }
+
+  // Synthesize Warm Lo-Fi Tape Hiss using Web Audio API
+  let hissGain = null;
+  function initTapeHiss() {
+    try {
+      const AudioCtx = window.AudioContext || window.webkitAudioContext;
+      if (!audioCtx && AudioCtx) audioCtx = new AudioCtx();
+      if (!audioCtx) return;
+
+      const bufferSize = audioCtx.sampleRate * 2;
+      const noiseBuffer = audioCtx.createBuffer(1, bufferSize, audioCtx.sampleRate);
+      const output = noiseBuffer.getChannelData(0);
+      let b0 = 0, b1 = 0, b2 = 0;
+      for (let i = 0; i < bufferSize; i++) {
+        const white = Math.random() * 2 - 1;
+        b0 = 0.99886 * b0 + white * 0.0555179;
+        b1 = 0.99332 * b1 + white * 0.0750759;
+        b2 = 0.96900 * b2 + white * 0.1538520;
+        output[i] = (b0 + b1 + b2 + white * 0.5362) * 0.02; // Warm pink noise
       }
-    });
-  };
 
-  function onYtReady(){
-    ytReady = true;
-    ytPlayer.setVolume(volSlider.value);
-    updateTrackInfo();
+      const whiteNoise = audioCtx.createBufferSource();
+      whiteNoise.buffer = noiseBuffer;
+      whiteNoise.loop = true;
+
+      const filter = audioCtx.createBiquadFilter();
+      filter.type = 'lowpass';
+      filter.frequency.value = 2400;
+
+      hissGain = audioCtx.createGain();
+      hissGain.gain.value = 0;
+
+      whiteNoise.connect(filter);
+      filter.connect(hissGain);
+      hissGain.connect(audioCtx.destination);
+      whiteNoise.start(0);
+    } catch (e) {}
   }
 
-  function onYtError(){
-    trackArtist.textContent = 'This track is unavailable — skipping...';
-    setTimeout(() => { if(ytPlayer && ytPlayer.nextVideo) ytPlayer.nextVideo(); }, 800);
-  }
+  // Toggle Play / Pause
+  function togglePlay() {
+    playClickSound(500);
 
-  function updateTrackInfo(){
-    if(!ytPlayer || !ytPlayer.getVideoData) return;
-    const data = ytPlayer.getVideoData();
-    if(data && data.title){
-      trackName.textContent = data.title;
-      trackArtist.textContent = data.author || 'Yaado Ki Cassette Radio';
-    }
-    if(data && data.video_id){
-      coverImg.src = 'https://img.youtube.com/vi/' + data.video_id + '/hqdefault.jpg';
-      coverImg.onload = () => {
-        coverImg.style.display = 'block';
-        coverFallback.style.display = 'none';
-      };
-      coverImg.onerror = () => {
-        coverImg.style.display = 'none';
-        coverFallback.style.display = 'block';
-      };
-    }
-  }
-
-  function onYtStateChange(e){
-    if(e.data === YT.PlayerState.PLAYING){
-      playIcon.style.display = 'none'; pauseIcon.style.display = 'block';
-      updateTrackInfo();
-    } else if(e.data === YT.PlayerState.PAUSED || e.data === YT.PlayerState.ENDED){
-      playIcon.style.display = 'block'; pauseIcon.style.display = 'none';
-    } else if(e.data === YT.PlayerState.CUED){
-      updateTrackInfo();
-    }
-  }
-
-  playBtn.addEventListener('click', () => {
-    if(!ytReady || !ytPlayer) return;
-    const state = ytPlayer.getPlayerState();
-    if(state === YT.PlayerState.PLAYING){
-      ytPlayer.pauseVideo();
+    if (audio.paused) {
+      const playPromise = audio.play();
+      if (playPromise !== undefined) {
+        playPromise.then(() => {
+          isPlaying = true;
+          cassetteBody.classList.add('is-playing');
+          playIconSymbol.textContent = '⏸';
+          playBtnLabel.textContent = 'PAUSE';
+          startTapeCounter();
+        }).catch(() => {
+          // Handle mobile auto-play restrictions gracefully
+        });
+      }
     } else {
-      ytPlayer.playVideo();
+      audio.pause();
+      isPlaying = false;
+      cassetteBody.classList.remove('is-playing');
+      playIconSymbol.textContent = '▶';
+      playBtnLabel.textContent = 'PLAY';
+      stopTapeCounter();
+    }
+  }
+
+  playPauseBtn.addEventListener('click', togglePlay);
+
+  // Next Track
+  function nextTrack() {
+    playClickSound(600);
+    const tracks = getActiveTracklist();
+    let nextIdx = currentTrackIndex + 1;
+    if (nextIdx >= tracks.length) nextIdx = 0;
+    loadTrack(currentTapeIndex, currentSide, nextIdx);
+    if (isPlaying) audio.play().catch(() => {});
+  }
+  document.getElementById('nextTrackBtn').addEventListener('click', nextTrack);
+
+  // Previous Track
+  function prevTrack() {
+    playClickSound(400);
+    const tracks = getActiveTracklist();
+    let prevIdx = currentTrackIndex - 1;
+    if (prevIdx < 0) prevIdx = tracks.length - 1;
+    loadTrack(currentTapeIndex, currentSide, prevIdx);
+    if (isPlaying) audio.play().catch(() => {});
+  }
+  document.getElementById('prevTrackBtn').addEventListener('click', prevTrack);
+
+  // Fast Forward (+10s)
+  document.getElementById('fastFwdBtn').addEventListener('click', () => {
+    playClickSound(750);
+    audio.currentTime = Math.min(audio.duration || 0, audio.currentTime + 10);
+  });
+
+  // Rewind (-10s)
+  document.getElementById('rewindBtn').addEventListener('click', () => {
+    playClickSound(300);
+    audio.currentTime = Math.max(0, audio.currentTime - 10);
+  });
+
+  // 3D Flip Cassette (Side A ⇄ Side B)
+  function flipCassette() {
+    playClickSound(350);
+    currentSide = currentSide === 'A' ? 'B' : 'A';
+    cassetteBody.classList.toggle('is-flipped', currentSide === 'B');
+    loadTrack(currentTapeIndex, currentSide, 0);
+    if (isPlaying) audio.play().catch(() => {});
+  }
+  document.getElementById('flipBtn').addEventListener('click', flipCassette);
+  cassetteBody.addEventListener('click', flipCassette);
+
+  // Update Spool Rolls dynamically based on progress (0% to 100%)
+  function updateCassetteRolls(pct) {
+    // Left spool starts full (62px) and shrinks to 24px
+    const leftSize = Math.max(22, Math.round(62 - (pct * 38)));
+    // Right spool starts at 22px and grows to 62px
+    const rightSize = Math.max(22, Math.round(24 + (pct * 38)));
+
+    leftTapeRoll.style.width = `${leftSize}px`;
+    leftTapeRoll.style.height = `${leftSize}px`;
+    rightTapeRoll.style.width = `${rightSize}px`;
+    rightTapeRoll.style.height = `${rightSize}px`;
+
+    leftTapeRollB.style.width = `${rightSize}px`;
+    leftTapeRollB.style.height = `${rightSize}px`;
+    rightTapeRollB.style.width = `${leftSize}px`;
+    rightTapeRollB.style.height = `${leftSize}px`;
+  }
+
+  // Audio Time Update
+  audio.addEventListener('timeupdate', () => {
+    const cur = audio.currentTime || 0;
+    const dur = audio.duration || 0;
+    const pct = dur > 0 ? (cur / dur) : 0;
+
+    scrubFill.style.width = `${pct * 100}%`;
+    currentTimeLabel.textContent = formatTime(cur);
+    if (dur > 0) totalDurationLabel.textContent = formatTime(dur);
+
+    updateCassetteRolls(pct);
+
+    // Simulate animated VU Meter dancing to music
+    if (isPlaying) {
+      const baseL = Math.sin(cur * 8) * 20 + 40 + Math.random() * 25;
+      const baseR = Math.cos(cur * 7) * 20 + 40 + Math.random() * 25;
+      vuLeft.style.width = `${Math.min(100, Math.max(15, baseL))}%`;
+      vuRight.style.width = `${Math.min(100, Math.max(15, baseR))}%`;
     }
   });
 
-  prevBtn.addEventListener('click', () => { if(ytReady) ytPlayer.previousVideo(); });
-  nextBtn.addEventListener('click', () => { if(ytReady) ytPlayer.nextVideo(); });
+  // Track Ended -> Play next
+  audio.addEventListener('ended', nextTrack);
 
+  // Scrubber Seeking
   scrubTrack.addEventListener('click', (e) => {
-    if(!ytReady) return;
-    const duration = ytPlayer.getDuration();
-    if(!duration) return;
     const rect = scrubTrack.getBoundingClientRect();
-    const pct = (e.clientX - rect.left) / rect.width;
-    ytPlayer.seekTo(pct * duration, true);
-  });
-
-  volSlider.addEventListener('input', () => {
-    if(ytReady) ytPlayer.setVolume(volSlider.value);
-  });
-
-  // Poll for progress since the API doesn't push time updates on its own
-  setInterval(() => {
-    if(!ytReady || !ytPlayer || !ytPlayer.getCurrentTime) return;
-    const current = ytPlayer.getCurrentTime() || 0;
-    const duration = ytPlayer.getDuration() || 0;
-    const pct = duration ? (current/duration)*100 : 0;
-    scrubFill.style.width = pct + '%';
-    timeLabel.textContent = fmt(current) + ' / ' + fmt(duration);
-  }, 500);
-
-  // ===== PLAYLISTS / SONGS — open the real YouTube playlist =====
-  const playlistsBtn = document.getElementById('playlistsBtn');
-  const songsBtn = document.getElementById('songsBtn');
-  playlistsBtn.addEventListener('click', () => window.open(YT_PLAYLIST_URL, '_blank'));
-  songsBtn.addEventListener('click', () => window.open(YT_PLAYLIST_URL, '_blank'));
-
-  // ===== NOTIFICATION CARD BUTTONS =====
-  document.getElementById('notif1Close').addEventListener('click', (e) => {
-    e.target.closest('.notif-card').style.display = 'none';
-  });
-  document.getElementById('notif2Close').addEventListener('click', (e) => {
-    e.target.closest('.notif-card').style.display = 'none';
-  });
-
-  // WhatsApp group invite link
-  document.getElementById('joinFreeBtn').addEventListener('click', () => {
-    window.open('https://chat.whatsapp.com/EMituq2F5HLGZnK8CxME5d', '_blank');
-  });
-
-  // ===== REAL PWA INSTALL (works once hosted on HTTPS with manifest.json + sw.js) =====
-  let deferredPrompt = null;
-  const installBtn = document.getElementById('installBtn');
-  const installCardBtn = document.getElementById('installCardBtn');
-  const installCard = document.getElementById('installCard');
-
-  window.addEventListener('beforeinstallprompt', (e) => {
-    e.preventDefault();
-    deferredPrompt = e;
-  });
-
-  async function triggerInstall(){
-    if(deferredPrompt){
-      deferredPrompt.prompt();
-      const choice = await deferredPrompt.userChoice;
-      deferredPrompt = null;
-      if(choice.outcome === 'accepted') installCard.style.display = 'none';
-    } else {
-      alert('Install isn\'t available yet — this page needs to be hosted on HTTPS with a manifest.json and service worker for the native install prompt to appear. Ask me to set that up when you\'re ready to deploy.');
+    const clickPct = (e.clientX - rect.left) / rect.width;
+    if (audio.duration) {
+      audio.currentTime = clickPct * audio.duration;
     }
+  });
+
+  // Volume
+  volumeSlider.addEventListener('input', (e) => {
+    audio.volume = parseFloat(e.target.value);
+  });
+
+  // Tape Counter Timer
+  function startTapeCounter() {
+    stopTapeCounter();
+    tapeCounterTimer = setInterval(() => {
+      tapeCounter++;
+      tapeCounterEl.textContent = String(tapeCounter).padStart(3, '0');
+    }, 1000);
+  }
+  function stopTapeCounter() {
+    if (tapeCounterTimer) clearInterval(tapeCounterTimer);
+  }
+  document.getElementById('resetCounterBtn').addEventListener('click', () => {
+    playClickSound(800);
+    tapeCounter = 0;
+    tapeCounterEl.textContent = '000';
+  });
+
+  // Tape Hiss Toggle
+  const tapeHissBtn = document.getElementById('tapeHissBtn');
+  tapeHissBtn.addEventListener('click', () => {
+    playClickSound(420);
+    if (!hissGain) initTapeHiss();
+    isTapeHissOn = !isTapeHissOn;
+    tapeHissBtn.classList.toggle('active', isTapeHissOn);
+    if (hissGain) {
+      hissGain.gain.setValueAtTime(isTapeHissOn ? 0.35 : 0, audioCtx.currentTime);
+    }
+  });
+
+  // Slowed & Reverb Mood Toggle
+  const lofiMoodBtn = document.getElementById('lofiMoodBtn');
+  lofiMoodBtn.addEventListener('click', () => {
+    playClickSound(380);
+    isSlowedMoodOn = !isSlowedMoodOn;
+    lofiMoodBtn.classList.toggle('active', isSlowedMoodOn);
+    audio.playbackRate = isSlowedMoodOn ? 0.85 : 1.0;
+  });
+
+  // Sleep Timer (Cycles: Off -> 15m -> 30m -> 45m -> 60m)
+  const sleepTimerBtn = document.getElementById('sleepTimerBtn');
+  const sleepTimerLabel = document.getElementById('sleepTimerLabel');
+  const sleepDurations = [0, 15, 30, 45, 60];
+  let sleepDurationIndex = 0;
+
+  sleepTimerBtn.addEventListener('click', () => {
+    playClickSound(450);
+    sleepDurationIndex = (sleepDurationIndex + 1) % sleepDurations.length;
+    const mins = sleepDurations[sleepDurationIndex];
+
+    if (sleepTimer) clearTimeout(sleepTimer);
+
+    if (mins === 0) {
+      sleepTimerBtn.classList.remove('active');
+      sleepTimerLabel.textContent = '⏱️ Timer';
+    } else {
+      sleepTimerBtn.classList.add('active');
+      sleepTimerLabel.textContent = `⏱️ ${mins}m`;
+      sleepTimer = setTimeout(() => {
+        if (isPlaying) togglePlay();
+        sleepTimerBtn.classList.remove('active');
+        sleepTimerLabel.textContent = '⏱️ Timer';
+        sleepDurationIndex = 0;
+      }, mins * 60 * 1000);
+    }
+  });
+
+  // ===== 3. CASSETTE SHELF / TAPE DRAWER MODAL =====
+  const tapeShelfModal = document.getElementById('tapeShelfModal');
+  const openDrawerBtn = document.getElementById('openDrawerBtn');
+  const ejectBtn = document.getElementById('ejectBtn');
+  const closeShelfBtn = document.getElementById('closeShelfBtn');
+  const mixtapesList = document.getElementById('mixtapesList');
+  const activeTracklist = document.getElementById('activeTracklist');
+
+  function openShelf() {
+    playClickSound(300);
+    renderShelf();
+    updateActiveTracklistUI();
+    tapeShelfModal.classList.add('open');
+  }
+  function closeShelf() {
+    playClickSound(400);
+    tapeShelfModal.classList.remove('open');
   }
 
-  installBtn.addEventListener('click', triggerInstall);
-  installCardBtn.addEventListener('click', triggerInstall);
+  openDrawerBtn.addEventListener('click', openShelf);
+  ejectBtn.addEventListener('click', openShelf);
+  closeShelfBtn.addEventListener('click', closeShelf);
+  tapeShelfModal.addEventListener('click', (e) => {
+    if (e.target === tapeShelfModal) closeShelf();
+  });
 
-  if('serviceWorker' in navigator){
+  function renderShelf() {
+    mixtapesList.innerHTML = '';
+    MIXTAPES.forEach((tape, idx) => {
+      const item = document.createElement('div');
+      item.className = `cassette-box-item ${idx === currentTapeIndex ? 'selected' : ''}`;
+      item.innerHTML = `
+        <div class="box-meta">
+          <div class="box-title">📼 ${tape.name}</div>
+          <div class="box-desc">${tape.desc}</div>
+        </div>
+        <span class="box-tag">${tape.sideA.length + tape.sideB.length} Songs</span>
+      `;
+      item.addEventListener('click', () => {
+        loadTrack(idx, 'A', 0);
+        if (isPlaying) audio.play().catch(() => {});
+        renderShelf();
+        updateActiveTracklistUI();
+      });
+      mixtapesList.appendChild(item);
+    });
+  }
+
+  function updateActiveTracklistUI() {
+    activeTracklist.innerHTML = '';
+    const tracks = getActiveTracklist();
+    tracks.forEach((t, idx) => {
+      const row = document.createElement('div');
+      row.className = `track-row ${idx === currentTrackIndex ? 'active-track' : ''}`;
+      row.innerHTML = `
+        <span class="num">${idx + 1}.</span>
+        <span class="title">${t.title} <small style="opacity:0.65;">(${t.artist.split('•')[0].trim()})</small></span>
+        <span class="dur">${t.duration || ''}</span>
+      `;
+      row.addEventListener('click', () => {
+        loadTrack(currentTapeIndex, currentSide, idx);
+        audio.play().then(() => {
+          isPlaying = true;
+          cassetteBody.classList.add('is-playing');
+          playIconSymbol.textContent = '⏸';
+          playBtnLabel.textContent = 'PAUSE';
+          startTapeCounter();
+        }).catch(() => {});
+        closeShelf();
+      });
+      activeTracklist.appendChild(row);
+    });
+  }
+
+  // Custom Local MP3 Loading
+  const localMp3Input = document.getElementById('localMp3Input');
+  const loadLocalFileBtn = document.getElementById('loadLocalFileBtn');
+  loadLocalFileBtn.addEventListener('click', () => localMp3Input.click());
+
+  localMp3Input.addEventListener('change', (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      const customUrl = URL.createObjectURL(file);
+      const cleanName = file.name.replace(/\.[^/.]+$/, '');
+      const customTrack = {
+        title: cleanName,
+        artist: 'My Custom Tape • Local Audio',
+        src: customUrl,
+        duration: 'Playing'
+      };
+      MIXTAPES[0].sideA.unshift(customTrack);
+      loadTrack(0, 'A', 0);
+      closeShelf();
+      togglePlay();
+    }
+  });
+
+  // ===== 4. AMBIENCE & LIVE CLOCK =====
+  function updateClock() {
+    const now = new Date();
+    let h = now.getHours();
+    const m = String(now.getMinutes()).padStart(2, '0');
+    const ampm = h >= 12 ? 'PM' : 'AM';
+    h = h % 12; if (h === 0) h = 12;
+    document.getElementById('clockTime').textContent = `${h}:${m} ${ampm}`;
+  }
+  updateClock();
+  setInterval(updateClock, 30000);
+
+  // Gently drifting listener count
+  let listeners = 348;
+  const listenerEl = document.getElementById('listenerCount');
+  setInterval(() => {
+    listeners += Math.floor(Math.random() * 5) - 2;
+    if (listeners < 280) listeners = 280;
+    listenerEl.textContent = listeners;
+  }, 4500);
+
+  // Initialize First Track
+  loadTrack(0, 'A', 0);
+
+  // PWA Service Worker Registration
+  if ('serviceWorker' in navigator) {
     navigator.serviceWorker.register('sw.js').catch(() => {});
   }
 </script>
 
 </body>
 </html>
-
