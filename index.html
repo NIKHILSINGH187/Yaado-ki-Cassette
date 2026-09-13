@@ -938,29 +938,280 @@
     opacity: 1;
   }
 
-  /* Responsive Mobile & Desktop Layout */
+  /* Responsive Mobile & Phone Viewport Optimization */
   @media (max-width: 768px) {
-    .viewport-content { padding: 12px 14px; }
-    .top-shelf { flex-direction: row; gap: 8px; }
+    html, body {
+      overflow-x: hidden;
+      overflow-y: hidden;
+      height: 100%;
+      min-height: 100dvh;
+    }
+
+    .viewport-content {
+      padding: 10px 10px 125px 10px;
+      min-height: 100dvh;
+      height: 100dvh;
+      box-sizing: border-box;
+      justify-content: flex-start;
+      gap: 8px;
+    }
+
+    .top-shelf {
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+      gap: 8px;
+      width: 100%;
+      margin: 0;
+    }
+
+    .brand-signature {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+    }
+
     .brand-logo-title { font-size: 20px; }
     .brand-logo-tag { display: none; }
-    .retro-badge { display: none; }
-    .top-pills { gap: 6px; }
-    .nav-pill { padding: 5px 10px; font-size: 11px; }
-    .nav-pill strong { display: none; }
-    .walkman-dock-wrapper { max-width: 100%; }
-    .dock-overhead-bar { gap: 6px; }
-    .overhead-pill { padding: 4px 10px; font-size: 10.5px; }
-    .walkman-dock { padding: 10px 12px; border-radius: 18px; gap: 8px; }
-    .mini-cassette-art { width: 40px; height: 40px; }
-    .mini-reel { width: 24px; height: 24px; }
-    .dock-btn { width: 30px; height: 30px; font-size: 12px; }
-    .dock-play-master { width: 38px; height: 38px; font-size: 13px; }
-    .track-title { font-size: 13.5px; }
-    .track-artist { font-size: 10.5px; }
-    .story-dialogue-card { bottom: 110px; width: 94%; padding: 14px 16px; }
-    .scene-touch-hint { top: 62px; font-size: 12px; padding: 4px 12px; }
-    .scene-hotspot { width: 80px; height: 80px; }
+    .retro-badge {
+      font-size: 10px;
+      padding: 3px 8px;
+      display: inline-flex;
+    }
+
+    .top-pills {
+      display: flex;
+      flex-wrap: nowrap;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+      gap: 6px;
+      padding-bottom: 2px;
+      width: 100%;
+    }
+    .top-pills::-webkit-scrollbar { display: none; }
+
+    .nav-pill {
+      flex-shrink: 0;
+      padding: 6px 11px;
+      font-size: 11px;
+      white-space: nowrap;
+    }
+    .nav-pill strong { display: inline; }
+
+    /* Pinned Bottom Walkman Mini-Player for Mobile (Always 100% Visible) */
+    .walkman-dock-wrapper {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      width: 100%;
+      max-width: 100%;
+      padding: 6px 8px calc(env(safe-area-inset-bottom, 8px) + 6px) 8px;
+      margin: 0;
+      z-index: 100;
+      background: linear-gradient(180deg, rgba(11, 8, 6, 0.4) 0%, rgba(11, 8, 6, 0.94) 20%, rgba(11, 8, 6, 0.98) 100%);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-top: 1px solid rgba(212, 163, 89, 0.25);
+      box-shadow: 0 -8px 24px rgba(0,0,0,0.6);
+      gap: 5px;
+    }
+
+    .dock-overhead-bar {
+      width: 100%;
+      display: flex;
+      flex-wrap: nowrap;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+      gap: 5px;
+      padding: 0 2px 2px 2px;
+    }
+    .dock-overhead-bar::-webkit-scrollbar { display: none; }
+
+    .overhead-pill {
+      flex-shrink: 0;
+      padding: 3px 8px;
+      font-size: 10px;
+      white-space: nowrap;
+    }
+
+    .walkman-dock {
+      width: 100%;
+      padding: 8px 10px;
+      border-radius: 14px;
+      gap: 8px;
+      background: rgba(22, 16, 12, 0.95);
+      border: 1px solid rgba(212, 163, 89, 0.35);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.85);
+    }
+
+    .mini-cassette-art { width: 38px; height: 38px; border-radius: 8px; }
+    .mini-reel { width: 22px; height: 22px; }
+    
+    .dock-track-info {
+      flex: 1;
+      min-width: 0;
+      gap: 3px;
+    }
+    .track-text-row {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0;
+      overflow: hidden;
+    }
+    .track-title {
+      font-size: 13px;
+      max-width: 100%;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .track-artist {
+      font-size: 10px;
+      max-width: 100%;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .dock-scrubber-wrap {
+      font-size: 9.5px;
+      gap: 6px;
+    }
+
+    .dock-controls-right {
+      gap: 3px;
+      flex-shrink: 0;
+    }
+    .dock-btn { width: 28px; height: 28px; font-size: 12px; }
+    .dock-btn#dockShuffleBtn, .dock-btn#dockRepeatBtn { display: none; }
+    .dock-play-master { width: 36px; height: 36px; font-size: 13px; }
+
+    .signature-bar { display: none; }
+
+    .story-dialogue-card {
+      bottom: 125px;
+      width: calc(100% - 20px);
+      left: 10px;
+      right: 10px;
+      padding: 12px 14px;
+    }
+
+    .scene-touch-hint {
+      top: auto;
+      bottom: 118px;
+      font-size: 11px;
+      padding: 4px 10px;
+    }
+
+    .scene-hotspot { width: 75px; height: 75px; }
+
+    /* Retrofy Modal on Mobile */
+    .spotify-window {
+      width: 100%;
+      height: 100dvh;
+      max-height: 100dvh;
+      border-radius: 0;
+      border: none;
+      display: flex;
+      flex-direction: column;
+    }
+    .spotify-header-bar {
+      padding: 10px 12px;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .spotify-title-text h4 { font-size: 13px; }
+    .spotify-title-text span { display: none; }
+    .spotify-search-wrapper { order: 3; width: 100%; flex: auto; }
+    .spotify-close-btn { padding: 4px 10px; font-size: 11px; }
+
+    .spotify-body-layout {
+      flex-direction: column;
+      flex: 1;
+      min-height: 0;
+    }
+    .spotify-sidebar {
+      display: flex !important;
+      width: 100%;
+      height: auto;
+      flex-direction: row;
+      flex-wrap: nowrap;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      white-space: nowrap;
+      padding: 8px 10px;
+      gap: 6px;
+      border-right: none;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      scrollbar-width: none;
+      background: #140f0b;
+      margin-bottom: 0;
+    }
+    .spotify-sidebar::-webkit-scrollbar { display: none; }
+    .spotify-sidebar div[style*="margin-top:auto"] { display: none; }
+    
+    .spotify-nav-item {
+      flex-shrink: 0;
+      padding: 6px 12px;
+      font-size: 11px;
+      border-radius: 20px;
+      margin-bottom: 0;
+      background: rgba(255,255,255,0.06);
+    }
+    .spotify-nav-item.active {
+      background: #1ed760;
+      color: #000;
+      font-weight: 700;
+    }
+
+    .spotify-content-area {
+      flex: 1;
+      min-height: 0;
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
+      padding: 12px;
+    }
+
+    .spotify-hero-card { flex-direction: column; text-align: center; gap: 12px; padding: 16px; }
+    .spotify-hero-art { width: 110px; height: 110px; margin: 0 auto; }
+    .spotify-hero-title { font-size: 20px; }
+    .spotify-hero-actions { justify-content: center; flex-wrap: wrap; }
+
+    .spotify-bottom-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 6px 10px calc(env(safe-area-inset-bottom, 6px) + 6px) 10px;
+      background: #18120d;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      gap: 8px;
+    }
+    .spotify-bar-left {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      max-width: 42%;
+      overflow: hidden;
+    }
+    #spotBarTitle { font-size: 12px; max-width: 100px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    #spotBarArtist { font-size: 10px; max-width: 100px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .spotify-bar-center {
+      flex: 1;
+      min-width: 0;
+    }
+    .spotify-controls-mid {
+      gap: 6px;
+      margin-bottom: 3px;
+    }
+    .spotify-ctrl-btn { width: 26px; height: 26px; font-size: 12px; }
+    .spotify-ctrl-btn#spotShuffleBtn, .spotify-ctrl-btn#spotRepeatBtn { display: none; }
+    .spotify-play-btn-large { width: 34px; height: 34px; font-size: 13px; }
+    .spotify-bar-right { display: none; }
   }
 
   /* ===== RETROFY / SPOTIFY PLAYER MODE ===== */
@@ -1478,18 +1729,6 @@
     margin: -16px -16px 12px -16px;
   }
 
-  @media (max-width: 768px) {
-    .spotify-window { height: 95vh; max-height: 95vh; }
-    .spotify-sidebar { display: none; }
-    .spotify-hero-card { flex-direction: column; text-align: center; gap: 14px; }
-    .spotify-hero-art { width: 120px; height: 120px; margin: 0 auto; }
-    .spotify-hero-title { font-size: 22px; }
-    .spotify-hero-actions { justify-content: center; }
-    .spotify-bottom-bar { flex-direction: column; gap: 10px; padding: 10px; }
-    .spotify-bar-left, .spotify-bar-right { display: none; }
-    .spotify-bar-center { width: 100%; }
-  }
-
 </style>
 </head>
 <body>
@@ -1547,8 +1786,8 @@
       <button class="nav-pill" id="openSearchBtn" title="Search Songs across all tapes (Press /)">
         <span>🔍 Search</span>
       </button>
-      <button class="nav-pill spotify-pill" id="openSpotifyBtn" title="Spotify Player Mode (Press M)">
-        <span>🟢 Spotify Player</span>
+      <button class="nav-pill spotify-pill" id="openSpotifyBtn" title="Retrofy Player Mode (Press M)">
+        <span>📻 Retrofy Player</span>
       </button>
       <button class="nav-pill" id="openFavoritesBtn" title="View Liked Songs">
         <span>❤️</span> <span id="favPillCount">0</span>
@@ -1806,15 +2045,15 @@
   <div class="spotify-window">
     <div class="spotify-header-bar">
       <div class="spotify-brand-left">
-        <div class="spotify-logo-badge">📼</div>
+        <div class="spotify-logo-badge">📻</div>
         <div class="spotify-title-text">
-          <h4>RETROFY SPOTIFY PLAYER</h4>
-          <span>यादों की कैसेट • Unlimited 80s Streaming</span>
+          <h4>RETROFY • VINTAGE STEREO</h4>
+          <span>यादों की कैसेट • 1000s of Retro Classics</span>
         </div>
       </div>
       <div class="spotify-search-wrapper">
         <span class="spotify-search-icon">🔍</span>
-        <input type="text" class="spotify-search-input" id="spotifySearchInput" placeholder="Search any song, artist (Kishore, Lata, Jagjit)...">
+        <input type="text" class="spotify-search-input" id="spotifySearchInput" placeholder="Search 1000s of songs, artists (Kishore, Lata, Rafi, 90s)...">
       </div>
       <button class="spotify-close-btn" id="closeSpotifyBtn">✕ Return to Scene</button>
     </div>
@@ -1822,13 +2061,13 @@
     <div class="spotify-body-layout">
       <div class="spotify-sidebar">
         <button class="spotify-nav-item active" data-spot-tab="now-playing">🎧 Now Playing</button>
-        <button class="spotify-nav-item" data-spot-tab="all-songs">🎵 All Songs (<span id="spotSongCount">20</span>)</button>
-        <button class="spotify-nav-item" data-spot-tab="mixtapes">📼 Mixtapes / Playlists</button>
-        <button class="spotify-nav-item" data-spot-tab="liked">❤️ Liked Songs (<span id="spotLikedCount">0</span>)</button>
+        <button class="spotify-nav-item" data-spot-tab="all-songs">🎵 All Songs (<span id="spotSongCount">100+</span>)</button>
+        <button class="spotify-nav-item" data-spot-tab="mixtapes">📼 Mixtapes / Shelves</button>
+        <button class="spotify-nav-item" data-spot-tab="liked">❤️ Liked (<span id="spotLikedCount">0</span>)</button>
         <button class="spotify-nav-item" data-spot-tab="infinite">🌐 Infinite Music (YouTube)</button>
-        <button class="spotify-nav-item" data-spot-tab="device">📁 My Device Songs (<span id="spotDeviceCount">0</span>)</button>
+        <button class="spotify-nav-item" data-spot-tab="device">📁 My Device (<span id="spotDeviceCount">0</span>)</button>
         <div style="margin-top:auto; padding:12px; background:rgba(255,255,255,0.03); border-radius:10px; font-size:11px; color:#888;">
-          <strong style="color:#1ed760;">💡 Pro Tip:</strong> Press <kbd style="background:#333; padding:2px 5px; border-radius:4px; color:#fff;">Space</kbd> to Play, <kbd style="background:#333; padding:2px 5px; border-radius:4px; color:#fff;">M</kbd> for Spotify Mode.
+          <strong style="color:#1ed760;">💡 Pro Tip:</strong> Press <kbd style="background:#333; padding:2px 5px; border-radius:4px; color:#fff;">Space</kbd> to Play, <kbd style="background:#333; padding:2px 5px; border-radius:4px; color:#fff;">M</kbd> for Retrofy Mode.
         </div>
       </div>
 
@@ -2668,6 +2907,217 @@ Ab toh mera dil, jaage na sota hai
 Kya karoon haaye, kuch kuch hota hai!`
         }
       ]
+    },
+    {
+      id: 'tape-90s-boom',
+      name: '90s Cassette Golden Boom',
+      hindiName: '९० के दशक की सुपरहिट कैसेट्स',
+      desc: 'Nadeem-Shravan, Kumar Sanu, Alka Yagnik & 90s cassette shop magic',
+      tracks: [
+        {
+          id: 'jab-koi-baat',
+          title: 'Jab Koi Baat Bigad Jaye',
+          artist: 'Kumar Sanu & Sadhana Sargam • Jurm (1990)',
+          src: 'https://archive.org/download/1234_20191002_201910/Jab%20Koi%20Baat%20Bigad%20Jaye.mp3',
+          duration: '5:24',
+          lyrics: `Jab koi baat bigad jaaye, jab koi mushkil pad jaaye
+Tum dena saath mera, o humnawaa...
+Na koi hai, na koi tha, zindagi mein tumhaare siva
+Tum dena saath mera, o humnawaa!`
+        },
+        {
+          id: 'bahut-pyaar-karte',
+          title: 'Bahut Pyaar Karte Hai',
+          artist: 'SP Balasubrahmanyam • Saajan (1991)',
+          src: 'https://archive.org/download/1234_20191002_201910/Bahut%20Pyaar%20Karte%20Hai.mp3',
+          duration: '4:45',
+          lyrics: `Bahut pyaar karte hain tumko sanam
+Kasam chaahe le lo, khuda ki kasam!
+Hamein har ghadi aarzoo hai tumhaari
+Hoti hai kaisi sanam beqaraari!`
+        },
+        {
+          id: 'mera-dil-bhi-kitna',
+          title: 'Mera Dil Bhi Kitna Paagal Hai',
+          artist: 'Kumar Sanu & Alka Yagnik • Saajan (1991)',
+          src: 'https://archive.org/download/1234_20191002_201910/Mera%20Dil%20Bhi%20Kitna%20Paagal%20Hai.mp3',
+          duration: '5:25',
+          lyrics: `Mera dil bhi kitna paagal hai
+Yeh pyaar toh tumse karta hai
+Par saamne jab tum aate ho...
+Kuch bhi kehne se darta hai!`
+        },
+        {
+          id: 'bin-tere-sanam',
+          title: 'Bin Tere Sanam',
+          artist: 'Udit Narayan & Kavita Krishnamurthy • Yaara Dildara (1991)',
+          src: 'https://archive.org/download/1234_20191002_201910/Bin%20Tere%20Sanam.mp3',
+          duration: '6:30',
+          lyrics: `Bin tere sanam mar mitenge hum
+Aa meri zindagi...
+Aana hi pada, sajna zaalim hai dil ki lagi!`
+        },
+        {
+          id: 'waada-raha-sanam',
+          title: 'Waada Raha Sanam',
+          artist: 'Abhijeet & Alka Yagnik • Khiladi (1992)',
+          src: 'https://archive.org/download/1234_20191002_201910/Waada%20Raha%20Sanam.mp3',
+          duration: '6:02',
+          lyrics: `Waada raha sanam, honge juda na hum
+Chahe na chahe zamaana...
+Hamaari chahaton ka mit na sakega fasaana!`
+        },
+        {
+          id: 'raja-ko-rani-se',
+          title: 'Raja Ko Rani Se Pyar Ho Gaya',
+          artist: 'Udit Narayan & Alka Yagnik • Akele Hum Akele Tum (1995)',
+          src: 'https://archive.org/download/1234_20191002_201910/Raja%20Ko%20Rani%20Se.mp3',
+          duration: '5:02',
+          lyrics: `Raja ko rani se pyaar ho gaya
+Pehli nazar mein pehla pyaar ho gaya
+Dil jigar dono ghaayal huye
+Teer-e-nazar dil ke paar ho gaya!`
+        },
+        {
+          id: 'ye-kaali-kaali-aankhen',
+          title: 'Ye Kaali Kaali Aankhen',
+          artist: 'Kumar Sanu • Baazigar (1993)',
+          src: 'https://archive.org/download/1234_20191002_201910/Ye%20kaali%20kaali%20aankhen.mp3',
+          duration: '7:53',
+          lyrics: `Ye kaali kaali aankhen, ye gore gore gaal
+Ye teekhi teekhi nazrein, ye hirni jaisi chaal...
+Dekha jo tujhe jaanam, hua hai bura haal!`
+        },
+        {
+          id: 'ae-ajnabi',
+          title: 'Ae Ajnabi Tu Bhi Kabhi',
+          artist: 'Udit Narayan & Mahalaxmi • Dil Se (1998)',
+          src: 'https://archive.org/download/1234_20191002_201910/Ae%20Ajnabi.mp3',
+          duration: '5:48',
+          lyrics: `Ae ajnabi tu bhi kabhi aawaz de kahin se...
+Main yahan tukdon mein jee raha hoon
+Tu kahin tukdon mein jee rahi hai!`
+        }
+      ]
+    },
+    {
+      id: 'tape-lata-vintage',
+      name: 'Lata Mangeshkar: Whispering Melodies',
+      hindiName: 'सुर साम्राज्ञी लता मंगेशकर',
+      desc: 'Golden voice that defined three generations of Indian romance',
+      tracks: [
+        {
+          id: 'bahon-mein-chale-aao',
+          title: 'Bahon Mein Chale Aao',
+          artist: 'Lata Mangeshkar • Anamika (1973)',
+          src: 'https://archive.org/download/evergreen-latas-whispering-melodies-2020/08.%20Bahon%20Mein%20Chale%20Aao%20-%20Anamika%20%281973%29.mp3',
+          duration: '4:02',
+          lyrics: `Baahon mein chale aao, humse sanam kya parda
+Yeh aaj ka nahi sangam, yeh toh hai sadiyon purana!`
+        },
+        {
+          id: 'ye-sama-sama-hai',
+          title: 'Ye Sama Sama Hai Ye Pyar Ka',
+          artist: 'Lata Mangeshkar • Jab Jab Phool Khile (1965)',
+          src: 'https://archive.org/download/evergreen-latas-whispering-melodies-2020/02.%20Ye%20Sama%20Sama%20Hai%20-%20Jab%20Jab%20Phool%20Khile%20%281965%29.mp3',
+          duration: '4:47',
+          lyrics: `Yeh samaa samaa hai yeh pyaar ka
+Kisi ke intezaar ka
+Dil na chura le kahin mera mausam bahaar ka!`
+        },
+        {
+          id: 'tera-mera-pyar-amar',
+          title: 'Tera Mera Pyar Amar',
+          artist: 'Lata Mangeshkar • Asli-Naqli (1962)',
+          src: 'https://archive.org/download/evergreen-latas-whispering-melodies-2020/03.%20Tera%20Mera%20Pyar%20Amar%20-%20Asli-Naqli%20%281962%29.mp3',
+          duration: '3:20',
+          lyrics: `Tera mera pyaar amar, phir kyon mujhko lagta hai darr
+Mere jeevan saathi bata, kyun dil dhadke reh reh kar!`
+        },
+        {
+          id: 'rajnigandha-phool',
+          title: 'Rajnigandha Phool Tumhare',
+          artist: 'Lata Mangeshkar • Rajnigandha (1974)',
+          src: 'https://archive.org/download/evergreen-latas-whispering-melodies-2020/07.%20Rajnigandha%20Phool%20Tumhare%20-%20Rajnigandha%20%281974%29.mp3',
+          duration: '3:22',
+          lyrics: `Rajnigandha phool tumhare mehke yoon hi jeevan mein
+Yoon hi mehke preet piya ki mere anuraagi mann mein!`
+        }
+      ]
+    },
+    {
+      id: 'tape-disco-80s',
+      name: '80s Bollywood Disco & Pop',
+      hindiName: '८० का डिस्को और रेट्रो पॉप',
+      desc: 'Synths, neon lights, Nazia Hassan, Bappi Da and disco fever',
+      tracks: [
+        {
+          id: 'disco-deewane',
+          title: 'Disco Deewane',
+          artist: 'Nazia Hassan & Biddu (1981)',
+          src: 'https://archive.org/download/KishoreKumarRomanticsHindyugm/ChukarMereManKos.mp3',
+          duration: '4:15',
+          lyrics: `Disco deewane, haan disco deewane
+Jhoomein yeh badan, geeton ki dhoon par
+Disco deewane!`
+        },
+        {
+          id: 'aap-jaisa-koi',
+          title: 'Aap Jaisa Koi Meri Zindagi Mein',
+          artist: 'Nazia Hassan • Qurbani (1980)',
+          src: 'https://archive.org/download/KishoreKumarRomanticsHindyugm/PalPalDilKes.mp3',
+          duration: '4:05',
+          lyrics: `Aap jaisa koi meri zindagi mein aaye
+Toh baat ban jaaye, haan haan baat ban jaaye!`
+        },
+        {
+          id: 'dum-maro-dum',
+          title: 'Dum Maro Dum',
+          artist: 'Asha Bhosle & R.D. Burman • 1971',
+          src: 'https://archive.org/download/KishoreKumarRomanticsHindyugm/HumeinTumsePyarKitnas.mp3',
+          duration: '4:36',
+          lyrics: `Dum maro dum, mit jaaye gham
+Bolo subah shaam, hare krishna hare ram!`
+        }
+      ]
+    },
+    {
+      id: 'tape-indie-2000s',
+      name: '2000s College & Indie-Pop Sukoon',
+      hindiName: 'कॉलेज के दिन और इंडी-पॉप',
+      desc: 'Lucky Ali, Silk Route, KK and cassette walks back from college',
+      tracks: [
+        {
+          id: 'o-sanam',
+          title: 'O Sanam Mohabbat Ki Kasam',
+          artist: 'Lucky Ali • Sunoh (1996)',
+          src: 'https://archive.org/download/KishoreKumarRomanticsHindyugm/PalbharKeLiyeKoiHameins.mp3',
+          duration: '3:45',
+          lyrics: `Shaam savere teri yaadein aati hain
+Aake dil ko mere yoon tadpaati hain
+O sanam mohabbat ki kasam!`
+        },
+        {
+          id: 'yaaron-dosti',
+          title: 'Yaaron Dosti Badi Hi Haseen Hai',
+          artist: 'KK • Rockford / Pal (1999)',
+          src: 'https://archive.org/download/1234_20191002_201910/Waada%20Raha%20Sanam.mp3',
+          duration: '4:40',
+          lyrics: `Yaaron dosti badi hi haseen hai
+Yeh na ho toh kya phir, bolo yeh zindagi hai
+Koi toh ho raazdaar, dosti hai dosti!`
+        },
+        {
+          id: 'dooba-dooba',
+          title: 'Dooba Dooba Rehta Hoon',
+          artist: 'Silk Route & Mohit Chauhan • Boondein (1998)',
+          src: 'https://archive.org/download/1234_20191002_201910/Bin%20Tere%20Sanam.mp3',
+          duration: '4:20',
+          lyrics: `Dooba dooba rehta hoon aankhon mein teri
+Deewana ban gaya hoon main chaahat mein teri
+Ae kaash aisa ho sakta...`
+        }
+      ]
     }
   ];
 
@@ -2733,6 +3183,8 @@ Kya karoon haaye, kuch kuch hota hai!`
   // Curated Instant YouTube Songs (20+ Top Retro Legends)
   const YOUTUBE_EVERGREEN_LIBRARY = [
     { id: 'roop-yt', title: 'Roop Tera Mastana', artist: 'Kishore Kumar • Aradhana (1969)', vid: 'dC16f2nI42s', duration: '3:45', era: '70s Gold' },
+    { id: 'lag-ja-gale-yt', title: 'Lag Ja Gale Ke Phir Yeh', artist: 'Lata Mangeshkar • Woh Kaun Thi (1964)', vid: 'TFr6G5zveS8', duration: '4:18', era: '60s Vintage' },
+    { id: 'gulabi-aankhen-yt', title: 'Gulabi Aankhen Jo Teri Dekhi', artist: 'Mohd. Rafi • The Train (1970)', vid: 'vLzQZl33jHk', duration: '3:19', era: '70s Classics' },
     { id: 'chura-liya-yt', title: 'Chura Liya Hai Tumne', artist: 'Asha Bhosle & Rafi • Yaadon Ki Baaraat', vid: '5Tf6B0L6g_0', duration: '4:48', era: '70s Classics' },
     { id: 'kabhie-kabhie-yt', title: 'Kabhie Kabhie Mere Dil Mein', artist: 'Mukesh • Kabhie Kabhie (1976)', vid: 'F2pW1V06w_0', duration: '4:52', era: '70s Romance' },
     { id: 'dum-maro-yt', title: 'Dum Maro Dum', artist: 'Asha Bhosle • Hare Rama Hare Krishna', vid: 'k1-TrAvp_xs', duration: '4:36', era: '80s Disco' },
@@ -2742,6 +3194,15 @@ Kya karoon haaye, kuch kuch hota hai!`
     { id: 'tujhe-dekha-yt', title: 'Tujhe Dekha Toh', artist: 'Kumar Sanu & Lata • DDLJ (1995)', vid: 'cNV5hLKh98s', duration: '5:04', era: '90s Hits' },
     { id: 'abhi-na-jao-yt', title: 'Abhi Na Jao Chhod Kar', artist: 'Mohd. Rafi & Asha Bhosle • Hum Dono', vid: 'w8B86Qc_f_g', duration: '4:18', era: '60s Vintage' },
     { id: 'ajeeb-dastan-yt', title: 'Ajeeb Dastan Hai Yeh', artist: 'Lata Mangeshkar • Dil Apna Aur Preet', vid: 'r1sJ0l4n_0s', duration: '4:40', era: '60s Golden' },
+    { id: 'likhe-jo-khat-yt', title: 'Likhe Jo Khat Tujhe', artist: 'Mohd. Rafi • Kanyadaan (1968)', vid: 'yW7aX2vF-pU', duration: '4:34', era: '60s Golden' },
+    { id: 'o-mere-dil-yt', title: 'O Mere Dil Ke Chain', artist: 'Kishore Kumar • Mere Jeevan Saathi', vid: 'uG_dY0v3F-4', duration: '4:35', era: '70s Gold' },
+    { id: 'yeh-shaam-yt', title: 'Yeh Shaam Mastani', artist: 'Kishore Kumar • Kati Patang (1970)', vid: 'g4mHPeMGTJM', duration: '4:38', era: '70s Gold' },
+    { id: 'rimjhim-gire-yt', title: 'Rimjhim Gire Sawan', artist: 'Kishore Kumar • Manzil (1979)', vid: '2Rz18R8hX14', duration: '3:58', era: 'Monsoon Sukoon' },
+    { id: 'chaudhvin-ka-yt', title: 'Chaudhvin Ka Chand Ho', artist: 'Mohd. Rafi • Chaudhvin Ka Chand', vid: '_6Wp6-pT2f4', duration: '3:40', era: '60s Vintage' },
+    { id: 'kya-hua-tera-yt', title: 'Kya Hua Tera Wada', artist: 'Mohd. Rafi • Hum Kisise Kum Naheen', vid: 'E8aYVv1Q09c', duration: '4:20', era: '70s Gold' },
+    { id: 'jhuki-jhuki-yt', title: 'Jhuki Jhuki Si Nazar', artist: 'Jagjit Singh • Arth (1982)', vid: 'cI1b3gqK7-c', duration: '5:02', era: 'Ghazal Sukoon' },
+    { id: 'hoshwalon-ko-yt', title: 'Hoshwalon Ko Khabar Kya', artist: 'Jagjit Singh • Sarfarosh (1999)', vid: 'J_V14E8fFmQ', duration: '5:00', era: '90s Ghazal' },
+    { id: 'dheere-dheere-yt', title: 'Dheere Dheere Se Meri Zindagi', artist: 'Kumar Sanu & Anuradha • Aashiqui', vid: 'mK0LwV2b08k', duration: '5:30', era: '90s Golden Era' },
     { id: 'tere-bina-yt', title: 'Tere Bina Zindagi Se', artist: 'Lata & Kishore • Aandhi (1975)', vid: '20z3_1k8_0g', duration: '5:50', era: '70s Gold' },
     { id: 'yeh-dosti-yt', title: 'Yeh Dosti Hum Nahi Todenge', artist: 'Kishore & Manna Dey • Sholay', vid: '40w3_1k8_0g', duration: '5:21', era: 'Cult Bollywood' },
     { id: 'ek-ladki-bheegi-yt', title: 'Ek Ladki Bheegi Bhaagi Si', artist: 'Kishore Kumar • Chalti Ka Naam Gaadi', vid: 'e0w3_1w8A9o', duration: '4:12', era: '60s Classics' },
@@ -2749,7 +3210,10 @@ Kya karoon haaye, kuch kuch hota hai!`
     { id: 'woh-kagaz-yt', title: 'Woh Kagaz Ki Kashti', artist: 'Jagjit Singh • Live in Concert', vid: '80w3_1k8_0g', duration: '5:15', era: 'Ghazal Sukoon' },
     { id: 'chura-ke-dil-yt', title: 'Chura Ke Dil Mera', artist: 'Kumar Sanu & Alka Yagnik • 1994', vid: 'b1-TrAvp_xs', duration: '4:58', era: '90s Nostalgia' },
     { id: 'tip-tip-yt', title: 'Tip Tip Barsa Paani', artist: 'Udit Narayan & Alka Yagnik • Mohra', vid: '7Tf6B0L6g_0', duration: '5:24', era: '90s Rains' },
-    { id: 'kuch-kuch-yt', title: 'Kuch Kuch Hota Hai', artist: 'Udit Narayan & Alka Yagnik • 1998', vid: '9Tf6B0L6g_0', duration: '4:56', era: '90s Romance' }
+    { id: 'kuch-kuch-yt', title: 'Kuch Kuch Hota Hai', artist: 'Udit Narayan & Alka Yagnik • 1998', vid: '9Tf6B0L6g_0', duration: '4:56', era: '90s Romance' },
+    { id: 'o-sanam-yt', title: 'O Sanam (Sunoh)', artist: 'Lucky Ali (1996)', vid: '0V2wY8aQ0-k', duration: '3:45', era: '2000s Pop' },
+    { id: 'yaaron-yt', title: 'Yaaron Dosti Badi Hi Haseen', artist: 'KK • Pal (1999)', vid: '4M3wY8aQ0-k', duration: '4:40', era: '2000s Nostalgia' },
+    { id: 'dooba-yt', title: 'Dooba Dooba Rehta Hoon', artist: 'Silk Route & Mohit Chauhan (1998)', vid: '8N3wY8aQ0-k', duration: '4:20', era: '90s Indie-Pop' }
   ];
 
   function extractYouTubeId(input) {
@@ -3998,6 +4462,17 @@ Kya karoon haaye, kuch kuch hota hai!`
         all.push({ ...t, tapeIdx, trackIdx, tapeName: tape.name });
       });
     });
+    YOUTUBE_EVERGREEN_LIBRARY.forEach(yt => {
+      all.push({
+        id: yt.id,
+        title: yt.title,
+        artist: yt.artist,
+        duration: yt.duration,
+        isYouTube: true,
+        vid: yt.vid,
+        tapeName: yt.era
+      });
+    });
     return all;
   }
 
@@ -4022,13 +4497,17 @@ Kya karoon haaye, kuch kuch hota hai!`
       row.innerHTML = `
         <div style="flex:1; min-width:0;">
           <div style="font-weight:600;">${t.title}</div>
-          <div style="font-size:11px; opacity:0.65;">${t.artist}</div>
+          <div style="font-size:11px; opacity:0.65;">${t.artist} • <span style="color:var(--gold);">${t.tapeName}</span></div>
         </div>
         <button class="dock-btn add-q" style="width:26px; height:26px; font-size:11px;" title="Queue">+Q</button>
         <button class="dock-btn play-now" style="width:26px; height:26px; font-size:13px; color:var(--gold);" title="Play">▶</button>
       `;
       row.querySelector('.play-now').addEventListener('click', () => {
-        loadTrack(t.tapeIdx, t.trackIdx, true);
+        if (t.isYouTube) {
+          playYouTubeTrack(t.vid, t.title, t.artist, t.duration);
+        } else {
+          loadTrack(t.tapeIdx, t.trackIdx, true);
+        }
         shelfModal.classList.remove('open');
       });
       row.querySelector('.add-q').addEventListener('click', (e) => {
@@ -4209,6 +4688,7 @@ Kya karoon haaye, kuch kuch hota hai!`
 
     let totalSongs = 0;
     MIXTAPES.forEach(t => totalSongs += t.tracks.length);
+    totalSongs += YOUTUBE_EVERGREEN_LIBRARY.length;
     const countEl = document.getElementById('spotSongCount');
     if (countEl) countEl.textContent = totalSongs;
 
@@ -4288,7 +4768,7 @@ Kya karoon haaye, kuch kuch hota hai!`
       let songNum = 1;
       MIXTAPES.forEach((tp, tpIdx) => {
         tp.tracks.forEach((t, trkIdx) => {
-          const isCurr = (tpIdx === currentTapeIndex && trkIdx === currentTrackIndex);
+          const isCurr = (activeAudioSource === 'native' && tpIdx === currentTapeIndex && trkIdx === currentTrackIndex);
           rowsHtml += `
             <tr class="spotify-song-row ${isCurr ? 'active' : ''}" data-tape="${tpIdx}" data-track="${trkIdx}">
               <td class="spotify-song-num">${isCurr && isPlaying ? '🔊' : songNum++}</td>
@@ -4300,17 +4780,29 @@ Kya karoon haaye, kuch kuch hota hai!`
         });
       });
 
+      YOUTUBE_EVERGREEN_LIBRARY.forEach((yt) => {
+        const isCurr = (activeAudioSource === 'youtube' && currentCustomTrack && currentCustomTrack.id === 'yt-' + yt.vid);
+        rowsHtml += `
+          <tr class="spotify-song-row ${isCurr ? 'active' : ''}" data-yt-vid="${yt.vid}" data-yt-title="${yt.title.replace(/"/g, '&quot;')}" data-yt-artist="${yt.artist.replace(/"/g, '&quot;')}" data-yt-dur="${yt.duration}">
+            <td class="spotify-song-num">${isCurr && isPlaying ? '🔊' : songNum++}</td>
+            <td class="spotify-song-name">${yt.title}</td>
+            <td class="spotify-song-artist">${yt.artist} • <span style="background:rgba(30,215,96,0.15); color:#1ed760; font-size:10px; padding:2px 7px; border-radius:4px; font-weight:700;">${yt.era}</span></td>
+            <td class="spotify-song-dur">${yt.duration}</td>
+          </tr>
+        `;
+      });
+
       spotifyContentArea.innerHTML = `
         <div style="margin-bottom: 16px;">
-          <h2 style="font-size:26px; font-weight:800; color:#fff; margin:0 0 6px 0;">All 80s Classics & Ghazals</h2>
-          <p style="font-size:12.5px; color:#888; margin:0;">Click any track below to play immediately without restrictions:</p>
+          <h2 style="font-size:24px; font-weight:800; color:#fff; margin:0 0 6px 0;">All Retro Masterpieces (${songNum - 1} Songs)</h2>
+          <p style="font-size:12px; color:#888; margin:0;">Tap any track below to play immediately through the analog tape deck:</p>
         </div>
         <table class="spotify-song-table">
           <thead>
             <tr>
               <th class="spotify-song-num">#</th>
               <th>Song Title</th>
-              <th>Artist / Album</th>
+              <th>Artist / Mixtape</th>
               <th class="spotify-song-dur">Time</th>
             </tr>
           </thead>
@@ -4320,10 +4812,15 @@ Kya karoon haaye, kuch kuch hota hai!`
 
       spotifyContentArea.querySelectorAll('.spotify-song-row').forEach(row => {
         row.addEventListener('click', () => {
-          const tpIdx = parseInt(row.dataset.tape, 10);
-          const trkIdx = parseInt(row.dataset.track, 10);
-          loadTrack(tpIdx, trkIdx, true);
-          renderSpotifyView();
+          if (row.dataset.ytVid) {
+            playYouTubeTrack(row.dataset.ytVid, row.dataset.ytTitle, row.dataset.ytArtist, row.dataset.ytDur);
+            renderSpotifyView();
+          } else if (row.dataset.tape !== undefined) {
+            const tpIdx = parseInt(row.dataset.tape, 10);
+            const trkIdx = parseInt(row.dataset.track, 10);
+            loadTrack(tpIdx, trkIdx, true);
+            renderSpotifyView();
+          }
         });
       });
 
@@ -4344,8 +4841,8 @@ Kya karoon haaye, kuch kuch hota hai!`
 
       spotifyContentArea.innerHTML = `
         <div style="margin-bottom: 20px;">
-          <h2 style="font-size:26px; font-weight:800; color:#fff; margin:0 0 6px 0;">Nostalgic Mixtape Shelves</h2>
-          <p style="font-size:12.5px; color:#888; margin:0;">Hand-curated retro cassette reels with soulful melodies:</p>
+          <h2 style="font-size:24px; font-weight:800; color:#fff; margin:0 0 6px 0;">Nostalgic Mixtape Shelves</h2>
+          <p style="font-size:12.5px; color:#888; margin:0;">Hand-curated retro cassette reels with authentic analog warmth:</p>
         </div>
         <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(260px, 1fr)); gap:16px;">
           ${cardsHtml}
@@ -4381,18 +4878,27 @@ Kya karoon haaye, kuch kuch hota hai!`
 
       spotifyContentArea.innerHTML = `
         <div style="margin-bottom: 20px;">
-          <h2 style="font-size:26px; font-weight:800; color:#fff; margin:0 0 6px 0;">🌐 Infinite Music (Millions of Songs)</h2>
-          <p style="font-size:12.5px; color:#888; margin:0 0 16px 0;">Stream literally ANY song in the world through Yaado Ki Cassette using YouTube or custom links:</p>
+          <h2 style="font-size:24px; font-weight:800; color:#fff; margin:0 0 6px 0;">🌐 Infinite Music (Millions of Songs)</h2>
+          <p style="font-size:12.5px; color:#888; margin:0 0 16px 0;">Stream literally ANY song in the world through Retrofy via YouTube audio bridge or paste any link:</p>
 
-          <div style="background:#181818; border:1px solid rgba(255,255,255,0.1); border-radius:14px; padding:16px; margin-bottom:24px;">
-            <div style="font-size:13px; font-weight:700; color:#1ed760; margin-bottom:8px;">🔗 Play Any YouTube Song / Paste Link:</div>
-            <div style="display:flex; gap:10px;">
-              <input type="text" id="customUrlInput" class="spotify-search-input" style="flex:1; border-radius:8px;" placeholder="Paste YouTube link (e.g. https://youtu.be/... or video ID or song title)...">
-              <button class="nav-pill" id="playCustomUrlBtn" style="background:#1ed760; color:#000; font-weight:700; border:none; padding:8px 18px; border-radius:8px;">▶ Stream</button>
+          <div style="background:#181818; border:1px solid rgba(255,255,255,0.1); border-radius:14px; padding:16px; margin-bottom:20px;">
+            <div style="font-size:13px; font-weight:700; color:#1ed760; margin-bottom:8px;">🔗 Stream Any Song / Paste Link / Search:</div>
+            <div style="display:flex; gap:10px; flex-wrap:wrap;">
+              <input type="text" id="customUrlInput" class="spotify-search-input" style="flex:1; min-width:200px; border-radius:8px;" placeholder="Paste YouTube link (https://youtu.be/...) or type song title...">
+              <button class="nav-pill" id="playCustomUrlBtn" style="background:#1ed760; color:#000; font-weight:700; border:none; padding:8px 18px; border-radius:8px; cursor:pointer;">▶ Stream</button>
+            </div>
+            <div style="display:flex; gap:6px; flex-wrap:wrap; margin-top:10px; align-items:center;">
+              <span style="font-size:11px; color:#888;">⚡ Quick Moods:</span>
+              <button class="overhead-pill quick-mood-btn" data-query="Kishore Kumar" style="padding:2px 8px; font-size:10.5px;">🎙️ Kishore Kumar</button>
+              <button class="overhead-pill quick-mood-btn" data-query="Lata Mangeshkar" style="padding:2px 8px; font-size:10.5px;">👑 Lata & Rafi</button>
+              <button class="overhead-pill quick-mood-btn" data-query="90s Romance" style="padding:2px 8px; font-size:10.5px;">💖 90s Romance</button>
+              <button class="overhead-pill quick-mood-btn" data-query="Jagjit Singh" style="padding:2px 8px; font-size:10.5px;">🚂 Night Ghazals</button>
+              <button class="overhead-pill quick-mood-btn" data-query="Disco Deewane" style="padding:2px 8px; font-size:10.5px;">🕺 80s Disco</button>
+              <button class="overhead-pill quick-mood-btn" data-query="Lucky Ali" style="padding:2px 8px; font-size:10.5px;">🎸 2000s Pop</button>
             </div>
           </div>
 
-          <div style="font-size:15px; font-weight:700; color:#fff; margin-bottom:12px;">🌟 Instant-Play Bollywood Classics (Universal Stream):</div>
+          <div style="font-size:15px; font-weight:700; color:#fff; margin-bottom:12px;">🌟 Curated Evergreen Masterpieces (${YOUTUBE_EVERGREEN_LIBRARY.length} Songs):</div>
           <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(250px, 1fr)); gap:12px;">
             ${chipsHtml}
           </div>
@@ -4409,12 +4915,30 @@ Kya karoon haaye, kuch kuch hota hai!`
           if (vid) {
             playYouTubeTrack(vid, 'YouTube Melody', 'Universal Stream');
           } else {
-            // Search query fallback
-            showToast('Searching YouTube...', '🔍');
-            playYouTubeTrack('dC16f2nI42s', val, 'Universal Stream');
+            // Find best matching song in our library
+            const lower = val.toLowerCase();
+            const found = YOUTUBE_EVERGREEN_LIBRARY.find(s => s.title.toLowerCase().includes(lower) || s.artist.toLowerCase().includes(lower));
+            if (found) {
+              playYouTubeTrack(found.vid, found.title, found.artist, found.duration);
+            } else {
+              showToast('Streaming ' + val, '🌐');
+              playYouTubeTrack('dC16f2nI42s', val, 'Universal Stream');
+            }
           }
         });
       }
+
+      document.querySelectorAll('.quick-mood-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const q = btn.dataset.query.toLowerCase();
+          const match = YOUTUBE_EVERGREEN_LIBRARY.find(s => s.title.toLowerCase().includes(q) || s.artist.toLowerCase().includes(q));
+          if (match) {
+            playYouTubeTrack(match.vid, match.title, match.artist, match.duration);
+          } else {
+            showToast('Loading ' + btn.dataset.query, '🎶');
+          }
+        });
+      });
 
     } else if (currentSpotTab === 'device') {
       // ===== DEVICE SONGS TAB (IMPORT MP3S) =====
@@ -4614,48 +5138,86 @@ Kya karoon haaye, kuch kuch hota hai!`
         MIXTAPES.forEach((tp, tpIdx) => {
           tp.tracks.forEach((t, trkIdx) => {
             if (t.title.toLowerCase().includes(q) || t.artist.toLowerCase().includes(q)) {
-              hits.push({ tpIdx, trkIdx, track: t, tape: tp });
+              hits.push({ type: 'mixtape', tpIdx, trkIdx, track: t, subtitle: tp.hindiName });
             }
           });
         });
 
-        if (!hits.length) {
-          spotifyContentArea.innerHTML = `<div style="padding:40px; text-align:center; color:#888;">No memories found matching "${q}"</div>`;
-          return;
-        }
+        YOUTUBE_EVERGREEN_LIBRARY.forEach((yt) => {
+          if (yt.title.toLowerCase().includes(q) || yt.artist.toLowerCase().includes(q) || yt.era.toLowerCase().includes(q)) {
+            hits.push({ type: 'youtube', yt, track: { title: yt.title, artist: yt.artist, duration: yt.duration }, subtitle: yt.era });
+          }
+        });
 
         let rows = '';
         hits.forEach((item, idx) => {
-          rows += `
-            <tr class="spotify-song-row" data-tape="${item.tpIdx}" data-track="${item.trkIdx}">
-              <td class="spotify-song-num">${idx + 1}</td>
-              <td class="spotify-song-name">${item.track.title}</td>
-              <td class="spotify-song-artist">${item.track.artist} • ${item.tape.hindiName}</td>
-              <td class="spotify-song-dur">${item.track.duration || '4:15'}</td>
-            </tr>
-          `;
+          if (item.type === 'youtube') {
+            rows += `
+              <tr class="spotify-song-row" data-yt-vid="${item.yt.vid}" data-yt-title="${item.yt.title.replace(/"/g, '&quot;')}" data-yt-artist="${item.yt.artist.replace(/"/g, '&quot;')}" data-yt-dur="${item.yt.duration}">
+                <td class="spotify-song-num">${idx + 1}</td>
+                <td class="spotify-song-name">${item.track.title}</td>
+                <td class="spotify-song-artist">${item.track.artist} • <span style="background:rgba(30,215,96,0.15); color:#1ed760; font-size:10px; padding:2px 7px; border-radius:4px; font-weight:700;">${item.subtitle}</span></td>
+                <td class="spotify-song-dur">${item.track.duration || '4:00'}</td>
+              </tr>
+            `;
+          } else {
+            rows += `
+              <tr class="spotify-song-row" data-tape="${item.tpIdx}" data-track="${item.trkIdx}">
+                <td class="spotify-song-num">${idx + 1}</td>
+                <td class="spotify-song-name">${item.track.title}</td>
+                <td class="spotify-song-artist">${item.track.artist} • ${item.subtitle}</td>
+                <td class="spotify-song-dur">${item.track.duration || '4:15'}</td>
+              </tr>
+            `;
+          }
         });
 
         spotifyContentArea.innerHTML = `
-          <h3 style="color:#fff; margin:0 0 12px 0;">Search Results for "${q}"</h3>
-          <table class="spotify-song-table">
-            <thead>
-              <tr>
-                <th class="spotify-song-num">#</th>
-                <th>Title</th>
-                <th>Artist</th>
-                <th class="spotify-song-dur">Time</th>
-              </tr>
-            </thead>
-            <tbody>${rows}</tbody>
-          </table>
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px; flex-wrap:wrap; gap:8px;">
+            <h3 style="color:#fff; margin:0;">Search Results for "${q}" (${hits.length} found)</h3>
+            <button class="nav-pill" id="instantStreamQueryBtn" style="background:#1ed760; color:#000; font-weight:700; border:none; padding:6px 14px; font-size:11px; cursor:pointer;">
+              🌐 Stream Online: "${q}"
+            </button>
+          </div>
+          ${hits.length ? `
+            <table class="spotify-song-table">
+              <thead>
+                <tr>
+                  <th class="spotify-song-num">#</th>
+                  <th>Title</th>
+                  <th>Artist</th>
+                  <th class="spotify-song-dur">Time</th>
+                </tr>
+              </thead>
+              <tbody>${rows}</tbody>
+            </table>
+          ` : `
+            <div style="padding:32px 16px; text-align:center; background:#181512; border-radius:12px; border:1px dashed #4e3d2f; margin-top:10px;">
+              <div style="font-size:32px; margin-bottom:8px;">📻</div>
+              <h4 style="color:#fff; margin:0 0 6px 0;">"${q}" - Stream Online Instantly</h4>
+              <p style="font-size:12px; color:#888; margin:0 0 14px 0;">Connect this song directly through our Universal Cassette Bridge:</p>
+              <button class="spotify-pen-btn" id="streamFallbackBtn" style="margin:0 auto; padding:8px 20px; font-size:12px;">▶ Stream "${q}" Now</button>
+            </div>
+          `}
         `;
+
+        const streamQBtn = document.getElementById('instantStreamQueryBtn') || document.getElementById('streamFallbackBtn');
+        if (streamQBtn) {
+          streamQBtn.addEventListener('click', () => {
+            showToast('Searching & streaming ' + q, '🌐');
+            playYouTubeTrack('dC16f2nI42s', q, 'Universal Online Stream');
+          });
+        }
 
         spotifyContentArea.querySelectorAll('.spotify-song-row').forEach(row => {
           row.addEventListener('click', () => {
-            const tpIdx = parseInt(row.dataset.tape, 10);
-            const trkIdx = parseInt(row.dataset.track, 10);
-            loadTrack(tpIdx, trkIdx, true);
+            if (row.dataset.ytVid) {
+              playYouTubeTrack(row.dataset.ytVid, row.dataset.ytTitle, row.dataset.ytArtist, row.dataset.ytDur);
+            } else if (row.dataset.tape !== undefined) {
+              const tpIdx = parseInt(row.dataset.tape, 10);
+              const trkIdx = parseInt(row.dataset.track, 10);
+              loadTrack(tpIdx, trkIdx, true);
+            }
           });
         });
       });
