@@ -2758,7 +2758,7 @@ an unforgettable memory.`
   window.addEventListener('resize', resizeAmbientCanvas);
   resizeAmbientCanvas();
 
-  // Living Ambient Particle States
+  // ===== ENHANCED LIVING AMBIENT PARTICLES & BEHAVIORS =====
   const dustMotes = [];
   for (let i = 0; i < 40; i++) {
     dustMotes.push({
@@ -2775,6 +2775,46 @@ an unforgettable memory.`
   const passingSignals = [];
   let signalCounter = 0;
 
+  // Scene 1: Pigeon (Kabootar) & Vintage Ceiling Fan State
+  let pigeonState = 'idle';
+  let pigeonX = -50, pigeonY = -50, pigeonTimer = 0, pigeonPerchTimer = 0;
+
+  // Scene 2: Roof Water Drips & Lightning State
+  const roofDrips = [
+    { xRatio: 0.24, yRatio: 0.16, timer: 0.1, speed: 0.014, dropY: 0, fallVy: 1 },
+    { xRatio: 0.52, yRatio: 0.18, timer: 0.6, speed: 0.016, dropY: 0, fallVy: 1 },
+    { xRatio: 0.78, yRatio: 0.17, timer: 0.3, speed: 0.012, dropY: 0, fallVy: 1 }
+  ];
+  const dripRipples = [];
+  let lightningTick = 0;
+  let lightningAlpha = 0;
+
+  // Scene 3: Passing Trees, Lanterns & Interactive Window Mist
+  const passingTrees = [];
+  let treeTimer = 0;
+  const mistClears = [];
+
+  window.addEventListener('pointermove', (e) => {
+    if (currentSceneKey === 'train') {
+      const w = window.innerWidth, h = window.innerHeight;
+      if (e.clientX >= w * 0.20 && e.clientX <= w * 0.60 && e.clientY >= h * 0.18 && e.clientY <= h * 0.54) {
+        mistClears.push({ x: e.clientX, y: e.clientY, r: 24, alpha: 0.95 });
+        if (mistClears.length > 50) mistClears.shift();
+      }
+    }
+  });
+
+  // Scene 4: Flying Seagulls Flock & Moving Padmini Taxis
+  const seagullFlock = [
+    { x: -20, baseYRatio: 0.18, speed: 1.5 },
+    { x: -50, baseYRatio: 0.15, speed: 1.45 },
+    { x: -75, baseYRatio: 0.21, speed: 1.55 },
+    { x: -105, baseYRatio: 0.17, speed: 1.48 },
+    { x: -130, baseYRatio: 0.23, speed: 1.52 }
+  ];
+  const movingTaxis = [];
+  let taxiTimer = 0;
+
   function animateAmbientLivingScenes() {
     if (!ambCtx || !ambientCanvas) return;
     ambCtx.clearRect(0, 0, ambientCanvas.width, ambientCanvas.height);
@@ -2782,8 +2822,8 @@ an unforgettable memory.`
     const h = ambientCanvas.height;
 
     if (currentSceneKey === 'bazaar') {
-      // 1. Golden sunbeams & floating golden dust motes across the shop
-      ambCtx.fillStyle = 'rgba(255, 220, 140, 0.035)';
+      // 1. Golden sunbeams & floating golden dust motes
+      ambCtx.fillStyle = 'rgba(255, 220, 140, 0.038)';
       ambCtx.beginPath();
       ambCtx.moveTo(w * 0.35, 0);
       ambCtx.lineTo(w * 0.65, 0);
@@ -2792,7 +2832,6 @@ an unforgettable memory.`
       ambCtx.closePath();
       ambCtx.fill();
 
-      // Floating sun motes
       dustMotes.forEach(p => {
         p.x += p.speedX;
         p.y += p.speedY;
@@ -2805,8 +2844,82 @@ an unforgettable memory.`
         ambCtx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
         ambCtx.fill();
       });
+
+      // 2. Slow-turning 3-blade vintage ceiling fan overhead with soft shadow
+      const fanX = w * 0.82;
+      const fanY = h * 0.075;
+      const fanAngle = (Date.now() * 0.0022) % (Math.PI * 2);
+      ambCtx.save();
+      ambCtx.translate(fanX, fanY);
+      ambCtx.rotate(fanAngle);
+      ambCtx.fillStyle = 'rgba(25, 18, 10, 0.16)';
+      for (let b = 0; b < 3; b++) {
+        ambCtx.rotate((Math.PI * 2) / 3);
+        ambCtx.beginPath();
+        ambCtx.ellipse(36, 0, 34, 8.5, 0, 0, Math.PI * 2);
+        ambCtx.fill();
+      }
+      ambCtx.fillStyle = 'rgba(60, 42, 25, 0.45)';
+      ambCtx.beginPath();
+      ambCtx.arc(0, 0, 11, 0, Math.PI * 2);
+      ambCtx.fill();
+      ambCtx.restore();
+
+      // 3. Pigeon (Kabootar) fluttering in, perching on awning & taking flight
+      pigeonTimer += 0.016;
+      if (pigeonTimer > 18 && pigeonState === 'idle') {
+        pigeonState = 'flying_in';
+        pigeonX = w + 40;
+        pigeonY = h * 0.16;
+      }
+      if (pigeonState === 'flying_in') {
+        pigeonX -= 3.4;
+        pigeonY += (h * 0.23 - pigeonY) * 0.05;
+        const flap = Math.sin(Date.now() * 0.02) * 7;
+        ambCtx.fillStyle = 'rgba(40, 35, 30, 0.85)';
+        ambCtx.beginPath();
+        ambCtx.ellipse(pigeonX, pigeonY, 10, 6, 0.2, 0, Math.PI * 2);
+        ambCtx.fill();
+        ambCtx.beginPath();
+        ambCtx.moveTo(pigeonX - 4, pigeonY);
+        ambCtx.lineTo(pigeonX - 12, pigeonY - flap);
+        ambCtx.lineTo(pigeonX + 4, pigeonY);
+        ambCtx.fill();
+        if (pigeonX <= w * 0.68) {
+          pigeonState = 'perched';
+          pigeonPerchTimer = 0;
+        }
+      } else if (pigeonState === 'perched') {
+        pigeonPerchTimer += 0.016;
+        const headBob = Math.sin(Date.now() * 0.009) * 1.5;
+        ambCtx.fillStyle = 'rgba(45, 38, 30, 0.9)';
+        ambCtx.beginPath();
+        ambCtx.ellipse(w * 0.68, h * 0.23, 10, 6.5, 0, 0, Math.PI * 2);
+        ambCtx.fill();
+        ambCtx.beginPath();
+        ambCtx.arc(w * 0.68 - 7, h * 0.23 - 4 + headBob, 4, 0, Math.PI * 2);
+        ambCtx.fill();
+        if (pigeonPerchTimer > 6.0) pigeonState = 'flying_out';
+      } else if (pigeonState === 'flying_out') {
+        pigeonX -= 4.5;
+        pigeonY -= 1.6;
+        const flap = Math.sin(Date.now() * 0.024) * 8;
+        ambCtx.fillStyle = 'rgba(40, 35, 30, 0.85)';
+        ambCtx.beginPath();
+        ambCtx.ellipse(pigeonX, pigeonY, 9, 5.5, -0.3, 0, Math.PI * 2);
+        ambCtx.fill();
+        ambCtx.beginPath();
+        ambCtx.moveTo(pigeonX - 3, pigeonY);
+        ambCtx.lineTo(pigeonX - 12, pigeonY - flap);
+        ambCtx.lineTo(pigeonX + 4, pigeonY);
+        ambCtx.fill();
+        if (pigeonX < -60) {
+          pigeonState = 'idle';
+          pigeonTimer = 0;
+        }
+      }
     } else if (currentSceneKey === 'monsoon') {
-      // 2. Continuous rising steam from chai kettle and glasses
+      // 1. Continuous rising steam from chai kettle and glasses
       if (Math.random() < 0.3) {
         liveSteamPuffs.push({
           x: w * 0.45 + (Math.random() * 20 - 10),
@@ -2836,8 +2949,67 @@ an unforgettable memory.`
         ambCtx.arc(s.x, s.y, s.radius, 0, Math.PI * 2);
         ambCtx.fill();
       }
+
+      // 2. Rhythmic roof water drips from awning into puddle
+      roofDrips.forEach(drip => {
+        drip.timer += drip.speed;
+        const dx = w * drip.xRatio;
+        const dyOrigin = h * drip.yRatio;
+        if (drip.timer < 0.78) {
+          const dropRad = 1 + drip.timer * 3.8;
+          ambCtx.fillStyle = 'rgba(210, 235, 255, 0.65)';
+          ambCtx.beginPath();
+          ambCtx.arc(dx, dyOrigin + dropRad, dropRad, 0, Math.PI * 2);
+          ambCtx.fill();
+        } else {
+          if (drip.dropY === 0) drip.dropY = dyOrigin;
+          drip.dropY += drip.fallVy;
+          drip.fallVy += 0.48;
+          ambCtx.fillStyle = 'rgba(220, 240, 255, 0.8)';
+          ambCtx.beginPath();
+          ambCtx.ellipse(dx, drip.dropY, 2.2, 5, 0, 0, Math.PI * 2);
+          ambCtx.fill();
+
+          if (drip.dropY >= h * 0.86) {
+            dripRipples.push({ x: dx, y: h * 0.86, r: 2, alpha: 0.65 });
+            drip.timer = 0;
+            drip.dropY = 0;
+            drip.fallVy = 1;
+          }
+        }
+      });
+
+      for (let rIdx = dripRipples.length - 1; rIdx >= 0; rIdx--) {
+        const rip = dripRipples[rIdx];
+        rip.r += 0.85;
+        rip.alpha -= 0.016;
+        if (rip.alpha <= 0) {
+          dripRipples.splice(rIdx, 1);
+          continue;
+        }
+        ambCtx.strokeStyle = `rgba(210, 235, 255, ${rip.alpha})`;
+        ambCtx.lineWidth = 1.2;
+        ambCtx.beginPath();
+        ambCtx.ellipse(rip.x, rip.y, rip.r * 2.2, rip.r * 0.7, 0, 0, Math.PI * 2);
+        ambCtx.stroke();
+      }
+
+      // 3. Subtle distant lightning flash
+      lightningTick++;
+      if (lightningTick > 1400) {
+        lightningTick = 0;
+        lightningAlpha = 0.22;
+      }
+      if (lightningAlpha > 0) {
+        const lGrad = ambCtx.createLinearGradient(0, 0, 0, h * 0.38);
+        lGrad.addColorStop(0, `rgba(215, 230, 255, ${lightningAlpha})`);
+        lGrad.addColorStop(1, 'transparent');
+        ambCtx.fillStyle = lGrad;
+        ambCtx.fillRect(0, 0, w, h * 0.38);
+        lightningAlpha -= 0.018;
+      }
     } else if (currentSceneKey === 'train') {
-      // 3. Sleeper Train window - twinkling stars & passing railway signal lights
+      // 1. Sleeper Train window - twinkling stars & passing railway signal lights
       const starTime = Date.now() * 0.002;
       for (let i = 0; i < 24; i++) {
         const sx = w * 0.22 + (i * 23 % (w * 0.36));
@@ -2849,7 +3021,35 @@ an unforgettable memory.`
         ambCtx.fill();
       }
 
-      // Passing yellow signal lights drifting left (train forward motion!)
+      // Passing distant tree silhouettes and village lanterns
+      treeTimer++;
+      if (treeTimer % 200 === 0) {
+        passingTrees.push({ x: w * 0.58, type: Math.random() < 0.65 ? 'tree' : 'lantern', size: Math.random() * 18 + 26 });
+      }
+      for (let tIdx = passingTrees.length - 1; tIdx >= 0; tIdx--) {
+        const item = passingTrees[tIdx];
+        item.x -= 3.2;
+        if (item.x < w * 0.20) {
+          passingTrees.splice(tIdx, 1);
+          continue;
+        }
+        if (item.type === 'tree') {
+          ambCtx.fillStyle = 'rgba(15, 22, 28, 0.75)';
+          ambCtx.beginPath();
+          ambCtx.arc(item.x, h * 0.38, item.size * 0.45, 0, Math.PI * 2);
+          ambCtx.fill();
+        } else {
+          const lGrad = ambCtx.createRadialGradient(item.x, h * 0.40, 0, item.x, h * 0.40, 10);
+          lGrad.addColorStop(0, 'rgba(255, 185, 60, 0.85)');
+          lGrad.addColorStop(1, 'transparent');
+          ambCtx.fillStyle = lGrad;
+          ambCtx.beginPath();
+          ambCtx.arc(item.x, h * 0.40, 10, 0, Math.PI * 2);
+          ambCtx.fill();
+        }
+      }
+
+      // Passing yellow signal lights drifting left
       signalCounter++;
       if (signalCounter % 130 === 0) {
         passingSignals.push({
@@ -2875,6 +3075,42 @@ an unforgettable memory.`
         ambCtx.fillStyle = grad;
         ambCtx.beginPath();
         ambCtx.arc(sig.x, sig.y, sig.radius * 3.2, 0, Math.PI * 2);
+        ambCtx.fill();
+      }
+
+      // 2. Train rhythmic sway of berth chain and curtain
+      const trainSway = Math.sin(Date.now() * 0.0035) * 6;
+      ambCtx.fillStyle = 'rgba(24, 45, 65, 0.35)';
+      ambCtx.beginPath();
+      ambCtx.moveTo(w * 0.21 + trainSway, h * 0.18);
+      ambCtx.quadraticCurveTo(w * 0.22 + trainSway * 1.4, h * 0.36, w * 0.20, h * 0.52);
+      ambCtx.lineTo(w * 0.18, h * 0.52);
+      ambCtx.lineTo(w * 0.18, h * 0.18);
+      ambCtx.closePath();
+      ambCtx.fill();
+
+      ambCtx.strokeStyle = 'rgba(160, 140, 110, 0.5)';
+      ambCtx.lineWidth = 2.2;
+      ambCtx.beginPath();
+      ambCtx.moveTo(w * 0.24, h * 0.15);
+      ambCtx.quadraticCurveTo(w * 0.24 + trainSway * 0.6, h * 0.28, w * 0.24 + trainSway, h * 0.42);
+      ambCtx.stroke();
+
+      // 3. Interactive mist swipe trails on window glass
+      for (let mIdx = mistClears.length - 1; mIdx >= 0; mIdx--) {
+        const mc = mistClears[mIdx];
+        mc.alpha -= 0.003;
+        if (mc.alpha <= 0) {
+          mistClears.splice(mIdx, 1);
+          continue;
+        }
+        const mGrad = ambCtx.createRadialGradient(mc.x, mc.y, 0, mc.x, mc.y, mc.r);
+        mGrad.addColorStop(0, `rgba(255, 255, 255, ${mc.alpha * 0.25})`);
+        mGrad.addColorStop(0.7, `rgba(180, 220, 255, ${mc.alpha * 0.12})`);
+        mGrad.addColorStop(1, 'transparent');
+        ambCtx.fillStyle = mGrad;
+        ambCtx.beginPath();
+        ambCtx.arc(mc.x, mc.y, mc.r, 0, Math.PI * 2);
         ambCtx.fill();
       }
 
@@ -2906,9 +3142,8 @@ an unforgettable memory.`
         ambCtx.fill();
       }
     } else if (currentSceneKey === 'sunset') {
-      // 4. Marine Drive Sunset - Arabian Sea water reflections & Victorian lamp glow
+      // 1. Ocean wave golden shimmer
       const time = Date.now() * 0.003;
-      // Ocean wave golden shimmer
       for (let i = 0; i < 14; i++) {
         const wx = w * 0.6 + Math.sin(time + i) * 60 + i * 26;
         const wy = h * 0.55 + (i * 12) + Math.cos(time + i * 0.5) * 4;
@@ -2919,7 +3154,7 @@ an unforgettable memory.`
         ambCtx.fill();
       }
 
-      // Victorian streetlamp warm pulsating glow
+      // 2. Victorian streetlamp warm pulsating glow
       const lampGlow = (Math.sin(time * 1.5) + 1) * 0.15 + 0.35;
       const lx = w * 0.535;
       const ly = h * 0.17;
@@ -2931,6 +3166,50 @@ an unforgettable memory.`
       ambCtx.beginPath();
       ambCtx.arc(lx, ly, 45, 0, Math.PI * 2);
       ambCtx.fill();
+
+      // 3. Flock of 5 Seagulls flying across the orange sky
+      const birdTime = Date.now() * 0.0018;
+      seagullFlock.forEach((b, idx) => {
+        b.x += b.speed;
+        if (b.x > w + 60) b.x = -70 - idx * 30;
+        const flap = Math.sin(birdTime * 7 + idx) * 4;
+        const by = (h * b.baseYRatio) + Math.sin(birdTime * 2 + idx) * 8;
+        ambCtx.strokeStyle = 'rgba(50, 30, 25, 0.75)';
+        ambCtx.lineWidth = 1.8;
+        ambCtx.beginPath();
+        ambCtx.moveTo(b.x - 9, by + flap);
+        ambCtx.quadraticCurveTo(b.x - 4, by - 3, b.x, by);
+        ambCtx.quadraticCurveTo(b.x + 4, by - 3, b.x + 9, by + flap);
+        ambCtx.stroke();
+      });
+
+      // 4. Moving miniature black-and-yellow Premier Padmini cabs with headlights
+      taxiTimer++;
+      if (taxiTimer % 340 === 0) {
+        movingTaxis.push({ x: w * 0.36, y: h * 0.655, speed: 0.95 });
+      }
+      for (let tx = movingTaxis.length - 1; tx >= 0; tx--) {
+        const cab = movingTaxis[tx];
+        cab.x += cab.speed;
+        if (cab.x > w * 0.92) {
+          movingTaxis.splice(tx, 1);
+          continue;
+        }
+        ambCtx.fillStyle = 'rgba(25, 18, 12, 0.85)';
+        ambCtx.fillRect(cab.x, cab.y, 22, 8.5);
+        ambCtx.fillStyle = 'rgba(235, 185, 45, 0.92)';
+        ambCtx.fillRect(cab.x + 5, cab.y - 4, 11, 4.5);
+        const beam = ambCtx.createLinearGradient(cab.x + 22, cab.y + 4, cab.x + 46, cab.y + 6);
+        beam.addColorStop(0, 'rgba(255, 235, 160, 0.4)');
+        beam.addColorStop(1, 'transparent');
+        ambCtx.fillStyle = beam;
+        ambCtx.beginPath();
+        ambCtx.moveTo(cab.x + 22, cab.y + 3);
+        ambCtx.lineTo(cab.x + 46, cab.y + 1);
+        ambCtx.lineTo(cab.x + 46, cab.y + 9);
+        ambCtx.closePath();
+        ambCtx.fill();
+      }
     }
 
     requestAnimationFrame(animateAmbientLivingScenes);
@@ -3565,18 +3844,460 @@ an unforgettable memory.`
     if (e.target === lyricsModal) lyricsModal.classList.remove('open');
   });
 
+  // ===== REYNOLDS PEN REWIND CONTROLLER =====
+  function triggerPenRewindAnimation() {
+    SoundFX.playPenRewind();
+    const penModal = document.getElementById('penRewindModal');
+    if (penModal) {
+      penModal.classList.add('active');
+      setTimeout(() => {
+        penModal.classList.remove('active');
+      }, 1200);
+    }
+    if (audio.currentTime > 15) {
+      audio.currentTime -= 15;
+    } else {
+      audio.currentTime = 0;
+    }
+    showToast('🖊️ Reynolds Pen se reel rewind! (15s back)', '📼');
+  }
+
+  function initPenRewindLogic() {
+    const penBtn = document.getElementById('dockPenRewindBtn');
+    if (penBtn) penBtn.addEventListener('click', triggerPenRewindAnimation);
+    const spotPen = document.getElementById('spotPenBtn');
+    if (spotPen) spotPen.addEventListener('click', triggerPenRewindAnimation);
+
+    const cassThumb = document.getElementById('cassetteThumbnail');
+    if (cassThumb) {
+      cassThumb.addEventListener('click', (e) => {
+        e.stopPropagation();
+        triggerPenRewindAnimation();
+      });
+    }
+  }
+
+  // ===== SPOTIFY / RETROFY PLAYER MODE ENGINE =====
+  const spotifyModal = document.getElementById('spotifyModal');
+  const spotifyContentArea = document.getElementById('spotifyContentArea');
+  let currentSpotTab = 'now-playing';
+
+  function openSpotifyPlayer(tab = 'now-playing') {
+    currentSpotTab = tab;
+    if (spotifyModal) {
+      spotifyModal.classList.add('open');
+      updateSpotSidebarActive();
+      renderSpotifyView();
+      syncSpotifyPlayerBar();
+    }
+  }
+
+  function closeSpotifyPlayer() {
+    if (spotifyModal) spotifyModal.classList.remove('open');
+  }
+
+  function updateSpotSidebarActive() {
+    document.querySelectorAll('.spotify-nav-item').forEach(btn => {
+      btn.classList.toggle('active', btn.dataset.spotTab === currentSpotTab);
+    });
+  }
+
+  function syncSpotifyPlayerBar() {
+    const track = getCurrentTrack();
+    const tape = MIXTAPES[currentTapeIndex];
+    const barTitle = document.getElementById('spotBarTitle');
+    const barArtist = document.getElementById('spotBarArtist');
+    const totalTime = document.getElementById('spotTotalTime');
+    const playBtn = document.getElementById('spotPlayBtn');
+    if (barTitle) barTitle.textContent = track.title;
+    if (barArtist) barArtist.textContent = track.artist;
+    if (totalTime) totalTime.textContent = track.duration || '0:00';
+    if (playBtn) playBtn.textContent = isPlaying ? '⏸' : '▶';
+
+    const spotHeart = document.getElementById('spotHeartBtn');
+    if (spotHeart) {
+      spotHeart.textContent = likedSongIds.has(track.id) ? '❤️' : '🤍';
+      spotHeart.style.color = likedSongIds.has(track.id) ? '#ff4d6d' : 'inherit';
+    }
+
+    let totalSongs = 0;
+    MIXTAPES.forEach(t => totalSongs += t.tracks.length);
+    const countEl = document.getElementById('spotSongCount');
+    if (countEl) countEl.textContent = totalSongs;
+
+    const likedEl = document.getElementById('spotLikedCount');
+    if (likedEl) likedEl.textContent = likedSongIds.size;
+  }
+
+  function renderSpotifyView() {
+    if (!spotifyContentArea) return;
+    const track = getCurrentTrack();
+    const tape = MIXTAPES[currentTapeIndex];
+
+    if (currentSpotTab === 'now-playing') {
+      spotifyContentArea.innerHTML = `
+        <div class="spotify-hero-card">
+          <div class="spotify-hero-art">
+            <div class="spotify-hero-reel"></div>
+          </div>
+          <div class="spotify-hero-meta">
+            <span class="spotify-tag">📼 ${tape.hindiName || tape.name}</span>
+            <h2 class="spotify-hero-title">${track.title}</h2>
+            <div class="spotify-hero-artist">${track.artist}</div>
+            <div class="spotify-hero-actions">
+              <button class="spotify-play-btn-large" id="heroSpotPlayBtn">${isPlaying ? '⏸' : '▶'}</button>
+              <button class="spotify-pen-btn" id="heroSpotPenBtn">🖊️ Rewind with Pen (15s)</button>
+              <button class="nav-pill" id="heroLyricsBtn" style="color:#d4af37;">📜 Read Lyrics</button>
+            </div>
+          </div>
+        </div>
+
+        <div style="font-size: 15px; font-weight:700; color:#fff; margin-bottom: 12px; display:flex; justify-content:space-between; align-items:center;">
+          <span>Recommended Tracks on this Mixtape</span>
+          <span style="font-size:12px; color:#1ed760;">${tape.tracks.length} Songs</span>
+        </div>
+
+        <table class="spotify-song-table">
+          <thead>
+            <tr>
+              <th class="spotify-song-num">#</th>
+              <th>Title</th>
+              <th>Artist & Film</th>
+              <th class="spotify-song-dur">⏱</th>
+            </tr>
+          </thead>
+          <tbody id="spotHeroTableBody"></tbody>
+        </table>
+      `;
+
+      const heroPlay = document.getElementById('heroSpotPlayBtn');
+      if (heroPlay) heroPlay.addEventListener('click', togglePlay);
+      const heroPen = document.getElementById('heroSpotPenBtn');
+      if (heroPen) heroPen.addEventListener('click', triggerPenRewindAnimation);
+      const heroLyr = document.getElementById('heroLyricsBtn');
+      if (heroLyr) heroLyr.addEventListener('click', openLyricsModal);
+
+      const tbody = document.getElementById('spotHeroTableBody');
+      if (tbody) {
+        tape.tracks.forEach((t, idx) => {
+          const tr = document.createElement('tr');
+          tr.className = 'spotify-song-row' + (idx === currentTrackIndex ? ' active' : '');
+          tr.innerHTML = `
+            <td class="spotify-song-num">${idx === currentTrackIndex && isPlaying ? '🔊' : idx + 1}</td>
+            <td class="spotify-song-name">${t.title}</td>
+            <td class="spotify-song-artist">${t.artist}</td>
+            <td class="spotify-song-dur">${t.duration || '4:00'}</td>
+          `;
+          tr.addEventListener('click', () => {
+            loadTrack(currentTapeIndex, idx, true);
+            renderSpotifyView();
+          });
+          tbody.appendChild(tr);
+        });
+      }
+
+    } else if (currentSpotTab === 'all-songs') {
+      let rowsHtml = '';
+      let songNum = 1;
+      MIXTAPES.forEach((tp, tpIdx) => {
+        tp.tracks.forEach((t, trkIdx) => {
+          const isCurr = (tpIdx === currentTapeIndex && trkIdx === currentTrackIndex);
+          rowsHtml += `
+            <tr class="spotify-song-row ${isCurr ? 'active' : ''}" data-tape="${tpIdx}" data-track="${trkIdx}">
+              <td class="spotify-song-num">${isCurr && isPlaying ? '🔊' : songNum++}</td>
+              <td class="spotify-song-name">${t.title}</td>
+              <td class="spotify-song-artist">${t.artist} • <em style="color:#1ed760; font-style:normal;">${tp.hindiName || tp.name}</em></td>
+              <td class="spotify-song-dur">${t.duration || '4:15'}</td>
+            </tr>
+          `;
+        });
+      });
+
+      spotifyContentArea.innerHTML = `
+        <div style="margin-bottom: 16px;">
+          <h2 style="font-size:26px; font-weight:800; color:#fff; margin:0 0 6px 0;">All 80s Classics & Ghazals</h2>
+          <p style="font-size:12.5px; color:#888; margin:0;">Click any track below to play immediately without restrictions:</p>
+        </div>
+        <table class="spotify-song-table">
+          <thead>
+            <tr>
+              <th class="spotify-song-num">#</th>
+              <th>Song Title</th>
+              <th>Artist / Album</th>
+              <th class="spotify-song-dur">Time</th>
+            </tr>
+          </thead>
+          <tbody>${rowsHtml}</tbody>
+        </table>
+      `;
+
+      spotifyContentArea.querySelectorAll('.spotify-song-row').forEach(row => {
+        row.addEventListener('click', () => {
+          const tpIdx = parseInt(row.dataset.tape, 10);
+          const trkIdx = parseInt(row.dataset.track, 10);
+          loadTrack(tpIdx, trkIdx, true);
+          renderSpotifyView();
+        });
+      });
+
+    } else if (currentSpotTab === 'mixtapes') {
+      let cardsHtml = '';
+      MIXTAPES.forEach((tp, tpIdx) => {
+        cardsHtml += `
+          <div class="scene-card ${tpIdx === currentTapeIndex ? 'selected' : ''}" data-tape="${tpIdx}" style="padding:16px; background:#1c140e; border:1px solid ${tpIdx === currentTapeIndex ? '#1ed760' : 'rgba(255,255,255,0.08)'}; border-radius:12px; cursor:pointer;">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+              <span style="font-size:16px; font-weight:700; color:#fff;">📼 ${tp.hindiName}</span>
+              <span class="scene-card-tag" style="background:#1ed760; color:#000; font-weight:700;">${tp.tracks.length} Songs</span>
+            </div>
+            <p style="font-size:12px; color:#aaa; margin:0 0 10px 0;">${tp.desc}</p>
+            <div style="font-size:11px; color:#1ed760; font-weight:600;">Click to load & play tape ▶</div>
+          </div>
+        `;
+      });
+
+      spotifyContentArea.innerHTML = `
+        <div style="margin-bottom: 20px;">
+          <h2 style="font-size:26px; font-weight:800; color:#fff; margin:0 0 6px 0;">Nostalgic Mixtape Shelves</h2>
+          <p style="font-size:12.5px; color:#888; margin:0;">Hand-curated retro cassette reels with soulful melodies:</p>
+        </div>
+        <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(260px, 1fr)); gap:16px;">
+          ${cardsHtml}
+        </div>
+      `;
+
+      spotifyContentArea.querySelectorAll('.scene-card').forEach(card => {
+        card.addEventListener('click', () => {
+          const tpIdx = parseInt(card.dataset.tape, 10);
+          loadTrack(tpIdx, 0, true);
+          renderSpotifyView();
+        });
+      });
+
+    } else if (currentSpotTab === 'liked') {
+      const likedArr = [];
+      MIXTAPES.forEach((tp, tpIdx) => {
+        tp.tracks.forEach((t, trkIdx) => {
+          if (likedSongIds.has(t.id)) {
+            likedArr.push({ tpIdx, trkIdx, track: t, tape: tp });
+          }
+        });
+      });
+
+      if (!likedArr.length) {
+        spotifyContentArea.innerHTML = `
+          <div style="text-align:center; padding:50px 20px;">
+            <div style="font-size:44px; margin-bottom:12px;">🤍</div>
+            <h3 style="color:#fff;">No Liked Songs Yet</h3>
+            <p style="font-size:13px; color:#888;">Tap the heart icon (or press L) on any song to save it here.</p>
+          </div>
+        `;
+      } else {
+        let rows = '';
+        likedArr.forEach((item, idx) => {
+          const isCurr = (item.tpIdx === currentTapeIndex && item.trkIdx === currentTrackIndex);
+          rows += `
+            <tr class="spotify-song-row ${isCurr ? 'active' : ''}" data-tape="${item.tpIdx}" data-track="${item.trkIdx}">
+              <td class="spotify-song-num">${idx + 1}</td>
+              <td class="spotify-song-name">${item.track.title}</td>
+              <td class="spotify-song-artist">${item.track.artist}</td>
+              <td class="spotify-song-dur">${item.track.duration || '4:10'}</td>
+            </tr>
+          `;
+        });
+        spotifyContentArea.innerHTML = `
+          <div style="margin-bottom: 16px;">
+            <h2 style="font-size:26px; font-weight:800; color:#fff; margin:0 0 6px 0;">❤️ Your Liked Classics</h2>
+            <p style="font-size:12.5px; color:#888; margin:0;">Saved in browser memory for your timeless listening:</p>
+          </div>
+          <table class="spotify-song-table">
+            <thead>
+              <tr>
+                <th class="spotify-song-num">#</th>
+                <th>Title</th>
+                <th>Artist</th>
+                <th class="spotify-song-dur">Time</th>
+              </tr>
+            </thead>
+            <tbody>${rows}</tbody>
+          </table>
+        `;
+        spotifyContentArea.querySelectorAll('.spotify-song-row').forEach(row => {
+          row.addEventListener('click', () => {
+            const tpIdx = parseInt(row.dataset.tape, 10);
+            const trkIdx = parseInt(row.dataset.track, 10);
+            loadTrack(tpIdx, trkIdx, true);
+            renderSpotifyView();
+          });
+        });
+      }
+    }
+  }
+
+  function initSpotifyPlayerMode() {
+    const openBtn = document.getElementById('openSpotifyBtn');
+    if (openBtn) openBtn.addEventListener('click', () => openSpotifyPlayer('now-playing'));
+    const closeBtn = document.getElementById('closeSpotifyBtn');
+    if (closeBtn) closeBtn.addEventListener('click', closeSpotifyPlayer);
+    if (spotifyModal) {
+      spotifyModal.addEventListener('click', (e) => {
+        if (e.target === spotifyModal) closeSpotifyPlayer();
+      });
+    }
+
+    document.querySelectorAll('.spotify-nav-item').forEach(btn => {
+      btn.addEventListener('click', () => {
+        currentSpotTab = btn.dataset.spotTab;
+        updateSpotSidebarActive();
+        renderSpotifyView();
+      });
+    });
+
+    const spotPlay = document.getElementById('spotPlayBtn');
+    if (spotPlay) spotPlay.addEventListener('click', togglePlay);
+    const spotNext = document.getElementById('spotNextBtn');
+    if (spotNext) spotNext.addEventListener('click', nextTrack);
+    const spotPrev = document.getElementById('spotPrevBtn');
+    if (spotPrev) spotPrev.addEventListener('click', prevTrack);
+    const spotShuf = document.getElementById('spotShuffleBtn');
+    if (spotShuf) spotShuf.addEventListener('click', () => dockShuffleBtn.click());
+    const spotRep = document.getElementById('spotRepeatBtn');
+    if (spotRep) spotRep.addEventListener('click', () => dockRepeatBtn.click());
+    const spotHrt = document.getElementById('spotHeartBtn');
+    if (spotHrt) spotHrt.addEventListener('click', toggleLikeCurrent);
+    const spotLyr = document.getElementById('spotLyricsBtn');
+    if (spotLyr) spotLyr.addEventListener('click', openLyricsModal);
+
+    const volSlider = document.getElementById('spotVolSlider');
+    if (volSlider) {
+      volSlider.addEventListener('input', (e) => {
+        audio.volume = parseFloat(e.target.value);
+      });
+    }
+
+    const spotScrub = document.getElementById('spotScrubTrack');
+    if (spotScrub) {
+      spotScrub.addEventListener('click', (e) => {
+        const rect = spotScrub.getBoundingClientRect();
+        const clickPct = (e.clientX - rect.left) / rect.width;
+        if (audio.duration) {
+          audio.currentTime = clickPct * audio.duration;
+        }
+      });
+    }
+
+    const searchInp = document.getElementById('spotifySearchInput');
+    if (searchInp) {
+      searchInp.addEventListener('input', (e) => {
+        const q = e.target.value.toLowerCase().trim();
+        if (!q) {
+          renderSpotifyView();
+          return;
+        }
+        currentSpotTab = 'search';
+        updateSpotSidebarActive();
+        const hits = [];
+        MIXTAPES.forEach((tp, tpIdx) => {
+          tp.tracks.forEach((t, trkIdx) => {
+            if (t.title.toLowerCase().includes(q) || t.artist.toLowerCase().includes(q)) {
+              hits.push({ tpIdx, trkIdx, track: t, tape: tp });
+            }
+          });
+        });
+
+        if (!hits.length) {
+          spotifyContentArea.innerHTML = `<div style="padding:40px; text-align:center; color:#888;">No memories found matching "${q}"</div>`;
+          return;
+        }
+
+        let rows = '';
+        hits.forEach((item, idx) => {
+          rows += `
+            <tr class="spotify-song-row" data-tape="${item.tpIdx}" data-track="${item.trkIdx}">
+              <td class="spotify-song-num">${idx + 1}</td>
+              <td class="spotify-song-name">${item.track.title}</td>
+              <td class="spotify-song-artist">${item.track.artist} • ${item.tape.hindiName}</td>
+              <td class="spotify-song-dur">${item.track.duration || '4:15'}</td>
+            </tr>
+          `;
+        });
+
+        spotifyContentArea.innerHTML = `
+          <h3 style="color:#fff; margin:0 0 12px 0;">Search Results for "${q}"</h3>
+          <table class="spotify-song-table">
+            <thead>
+              <tr>
+                <th class="spotify-song-num">#</th>
+                <th>Title</th>
+                <th>Artist</th>
+                <th class="spotify-song-dur">Time</th>
+              </tr>
+            </thead>
+            <tbody>${rows}</tbody>
+          </table>
+        `;
+
+        spotifyContentArea.querySelectorAll('.spotify-song-row').forEach(row => {
+          row.addEventListener('click', () => {
+            const tpIdx = parseInt(row.dataset.tape, 10);
+            const trkIdx = parseInt(row.dataset.track, 10);
+            loadTrack(tpIdx, trkIdx, true);
+          });
+        });
+      });
+    }
+
+    audio.addEventListener('timeupdate', () => {
+      const cur = audio.currentTime || 0;
+      const dur = audio.duration || 0;
+      const curEl = document.getElementById('spotCurTime');
+      const fillEl = document.getElementById('spotScrubFill');
+      if (curEl) curEl.textContent = formatTime(cur);
+      if (fillEl && dur > 0) fillEl.style.width = `${(cur / dur) * 100}%`;
+    });
+  }
+
+  // Hook syncSpotifyPlayerBar into loadTrack
+  const originalLoadTrack = loadTrack;
+  loadTrack = function(tapeIdx, trackIdx, autoPlay = false) {
+    originalLoadTrack(tapeIdx, trackIdx, autoPlay);
+    syncSpotifyPlayerBar();
+    if (spotifyModal && spotifyModal.classList.contains('open')) {
+      renderSpotifyView();
+    }
+  };
+
   // ===== 10. GENTLE INTRO FADE & KEYBOARD SHORTCUTS =====
   window.addEventListener('DOMContentLoaded', () => {
-    // 1. Fade sepia warmup overlay after 400ms
     setTimeout(() => {
       if (warmupOverlay) warmupOverlay.classList.add('faded');
     }, 400);
 
-    // 2. Render initial interactive hotspots for 80s Cassette Shop
     renderSceneHotspots('bazaar');
-
     persistLiked();
-    loadTrack(0, 0, false);
+    initSpotifyPlayerMode();
+    initPenRewindLogic();
+
+    // Pick a fresh random song on every website visit
+    function pickRandomStartupTrack() {
+      const pool = [];
+      MIXTAPES.forEach((tape, tapeIdx) => {
+        tape.tracks.forEach((track, trackIdx) => {
+          pool.push({ tapeIdx, trackIdx, id: track.id, tapeId: tape.id });
+        });
+      });
+      const lastId = localStorage.getItem('yaado_last_opened_track_id');
+      let candidates = pool.filter(item => item.id !== lastId);
+      if (!candidates.length) candidates = pool;
+      const chosen = candidates[Math.floor(Math.random() * candidates.length)];
+      try {
+        localStorage.setItem('yaado_last_opened_track_id', chosen.id);
+      } catch(e) {}
+      return chosen;
+    }
+
+    const startup = pickRandomStartupTrack();
+    loadTrack(startup.tapeIdx, startup.trackIdx, false);
+    showToast('ताज़ा याद: ' + (MIXTAPES[startup.tapeIdx].tracks[startup.trackIdx].title), '📻');
   });
 
   // Drifting listener count
@@ -3629,7 +4350,7 @@ an unforgettable memory.`
   });
 
   if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('sw.js?v=5').catch(() => {});
+    navigator.serviceWorker.register('sw.js?v=6').catch(() => {});
   }
 </script>
 
