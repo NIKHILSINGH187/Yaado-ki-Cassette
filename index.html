@@ -3,26 +3,26 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>यादों की कैसेट — Yaado Ki Cassette | Viral Retro Hindi Mixtape Player</title>
-<meta name="description" content="यादों की कैसेट (Yaado Ki Cassette) — An aesthetic, ad-free vintage cassette tape player streaming timeless Hindi classics, 90s nostalgia, ghazals, and soothing lo-fi beats.">
-<meta name="keywords" content="yaado ki cassette, retro hindi player, vintage cassette tape, purane gaane, old bollywood songs, lofi hindi, cassette player online">
+<title>यादों की कैसेट — Yaado Ki Cassette | Vintage Mixtape & Retro Music Player</title>
+<meta name="description" content="यादों की कैसेट (Yaado Ki Cassette) — A nostalgic, ad-free retro cassette player with Spotify-grade features: live search, custom queue, liked songs, lyrics, and warm lo-fi tape hiss.">
+<meta name="keywords" content="yaado ki cassette, retro hindi player, vintage cassette tape, purane gaane, old bollywood songs, lofi hindi, kishore kumar, lata mangeshkar, jagjit singh, cassette player online">
 <meta name="author" content="Nikhil Singh">
 <link rel="canonical" href="https://nikhilsingh187.github.io/Yaado-ki-Cassette/">
 
 <meta property="og:type" content="website">
 <meta property="og:title" content="यादों की कैसेट — Yaado Ki Cassette">
-<meta property="og:description" content="An aesthetic, ad-free retro cassette tape player streaming timeless Hindi classics & nostalgia.">
+<meta property="og:description" content="Play nostalgic Hindi cassette classics in a warm retro walkman aesthetic with search, queue, and lyrics.">
 <meta property="og:image" content="https://nikhilsingh187.github.io/Yaado-ki-Cassette/assets/hero-bg.png">
 <meta property="og:url" content="https://nikhilsingh187.github.io/Yaado-ki-Cassette/">
 
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="यादों की कैसेट — Yaado Ki Cassette">
-<meta name="twitter:description" content="Play nostalgic Hindi cassette classics in a warm retro walkman aesthetic.">
+<meta name="twitter:description" content="Play nostalgic Hindi cassette classics in a warm retro walkman aesthetic with Spotify-style search and lyrics.">
 <meta name="twitter:image" content="https://nikhilsingh187.github.io/Yaado-ki-Cassette/assets/hero-bg.png">
 <link rel="manifest" href="manifest.json">
 <meta name="theme-color" content="#c8963e">
 
-<!-- Google Fonts: Special Elite, Kalam (Handwritten Hindi/English), Space Mono -->
+<!-- Google Fonts -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=IBM+Plex+Mono:wght@400;500;600;700&family=Kalam:wght@400;700&family=Special+Elite&display=swap" rel="stylesheet">
@@ -36,11 +36,13 @@
     --paper-dark: #dfd2b8;
     --tape-body: #1e1b18;
     --tape-border: #38322c;
-    --glass-bg: rgba(22, 15, 9, 0.55);
-    --glass-border: rgba(244, 235, 217, 0.18);
+    --glass-bg: rgba(22, 15, 9, 0.65);
+    --glass-border: rgba(244, 235, 217, 0.2);
     --red: #e63946;
     --green: #2a9d8f;
+    --neon-green: #4ade80;
     --amber-glow: #ffb703;
+    --crimson: #ff4d6d;
   }
 
   * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
@@ -61,7 +63,7 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    padding: 18px 20px 24px;
+    padding: 16px 18px 20px;
     z-index: 1;
   }
 
@@ -77,7 +79,7 @@
     height: 100%;
     object-fit: cover;
     object-position: center;
-    filter: brightness(0.65) saturate(1.15);
+    filter: brightness(0.62) saturate(1.15);
   }
   .hero-overlay {
     position: fixed;
@@ -85,7 +87,7 @@
     z-index: -1;
     pointer-events: none;
     background: radial-gradient(circle at center, rgba(15, 10, 6, 0.25) 0%, rgba(10, 7, 4, 0.85) 100%),
-                linear-gradient(180deg, rgba(15,10,6,0.6) 0%, rgba(15,10,6,0.1) 40%, rgba(10,7,4,0.9) 100%);
+                linear-gradient(180deg, rgba(15,10,6,0.65) 0%, rgba(15,10,6,0.15) 40%, rgba(10,7,4,0.92) 100%);
   }
 
   /* Top Navigation Bar */
@@ -93,19 +95,19 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    gap: 12px;
+    gap: 10px;
     width: 100%;
-    max-width: 900px;
-    margin: 0 auto 12px auto;
+    max-width: 960px;
+    margin: 0 auto 10px auto;
   }
 
   .clock-badge {
-    font-size: 13px;
-    letter-spacing: 0.08em;
+    font-size: 12.5px;
+    letter-spacing: 0.06em;
     background: var(--glass-bg);
     border: 1px solid var(--glass-border);
-    backdrop-filter: blur(8px);
-    padding: 6px 14px;
+    backdrop-filter: blur(10px);
+    padding: 6px 13px;
     border-radius: 20px;
     display: flex;
     align-items: center;
@@ -119,16 +121,16 @@
     font-size: 12px;
     background: var(--glass-bg);
     border: 1px solid var(--glass-border);
-    backdrop-filter: blur(8px);
-    padding: 6px 14px;
+    backdrop-filter: blur(10px);
+    padding: 6px 13px;
     border-radius: 20px;
   }
   .live-dot {
     width: 7px;
     height: 7px;
     border-radius: 50%;
-    background: #4ade80;
-    box-shadow: 0 0 8px #4ade80;
+    background: var(--neon-green);
+    box-shadow: 0 0 8px var(--neon-green);
     animation: pulse 1.8s ease-in-out infinite;
   }
   @keyframes pulse { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.4; transform: scale(0.85); } }
@@ -136,7 +138,8 @@
   .top-actions {
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 7px;
+    flex-wrap: wrap;
   }
   .pill-btn {
     font-size: 11.5px;
@@ -145,7 +148,7 @@
     border-radius: 20px;
     border: 1px solid var(--glass-border);
     background: var(--glass-bg);
-    backdrop-filter: blur(8px);
+    backdrop-filter: blur(10px);
     color: var(--paper);
     cursor: pointer;
     text-decoration: none;
@@ -155,12 +158,23 @@
     transition: all 0.2s ease;
   }
   .pill-btn:hover {
-    background: rgba(212, 163, 89, 0.25);
+    background: rgba(212, 163, 89, 0.28);
     border-color: var(--brass);
+    transform: translateY(-1px);
+  }
+  .pill-btn.active {
+    background: rgba(212, 163, 89, 0.4);
+    border-color: var(--gold);
+    color: var(--gold);
+  }
+  .pill-btn.heart-pill.active {
+    color: var(--crimson);
+    border-color: rgba(255, 77, 109, 0.5);
+    background: rgba(255, 77, 109, 0.15);
   }
   .pill-btn.wa {
-    background: rgba(37, 211, 102, 0.2);
-    border-color: rgba(37, 211, 102, 0.4);
+    background: rgba(37, 211, 102, 0.18);
+    border-color: rgba(37, 211, 102, 0.35);
   }
 
   /* ===== MAIN CASSETTE DECK SECTION ===== */
@@ -169,29 +183,33 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    max-width: 650px;
+    max-width: 660px;
     margin: 0 auto;
     width: 100%;
-    gap: 18px;
+    gap: 16px;
   }
 
   /* 3D Cassette Container */
   .cassette-perspective {
     perspective: 1200px;
     width: 100%;
-    max-width: 520px;
+    max-width: 530px;
+    height: 310px;
+    position: relative;
+    cursor: pointer;
+    user-select: none;
   }
 
-  .cassette-card {
-    position: relative;
+  .cassette-flipper {
     width: 100%;
-    aspect-ratio: 1.58 / 1;
-    border-radius: 20px;
-    transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    height: 100%;
+    position: relative;
     transform-style: preserve-3d;
-    cursor: pointer;
+    transition: transform 0.8s cubic-bezier(0.4, 0.2, 0.15, 1.0);
+    border-radius: 20px;
   }
-  .cassette-card.is-flipped {
+
+  .cassette-flipper.is-flipped {
     transform: rotateY(180deg);
   }
 
@@ -200,150 +218,209 @@
     inset: 0;
     width: 100%;
     height: 100%;
-    border-radius: 20px;
     backface-visibility: hidden;
     -webkit-backface-visibility: hidden;
-    background: linear-gradient(145deg, #2b2621 0%, #171412 100%);
-    border: 2px solid #4a4138;
-    box-shadow: 0 20px 45px rgba(0, 0, 0, 0.8), inset 0 2px 4px rgba(255, 255, 255, 0.1), 0 0 25px rgba(212, 163, 89, 0.15);
-    padding: 16px;
+    background: linear-gradient(135deg, #2b2520 0%, #15110d 65%, #0e0b08 100%);
+    border: 3px solid #4a3e33;
+    border-radius: 20px;
+    box-shadow: 0 24px 45px rgba(0, 0, 0, 0.85), inset 0 2px 4px rgba(255, 255, 255, 0.1), inset 0 -4px 10px rgba(0,0,0,0.7);
+    padding: 18px 22px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    overflow: hidden;
   }
 
   .cassette-face.back-side {
     transform: rotateY(180deg);
+    background: linear-gradient(135deg, #24201c 0%, #13100d 65%, #0b0907 100%);
   }
 
-  /* Corner screws */
+  /* Screws in four corners */
   .screw {
     position: absolute;
-    width: 10px;
-    height: 10px;
+    width: 9px;
+    height: 9px;
     border-radius: 50%;
-    background: radial-gradient(circle, #8a7c6f 30%, #3a332d 100%);
-    border: 1px solid #201c18;
-    box-shadow: inset 0 1px 2px rgba(255, 255, 255, 0.2);
+    background: radial-gradient(circle, #8a7a6b 20%, #3e332a 80%);
+    border: 1px solid #1a140f;
+    box-shadow: inset 0 1px 1px rgba(255,255,255,0.3);
   }
   .screw::after {
-    content: '';
+    content: "";
     position: absolute;
-    top: 4px; left: 1px; right: 1px;
-    height: 1.5px;
-    background: #181410;
-    transform: rotate(35deg);
+    top: 3.5px;
+    left: 1px;
+    width: 7px;
+    height: 1.2px;
+    background: #1a140f;
   }
-  .screw.tl { top: 10px; left: 10px; }
-  .screw.tr { top: 10px; right: 10px; }
-  .screw.bl { bottom: 10px; left: 10px; }
-  .screw.br { bottom: 10px; right: 10px; }
+  .screw.tl { top: 9px; left: 9px; }
+  .screw.tr { top: 9px; right: 9px; }
+  .screw.bl { bottom: 9px; left: 9px; }
+  .screw.br { bottom: 9px; right: 9px; }
 
   /* Vintage Paper Sticker Label */
   .tape-sticker {
-    position: relative;
     width: 100%;
     height: 100%;
-    background: linear-gradient(180deg, #f7efe1 0%, #e6d7bc 100%);
+    background: linear-gradient(180deg, #f7efe1 0%, #ebdcc4 100%);
     border-radius: 12px;
-    box-shadow: inset 0 0 15px rgba(100, 75, 40, 0.18), 0 2px 6px rgba(0,0,0,0.4);
+    border: 2px solid #3d3126;
     padding: 12px 16px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    color: #241b12;
-    border: 1px solid #c4b397;
+    box-shadow: inset 0 0 16px rgba(110, 85, 55, 0.25), 0 3px 6px rgba(0,0,0,0.35);
+    color: #2b2118;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .tape-sticker::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0; right: 0; height: 5px;
+    background: repeating-linear-gradient(90deg, #c84b31 0, #c84b31 16px, #2d4263 16px, #2d4263 32px, #f3c267 32px, #f3c267 48px);
   }
 
   .sticker-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border-bottom: 2px solid #241b12;
-    padding-bottom: 4px;
-  }
-  .side-tag {
-    font-family: 'Special Elite', monospace;
-    font-size: 20px;
-    font-weight: 800;
-    line-height: 1;
-    color: #8b1e0f;
-    border: 2px solid #8b1e0f;
-    padding: 2px 6px;
-    border-radius: 4px;
-    letter-spacing: 1px;
-  }
-  .tape-title {
-    font-family: 'Kalam', cursive, sans-serif;
-    font-size: 22px;
-    font-weight: 700;
-    color: #1a120b;
-    text-align: center;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    padding: 0 8px;
-  }
-  .cassette-brand {
-    font-size: 9px;
-    font-weight: 700;
-    letter-spacing: 1.5px;
-    opacity: 0.75;
+    border-bottom: 2px solid #4a3828;
+    padding-bottom: 5px;
+    margin-top: 2px;
   }
 
-  /* Current Song Display on Label */
-  .handwritten-song {
-    font-family: 'Caveat', cursive;
+  .side-tag {
+    font-size: 15px;
+    font-weight: 800;
+    font-family: 'Special Elite', monospace;
+    background: #2b2118;
+    color: #f7efe1;
+    padding: 2px 9px;
+    border-radius: 4px;
+    letter-spacing: 0.08em;
+  }
+
+  .tape-title {
+    font-family: 'Kalam', cursive;
     font-size: 21px;
     font-weight: 700;
-    color: #152438; /* Ink blue */
+    color: #8c2d19;
+    letter-spacing: 0.02em;
     text-align: center;
-    margin: 4px 0;
+    flex: 1;
+    padding: 0 8px;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
   }
-  .handwritten-artist {
-    font-family: 'Kalam', cursive;
-    font-size: 13px;
-    color: #5c4d3c;
-    text-align: center;
+
+  .cassette-brand {
+    font-family: 'Special Elite', monospace;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    color: #5a4b3d;
   }
 
-  /* Tape Window with Dual Rotating Reels */
-  .tape-window {
-    position: relative;
-    width: 82%;
-    height: 64px;
-    margin: 2px auto;
-    background: rgba(18, 14, 11, 0.92);
-    border-radius: 30px;
-    border: 2px solid #3d352e;
-    box-shadow: inset 0 4px 10px rgba(0, 0, 0, 0.9);
+  /* Song Meta with Heart Like Button */
+  .song-meta-wrap {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 0 20px;
+    gap: 8px;
+  }
+  .song-text-block {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .handwritten-song {
+    font-family: 'Caveat', cursive;
+    font-size: 22px;
+    font-weight: 700;
+    color: #1a1612;
+    line-height: 1.15;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .handwritten-artist {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11.5px;
+    font-weight: 500;
+    color: #5c4b3c;
+    margin-top: 2px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  /* Tape Heart Like Button */
+  .tape-heart-btn {
+    background: rgba(43, 33, 24, 0.08);
+    border: 1px solid rgba(43, 33, 24, 0.2);
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    cursor: pointer;
+    transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    flex-shrink: 0;
+  }
+  .tape-heart-btn:hover {
+    transform: scale(1.15);
+    background: rgba(255, 77, 109, 0.18);
+    border-color: var(--crimson);
+  }
+  .tape-heart-btn.liked {
+    animation: heartPulse 0.4s ease forwards;
+    background: rgba(255, 77, 109, 0.2);
+    border-color: var(--crimson);
+  }
+  @keyframes heartPulse {
+    0% { transform: scale(0.9); }
+    50% { transform: scale(1.3); }
+    100% { transform: scale(1.1); }
+  }
+
+  /* Tape Window with Spools */
+  .tape-window {
+    width: 100%;
+    height: 74px;
+    background: #0f0c09;
+    border-radius: 10px;
+    border: 2px solid #3a2e22;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 44px;
+    box-shadow: inset 0 4px 10px rgba(0,0,0,0.9), 0 1px 2px rgba(255,255,255,0.2);
     overflow: hidden;
   }
 
-  /* Center tape bridge */
   .tape-bridge {
     position: absolute;
-    top: 50%;
     left: 20%;
     right: 20%;
-    height: 16px;
+    top: 50%;
+    height: 18px;
     transform: translateY(-50%);
-    background: rgba(30, 20, 10, 0.7);
-    border-top: 1px dashed rgba(255, 255, 255, 0.1);
-    border-bottom: 1px dashed rgba(255, 255, 255, 0.1);
-    z-index: 1;
+    background: rgba(30, 24, 18, 0.7);
+    border: 1px dashed rgba(244, 235, 217, 0.15);
+    border-radius: 3px;
     pointer-events: none;
+    z-index: 1;
   }
 
-  /* Left & Right Reels */
+  /* Reels / Spools */
   .tape-spool-wrap {
     position: relative;
     display: flex;
@@ -352,361 +429,377 @@
     z-index: 2;
   }
 
-  /* Dynamic magnetic tape roll that physically expands/contracts */
   .tape-roll {
     position: absolute;
     border-radius: 50%;
-    background: radial-gradient(circle, #2b1f15 0%, #150f0a 85%, #0d0906 100%);
+    background: radial-gradient(circle, #3d2b1f 35%, #241912 70%, #150f0a 100%);
     box-shadow: 0 0 6px rgba(0,0,0,0.8);
     transition: width 0.3s ease, height 0.3s ease;
   }
 
-  /* Rotating Cogwheel */
   .cog-wheel {
-    position: relative;
     width: 44px;
     height: 44px;
     border-radius: 50%;
-    background: #e6dfd5;
-    border: 3px solid #8d8070;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.5);
+    background: #e6ded1;
+    border: 2px solid #4a3e33;
+    position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
+    box-shadow: inset 0 2px 4px rgba(0,0,0,0.3), 0 2px 4px rgba(0,0,0,0.5);
   }
+
+  .is-playing .cog-wheel {
+    animation: spin 3.2s linear infinite;
+  }
+  .is-flipped .is-playing .cog-wheel {
+    animation: spin-reverse 3.2s linear infinite;
+  }
+
+  @keyframes spin { 100% { transform: rotate(360deg); } }
+  @keyframes spin-reverse { 100% { transform: rotate(-360deg); } }
 
   .cog-spokes {
     position: absolute;
     width: 100%;
     height: 100%;
     border-radius: 50%;
+    background: repeating-conic-gradient(#e6ded1 0deg 30deg, #3d3126 30deg 60deg);
+    opacity: 0.85;
+    mask: radial-gradient(circle, transparent 40%, black 41%);
+    -webkit-mask: radial-gradient(circle, transparent 40%, black 41%);
   }
-  .cog-spokes::before, .cog-spokes::after {
-    content: '';
-    position: absolute;
-    background: #5a5043;
-  }
-  .cog-spokes::before {
-    top: 5px; bottom: 5px; left: 50%;
-    width: 3px;
-    transform: translateX(-50%);
-  }
-  .cog-spokes::after {
-    left: 5px; right: 5px; top: 50%;
-    height: 3px;
-    transform: translateY(-50%);
-  }
+
   .cog-center-hole {
     width: 14px;
     height: 14px;
+    background: #0f0c09;
     border-radius: 50%;
-    background: #110d0a;
-    border: 2px solid #5a5043;
-    z-index: 2;
+    border: 2px solid #5a4b3d;
+    z-index: 3;
   }
 
-  /* Cog Rotation Animation */
-  @keyframes spinReel {
-    from { transform: rotate(0deg); }
-    to { transform: rotate(360deg); }
-  }
-  .is-playing .cog-wheel {
-    animation: spinReel 2.8s linear infinite;
-  }
-
-  /* Sticker Footer Info */
   .sticker-footer {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    font-size: 9px;
-    font-weight: 600;
-    border-top: 1px solid #7e6c56;
-    padding-top: 3px;
-    color: #4a3c2e;
-    letter-spacing: 0.5px;
+    font-size: 8.5px;
+    font-weight: 700;
+    color: #6a5847;
+    letter-spacing: 0.05em;
+    border-top: 1px solid #4a3828;
+    padding-top: 4px;
   }
 
-  /* ===== BOOMBOX / WALKMAN CONTROLS DOCK ===== */
+  /* ===== WALKMAN / DECK CONTROLS ===== */
   .deck-controls {
     width: 100%;
-    background: var(--glass-bg);
-    border: 1px solid var(--glass-border);
-    backdrop-filter: blur(14px);
-    -webkit-backdrop-filter: blur(14px);
+    background: linear-gradient(180deg, rgba(30, 23, 16, 0.85) 0%, rgba(18, 14, 10, 0.95) 100%);
+    border: 2px solid var(--tape-border);
     border-radius: 20px;
-    padding: 16px 20px;
+    padding: 16px 20px 18px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.75), inset 0 1px 1px rgba(255,255,255,0.08);
+    backdrop-filter: blur(12px);
     display: flex;
     flex-direction: column;
     gap: 14px;
-    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.7);
   }
 
-  /* Deck Header: VU Meter & Tape Counter */
+  /* VU Meters & Tape Counter */
   .deck-top-row {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    gap: 16px;
-    padding-bottom: 12px;
-    border-bottom: 1px dashed var(--glass-border);
+    gap: 14px;
   }
 
-  /* Glowing Analog Dual VU Meter */
   .vu-meter-box {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    background: rgba(10, 7, 4, 0.7);
-    border: 1px solid rgba(212, 163, 89, 0.3);
-    border-radius: 10px;
-    padding: 6px 12px;
-  }
-  .vu-channel {
+    flex: 1;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    gap: 3px;
+    gap: 5px;
+    background: #110d0a;
+    padding: 7px 12px;
+    border-radius: 10px;
+    border: 1px solid #3d3023;
   }
-  .vu-label {
-    font-size: 8px;
+
+  .vu-channel {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 9px;
     font-weight: 700;
     color: var(--brass);
-    letter-spacing: 1px;
   }
+  .vu-label { width: 26px; }
+
   .vu-bar-track {
-    width: 60px;
-    height: 8px;
-    background: #1a140f;
+    flex: 1;
+    height: 7px;
+    background: #201710;
     border-radius: 4px;
     overflow: hidden;
     position: relative;
-    border: 1px solid #33271c;
   }
+
   .vu-bar-fill {
     height: 100%;
-    width: 25%;
-    background: linear-gradient(90deg, #2a9d8f 60%, #e9c46a 85%, #e76f51 100%);
-    box-shadow: 0 0 8px rgba(233, 196, 106, 0.5);
+    width: 20%;
+    background: linear-gradient(90deg, #2a9d8f 0%, #e9c46a 65%, #e76f51 88%, #e63946 100%);
+    border-radius: 4px;
     transition: width 0.08s ease;
   }
 
-  /* Digital Tape Counter */
   .counter-box {
     display: flex;
     align-items: center;
     gap: 8px;
+    background: #110d0a;
+    padding: 7px 14px;
+    border-radius: 10px;
+    border: 1px solid #3d3023;
   }
-  .counter-display {
-    background: #0d0a08;
-    color: #ffb703;
-    font-family: 'Special Elite', monospace;
-    font-size: 16px;
-    font-weight: 700;
-    padding: 4px 10px;
-    border-radius: 6px;
-    border: 1px solid #4a3b25;
-    letter-spacing: 3px;
-    text-shadow: 0 0 8px rgba(255, 183, 3, 0.5);
-  }
-  .counter-reset {
-    background: none;
-    border: none;
-    color: var(--paper);
-    opacity: 0.6;
-    font-size: 10px;
-    cursor: pointer;
-  }
-  .counter-reset:hover { opacity: 1; color: var(--brass); }
 
-  /* Scrub Progress Bar */
+  .counter-display {
+    font-family: 'Special Elite', monospace;
+    font-size: 18px;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    color: var(--gold);
+    background: #000;
+    padding: 2px 8px;
+    border-radius: 4px;
+    border: 1px solid #2a2016;
+  }
+
+  .counter-reset {
+    font-size: 9px;
+    font-weight: 700;
+    padding: 4px 8px;
+    background: #34271c;
+    color: var(--paper);
+    border: 1px solid #55402f;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+  .counter-reset:hover { background: #483626; }
+
+  /* Scrubber Progress */
   .scrubber-section {
     display: flex;
     align-items: center;
     gap: 12px;
-  }
-  .scrubber-track {
-    flex: 1;
-    height: 6px;
-    background: rgba(244, 235, 217, 0.15);
-    border-radius: 3px;
-    cursor: pointer;
-    position: relative;
-    border: 1px solid rgba(255, 255, 255, 0.06);
-  }
-  .scrubber-fill {
-    position: absolute;
-    left: 0; top: 0; bottom: 0;
-    width: 0%;
-    background: linear-gradient(90deg, var(--brass), var(--gold));
-    border-radius: 3px;
-    box-shadow: 0 0 10px var(--brass-glow);
-  }
-  .time-text {
-    font-size: 11px;
-    font-weight: 600;
-    opacity: 0.8;
-    white-space: nowrap;
+    font-size: 11.5px;
+    color: var(--paper-dark);
   }
 
-  /* Heavy Mechanical Push Buttons (Boombox style) */
+  .time-text { width: 36px; font-weight: 600; text-align: center; }
+
+  .scrubber-track {
+    flex: 1;
+    height: 8px;
+    background: #150f0a;
+    border-radius: 5px;
+    position: relative;
+    cursor: pointer;
+    border: 1px solid #36291e;
+  }
+
+  .scrubber-fill {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(90deg, var(--brass) 0%, var(--gold) 100%);
+    border-radius: 5px;
+    position: relative;
+    box-shadow: 0 0 10px var(--brass-glow);
+  }
+
+  .scrubber-fill::after {
+    content: "";
+    position: absolute;
+    right: -5px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: #fff;
+    border: 2px solid var(--brass);
+    box-shadow: 0 0 8px rgba(0,0,0,0.8);
+  }
+
+  /* Mechanical Push Buttons */
   .buttons-dock {
     display: flex;
-    align-items: center;
     justify-content: space-between;
+    align-items: center;
     gap: 8px;
+    flex-wrap: wrap;
   }
 
   .mech-btn {
     flex: 1;
-    height: 46px;
+    min-width: 48px;
+    height: 48px;
+    background: linear-gradient(180deg, #3e3023 0%, #201811 100%);
+    border: 1px solid #5a4634;
     border-radius: 10px;
-    border: 1px solid #4a3e30;
-    background: linear-gradient(180deg, #2d261e 0%, #1c1712 100%);
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5), inset 0 1px 1px rgba(255, 255, 255, 0.12);
     color: var(--paper);
+    font-family: 'IBM Plex Mono', monospace;
     font-size: 11px;
     font-weight: 700;
+    cursor: pointer;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 3px;
-    cursor: pointer;
+    gap: 2px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.6), inset 0 1px 1px rgba(255,255,255,0.12);
     transition: all 0.12s ease;
     user-select: none;
+    position: relative;
   }
+
   .mech-btn:hover {
-    background: linear-gradient(180deg, #383026 0%, #221c16 100%);
+    background: linear-gradient(180deg, #4f3d2d 0%, #2a2016 100%);
     border-color: var(--brass);
-    color: var(--gold);
     transform: translateY(-1px);
   }
-  .mech-btn:active, .mech-btn.is-active {
+
+  .mech-btn:active {
     transform: translateY(2px);
-    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.6), inset 0 2px 4px rgba(0, 0, 0, 0.8);
-    border-color: var(--brass);
-    background: #14100c;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.8), inset 0 2px 4px rgba(0,0,0,0.6);
   }
 
   .mech-btn.play-master {
-    flex: 1.3;
-    background: linear-gradient(180deg, #b88636 0%, #875c1c 100%);
-    color: #120e09;
-    border-color: #d4a359;
-    box-shadow: 0 4px 14px var(--brass-glow);
+    flex: 1.4;
+    background: linear-gradient(180deg, #d4a359 0%, #8c6328 100%);
+    color: #120d08;
+    border-color: #f3c267;
+    box-shadow: 0 4px 12px rgba(212, 163, 89, 0.4), inset 0 1px 2px rgba(255,255,255,0.4);
   }
   .mech-btn.play-master:hover {
-    background: linear-gradient(180deg, #caa049 0%, #9e6d23 100%);
-    color: #000;
+    background: linear-gradient(180deg, #f3c267 0%, #9e7130 100%);
+  }
+
+  .mech-btn.active {
+    background: linear-gradient(180deg, #2a9d8f 0%, #15574f 100%);
+    color: #ffffff;
+    border-color: #4ade80;
+    box-shadow: 0 0 10px rgba(74, 222, 128, 0.4);
   }
 
   .btn-label {
-    font-size: 8.5px;
-    letter-spacing: 0.8px;
-    text-transform: uppercase;
-    opacity: 0.8;
+    font-size: 9px;
+    letter-spacing: 0.05em;
+    opacity: 0.85;
   }
 
-  /* Extra Controls Row: Tape Hiss, Lo-Fi Mood, Volume */
+  /* Extra Controls Row: Tape Hiss, Lo-Fi, Sleep Timer, Volume */
   .extras-row {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    flex-wrap: wrap;
     gap: 12px;
-    font-size: 11.5px;
-    padding-top: 4px;
+    flex-wrap: wrap;
+    border-top: 1px dashed rgba(244, 235, 217, 0.12);
+    padding-top: 12px;
   }
 
   .toggle-wrap {
     display: flex;
-    align-items: center;
     gap: 8px;
+    flex-wrap: wrap;
   }
 
   .toggle-btn {
-    padding: 4px 10px;
-    border-radius: 14px;
-    border: 1px solid var(--glass-border);
-    background: rgba(255, 255, 255, 0.05);
-    color: var(--paper);
-    cursor: pointer;
     font-size: 11px;
-    display: flex;
+    font-weight: 600;
+    padding: 6px 12px;
+    background: #18120d;
+    border: 1px solid #3e3023;
+    border-radius: 8px;
+    color: var(--paper-dark);
+    cursor: pointer;
+    transition: all 0.15s;
+    display: inline-flex;
     align-items: center;
     gap: 5px;
-    transition: all 0.2s ease;
   }
+  .toggle-btn:hover { background: #261c14; border-color: var(--brass); }
   .toggle-btn.active {
-    background: var(--brass);
-    color: #1a120b;
-    font-weight: 700;
-    border-color: var(--brass);
-    box-shadow: 0 0 10px var(--brass-glow);
+    background: rgba(212, 163, 89, 0.25);
+    border-color: var(--gold);
+    color: var(--gold);
   }
 
-  /* Volume & Mood */
   .vol-wrap {
     display: flex;
     align-items: center;
     gap: 8px;
+    font-size: 13px;
   }
+
   .slider-custom {
     -webkit-appearance: none;
-    width: 70px;
-    height: 4px;
-    background: rgba(244, 235, 217, 0.2);
-    border-radius: 2px;
+    appearance: none;
+    width: 95px;
+    height: 6px;
+    background: #150f0a;
+    border-radius: 3px;
+    border: 1px solid #36291e;
     outline: none;
   }
   .slider-custom::-webkit-slider-thumb {
     -webkit-appearance: none;
-    width: 12px;
-    height: 12px;
+    appearance: none;
+    width: 14px;
+    height: 14px;
     border-radius: 50%;
     background: var(--brass);
+    border: 1px solid #fff;
     cursor: pointer;
-    box-shadow: 0 0 6px var(--brass-glow);
+    box-shadow: 0 0 6px rgba(0,0,0,0.8);
   }
 
-  /* ===== CASSETTE SHELF / TAPE DRAWER (EJECT MODAL) ===== */
+  /* ===== TAPE SHELF & DISCOVERY MODAL (Spotify-style Tabs) ===== */
   .tape-shelf-drawer {
-    display: none;
     position: fixed;
     inset: 0;
-    background: rgba(0, 0, 0, 0.8);
-    backdrop-filter: blur(10px);
+    background: rgba(8, 6, 4, 0.85);
+    backdrop-filter: blur(14px);
+    display: none;
     z-index: 100;
     align-items: center;
     justify-content: center;
-    padding: 20px;
+    padding: 16px;
   }
   .tape-shelf-drawer.open {
     display: flex;
   }
 
   .shelf-content {
-    background: #1d1814;
+    background: #1a1511;
     border: 2px solid #5a4b3a;
-    border-radius: 18px;
-    max-width: 500px;
+    border-radius: 20px;
+    max-width: 560px;
     width: 100%;
-    max-height: 85vh;
+    max-height: 88vh;
     overflow-y: auto;
     padding: 20px;
-    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.9);
+    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.95);
     display: flex;
     flex-direction: column;
-    gap: 16px;
+    gap: 14px;
   }
 
   .shelf-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border-bottom: 1px dashed #5a4b3a;
-    padding-bottom: 10px;
   }
   .shelf-header h3 {
     font-size: 16px;
@@ -720,17 +813,80 @@
     background: none;
     border: none;
     color: var(--paper);
-    font-size: 20px;
+    font-size: 22px;
     cursor: pointer;
     opacity: 0.7;
+    transition: opacity 0.15s;
   }
-  .close-shelf-btn:hover { opacity: 1; }
+  .close-shelf-btn:hover { opacity: 1; color: var(--gold); }
 
-  .cassette-box-item {
-    background: linear-gradient(145deg, #2c251e 0%, #18130f 100%);
-    border: 1px solid #544434;
+  /* Shelf Navigation Tabs */
+  .shelf-tabs {
+    display: flex;
+    gap: 6px;
+    border-bottom: 1px dashed #4e3d2f;
+    padding-bottom: 10px;
+    overflow-x: auto;
+  }
+  .shelf-tab-btn {
+    background: #251c15;
+    border: 1px solid #4a3828;
+    color: var(--paper);
+    padding: 6px 12px;
+    border-radius: 16px;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: all 0.15s;
+  }
+  .shelf-tab-btn:hover { background: #35281e; border-color: var(--brass); }
+  .shelf-tab-btn.active {
+    background: var(--brass);
+    color: #120e09;
+    border-color: var(--gold);
+  }
+
+  /* Search Input */
+  .search-wrap {
+    position: relative;
+    width: 100%;
+  }
+  .retro-search-input {
+    width: 100%;
+    background: #0f0c09;
+    border: 2px solid #4a3a2a;
     border-radius: 12px;
-    padding: 12px 16px;
+    padding: 10px 38px 10px 14px;
+    color: var(--paper);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 13px;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+  .retro-search-input:focus {
+    border-color: var(--gold);
+    box-shadow: 0 0 10px var(--brass-glow);
+  }
+  .clear-search-btn {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    color: var(--paper-dark);
+    cursor: pointer;
+    font-size: 14px;
+    display: none;
+  }
+
+  /* List Items inside Modals */
+  .cassette-box-item {
+    background: linear-gradient(145deg, #2a221a 0%, #17120e 100%);
+    border: 1px solid #4d3c2c;
+    border-radius: 12px;
+    padding: 12px 14px;
     cursor: pointer;
     display: flex;
     justify-content: space-between;
@@ -739,7 +895,7 @@
   }
   .cassette-box-item:hover, .cassette-box-item.selected {
     border-color: var(--brass);
-    background: #352c24;
+    background: #33271d;
     transform: translateX(4px);
   }
   .box-meta .box-title {
@@ -760,14 +916,14 @@
     background: var(--brass);
     color: #120e09;
     font-weight: 700;
+    flex-shrink: 0;
   }
 
-  /* Track List Accordion inside Cassette Drawer */
+  /* Track Row */
   .track-list-drawer {
     display: flex;
     flex-direction: column;
     gap: 6px;
-    margin-top: 6px;
   }
   .track-row {
     display: flex;
@@ -779,14 +935,122 @@
     background: rgba(255, 255, 255, 0.03);
     cursor: pointer;
     transition: background 0.15s;
+    gap: 10px;
   }
   .track-row:hover, .track-row.active-track {
-    background: rgba(212, 163, 89, 0.2);
+    background: rgba(212, 163, 89, 0.22);
     color: var(--gold);
   }
-  .track-row .num { opacity: 0.5; width: 22px; }
-  .track-row .title { flex: 1; font-weight: 500; }
-  .track-row .dur { opacity: 0.6; font-size: 11px; }
+  .track-row .num { opacity: 0.5; width: 20px; flex-shrink: 0; }
+  .track-row .title { flex: 1; font-weight: 500; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .track-row .dur { opacity: 0.6; font-size: 11px; flex-shrink: 0; }
+  .track-row-actions {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex-shrink: 0;
+  }
+  .row-action-btn {
+    background: none;
+    border: none;
+    color: var(--paper);
+    font-size: 13px;
+    cursor: pointer;
+    opacity: 0.6;
+    padding: 3px 5px;
+    border-radius: 4px;
+    transition: all 0.15s;
+  }
+  .row-action-btn:hover { opacity: 1; background: rgba(255,255,255,0.1); color: var(--gold); }
+  .row-action-btn.liked { color: var(--crimson); opacity: 1; }
+
+  /* ===== LYRICS MODAL ===== */
+  .lyrics-modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(10, 7, 5, 0.88);
+    backdrop-filter: blur(14px);
+    display: none;
+    z-index: 110;
+    align-items: center;
+    justify-content: center;
+    padding: 16px;
+  }
+  .lyrics-modal.open { display: flex; }
+
+  .lyrics-content {
+    background: #f4ebd9;
+    color: #241c14;
+    border: 3px solid #6b553e;
+    border-radius: 16px;
+    max-width: 520px;
+    width: 100%;
+    max-height: 82vh;
+    overflow-y: auto;
+    padding: 24px 28px;
+    box-shadow: 0 25px 60px rgba(0,0,0,0.9);
+    position: relative;
+    font-family: 'Special Elite', monospace;
+  }
+  .lyrics-content::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0; right: 0; height: 6px;
+    background: repeating-linear-gradient(90deg, #c84b31 0, #c84b31 16px, #2d4263 16px, #2d4263 32px, #f3c267 32px, #f3c267 48px);
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
+  }
+  .lyrics-header {
+    border-bottom: 2px solid #5a4b3d;
+    padding-bottom: 12px;
+    margin-bottom: 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+  .lyrics-header h3 {
+    font-size: 20px;
+    font-weight: 700;
+    color: #8c2d19;
+  }
+  .lyrics-header p {
+    font-size: 12px;
+    color: #554433;
+    margin-top: 3px;
+  }
+  .lyrics-body {
+    font-size: 14px;
+    line-height: 1.8;
+    white-space: pre-line;
+    color: #2b2219;
+  }
+
+  /* ===== FLOATING RETRO TOAST ===== */
+  .retro-toast {
+    position: fixed;
+    bottom: 24px;
+    left: 50%;
+    transform: translateX(-50%) translateY(100px);
+    background: #1a140f;
+    border: 1px solid var(--gold);
+    color: var(--paper);
+    padding: 10px 20px;
+    border-radius: 25px;
+    font-size: 12.5px;
+    font-weight: 600;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.8), 0 0 15px var(--brass-glow);
+    z-index: 200;
+    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.3s;
+    opacity: 0;
+    pointer-events: none;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .retro-toast.show {
+    transform: translateX(-50%) translateY(0);
+    opacity: 1;
+  }
 
   /* Footer Links */
   .stage-footer {
@@ -796,10 +1060,10 @@
     flex-wrap: wrap;
     gap: 12px;
     width: 100%;
-    max-width: 900px;
-    margin: 12px auto 0 auto;
+    max-width: 960px;
+    margin: 10px auto 0 auto;
     font-size: 11px;
-    opacity: 0.7;
+    opacity: 0.75;
   }
   .footer-links {
     display: flex;
@@ -813,16 +1077,16 @@
   .footer-links a:hover { color: var(--brass); }
 
   /* Mobile Tweaks */
-  @media (max-width: 580px) {
+  @media (max-width: 600px) {
     .stage { padding: 12px 14px 16px; }
-    .topbar { flex-wrap: wrap; justify-content: center; }
-    .cassette-perspective { max-width: 100%; }
-    .tape-title { font-size: 18px; }
-    .handwritten-song { font-size: 17px; }
-    .handwritten-artist { font-size: 11.5px; }
-    .tape-window { height: 54px; }
+    .topbar { flex-direction: column; gap: 8px; }
+    .cassette-perspective { height: 270px; }
+    .tape-title { font-size: 17px; }
+    .handwritten-song { font-size: 18px; }
+    .handwritten-artist { font-size: 11px; }
+    .tape-window { height: 56px; padding: 0 28px; }
     .cog-wheel { width: 36px; height: 36px; }
-    .mech-btn { height: 42px; font-size: 10px; }
+    .mech-btn { height: 44px; font-size: 10px; }
     .deck-controls { padding: 14px; border-radius: 16px; }
     .stage-footer { justify-content: center; text-align: center; }
   }
@@ -851,22 +1115,31 @@
     </div>
 
     <div class="top-actions">
-      <a class="pill-btn wa" href="https://chat.whatsapp.com/EMituq2F5HLGZnK8CxME5d" target="_blank" rel="noopener">
-        <span>💬 WhatsApp</span>
-      </a>
-      <button class="pill-btn" id="openDrawerBtn">
-        <span>📼 Tape Shelf</span>
+      <button class="pill-btn" id="openSearchBtn" title="Search songs across all mixtapes (Press /)">
+        <span>🔍 Search</span>
       </button>
+      <button class="pill-btn heart-pill" id="openLikedBtn" title="View Liked Songs">
+        <span>❤️</span><span id="likedCountBadge">0</span>
+      </button>
+      <button class="pill-btn" id="openQueueBtn" title="View playback queue">
+        <span>📑 Queue</span>
+      </button>
+      <button class="pill-btn" id="openDrawerBtn" title="Open Cassette Shelf">
+        <span>📼 Shelf</span>
+      </button>
+      <a class="pill-btn wa" href="https://chat.whatsapp.com/EMituq2F5HLGZnK8CxME5d" target="_blank" rel="noopener">
+        <span>💬 WA</span>
+      </a>
     </div>
   </header>
 
   <!-- Main Player Stage -->
   <main class="player-stage">
 
-    <!-- 3D Interactive Cassette -->
-    <div class="cassette-perspective">
-      <div class="cassette-card" id="cassetteBody" title="Click anywhere on cassette to Flip Side A ⇄ Side B">
-        
+    <!-- 3D Flippable Cassette Tape -->
+    <div class="cassette-perspective" id="cassetteDeck" title="Click anywhere on cassette to Flip (Side A ⇄ Side B)">
+      <div class="cassette-flipper" id="cassetteBody">
+
         <!-- SIDE A FACE -->
         <div class="cassette-face front-side">
           <div class="screw tl"></div>
@@ -881,16 +1154,19 @@
               <span class="cassette-brand">STEREO 90</span>
             </div>
 
-            <div>
-              <div class="handwritten-song" id="labelSongTitle">Pal Pal Dil Ke Paas</div>
-              <div class="handwritten-artist" id="labelArtist">Kishore Kumar • Blackmail</div>
+            <div class="song-meta-wrap">
+              <div class="song-text-block">
+                <div class="handwritten-song" id="labelSongTitle">Pal Pal Dil Ke Paas</div>
+                <div class="handwritten-artist" id="labelArtist">Kishore Kumar • Blackmail</div>
+              </div>
+              <button class="tape-heart-btn" id="heartBtnA" title="Like / Save to Favorites (Press L)">🤍</button>
             </div>
 
             <!-- Tape Window with Reels -->
             <div class="tape-window">
               <div class="tape-bridge"></div>
 
-              <!-- Left Spool (shrinks as song plays) -->
+              <!-- Left Spool -->
               <div class="tape-spool-wrap">
                 <div class="tape-roll" id="leftTapeRoll" style="width: 60px; height: 60px;"></div>
                 <div class="cog-wheel">
@@ -899,7 +1175,7 @@
                 </div>
               </div>
 
-              <!-- Right Spool (grows as song plays) -->
+              <!-- Right Spool -->
               <div class="tape-spool-wrap">
                 <div class="tape-roll" id="rightTapeRoll" style="width: 24px; height: 24px;"></div>
                 <div class="cog-wheel">
@@ -911,7 +1187,7 @@
 
             <div class="sticker-footer">
               <span>TYPE I (NORMAL) BIAS</span>
-              <span>TAP TO FLIP ⇄</span>
+              <span>TAP CASSETTE TO FLIP ⇄</span>
               <span>HIGH RESOLUTION AUDIO</span>
             </div>
           </div>
@@ -926,14 +1202,17 @@
 
           <div class="tape-sticker" style="background: linear-gradient(180deg, #ede2ce 0%, #dacaba 100%);">
             <div class="sticker-header">
-              <span class="side-tag" style="color: #2b5876; border-color: #2b5876;">SIDE B</span>
+              <span class="side-tag" id="labelSideTagB" style="color: #2b5876; border-color: #2b5876;">SIDE B</span>
               <span class="tape-title" id="labelTapeTitleB">यादों की कैसेट</span>
               <span class="cassette-brand">RETRO TDK</span>
             </div>
 
-            <div>
-              <div class="handwritten-song" id="labelSongTitleB">Humein Tumse Pyar Kitna</div>
-              <div class="handwritten-artist" id="labelArtistB">Kishore Kumar • Kudrat</div>
+            <div class="song-meta-wrap">
+              <div class="song-text-block">
+                <div class="handwritten-song" id="labelSongTitleB">Humein Tumse Pyar Kitna</div>
+                <div class="handwritten-artist" id="labelArtistB">Kishore Kumar • Kudrat</div>
+              </div>
+              <button class="tape-heart-btn" id="heartBtnB" title="Like / Save to Favorites (Press L)">🤍</button>
             </div>
 
             <!-- Tape Window with Reels -->
@@ -959,7 +1238,7 @@
 
             <div class="sticker-footer">
               <span>120µs EQUALIZATION</span>
-              <span>TAP TO FLIP ⇄</span>
+              <span>TAP CASSETTE TO FLIP ⇄</span>
               <span>YAADO KI CASSETTE</span>
             </div>
           </div>
@@ -1005,58 +1284,69 @@
         <span class="time-text" id="totalDurationLabel">0:00</span>
       </div>
 
-      <!-- Heavy Mechanical Push Buttons -->
+      <!-- Heavy Mechanical Push Buttons with Spotify-Style Shuffle & Repeat -->
       <div class="buttons-dock">
-        <button class="mech-btn" id="rewindBtn" title="Rewind 10 seconds">
+        <button class="mech-btn" id="shuffleBtn" title="Toggle Shuffle Mode (Press S)">
+          <span>🔀</span>
+          <span class="btn-label" id="shuffleLabel">SHFL</span>
+        </button>
+
+        <button class="mech-btn" id="rewindBtn" title="Rewind 10 seconds (Press ←)">
           <span>◄◄</span>
           <span class="btn-label">REW</span>
         </button>
 
-        <button class="mech-btn" id="prevTrackBtn" title="Previous Song">
+        <button class="mech-btn" id="prevTrackBtn" title="Previous Song (Press P)">
           <span>|◄</span>
           <span class="btn-label">PREV</span>
         </button>
 
-        <button class="mech-btn play-master" id="playPauseBtn" title="Play / Pause">
+        <button class="mech-btn play-master" id="playPauseBtn" title="Play / Pause (Press Space)">
           <span id="playIconSymbol" style="font-size: 16px;">▶</span>
           <span class="btn-label" id="playBtnLabel">PLAY</span>
         </button>
 
-        <button class="mech-btn" id="nextTrackBtn" title="Next Song">
+        <button class="mech-btn" id="nextTrackBtn" title="Next Song (Press N)">
           <span>►|</span>
           <span class="btn-label">NEXT</span>
         </button>
 
-        <button class="mech-btn" id="fastFwdBtn" title="Fast Forward 10 seconds">
+        <button class="mech-btn" id="fastFwdBtn" title="Fast Forward 10 seconds (Press →)">
           <span>►►</span>
           <span class="btn-label">FFWD</span>
         </button>
 
-        <button class="mech-btn" id="flipBtn" title="Flip Side A / Side B">
+        <button class="mech-btn" id="repeatBtn" title="Toggle Repeat Mode: All / One / Off (Press R)">
+          <span id="repeatIcon">🔁</span>
+          <span class="btn-label" id="repeatLabel">ALL</span>
+        </button>
+
+        <button class="mech-btn" id="flipBtn" title="Flip Side A / Side B (Press F)">
           <span>↻</span>
           <span class="btn-label">FLIP</span>
         </button>
 
-        <button class="mech-btn" id="ejectBtn" title="Eject / Switch Mixtape">
+        <button class="mech-btn" id="ejectBtn" title="Eject / Open Mixtape Shelf">
           <span>⏏</span>
           <span class="btn-label">EJECT</span>
         </button>
       </div>
 
-      <!-- Extra Controls Row: Tape Hiss, Lo-Fi Mood, Volume -->
+      <!-- Extra Controls Row: Tape Hiss, Lo-Fi Mood, Lyrics, Volume -->
       <div class="extras-row">
-        <!-- Tape Hiss Toggle -->
         <div class="toggle-wrap">
           <button class="toggle-btn" id="tapeHissBtn" title="Toggle warm analog tape hiss">
             <span>📻 Hiss</span>
           </button>
           
-          <!-- Slowed + Reverb Mood -->
           <button class="toggle-btn" id="lofiMoodBtn" title="Toggle dreamy Slowed + Reverb mode">
             <span>✨ Slowed Lo-Fi</span>
           </button>
 
-          <!-- Sleep Timer -->
+          <button class="toggle-btn" id="openLyricsBtnDeck" title="Read lyrics (Press L)">
+            <span>📜 Lyrics</span>
+          </button>
+
           <button class="toggle-btn" id="sleepTimerBtn" title="Set sleep timer">
             <span id="sleepTimerLabel">⏱️ Timer</span>
           </button>
@@ -1075,7 +1365,7 @@
 
   <!-- Footer -->
   <footer class="stage-footer">
-    <div>यादों की कैसेट • Old Bollywood, Ghazals & Nostalgia 24/7</div>
+    <div>यादों की कैसेट • Timeless Bollywood, Ghazals & Memories 24/7</div>
     <div class="footer-links">
       <a href="https://open.spotify.com/search/yaado%20ki%20cassette" target="_blank" rel="noopener">Spotify</a>
       <span>•</span>
@@ -1087,48 +1377,106 @@
 
 </div>
 
-<!-- Tape Shelf Drawer (Eject / Tape Picker Modal) -->
+<!-- Tape Shelf & Music Discovery Drawer (Spotify-style Tabs) -->
 <div class="tape-shelf-drawer" id="tapeShelfModal">
   <div class="shelf-content">
+    
     <div class="shelf-header">
-      <h3>📼 Your Cassette Shelf</h3>
+      <h3 id="shelfTitle">📼 Your Cassette Deck</h3>
       <button class="close-shelf-btn" id="closeShelfBtn">✕</button>
     </div>
 
-    <p style="font-size: 12px; opacity: 0.75;">Select a curated mixtape cartridge to insert into the deck:</p>
-
-    <div id="mixtapesList" style="display: flex; flex-direction: column; gap: 10px;">
-      <!-- Populated dynamically via JS -->
+    <!-- Tabs Navigation -->
+    <div class="shelf-tabs">
+      <button class="shelf-tab-btn active" data-tab="mixtapes">📼 Mixtapes</button>
+      <button class="shelf-tab-btn" data-tab="search">🔍 Search Songs</button>
+      <button class="shelf-tab-btn" data-tab="queue">📑 Up Next Queue (<span id="queueTabCount">0</span>)</button>
+      <button class="shelf-tab-btn" data-tab="favorites">❤️ Liked Songs (<span id="favTabCount">0</span>)</button>
     </div>
 
-    <!-- Active Tape Tracklist -->
-    <div style="margin-top: 12px; border-top: 1px dashed #5a4b3a; padding-top: 12px;">
-      <div style="font-size: 13px; font-weight: 700; color: var(--gold); margin-bottom: 8px;">
-        📜 Tracks on Active Tape:
+    <!-- TAB 1: MIXTAPES -->
+    <div id="tabMixtapesPanel" class="tab-panel">
+      <p style="font-size: 11.5px; opacity: 0.75; margin-bottom: 8px;">Select a cassette to insert into the deck:</p>
+      <div id="mixtapesList" style="display: flex; flex-direction: column; gap: 10px;"></div>
+
+      <div style="margin-top: 14px; border-top: 1px dashed #5a4b3a; padding-top: 10px;">
+        <div style="font-size: 12.5px; font-weight: 700; color: var(--gold); margin-bottom: 8px;">
+          📜 Tracks on Active Cassette:
+        </div>
+        <div class="track-list-drawer" id="activeTracklist"></div>
       </div>
-      <div class="track-list-drawer" id="activeTracklist">
-        <!-- Tracks populated dynamically -->
+
+      <!-- Local MP3 Loader -->
+      <div style="margin-top: 10px; border-top: 1px dashed #5a4b3a; padding-top: 12px;">
+        <div style="font-size: 12px; font-weight: 600; color: var(--brass); margin-bottom: 6px;">
+          ➕ Play Local MP3 (Custom Tape):
+        </div>
+        <input type="file" id="localMp3Input" accept="audio/*" style="display: none;">
+        <button class="pill-btn" id="loadLocalFileBtn" style="width: 100%; justify-content: center; padding: 8px;">
+          📁 Choose Audio File from Device
+        </button>
       </div>
     </div>
 
-    <!-- Custom MP3 / Link Loader -->
-    <div style="margin-top: 8px; border-top: 1px dashed #5a4b3a; padding-top: 12px;">
-      <div style="font-size: 12px; font-weight: 600; color: var(--brass); margin-bottom: 6px;">
-        ➕ Play Your Own Song (Custom Tape):
+    <!-- TAB 2: SEARCH SONGS (Spotify-Style) -->
+    <div id="tabSearchPanel" class="tab-panel" style="display: none;">
+      <div class="search-wrap">
+        <input type="text" class="retro-search-input" id="songSearchInput" placeholder="Search by song, singer, movie, or mood...">
+        <button class="clear-search-btn" id="clearSearchBtn">✕</button>
       </div>
-      <input type="file" id="localMp3Input" accept="audio/*" style="display: none;">
-      <button class="pill-btn" id="loadLocalFileBtn" style="width: 100%; justify-content: center; padding: 8px;">
-        📁 Choose Audio File from Device
-      </button>
+      <div style="margin-top: 12px;">
+        <div style="font-size: 12px; opacity: 0.75; margin-bottom: 8px;" id="searchResultsHeader">
+          Type to search Kishore, Rafi, Lata, Jagjit, or 90s...
+        </div>
+        <div class="track-list-drawer" id="searchResultsList"></div>
+      </div>
+    </div>
+
+    <!-- TAB 3: UP NEXT QUEUE -->
+    <div id="tabQueuePanel" class="tab-panel" style="display: none;">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+        <span style="font-size: 12px; opacity: 0.75;">Upcoming tracks in queue:</span>
+        <button class="counter-reset" id="clearQueueBtn" style="font-size: 10px;">Clear Queue</button>
+      </div>
+      <div class="track-list-drawer" id="queueTracksList"></div>
+    </div>
+
+    <!-- TAB 4: LIKED SONGS (Meri Pasand) -->
+    <div id="tabFavoritesPanel" class="tab-panel" style="display: none;">
+      <p style="font-size: 11.5px; opacity: 0.75; margin-bottom: 8px;">Your saved songs (saved in your browser):</p>
+      <div class="track-list-drawer" id="favoritesTracksList"></div>
+    </div>
+
+  </div>
+</div>
+
+<!-- Lyrics Modal Sheet -->
+<div class="lyrics-modal" id="lyricsModal">
+  <div class="lyrics-content">
+    <div class="lyrics-header">
+      <div>
+        <h3 id="lyricsTitle">Pal Pal Dil Ke Paas</h3>
+        <p id="lyricsArtist">Kishore Kumar • Blackmail (1973)</p>
+      </div>
+      <button class="close-shelf-btn" id="closeLyricsBtn" style="color: #241c14;">✕</button>
+    </div>
+    <div class="lyrics-body" id="lyricsBody">
+      Loading lyrics...
     </div>
   </div>
+</div>
+
+<!-- Floating Retro Toast -->
+<div class="retro-toast" id="retroToast">
+  <span id="toastIcon">✨</span>
+  <span id="toastText">Playing</span>
 </div>
 
 <!-- Native HTML5 Audio Element for Bulletproof, Ad-Free Playback -->
 <audio id="audioEngine" preload="auto"></audio>
 
 <script>
-  // ===== 1. CURATED NOSTALGIC MIXTAPES DATABASE =====
+  // ===== 1. EXPANDED SPOTIFY-GRADE MIXTAPES DATABASE WITH LYRICS =====
   const MIXTAPES = [
     {
       id: 'tape-kishore',
@@ -1137,36 +1485,205 @@
       desc: 'Evergreen romance & melodies from the golden era',
       sideA: [
         {
+          id: 'pal-pal-dil',
           title: 'Pal Pal Dil Ke Paas',
           artist: 'Kishore Kumar • Blackmail (1973)',
+          movie: 'Blackmail',
+          year: '1973',
           src: 'https://archive.org/download/KishoreKumarRomanticsHindyugm/PalPalDilKes.mp3',
-          duration: '5:30'
+          duration: '5:30',
+          lyrics: `Pal pal dil ke paas tum rehti ho
+Jeevan meethi pyaas yeh kehti ho
+Pal pal dil ke paas tum rehti ho
+
+Har shaam aankhon par tera aanchal lehraye
+Har raat yaadon ki baarat le aaye
+Main saans leta hoon, teri khushboo aati hai
+Ek mehka mehka sa paigaam laati hai
+Mere dil ki dhadkan bhi tere geet gaati hai
+Pal pal dil ke paas tum rehti ho...`
         },
         {
+          id: 'chukar-mere-man',
           title: 'Chukar Mere Man Ko',
           artist: 'Kishore Kumar • Yaarana (1981)',
+          movie: 'Yaarana',
+          year: '1981',
           src: 'https://archive.org/download/KishoreKumarRomanticsHindyugm/ChukarMereManKos.mp3',
-          duration: '4:14'
+          duration: '4:14',
+          lyrics: `Chhookar mere man ko kiya toone kya ishaara
+Badla yeh mausam lage pyaara jag saara
+
+Tu jo kahe jeevan bhar tere liye gaaoon
+Geet tere bolon pe likhta chala jaaoon
+Roop ko tere poojoon, yaheen meri pooja
+Aasmaan se aayi tu, koyi na dooja
+Chhookar mere man ko kiya toone kya ishaara...`
         },
         {
+          id: 'pyar-diwana',
           title: 'Pyar Diwana Hota Hai',
           artist: 'Kishore Kumar • Kati Patang (1970)',
+          movie: 'Kati Patang',
+          year: '1970',
           src: 'https://archive.org/download/KishoreKumarRomanticsHindyugm/PyarDiwanaHotaHai-KatiPatang.mp3',
-          duration: '4:47'
+          duration: '4:47',
+          lyrics: `Pyaar deewana hota hai, mastana hota hai
+Har khushi se, har gham se begaana hota hai
+
+Shama kahe parwaane se, pare chala jaa
+Meri tarah jal jaayega, yahan nahin aa
+Woh nahin sunta usko jal jaana hota hai
+Pyaar deewana hota hai, mastana hota hai...`
+        },
+        {
+          id: 'mere-dil-ke-chain',
+          title: 'O Mere Dil Ke Chain',
+          artist: 'Kishore Kumar • Mere Jeevan Saathi (1972)',
+          movie: 'Mere Jeevan Saathi',
+          year: '1972',
+          src: 'https://archive.org/download/KishoreKumarRomanticsHindyugm/PalPalDilKes.mp3',
+          duration: '4:35',
+          lyrics: `O mere dil ke chain
+Chain aaye mere dil ko dua keejiye
+
+Apna hi saaya dekh ke tum jaane jahan sharma gaye
+Abhi to yeh pehli manzil hai, tum to abhi se ghabra gaye
+Mera kya hoga socho toh zara
+O mere dil ke chain, chain aaye mere dil ko dua keejiye...`
         }
       ],
       sideB: [
         {
+          id: 'humein-tumse-pyar',
           title: 'Humein Tumse Pyar Kitna',
           artist: 'Kishore Kumar • Kudrat (1981)',
+          movie: 'Kudrat',
+          year: '1981',
           src: 'https://archive.org/download/KishoreKumarRomanticsHindyugm/HumeinTumsePyarKitnas.mp3',
-          duration: '4:16'
+          duration: '4:16',
+          lyrics: `Humein tumse pyaar kitna yeh hum nahin jaante
+Magar jee nahin sakte tumhaare bina
+Humein tumse pyaar kitna...
+
+Suna gham judaai ka uthaate hain log
+Jaane zindagi kaise bitaate hain log
+Din bhi yahan toh lage baras ke samaan
+Humein tumse pyaar kitna yeh hum nahin jaante...`
         },
         {
+          id: 'palbhar-ke-liye',
           title: 'Palbhar Ke Liye Koi Hamein',
           artist: 'Kishore Kumar • Johny Mera Naam (1970)',
+          movie: 'Johny Mera Naam',
+          year: '1970',
           src: 'https://archive.org/download/KishoreKumarRomanticsHindyugm/PalbharKeLiyeKoiHameins.mp3',
-          duration: '4:47'
+          duration: '4:47',
+          lyrics: `Pal bhar ke liye koyi humein pyaar kar le
+Jhootha hi sahi
+Do din ke liye koyi ikraar kar le
+Jhootha hi sahi...`
+        },
+        {
+          id: 'yeh-jo-mohabbat-hai',
+          title: 'Yeh Jo Mohabbat Hai',
+          artist: 'Kishore Kumar • Kati Patang (1970)',
+          movie: 'Kati Patang',
+          year: '1970',
+          src: 'https://archive.org/download/KishoreKumarRomanticsHindyugm/PyarDiwanaHotaHai-KatiPatang.mp3',
+          duration: '4:08',
+          lyrics: `Yeh jo mohabbat hai, yeh unka hai kaam
+Mehboob ka jo bas lete hue naam
+Mar jaayein, mit jaayein, ho jaayein badnaam
+Rehne do, chhodo bhi jaane do yaar, hum na karenge pyaar...`
+        }
+      ]
+    },
+    {
+      id: 'tape-lata-rafi',
+      name: 'Lata & Rafi - Golden Duets',
+      hindiName: 'लता और रफ़ी के नगमे',
+      desc: 'Soul-stirring romantic poetry & unforgettable symphonies',
+      sideA: [
+        {
+          id: 'lag-ja-gale',
+          title: 'Lag Ja Gale',
+          artist: 'Lata Mangeshkar • Woh Kaun Thi (1964)',
+          movie: 'Woh Kaun Thi',
+          year: '1964',
+          src: 'https://ia800300.us.archive.org/1/items/HothonSeChhuLoTum_201602/Hothon%20Se%20Chhu%20Lo%20Tum.mp3',
+          duration: '4:15',
+          lyrics: `Lag ja gale ke phir yeh haseen raat ho na ho
+Shayad phir is janam mein mulaqaat ho na ho
+Lag ja gale ke phir yeh haseen raat ho na ho...
+
+Humko mili hain aaj yeh ghadiyan naseeb se
+Jee bhar ke dekh lijiye humko qareeb se
+Phir aapke naseeb mein yeh baat ho na ho
+Lag ja gale...`
+        },
+        {
+          id: 'aap-ki-nazron-ne',
+          title: 'Aap Ki Nazron Ne Samjha',
+          artist: 'Lata Mangeshkar • Anpadh (1962)',
+          movie: 'Anpadh',
+          year: '1962',
+          src: 'https://ia800508.us.archive.org/15/items/JhukiJhukiSiNazar_201602/Jhuki%20Jhuki%20Si%20Nazar.mp3',
+          duration: '3:56',
+          lyrics: `Aap ki nazron ne samjha pyaar ke qaabil mujhe
+Dil ki ae dhadkan thehar ja, mil gayi manzil mujhe
+Aap ki nazron ne samjha...
+
+Ji humein manzoor hai aapka yeh faisla
+Keh rahi hai har nazar, banda-parwar shukriya
+Do jahaan ki aaj khushiyan ho gayi haasil mujhe...`
+        },
+        {
+          id: 'chaudhvin-ka-chand',
+          title: 'Chaudhvin Ka Chand Ho',
+          artist: 'Mohammed Rafi • Chaudhvin Ka Chand (1960)',
+          movie: 'Chaudhvin Ka Chand',
+          year: '1960',
+          src: 'https://archive.org/download/KishoreKumarRomanticsHindyugm/ChukarMereManKos.mp3',
+          duration: '3:40',
+          lyrics: `Chaudhvin ka chand ho ya aaftab ho?
+Jo bhi ho tum khuda ki qasam la-jawab ho!
+
+Zulfein hain jaise kaandhe pe baadal jhuke hue
+Aankhen hain jaise may ke pyaale bhare hue
+Masti hai jismein pyaar ki tum woh sharaab ho
+Chaudhvin ka chand ho ya aaftab ho...`
+        }
+      ],
+      sideB: [
+        {
+          id: 'likhe-jo-khat-tujhe',
+          title: 'Likhe Jo Khat Tujhe',
+          artist: 'Mohammed Rafi • Kanyadaan (1968)',
+          movie: 'Kanyadaan',
+          year: '1968',
+          src: 'https://archive.org/download/KishoreKumarRomanticsHindyugm/PalPalDilKes.mp3',
+          duration: '4:32',
+          lyrics: `Likhe jo khat tujhe woh teri yaad mein
+Hazaaron rang ke nazaare ban gaye
+Savera jab hua toh phool ban gaye
+Jo raat aayi toh sitaare ban gaye...`
+        },
+        {
+          id: 'tere-bina-zindagi',
+          title: 'Tere Bina Zindagi Se Koyi',
+          artist: 'Lata & Kishore • Aandhi (1975)',
+          movie: 'Aandhi',
+          year: '1975',
+          src: 'https://archive.org/download/KishoreKumarRomanticsHindyugm/HumeinTumsePyarKitnas.mp3',
+          duration: '5:50',
+          lyrics: `Tere bina zindagi se koyi shikwa toh nahin
+Shikwa nahin, shikwa toh nahin
+Tere bina zindagi bhi lekin zindagi toh nahin...
+
+Kaash aisa ho tere qadmon se chun ke manzil chalein
+Aur kahin door hum dono sang chalein
+Tere bina zindagi se koyi shikwa toh nahin...`
         }
       ]
     },
@@ -1174,33 +1691,84 @@
       id: 'tape-ghazals',
       name: 'Late Night Ghazals & Sukoon',
       hindiName: 'जगजीत सिंह और गज़लें',
-      desc: 'Soulful poetry & acoustic ghazals for quiet nights',
+      desc: 'Soulful acoustic poetry & ghazals for quiet nights',
       sideA: [
         {
+          id: 'hothon-se-chhu-lo',
           title: 'Hothon Se Chhu Lo Tum',
           artist: 'Jagjit Singh • Prem Geet (1981)',
+          movie: 'Prem Geet',
+          year: '1981',
           src: 'https://ia800300.us.archive.org/1/items/HothonSeChhuLoTum_201602/Hothon%20Se%20Chhu%20Lo%20Tum.mp3',
-          duration: '4:58'
+          duration: '4:58',
+          lyrics: `Hothon se chhu lo tum, mera geet amar kar do
+Ban jaao meet mere, meri preet amar kar do
+
+Na umr ki seema ho, na janm ka ho bandhan
+Jab pyaar kare koyi, toh dekhe kewal mann
+Nayi reet chala kar tum, yeh reet amar kar do
+Hothon se chhu lo tum...`
         },
         {
+          id: 'jhuki-jhuki-si',
           title: 'Jhuki Jhuki Si Nazar',
           artist: 'Jagjit Singh • Arth (1982)',
+          movie: 'Arth',
+          year: '1982',
           src: 'https://ia800508.us.archive.org/15/items/JhukiJhukiSiNazar_201602/Jhuki%20Jhuki%20Si%20Nazar.mp3',
-          duration: '5:02'
+          duration: '5:02',
+          lyrics: `Jhuki jhuki si nazar beqaraar hai ke nahin
+Daba daba sa sahi dil mein pyaar hai ke nahin
+
+Tu apne dil ki jawaan dhadkanon ko gin ke bata
+Meri nigaah ka tujhpe khumaar hai ke nahin
+Jhuki jhuki si nazar beqaraar hai ke nahin...`
+        },
+        {
+          id: 'tum-ko-dekha',
+          title: 'Tum Ko Dekha Toh Yeh Khayal',
+          artist: 'Jagjit Singh • Saath Saath (1982)',
+          movie: 'Saath Saath',
+          year: '1982',
+          src: 'https://ia800707.us.archive.org/24/items/YehDaulatBhiLeLo_201602/Yeh%20Daulat%20Bhi%20Le%20Lo.mp3',
+          duration: '4:50',
+          lyrics: `Tum ko dekha toh yeh khayal aaya
+Zindagi dhoop tum ghana saaya
+
+Aaj phir dil ne ik tamanna ki
+Aaj phir dil ko humne samjhaya
+Zindagi dhoop tum ghana saaya...`
         }
       ],
       sideB: [
         {
+          id: 'yeh-daulat-bhi',
           title: 'Yeh Daulat Bhi Le Lo',
           artist: 'Jagjit Singh • Live in Concert',
+          movie: 'Concert',
+          year: '1984',
           src: 'https://ia800707.us.archive.org/24/items/YehDaulatBhiLeLo_201602/Yeh%20Daulat%20Bhi%20Le%20Lo.mp3',
-          duration: '5:15'
+          duration: '5:15',
+          lyrics: `Yeh daulat bhi le lo, yeh shohrat bhi le lo
+Bhale chheen lo mujhse meri jawaani
+Magar mujhko lauta do bachpan ka saawan
+Woh kaagaz ki kashti, woh baarish ka paani...`
         },
         {
+          id: 'chithi-na-koi',
           title: 'Chithi Na Koi Sandesh',
           artist: 'Jagjit Singh • Dushman (1998)',
+          movie: 'Dushman',
+          year: '1998',
           src: 'https://ia800902.us.archive.org/11/items/ChithiNaKoiSandesh_201602/Chithi%20Na%20Koi%20Sandesh.mp3',
-          duration: '6:42'
+          duration: '6:42',
+          lyrics: `Chitthi na koyi sandesh, jaane woh kaun sa desh
+Jahan tum chale gaye...
+
+Ek aah bhari hogi, humne na suni hogi
+Jaate jaate tumne aawaaz toh di hogi
+Har waqt yahi hai gham, us waqt kahan the hum
+Kahan tum chale gaye...`
         }
       ]
     },
@@ -1208,44 +1776,75 @@
       id: 'tape-lofi',
       name: 'Retro Monsoon Lo-Fi & Beats',
       hindiName: 'मानसून लो-फाई यादें',
-      desc: 'Relaxing nostalgic Indian acoustic guitar & lo-fi vibes',
+      desc: 'Relaxing nostalgic Indian acoustic chill & tape beats',
       sideA: [
         {
+          id: 'delhi-rain-lofi',
           title: 'Old Delhi Rain & Nostalgia',
           artist: 'Yaado Ki Cassette Lo-Fi Lab',
+          movie: 'Monsoon Chill',
+          year: '2026',
           src: 'https://ia801509.us.archive.org/15/items/chill-lofi-song/Chill%20lofi%20song.mp3',
-          duration: '2:45'
+          duration: '2:45',
+          lyrics: `[Acoustic Guitar, Warm Tape Hiss & Gentle Drops on Windowpane]
+
+Vintage Indian street sounds, steaming chai in a clay kulhad,
+warm memories echoing through the rain...`
         },
         {
+          id: 'midnight-chai-lofi',
           title: 'Midnight Chai & Memories',
           artist: 'Acoustic Retro Instrumentals',
+          movie: 'Night Sessions',
+          year: '2026',
           src: 'https://ia802909.us.archive.org/14/items/lofi-study-chill-relax-instrumental/lofi-study.mp3',
-          duration: '3:12'
+          duration: '3:12',
+          lyrics: `[Soft Piano, Vinyl Crackles & Nostalgic Harmonium Chords]
+
+Late night reflections, studying under a warm desk lamp,
+pure peace and analog warmth.`
         }
       ],
       sideB: [
         {
+          id: 'marine-drive-lofi',
           title: 'Sunset at Marine Drive',
           artist: 'Tape Hiss & Sitar Chills',
+          movie: 'Bombay Waves',
+          year: '2026',
           src: 'https://ia801509.us.archive.org/15/items/chill-lofi-song/Chill%20lofi%20song.mp3',
-          duration: '2:45'
+          duration: '2:45',
+          lyrics: `[Sitar Harmonics, Ocean Breeze & Soft Percussion]
+
+Golden hour across Queen\'s Necklace, retro city lights,
+an unforgettable memory.`
         }
       ]
     }
   ];
 
-  // ===== 2. STATE MANAGEMENT =====
+  // ===== 2. SPOTIFY-GRADE STATE MANAGEMENT =====
   let currentTapeIndex = 0;
-  let currentSide = 'A'; // 'A' or 'B'
+  let currentSide = 'A';
   let currentTrackIndex = 0;
   let isPlaying = false;
+  let isShuffle = false;
+  let repeatMode = 'all'; // 'all', 'one', 'off'
+  let playbackQueue = [];
+  let currentActiveTrack = null;
+
+  // Liked Songs Storage
+  let likedSongIds = new Set();
+  try {
+    const saved = localStorage.getItem('yaado_liked_tracks_v1');
+    if (saved) likedSongIds = new Set(JSON.parse(saved));
+  } catch (e) {}
+
   let tapeCounter = 0;
   let tapeCounterTimer = null;
-  let tapeHissAudio = null;
   let isTapeHissOn = false;
   let isSlowedMoodOn = false;
   let sleepTimer = null;
-  let sleepTimeRemaining = 0;
 
   // DOM Elements
   const audio = document.getElementById('audioEngine');
@@ -1253,13 +1852,22 @@
   const playPauseBtn = document.getElementById('playPauseBtn');
   const playIconSymbol = document.getElementById('playIconSymbol');
   const playBtnLabel = document.getElementById('playBtnLabel');
+
   const labelSideTag = document.getElementById('labelSideTag');
+  const labelSideTagB = document.getElementById('labelSideTagB');
   const labelTapeTitle = document.getElementById('labelTapeTitle');
   const labelSongTitle = document.getElementById('labelSongTitle');
   const labelArtist = document.getElementById('labelArtist');
   const labelTapeTitleB = document.getElementById('labelTapeTitleB');
   const labelSongTitleB = document.getElementById('labelSongTitleB');
   const labelArtistB = document.getElementById('labelArtistB');
+
+  const heartBtnA = document.getElementById('heartBtnA');
+  const heartBtnB = document.getElementById('heartBtnB');
+  const likedCountBadge = document.getElementById('likedCountBadge');
+  const favTabCount = document.getElementById('favTabCount');
+  const queueTabCount = document.getElementById('queueTabCount');
+
   const scrubTrack = document.getElementById('scrubTrack');
   const scrubFill = document.getElementById('scrubFill');
   const currentTimeLabel = document.getElementById('currentTimeLabel');
@@ -1268,12 +1876,25 @@
   const vuLeft = document.getElementById('vuLeft');
   const vuRight = document.getElementById('vuRight');
   const tapeCounterEl = document.getElementById('tapeCounter');
+
   const leftTapeRoll = document.getElementById('leftTapeRoll');
   const rightTapeRoll = document.getElementById('rightTapeRoll');
   const leftTapeRollB = document.getElementById('leftTapeRollB');
   const rightTapeRollB = document.getElementById('rightTapeRollB');
 
-  // Format seconds to mm:ss
+  const shuffleBtn = document.getElementById('shuffleBtn');
+  const shuffleLabel = document.getElementById('shuffleLabel');
+  const repeatBtn = document.getElementById('repeatBtn');
+  const repeatIcon = document.getElementById('repeatIcon');
+  const repeatLabel = document.getElementById('repeatLabel');
+
+  // Modals & Drawers
+  const tapeShelfModal = document.getElementById('tapeShelfModal');
+  const lyricsModal = document.getElementById('lyricsModal');
+  const retroToast = document.getElementById('retroToast');
+  const toastText = document.getElementById('toastText');
+  const toastIcon = document.getElementById('toastIcon');
+
   function formatTime(s) {
     if (isNaN(s) || !isFinite(s)) return '0:00';
     const mins = Math.floor(s / 60);
@@ -1281,14 +1902,100 @@
     return `${mins}:${secs < 10 ? '0' : ''}${secs}`;
   }
 
-  // Get current active tracklist
+  let toastTimer = null;
+  function showToast(msg, icon = '📻') {
+    toastIcon.textContent = icon;
+    toastText.textContent = msg;
+    retroToast.classList.add('show');
+    if (toastTimer) clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => {
+      retroToast.classList.remove('show');
+    }, 2200);
+  }
+
+  function getAllSongs() {
+    const all = [];
+    MIXTAPES.forEach((tape, tapeIdx) => {
+      tape.sideA.forEach((t, i) => all.push({ ...t, tapeIdx, side: 'A', trackIdx: i, tapeName: tape.name }));
+      tape.sideB.forEach((t, i) => all.push({ ...t, tapeIdx, side: 'B', trackIdx: i, tapeName: tape.name }));
+    });
+    return all;
+  }
+
   function getActiveTracklist() {
     const tape = MIXTAPES[currentTapeIndex];
     return currentSide === 'A' ? tape.sideA : tape.sideB;
   }
 
-  // Load Track into Player
-  function loadTrack(tapeIdx, side, trackIdx) {
+  function persistLikedSongs() {
+    try {
+      localStorage.setItem('yaado_liked_tracks_v1', JSON.stringify([...likedSongIds]));
+    } catch (e) {}
+    likedCountBadge.textContent = likedSongIds.size;
+    favTabCount.textContent = likedSongIds.size;
+  }
+
+  function toggleLikeCurrentSong() {
+    if (!currentActiveTrack) return;
+    playClickSound(550);
+    const id = currentActiveTrack.id || currentActiveTrack.title;
+    if (likedSongIds.has(id)) {
+      likedSongIds.delete(id);
+      showToast('Removed from Liked Songs', '🤍');
+    } else {
+      likedSongIds.add(id);
+      showToast(`Liked: ${currentActiveTrack.title}`, '❤️');
+    }
+    persistLikedSongs();
+    updateHeartButtons();
+    renderFavoritesTab();
+  }
+
+  function updateHeartButtons() {
+    if (!currentActiveTrack) return;
+    const id = currentActiveTrack.id || currentActiveTrack.title;
+    const isLiked = likedSongIds.has(id);
+    heartBtnA.textContent = isLiked ? '❤️' : '🤍';
+    heartBtnB.textContent = isLiked ? '❤️' : '🤍';
+    heartBtnA.classList.toggle('liked', isLiked);
+    heartBtnB.classList.toggle('liked', isLiked);
+  }
+
+  heartBtnA.addEventListener('click', (e) => { e.stopPropagation(); toggleLikeCurrentSong(); });
+  heartBtnB.addEventListener('click', (e) => { e.stopPropagation(); toggleLikeCurrentSong(); });
+
+  function updateMediaSession(track, tape) {
+    if ('mediaSession' in navigator) {
+      try {
+        navigator.mediaSession.metadata = new MediaMetadata({
+          title: track.title,
+          artist: track.artist,
+          album: tape.name || 'यादों की कैसेट',
+          artwork: [
+            { src: 'assets/hero-bg.png', sizes: '512x512', type: 'image/png' }
+          ]
+        });
+
+        navigator.mediaSession.setActionHandler('play', () => togglePlay());
+        navigator.mediaSession.setActionHandler('pause', () => togglePlay());
+        navigator.mediaSession.setActionHandler('previoustrack', () => prevTrack());
+        navigator.mediaSession.setActionHandler('nexttrack', () => nextTrack());
+        navigator.mediaSession.setActionHandler('seekbackward', () => {
+          audio.currentTime = Math.max(0, audio.currentTime - 10);
+        });
+        navigator.mediaSession.setActionHandler('seekforward', () => {
+          audio.currentTime = Math.min(audio.duration || 0, audio.currentTime + 10);
+        });
+        navigator.mediaSession.setActionHandler('seekto', (details) => {
+          if (details.seekTime && audio.duration) {
+            audio.currentTime = details.seekTime;
+          }
+        });
+      } catch (e) {}
+    }
+  }
+
+  function loadTrack(tapeIdx, side, trackIdx, autoPlay = false) {
     currentTapeIndex = tapeIdx;
     currentSide = side;
     currentTrackIndex = trackIdx;
@@ -1296,18 +2003,20 @@
     const tape = MIXTAPES[currentTapeIndex];
     const tracks = getActiveTracklist();
     const track = tracks[currentTrackIndex] || tracks[0];
+    currentActiveTrack = track;
 
-    // Update cassette labels
     labelTapeTitle.textContent = tape.hindiName || tape.name;
     labelTapeTitleB.textContent = tape.hindiName || tape.name;
     labelSideTag.textContent = `SIDE ${currentSide}`;
+    labelSideTagB.textContent = `SIDE ${currentSide}`;
 
     labelSongTitle.textContent = track.title;
     labelArtist.textContent = track.artist;
     labelSongTitleB.textContent = track.title;
     labelArtistB.textContent = track.artist;
 
-    // Set Audio Source
+    updateHeartButtons();
+
     audio.src = track.src;
     audio.playbackRate = isSlowedMoodOn ? 0.85 : 1.0;
     scrubFill.style.width = '0%';
@@ -1316,9 +2025,61 @@
 
     updateCassetteRolls(0);
     updateActiveTracklistUI();
+    updateMediaSession(track, tape);
+
+    if (autoPlay) {
+      audio.play().then(() => {
+        isPlaying = true;
+        cassetteBody.classList.add('is-playing');
+        playIconSymbol.textContent = '⏸';
+        playBtnLabel.textContent = 'PAUSE';
+        startTapeCounter();
+        if ('mediaSession' in navigator) navigator.mediaSession.playbackState = 'playing';
+      }).catch(() => {});
+    }
   }
 
-  // Mechanical Button Click Audio Effect
+  function playDirectTrack(track) {
+    currentActiveTrack = track;
+    if (track.tapeIdx !== undefined) {
+      currentTapeIndex = track.tapeIdx;
+      currentSide = track.side || 'A';
+      currentTrackIndex = track.trackIdx || 0;
+    }
+    const tape = MIXTAPES[currentTapeIndex];
+
+    labelTapeTitle.textContent = tape.hindiName || tape.name;
+    labelTapeTitleB.textContent = tape.hindiName || tape.name;
+    labelSideTag.textContent = `SIDE ${currentSide}`;
+    labelSideTagB.textContent = `SIDE ${currentSide}`;
+
+    labelSongTitle.textContent = track.title;
+    labelArtist.textContent = track.artist;
+    labelSongTitleB.textContent = track.title;
+    labelArtistB.textContent = track.artist;
+
+    updateHeartButtons();
+
+    audio.src = track.src;
+    audio.playbackRate = isSlowedMoodOn ? 0.85 : 1.0;
+    scrubFill.style.width = '0%';
+    currentTimeLabel.textContent = '0:00';
+    totalDurationLabel.textContent = track.duration || '0:00';
+
+    updateCassetteRolls(0);
+    updateActiveTracklistUI();
+    updateMediaSession(track, tape);
+
+    audio.play().then(() => {
+      isPlaying = true;
+      cassetteBody.classList.add('is-playing');
+      playIconSymbol.textContent = '⏸';
+      playBtnLabel.textContent = 'PAUSE';
+      startTapeCounter();
+      showToast(`Playing: ${track.title}`, '▶');
+    }).catch(() => {});
+  }
+
   let audioCtx = null;
   function playClickSound(pitch = 400) {
     try {
@@ -1343,7 +2104,6 @@
     } catch (e) {}
   }
 
-  // Synthesize Warm Lo-Fi Tape Hiss using Web Audio API
   let hissGain = null;
   function initTapeHiss() {
     try {
@@ -1360,7 +2120,7 @@
         b0 = 0.99886 * b0 + white * 0.0555179;
         b1 = 0.99332 * b1 + white * 0.0750759;
         b2 = 0.96900 * b2 + white * 0.1538520;
-        output[i] = (b0 + b1 + b2 + white * 0.5362) * 0.02; // Warm pink noise
+        output[i] = (b0 + b1 + b2 + white * 0.5362) * 0.02;
       }
 
       const whiteNoise = audioCtx.createBufferSource();
@@ -1381,7 +2141,6 @@
     } catch (e) {}
   }
 
-  // Toggle Play / Pause
   function togglePlay() {
     playClickSound(500);
 
@@ -1394,9 +2153,9 @@
           playIconSymbol.textContent = '⏸';
           playBtnLabel.textContent = 'PAUSE';
           startTapeCounter();
-        }).catch(() => {
-          // Handle mobile auto-play restrictions gracefully
-        });
+          if ('mediaSession' in navigator) navigator.mediaSession.playbackState = 'playing';
+          showToast('Playing', '▶');
+        }).catch(() => {});
       }
     } else {
       audio.pause();
@@ -1405,61 +2164,127 @@
       playIconSymbol.textContent = '▶';
       playBtnLabel.textContent = 'PLAY';
       stopTapeCounter();
+      if ('mediaSession' in navigator) navigator.mediaSession.playbackState = 'paused';
+      showToast('Paused', '⏸');
     }
   }
 
   playPauseBtn.addEventListener('click', togglePlay);
 
-  // Next Track
   function nextTrack() {
     playClickSound(600);
+
+    if (playbackQueue.length > 0) {
+      const nextUp = playbackQueue.shift();
+      updateQueueUI();
+      playDirectTrack(nextUp);
+      return;
+    }
+
+    if (repeatMode === 'one') {
+      audio.currentTime = 0;
+      audio.play().catch(() => {});
+      return;
+    }
+
     const tracks = getActiveTracklist();
+
+    if (isShuffle) {
+      let randIdx = Math.floor(Math.random() * tracks.length);
+      if (tracks.length > 1 && randIdx === currentTrackIndex) {
+        randIdx = (randIdx + 1) % tracks.length;
+      }
+      loadTrack(currentTapeIndex, currentSide, randIdx, isPlaying);
+      return;
+    }
+
     let nextIdx = currentTrackIndex + 1;
-    if (nextIdx >= tracks.length) nextIdx = 0;
-    loadTrack(currentTapeIndex, currentSide, nextIdx);
-    if (isPlaying) audio.play().catch(() => {});
+    if (nextIdx >= tracks.length) {
+      if (repeatMode === 'off') {
+        audio.pause();
+        isPlaying = false;
+        cassetteBody.classList.remove('is-playing');
+        playIconSymbol.textContent = '▶';
+        playBtnLabel.textContent = 'PLAY';
+        stopTapeCounter();
+        return;
+      }
+      nextIdx = 0;
+    }
+    loadTrack(currentTapeIndex, currentSide, nextIdx, isPlaying);
   }
   document.getElementById('nextTrackBtn').addEventListener('click', nextTrack);
 
-  // Previous Track
   function prevTrack() {
     playClickSound(400);
+    if (audio.currentTime > 3) {
+      audio.currentTime = 0;
+      return;
+    }
     const tracks = getActiveTracklist();
     let prevIdx = currentTrackIndex - 1;
     if (prevIdx < 0) prevIdx = tracks.length - 1;
-    loadTrack(currentTapeIndex, currentSide, prevIdx);
-    if (isPlaying) audio.play().catch(() => {});
+    loadTrack(currentTapeIndex, currentSide, prevIdx, isPlaying);
   }
   document.getElementById('prevTrackBtn').addEventListener('click', prevTrack);
 
-  // Fast Forward (+10s)
   document.getElementById('fastFwdBtn').addEventListener('click', () => {
     playClickSound(750);
     audio.currentTime = Math.min(audio.duration || 0, audio.currentTime + 10);
+    showToast('+10s', '►►');
   });
 
-  // Rewind (-10s)
   document.getElementById('rewindBtn').addEventListener('click', () => {
     playClickSound(300);
     audio.currentTime = Math.max(0, audio.currentTime - 10);
+    showToast('-10s', '◄◄');
   });
 
-  // 3D Flip Cassette (Side A ⇄ Side B)
+  function toggleShuffle() {
+    playClickSound(460);
+    isShuffle = !isShuffle;
+    shuffleBtn.classList.toggle('active', isShuffle);
+    shuffleLabel.textContent = isShuffle ? 'ON' : 'SHFL';
+    showToast(isShuffle ? 'Shuffle: ON 🔀' : 'Shuffle: OFF', '🔀');
+  }
+  shuffleBtn.addEventListener('click', toggleShuffle);
+
+  function toggleRepeat() {
+    playClickSound(480);
+    if (repeatMode === 'all') {
+      repeatMode = 'one';
+      repeatIcon.textContent = '🔂';
+      repeatLabel.textContent = 'ONE';
+      repeatBtn.classList.add('active');
+      showToast('Repeat: Current Track 🔂', '🔂');
+    } else if (repeatMode === 'one') {
+      repeatMode = 'off';
+      repeatIcon.textContent = '🔁';
+      repeatLabel.textContent = 'OFF';
+      repeatBtn.classList.remove('active');
+      showToast('Repeat: OFF', '⏹');
+    } else {
+      repeatMode = 'all';
+      repeatIcon.textContent = '🔁';
+      repeatLabel.textContent = 'ALL';
+      repeatBtn.classList.add('active');
+      showToast('Repeat: All Tracks 🔁', '🔁');
+    }
+  }
+  repeatBtn.addEventListener('click', toggleRepeat);
+
   function flipCassette() {
     playClickSound(350);
     currentSide = currentSide === 'A' ? 'B' : 'A';
     cassetteBody.classList.toggle('is-flipped', currentSide === 'B');
-    loadTrack(currentTapeIndex, currentSide, 0);
-    if (isPlaying) audio.play().catch(() => {});
+    loadTrack(currentTapeIndex, currentSide, 0, isPlaying);
+    showToast(`Flipped to Side ${currentSide}`, '↻');
   }
   document.getElementById('flipBtn').addEventListener('click', flipCassette);
   cassetteBody.addEventListener('click', flipCassette);
 
-  // Update Spool Rolls dynamically based on progress (0% to 100%)
   function updateCassetteRolls(pct) {
-    // Left spool starts full (62px) and shrinks to 24px
     const leftSize = Math.max(22, Math.round(62 - (pct * 38)));
-    // Right spool starts at 22px and grows to 62px
     const rightSize = Math.max(22, Math.round(24 + (pct * 38)));
 
     leftTapeRoll.style.width = `${leftSize}px`;
@@ -1473,7 +2298,6 @@
     rightTapeRollB.style.height = `${leftSize}px`;
   }
 
-  // Audio Time Update
   audio.addEventListener('timeupdate', () => {
     const cur = audio.currentTime || 0;
     const dur = audio.duration || 0;
@@ -1485,19 +2309,28 @@
 
     updateCassetteRolls(pct);
 
-    // Simulate animated VU Meter dancing to music
     if (isPlaying) {
-      const baseL = Math.sin(cur * 8) * 20 + 40 + Math.random() * 25;
-      const baseR = Math.cos(cur * 7) * 20 + 40 + Math.random() * 25;
+      const baseL = Math.sin(cur * 8) * 22 + 42 + Math.random() * 25;
+      const baseR = Math.cos(cur * 7) * 22 + 42 + Math.random() * 25;
       vuLeft.style.width = `${Math.min(100, Math.max(15, baseL))}%`;
       vuRight.style.width = `${Math.min(100, Math.max(15, baseR))}%`;
     }
+
+    if ('mediaSession' in navigator && 'setPositionState' in navigator.mediaSession) {
+      try {
+        if (dur > 0) {
+          navigator.mediaSession.setPositionState({
+            duration: dur,
+            playbackRate: audio.playbackRate || 1,
+            position: Math.min(cur, dur)
+          });
+        }
+      } catch (e) {}
+    }
   });
 
-  // Track Ended -> Play next
   audio.addEventListener('ended', nextTrack);
 
-  // Scrubber Seeking
   scrubTrack.addEventListener('click', (e) => {
     const rect = scrubTrack.getBoundingClientRect();
     const clickPct = (e.clientX - rect.left) / rect.width;
@@ -1506,12 +2339,10 @@
     }
   });
 
-  // Volume
   volumeSlider.addEventListener('input', (e) => {
     audio.volume = parseFloat(e.target.value);
   });
 
-  // Tape Counter Timer
   function startTapeCounter() {
     stopTapeCounter();
     tapeCounterTimer = setInterval(() => {
@@ -1528,7 +2359,6 @@
     tapeCounterEl.textContent = '000';
   });
 
-  // Tape Hiss Toggle
   const tapeHissBtn = document.getElementById('tapeHissBtn');
   tapeHissBtn.addEventListener('click', () => {
     playClickSound(420);
@@ -1538,18 +2368,18 @@
     if (hissGain) {
       hissGain.gain.setValueAtTime(isTapeHissOn ? 0.35 : 0, audioCtx.currentTime);
     }
+    showToast(isTapeHissOn ? 'Tape Hiss: ON' : 'Tape Hiss: OFF', '📻');
   });
 
-  // Slowed & Reverb Mood Toggle
   const lofiMoodBtn = document.getElementById('lofiMoodBtn');
   lofiMoodBtn.addEventListener('click', () => {
     playClickSound(380);
     isSlowedMoodOn = !isSlowedMoodOn;
     lofiMoodBtn.classList.toggle('active', isSlowedMoodOn);
     audio.playbackRate = isSlowedMoodOn ? 0.85 : 1.0;
+    showToast(isSlowedMoodOn ? 'Slowed + Reverb: ON' : 'Normal Speed', '✨');
   });
 
-  // Sleep Timer (Cycles: Off -> 15m -> 30m -> 45m -> 60m)
   const sleepTimerBtn = document.getElementById('sleepTimerBtn');
   const sleepTimerLabel = document.getElementById('sleepTimerLabel');
   const sleepDurations = [0, 15, 30, 45, 60];
@@ -1565,30 +2395,35 @@
     if (mins === 0) {
       sleepTimerBtn.classList.remove('active');
       sleepTimerLabel.textContent = '⏱️ Timer';
+      showToast('Sleep Timer: OFF', '⏱️');
     } else {
       sleepTimerBtn.classList.add('active');
       sleepTimerLabel.textContent = `⏱️ ${mins}m`;
+      showToast(`Sleep timer set: ${mins} mins`, '⏱️');
       sleepTimer = setTimeout(() => {
         if (isPlaying) togglePlay();
         sleepTimerBtn.classList.remove('active');
         sleepTimerLabel.textContent = '⏱️ Timer';
         sleepDurationIndex = 0;
+        showToast('Goodnight! Tape stopped 😴', '🌙');
       }, mins * 60 * 1000);
     }
   });
 
-  // ===== 3. CASSETTE SHELF / TAPE DRAWER MODAL =====
-  const tapeShelfModal = document.getElementById('tapeShelfModal');
+  // ===== 3. CASSETTE SHELF & SPOTIFY TABS LOGIC =====
   const openDrawerBtn = document.getElementById('openDrawerBtn');
   const ejectBtn = document.getElementById('ejectBtn');
   const closeShelfBtn = document.getElementById('closeShelfBtn');
   const mixtapesList = document.getElementById('mixtapesList');
   const activeTracklist = document.getElementById('activeTracklist');
 
-  function openShelf() {
+  function openShelf(defaultTab = 'mixtapes') {
     playClickSound(300);
+    switchTab(defaultTab);
     renderShelf();
     updateActiveTracklistUI();
+    renderFavoritesTab();
+    updateQueueUI();
     tapeShelfModal.classList.add('open');
   }
   function closeShelf() {
@@ -1596,12 +2431,43 @@
     tapeShelfModal.classList.remove('open');
   }
 
-  openDrawerBtn.addEventListener('click', openShelf);
-  ejectBtn.addEventListener('click', openShelf);
+  openDrawerBtn.addEventListener('click', () => openShelf('mixtapes'));
+  ejectBtn.addEventListener('click', () => openShelf('mixtapes'));
   closeShelfBtn.addEventListener('click', closeShelf);
   tapeShelfModal.addEventListener('click', (e) => {
     if (e.target === tapeShelfModal) closeShelf();
   });
+
+  const tabBtns = document.querySelectorAll('.shelf-tab-btn');
+  const tabPanels = {
+    mixtapes: document.getElementById('tabMixtapesPanel'),
+    search: document.getElementById('tabSearchPanel'),
+    queue: document.getElementById('tabQueuePanel'),
+    favorites: document.getElementById('tabFavoritesPanel')
+  };
+
+  function switchTab(tabKey) {
+    tabBtns.forEach(btn => {
+      btn.classList.toggle('active', btn.dataset.tab === tabKey);
+    });
+    Object.keys(tabPanels).forEach(key => {
+      tabPanels[key].style.display = key === tabKey ? 'block' : 'none';
+    });
+    if (tabKey === 'search') {
+      setTimeout(() => document.getElementById('songSearchInput').focus(), 100);
+    }
+  }
+
+  tabBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      playClickSound(420);
+      switchTab(btn.dataset.tab);
+    });
+  });
+
+  document.getElementById('openSearchBtn').addEventListener('click', () => openShelf('search'));
+  document.getElementById('openQueueBtn').addEventListener('click', () => openShelf('queue'));
+  document.getElementById('openLikedBtn').addEventListener('click', () => openShelf('favorites'));
 
   function renderShelf() {
     mixtapesList.innerHTML = '';
@@ -1616,10 +2482,10 @@
         <span class="box-tag">${tape.sideA.length + tape.sideB.length} Songs</span>
       `;
       item.addEventListener('click', () => {
-        loadTrack(idx, 'A', 0);
-        if (isPlaying) audio.play().catch(() => {});
+        loadTrack(idx, 'A', 0, isPlaying);
         renderShelf();
         updateActiveTracklistUI();
+        showToast(`Selected: ${tape.name}`, '📼');
       });
       mixtapesList.appendChild(item);
     });
@@ -1631,25 +2497,236 @@
     tracks.forEach((t, idx) => {
       const row = document.createElement('div');
       row.className = `track-row ${idx === currentTrackIndex ? 'active-track' : ''}`;
+      const isLiked = likedSongIds.has(t.id || t.title);
       row.innerHTML = `
         <span class="num">${idx + 1}.</span>
         <span class="title">${t.title} <small style="opacity:0.65;">(${t.artist.split('•')[0].trim()})</small></span>
         <span class="dur">${t.duration || ''}</span>
+        <div class="track-row-actions">
+          <button class="row-action-btn ${isLiked ? 'liked' : ''}" title="Like">♥</button>
+          <button class="row-action-btn add-q" title="Add to Queue">+</button>
+        </div>
       `;
-      row.addEventListener('click', () => {
-        loadTrack(currentTapeIndex, currentSide, idx);
-        audio.play().then(() => {
-          isPlaying = true;
-          cassetteBody.classList.add('is-playing');
-          playIconSymbol.textContent = '⏸';
-          playBtnLabel.textContent = 'PAUSE';
-          startTapeCounter();
-        }).catch(() => {});
+      row.querySelector('.title').addEventListener('click', () => {
+        loadTrack(currentTapeIndex, currentSide, idx, true);
         closeShelf();
+      });
+      row.querySelector('.row-action-btn:not(.add-q)').addEventListener('click', (e) => {
+        e.stopPropagation();
+        const id = t.id || t.title;
+        if (likedSongIds.has(id)) likedSongIds.delete(id);
+        else likedSongIds.add(id);
+        persistLikedSongs();
+        updateHeartButtons();
+        updateActiveTracklistUI();
+        renderFavoritesTab();
+      });
+      row.querySelector('.add-q').addEventListener('click', (e) => {
+        e.stopPropagation();
+        playbackQueue.push(t);
+        updateQueueUI();
+        showToast(`Added to Queue: ${t.title}`, '📑');
       });
       activeTracklist.appendChild(row);
     });
   }
+
+  // ===== 4. SPOTIFY-STYLE LIVE SEARCH =====
+  const songSearchInput = document.getElementById('songSearchInput');
+  const clearSearchBtn = document.getElementById('clearSearchBtn');
+  const searchResultsList = document.getElementById('searchResultsList');
+  const searchResultsHeader = document.getElementById('searchResultsHeader');
+
+  songSearchInput.addEventListener('input', (e) => {
+    const q = e.target.value.trim().toLowerCase();
+    clearSearchBtn.style.display = q ? 'block' : 'none';
+    if (!q) {
+      searchResultsHeader.textContent = 'Type to search Kishore, Rafi, Lata, Jagjit, or 90s...';
+      searchResultsList.innerHTML = '';
+      return;
+    }
+
+    const all = getAllSongs();
+    const matches = all.filter(s =>
+      s.title.toLowerCase().includes(q) ||
+      s.artist.toLowerCase().includes(q) ||
+      (s.movie && s.movie.toLowerCase().includes(q)) ||
+      (s.lyrics && s.lyrics.toLowerCase().includes(q))
+    );
+
+    searchResultsHeader.textContent = `Found ${matches.length} song${matches.length === 1 ? '' : 's'}:`;
+    searchResultsList.innerHTML = '';
+
+    if (matches.length === 0) {
+      searchResultsList.innerHTML = '<div style="padding: 12px; font-size: 12px; opacity: 0.6; text-align: center;">No matches found. Try searching for singer, film, or title.</div>';
+      return;
+    }
+
+    matches.forEach((t, i) => {
+      const row = document.createElement('div');
+      row.className = 'track-row';
+      const isLiked = likedSongIds.has(t.id || t.title);
+      row.innerHTML = `
+        <span class="num">${i + 1}.</span>
+        <div style="flex: 1; min-width: 0;">
+          <div style="font-weight: 600;">${t.title}</div>
+          <div style="font-size: 11px; opacity: 0.65;">${t.artist}</div>
+        </div>
+        <div class="track-row-actions">
+          <button class="row-action-btn ${isLiked ? 'liked' : ''}" title="Like">♥</button>
+          <button class="row-action-btn add-q" title="Add to Queue">+Q</button>
+          <button class="row-action-btn play-btn" title="Play Now" style="color: var(--gold);">▶</button>
+        </div>
+      `;
+
+      row.querySelector('.play-btn').addEventListener('click', () => {
+        playDirectTrack(t);
+        closeShelf();
+      });
+      row.querySelector('.add-q').addEventListener('click', (e) => {
+        e.stopPropagation();
+        playbackQueue.push(t);
+        updateQueueUI();
+        showToast(`Added to Queue: ${t.title}`, '📑');
+      });
+      row.querySelector('.row-action-btn:not(.add-q):not(.play-btn)').addEventListener('click', (e) => {
+        e.stopPropagation();
+        const id = t.id || t.title;
+        if (likedSongIds.has(id)) likedSongIds.delete(id);
+        else likedSongIds.add(id);
+        persistLikedSongs();
+        updateHeartButtons();
+        row.querySelector('.row-action-btn').classList.toggle('liked', likedSongIds.has(id));
+      });
+      searchResultsList.appendChild(row);
+    });
+  });
+
+  clearSearchBtn.addEventListener('click', () => {
+    songSearchInput.value = '';
+    clearSearchBtn.style.display = 'none';
+    searchResultsHeader.textContent = 'Type to search Kishore, Rafi, Lata, Jagjit, or 90s...';
+    searchResultsList.innerHTML = '';
+    songSearchInput.focus();
+  });
+
+  // ===== 5. UP NEXT QUEUE & FAVORITES LOGIC =====
+  const queueTracksList = document.getElementById('queueTracksList');
+  const favoritesTracksList = document.getElementById('favoritesTracksList');
+
+  function updateQueueUI() {
+    queueTabCount.textContent = playbackQueue.length;
+    queueTracksList.innerHTML = '';
+
+    if (playbackQueue.length === 0) {
+      queueTracksList.innerHTML = '<div style="padding: 16px; font-size: 12px; opacity: 0.6; text-align: center;">Your queue is empty. Tap "+Q" on any song to add it!</div>';
+      return;
+    }
+
+    playbackQueue.forEach((t, idx) => {
+      const row = document.createElement('div');
+      row.className = 'track-row';
+      row.innerHTML = `
+        <span class="num">${idx + 1}.</span>
+        <span class="title">${t.title} <small style="opacity:0.65;">(${t.artist.split('•')[0].trim()})</small></span>
+        <div class="track-row-actions">
+          <button class="row-action-btn remove-q" title="Remove from queue">✕</button>
+        </div>
+      `;
+      row.querySelector('.title').addEventListener('click', () => {
+        playbackQueue.splice(idx, 1);
+        playDirectTrack(t);
+        updateQueueUI();
+        closeShelf();
+      });
+      row.querySelector('.remove-q').addEventListener('click', (e) => {
+        e.stopPropagation();
+        playbackQueue.splice(idx, 1);
+        updateQueueUI();
+        showToast('Removed from queue', '📑');
+      });
+      queueTracksList.appendChild(row);
+    });
+  }
+
+  document.getElementById('clearQueueBtn').addEventListener('click', () => {
+    playbackQueue = [];
+    updateQueueUI();
+    showToast('Queue cleared', '🗑️');
+  });
+
+  function renderFavoritesTab() {
+    favTabCount.textContent = likedSongIds.size;
+    likedCountBadge.textContent = likedSongIds.size;
+    favoritesTracksList.innerHTML = '';
+
+    const all = getAllSongs();
+    const liked = all.filter(s => likedSongIds.has(s.id || s.title));
+
+    if (liked.length === 0) {
+      favoritesTracksList.innerHTML = '<div style="padding: 16px; font-size: 12px; opacity: 0.6; text-align: center;">No liked songs yet. Tap the 🤍 heart on any track to save your favorites!</div>';
+      return;
+    }
+
+    liked.forEach((t, idx) => {
+      const row = document.createElement('div');
+      row.className = 'track-row';
+      row.innerHTML = `
+        <span class="num">${idx + 1}.</span>
+        <span class="title">${t.title} <small style="opacity:0.65;">(${t.artist.split('•')[0].trim()})</small></span>
+        <div class="track-row-actions">
+          <button class="row-action-btn liked" title="Remove from liked">♥</button>
+          <button class="row-action-btn add-q" title="Add to Queue">+Q</button>
+        </div>
+      `;
+      row.querySelector('.title').addEventListener('click', () => {
+        playDirectTrack(t);
+        closeShelf();
+      });
+      row.querySelector('.row-action-btn.liked').addEventListener('click', (e) => {
+        e.stopPropagation();
+        likedSongIds.delete(t.id || t.title);
+        persistLikedSongs();
+        updateHeartButtons();
+        renderFavoritesTab();
+        updateActiveTracklistUI();
+      });
+      row.querySelector('.add-q').addEventListener('click', (e) => {
+        e.stopPropagation();
+        playbackQueue.push(t);
+        updateQueueUI();
+        showToast(`Added to Queue: ${t.title}`, '📑');
+      });
+      favoritesTracksList.appendChild(row);
+    });
+  }
+
+  // ===== 6. VINTAGE LYRICS SHEET =====
+  const lyricsTitle = document.getElementById('lyricsTitle');
+  const lyricsArtist = document.getElementById('lyricsArtist');
+  const lyricsBody = document.getElementById('lyricsBody');
+  const closeLyricsBtn = document.getElementById('closeLyricsBtn');
+
+  function openLyrics() {
+    playClickSound(380);
+    if (!currentActiveTrack) {
+      showToast('Play a song first to view lyrics', '📜');
+      return;
+    }
+    lyricsTitle.textContent = currentActiveTrack.title;
+    lyricsArtist.textContent = currentActiveTrack.artist;
+    lyricsBody.textContent = currentActiveTrack.lyrics || 'Lyrics not available for this track yet.';
+    lyricsModal.classList.add('open');
+  }
+
+  document.getElementById('openLyricsBtnDeck').addEventListener('click', openLyrics);
+  closeLyricsBtn.addEventListener('click', () => {
+    playClickSound(400);
+    lyricsModal.classList.remove('open');
+  });
+  lyricsModal.addEventListener('click', (e) => {
+    if (e.target === lyricsModal) lyricsModal.classList.remove('open');
+  });
 
   // Custom Local MP3 Loading
   const localMp3Input = document.getElementById('localMp3Input');
@@ -1662,19 +2739,69 @@
       const customUrl = URL.createObjectURL(file);
       const cleanName = file.name.replace(/\.[^/.]+$/, '');
       const customTrack = {
+        id: 'custom-' + Date.now(),
         title: cleanName,
         artist: 'My Custom Tape • Local Audio',
         src: customUrl,
-        duration: 'Playing'
+        duration: 'Local File',
+        lyrics: 'Custom uploaded local track.'
       };
       MIXTAPES[0].sideA.unshift(customTrack);
-      loadTrack(0, 'A', 0);
+      loadTrack(0, 'A', 0, true);
       closeShelf();
-      togglePlay();
     }
   });
 
-  // ===== 4. AMBIENCE & LIVE CLOCK =====
+  // ===== 7. GLOBAL KEYBOARD SHORTCUTS (Spotify-Style) =====
+  window.addEventListener('keydown', (e) => {
+    if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+
+    if (e.code === 'Space') {
+      e.preventDefault();
+      togglePlay();
+    } else if (e.key === 'ArrowRight') {
+      e.preventDefault();
+      audio.currentTime = Math.min(audio.duration || 0, audio.currentTime + 5);
+      showToast('+5s', '►►');
+    } else if (e.key === 'ArrowLeft') {
+      e.preventDefault();
+      audio.currentTime = Math.max(0, audio.currentTime - 5);
+      showToast('-5s', '◄◄');
+    } else if (e.key === 'ArrowUp') {
+      e.preventDefault();
+      audio.volume = Math.min(1, audio.volume + 0.05);
+      volumeSlider.value = audio.volume;
+      showToast(`Volume: ${Math.round(audio.volume * 100)}%`, '🔊');
+    } else if (e.key === 'ArrowDown') {
+      e.preventDefault();
+      audio.volume = Math.max(0, audio.volume - 0.05);
+      volumeSlider.value = audio.volume;
+      showToast(`Volume: ${Math.round(audio.volume * 100)}%`, '🔉');
+    } else if (e.key.toLowerCase() === 'l') {
+      e.preventDefault();
+      toggleLikeCurrentSong();
+    } else if (e.key.toLowerCase() === 's') {
+      e.preventDefault();
+      toggleShuffle();
+    } else if (e.key.toLowerCase() === 'r') {
+      e.preventDefault();
+      toggleRepeat();
+    } else if (e.key.toLowerCase() === 'n') {
+      e.preventDefault();
+      nextTrack();
+    } else if (e.key.toLowerCase() === 'p') {
+      e.preventDefault();
+      prevTrack();
+    } else if (e.key.toLowerCase() === 'f') {
+      e.preventDefault();
+      flipCassette();
+    } else if (e.key === '/') {
+      e.preventDefault();
+      openShelf('search');
+    }
+  });
+
+  // ===== 8. AMBIENCE & LIVE CLOCK =====
   function updateClock() {
     const now = new Date();
     let h = now.getHours();
@@ -1686,7 +2813,6 @@
   updateClock();
   setInterval(updateClock, 30000);
 
-  // Gently drifting listener count
   let listeners = 348;
   const listenerEl = document.getElementById('listenerCount');
   setInterval(() => {
@@ -1695,10 +2821,9 @@
     listenerEl.textContent = listeners;
   }, 4500);
 
-  // Initialize First Track
-  loadTrack(0, 'A', 0);
+  persistLikedSongs();
+  loadTrack(0, 'A', 0, false);
 
-  // PWA Service Worker Registration
   if ('serviceWorker' in navigator) {
     navigator.serviceWorker.register('sw.js').catch(() => {});
   }
