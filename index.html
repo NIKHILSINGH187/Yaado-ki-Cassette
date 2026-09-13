@@ -961,6 +961,534 @@
     .scene-touch-hint { top: 62px; font-size: 12px; padding: 4px 12px; }
     .scene-hotspot { width: 80px; height: 80px; }
   }
+
+  /* ===== RETROFY / SPOTIFY PLAYER MODE ===== */
+  .nav-pill.spotify-pill {
+    background: rgba(29, 185, 84, 0.22);
+    border: 1px solid rgba(29, 185, 84, 0.45);
+    color: #1ed760;
+    box-shadow: 0 2px 10px rgba(29, 185, 84, 0.2);
+    font-weight: 700;
+  }
+  .nav-pill.spotify-pill:hover {
+    background: rgba(29, 185, 84, 0.4);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 16px rgba(29, 185, 84, 0.35);
+  }
+
+  .spotify-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(8, 6, 5, 0.94);
+    backdrop-filter: blur(22px);
+    -webkit-backdrop-filter: blur(22px);
+    z-index: 10000;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    box-sizing: border-box;
+    opacity: 0;
+    transition: opacity 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+  }
+  .spotify-modal.open {
+    display: flex;
+    opacity: 1;
+  }
+  .spotify-window {
+    width: 100%;
+    max-width: 1100px;
+    height: 88vh;
+    max-height: 820px;
+    background: #121212;
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    box-shadow: 0 28px 70px rgba(0, 0, 0, 0.9);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    color: #e0e0e0;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  }
+  .spotify-header-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 24px;
+    background: #181818;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  }
+  .spotify-brand-left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .spotify-logo-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: #1db954;
+    color: #000;
+    font-size: 16px;
+    font-weight: bold;
+    box-shadow: 0 0 12px rgba(29, 185, 84, 0.5);
+  }
+  .spotify-title-text h4 {
+    margin: 0;
+    font-size: 14.5px;
+    font-weight: 800;
+    color: #fff;
+    letter-spacing: 0.5px;
+  }
+  .spotify-title-text span {
+    font-size: 11px;
+    color: #1ed760;
+    font-weight: 600;
+  }
+  .spotify-search-wrapper {
+    flex: 1;
+    max-width: 380px;
+    margin: 0 20px;
+    position: relative;
+  }
+  .spotify-search-input {
+    width: 100%;
+    padding: 8px 14px 8px 36px;
+    background: #282828;
+    border: 1px solid transparent;
+    border-radius: 500px;
+    color: #fff;
+    font-size: 13px;
+    outline: none;
+    box-sizing: border-box;
+    transition: all 0.2s;
+  }
+  .spotify-search-input:focus {
+    background: #333;
+    border-color: #1db954;
+  }
+  .spotify-search-icon {
+    position: absolute;
+    left: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 13px;
+    opacity: 0.6;
+    pointer-events: none;
+  }
+  .spotify-close-btn {
+    background: #282828;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: #ddd;
+    padding: 6px 14px;
+    border-radius: 500px;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .spotify-close-btn:hover {
+    background: #383838;
+    color: #fff;
+    transform: scale(1.03);
+  }
+  .spotify-body-layout {
+    display: flex;
+    flex: 1;
+    overflow: hidden;
+  }
+  .spotify-sidebar {
+    width: 230px;
+    background: #121212;
+    border-right: 1px solid rgba(255, 255, 255, 0.06);
+    padding: 18px 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    box-sizing: border-box;
+  }
+  .spotify-nav-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 14px;
+    border-radius: 8px;
+    font-size: 13.5px;
+    font-weight: 600;
+    color: #b3b3b3;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    text-align: left;
+    transition: all 0.2s;
+    width: 100%;
+  }
+  .spotify-nav-item:hover {
+    color: #fff;
+    background: rgba(255, 255, 255, 0.06);
+  }
+  .spotify-nav-item.active {
+    color: #1ed760;
+    background: rgba(29, 185, 84, 0.12);
+  }
+  .spotify-content-area {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    background: linear-gradient(180deg, #241912 0%, #121212 280px);
+    padding: 24px;
+    box-sizing: border-box;
+  }
+  .spotify-hero-card {
+    display: flex;
+    align-items: center;
+    gap: 26px;
+    margin-bottom: 28px;
+  }
+  .spotify-hero-art {
+    width: 160px;
+    height: 160px;
+    border-radius: 12px;
+    box-shadow: 0 14px 35px rgba(0, 0, 0, 0.75);
+    background: #2b1f17;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    border: 2px solid rgba(212, 175, 55, 0.4);
+  }
+  .spotify-hero-reel {
+    width: 110px;
+    height: 110px;
+    border-radius: 50%;
+    border: 4px dashed rgba(255, 215, 0, 0.7);
+    animation: rotateVinyl 6s linear infinite;
+    animation-play-state: paused;
+    box-shadow: 0 0 15px rgba(255, 200, 50, 0.2);
+  }
+  .is-playing .spotify-hero-reel {
+    animation-play-state: running;
+  }
+  .spotify-hero-meta {
+    flex: 1;
+  }
+  .spotify-tag {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #1ed760;
+  }
+  .spotify-hero-title {
+    font-size: 30px;
+    font-weight: 800;
+    color: #fff;
+    margin: 6px 0 8px;
+    line-height: 1.2;
+  }
+  .spotify-hero-artist {
+    font-size: 14px;
+    color: #b3b3b3;
+    margin-bottom: 16px;
+  }
+  .spotify-hero-actions {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .spotify-play-btn-large {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: #1ed760;
+    border: none;
+    color: #000;
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 6px 20px rgba(29, 185, 84, 0.45);
+    transition: transform 0.2s, background 0.2s;
+  }
+  .spotify-play-btn-large:hover {
+    transform: scale(1.06);
+    background: #1fdf64;
+  }
+  .spotify-pen-btn {
+    background: rgba(255, 200, 80, 0.15);
+    border: 1px solid rgba(255, 200, 80, 0.35);
+    color: #ffd24d;
+    padding: 8px 16px;
+    border-radius: 500px;
+    font-size: 12px;
+    font-weight: 700;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    transition: all 0.2s;
+  }
+  .spotify-pen-btn:hover {
+    background: rgba(255, 200, 80, 0.3);
+    transform: translateY(-2px);
+  }
+  .spotify-song-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+  }
+  .spotify-song-table th {
+    text-align: left;
+    font-size: 11px;
+    color: #b3b3b3;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    padding: 8px 12px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  }
+  .spotify-song-row {
+    cursor: pointer;
+    border-radius: 6px;
+    transition: background 0.15s;
+  }
+  .spotify-song-row:hover {
+    background: rgba(255, 255, 255, 0.08);
+  }
+  .spotify-song-row.active {
+    background: rgba(29, 185, 84, 0.15);
+  }
+  .spotify-song-row.active .spotify-song-name {
+    color: #1ed760;
+    font-weight: 700;
+  }
+  .spotify-song-row td {
+    padding: 10px 12px;
+    font-size: 13.5px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+  }
+  .spotify-song-num {
+    width: 32px;
+    color: #888;
+    text-align: center;
+  }
+  .spotify-song-name {
+    color: #fff;
+    font-weight: 500;
+  }
+  .spotify-song-artist {
+    color: #999;
+    font-size: 12px;
+    margin-top: 2px;
+  }
+  .spotify-song-dur {
+    width: 60px;
+    text-align: right;
+    color: #888;
+    font-variant-numeric: tabular-nums;
+  }
+  .spotify-bottom-bar {
+    background: #181818;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    padding: 12px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+  }
+  .spotify-bar-left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    min-width: 220px;
+  }
+  .spotify-bar-center {
+    flex: 1;
+    max-width: 500px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+  }
+  .spotify-controls-mid {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+  .spotify-ctrl-btn {
+    background: none;
+    border: none;
+    color: #b3b3b3;
+    font-size: 16px;
+    cursor: pointer;
+    transition: color 0.2s;
+  }
+  .spotify-ctrl-btn:hover {
+    color: #fff;
+  }
+  .spotify-ctrl-btn.active {
+    color: #1ed760;
+  }
+  .spotify-bar-right {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    min-width: 180px;
+    justify-content: flex-end;
+  }
+  .spotify-vol-slider {
+    width: 85px;
+    accent-color: #1ed760;
+    cursor: pointer;
+  }
+
+  /* ===== REYNOLDS PEN CASSETTE REWIND MODAL ===== */
+  .pen-rewind-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(10px);
+    z-index: 10002;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.25s ease;
+  }
+  .pen-rewind-overlay.active {
+    display: flex;
+    opacity: 1;
+  }
+  .pen-rewind-card {
+    background: linear-gradient(135deg, #2b1f16, #1c140d);
+    border: 2px solid #d4af37;
+    border-radius: 20px;
+    padding: 24px 32px;
+    text-align: center;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.85);
+    max-width: 440px;
+    width: 90%;
+    color: #f7e7ce;
+    position: relative;
+  }
+  .pen-animation-stage {
+    position: relative;
+    width: 240px;
+    height: 140px;
+    margin: 16px auto;
+    background: #14100c;
+    border: 3px solid #5a452e;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    padding: 0 20px;
+    box-sizing: border-box;
+    box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.85);
+  }
+  .pen-spool {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    border: 3px dashed #d4af37;
+    position: relative;
+  }
+  .pen-spool.winding {
+    animation: reverseSpool 0.12s linear infinite;
+  }
+  @keyframes reverseSpool {
+    from { transform: rotate(360deg); }
+    to { transform: rotate(0deg); }
+  }
+  .reynolds-pen-graphic {
+    position: absolute;
+    left: 48px;
+    top: -28px;
+    width: 14px;
+    height: 130px;
+    background: linear-gradient(90deg, #004499, #0088ff, #004499);
+    border-radius: 3px;
+    box-shadow: 3px 6px 12px rgba(0,0,0,0.7);
+    transform-origin: 7px 90px;
+    animation: penWindingSpin 0.35s ease-in-out infinite alternate;
+  }
+  .reynolds-pen-graphic::before {
+    content: '';
+    position: absolute;
+    top: -12px;
+    left: 1px;
+    width: 12px;
+    height: 14px;
+    background: #ffffff;
+    border-radius: 2px;
+    border-top: 2px solid #004499;
+  }
+  .reynolds-pen-graphic::after {
+    content: 'REYNOLDS 045';
+    position: absolute;
+    top: 35px;
+    left: -16px;
+    font-size: 7px;
+    font-weight: 800;
+    color: #fff;
+    letter-spacing: 0.5px;
+    transform: rotate(90deg);
+  }
+  @keyframes penWindingSpin {
+    0% { transform: rotate(-22deg); }
+    100% { transform: rotate(22deg); }
+  }
+
+  /* J-Card Unfolding Lyrics Modal Styles */
+  .parchment-lyrics {
+    background: #f7efdb;
+    border: 2px solid #8c6a46;
+    border-radius: 12px;
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.75), inset 0 0 30px rgba(180, 140, 90, 0.25);
+    background-image: repeating-linear-gradient(0deg, transparent, transparent 27px, rgba(140, 106, 70, 0.12) 28px);
+    position: relative;
+  }
+  .j-card-spine {
+    background: #3e2714;
+    color: #f7dfa5;
+    padding: 6px 14px;
+    border-radius: 6px 6px 0 0;
+    font-size: 11px;
+    letter-spacing: 1px;
+    font-weight: 700;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: -16px -16px 12px -16px;
+  }
+
+  @media (max-width: 768px) {
+    .spotify-window { height: 95vh; max-height: 95vh; }
+    .spotify-sidebar { display: none; }
+    .spotify-hero-card { flex-direction: column; text-align: center; gap: 14px; }
+    .spotify-hero-art { width: 120px; height: 120px; margin: 0 auto; }
+    .spotify-hero-title { font-size: 22px; }
+    .spotify-hero-actions { justify-content: center; }
+    .spotify-bottom-bar { flex-direction: column; gap: 10px; padding: 10px; }
+    .spotify-bar-left, .spotify-bar-right { display: none; }
+    .spotify-bar-center { width: 100%; }
+  }
+
 </style>
 </head>
 <body>
@@ -1017,6 +1545,9 @@
       </button>
       <button class="nav-pill" id="openSearchBtn" title="Search Songs across all tapes (Press /)">
         <span>🔍 Search</span>
+      </button>
+      <button class="nav-pill spotify-pill" id="openSpotifyBtn" title="Spotify Player Mode (Press M)">
+        <span>🟢 Spotify Player</span>
       </button>
       <button class="nav-pill" id="openFavoritesBtn" title="View Liked Songs">
         <span>❤️</span> <span id="favPillCount">0</span>
@@ -1105,6 +1636,7 @@
         <button class="dock-btn heart-btn" id="dockLikeBtn" title="Save to Liked Songs (Press L)">🤍</button>
 
         <!-- Previous Track -->
+        <button class="dock-btn" id="dockPenRewindBtn" title="Reynolds Pen Rewind (Rewind 15s)">🖊️</button>
         <button class="dock-btn" id="dockPrevBtn" title="Previous Song (Press P)">⏮</button>
 
         <!-- Master Circular Play/Pause -->
@@ -1232,6 +1764,10 @@
 <!-- ===== MODAL 3: VINTAGE TYPEWRITER LYRICS ===== -->
 <div class="lyrics-modal" id="lyricsModal">
   <div class="parchment-lyrics">
+    <div class="j-card-spine">
+      <span>📼 यादों की कैसेट • RETRO STEREO C-60 INLAY</span>
+      <span>SIDE A / B ORIGINAL LYRICS</span>
+    </div>
     <div style="display:flex; justify-content:space-between; align-items:flex-start; border-bottom:2px solid #5a4b3d; padding-bottom:10px; margin-bottom:14px;">
       <div>
         <h3 id="lyricSongTitle" style="font-size: 20px; font-weight: 700; color: #8c2d19;">Pal Pal Dil Ke Paas</h3>
@@ -1247,6 +1783,93 @@
 <div class="retro-toast" id="retroToast">
   <span id="toastIcon">✨</span>
   <span id="toastText">Playing</span>
+</div>
+
+
+<!-- ===== REYNOLDS PEN CASSETTE REWIND OVERLAY ===== -->
+<div class="pen-rewind-overlay" id="penRewindModal">
+  <div class="pen-rewind-card">
+    <h3 style="color:#d4af37; margin:0 0 6px 0; font-size:18px;">🖊️ Reynolds Pen Rewind</h3>
+    <p style="font-size:12px; margin:0; opacity:0.85;">80s Jugad: Pen se cassette reel ghumai ja rahi hai...</p>
+    <div class="pen-animation-stage">
+      <div class="reynolds-pen-graphic"></div>
+      <div class="pen-spool winding"></div>
+      <div class="pen-spool winding" style="animation-direction: reverse;"></div>
+    </div>
+    <div style="font-size:11.5px; color:#1ed760; font-weight:700;">Rewinding 15 seconds back... 📼</div>
+  </div>
+</div>
+
+<!-- ===== SPOTIFY / RETROFY FULL PLAYER MODAL ===== -->
+<div class="spotify-modal" id="spotifyModal">
+  <div class="spotify-window">
+    <div class="spotify-header-bar">
+      <div class="spotify-brand-left">
+        <div class="spotify-logo-badge">📼</div>
+        <div class="spotify-title-text">
+          <h4>RETROFY SPOTIFY PLAYER</h4>
+          <span>यादों की कैसेट • Unlimited 80s Streaming</span>
+        </div>
+      </div>
+      <div class="spotify-search-wrapper">
+        <span class="spotify-search-icon">🔍</span>
+        <input type="text" class="spotify-search-input" id="spotifySearchInput" placeholder="Search any song, artist (Kishore, Lata, Jagjit)...">
+      </div>
+      <button class="spotify-close-btn" id="closeSpotifyBtn">✕ Return to Scene</button>
+    </div>
+
+    <div class="spotify-body-layout">
+      <div class="spotify-sidebar">
+        <button class="spotify-nav-item active" data-spot-tab="now-playing">🎧 Now Playing</button>
+        <button class="spotify-nav-item" data-spot-tab="all-songs">🎵 All Songs (<span id="spotSongCount">20</span>)</button>
+        <button class="spotify-nav-item" data-spot-tab="mixtapes">📼 Mixtapes / Playlists</button>
+        <button class="spotify-nav-item" data-spot-tab="liked">❤️ Liked Songs (<span id="spotLikedCount">0</span>)</button>
+        <div style="margin-top:auto; padding:12px; background:rgba(255,255,255,0.03); border-radius:10px; font-size:11px; color:#888;">
+          <strong style="color:#1ed760;">💡 Pro Tip:</strong> Press <kbd style="background:#333; padding:2px 5px; border-radius:4px; color:#fff;">Space</kbd> to Play, <kbd style="background:#333; padding:2px 5px; border-radius:4px; color:#fff;">M</kbd> for Spotify Mode.
+        </div>
+      </div>
+
+      <div class="spotify-content-area" id="spotifyContentArea">
+        <!-- Injected via JavaScript -->
+      </div>
+    </div>
+
+    <!-- Spotify Bottom Player Bar -->
+    <div class="spotify-bottom-bar">
+      <div class="spotify-bar-left">
+        <div style="width:44px; height:44px; background:#2b1f17; border:1px solid rgba(212,175,55,0.3); border-radius:6px; display:flex; align-items:center; justify-content:center; font-size:20px;">📼</div>
+        <div>
+          <div id="spotBarTitle" style="font-size:13px; font-weight:700; color:#fff;">Pal Pal Dil Ke Paas</div>
+          <div id="spotBarArtist" style="font-size:11px; color:#999;">Kishore Kumar</div>
+        </div>
+        <button id="spotHeartBtn" style="background:none; border:none; cursor:pointer; font-size:15px; margin-left:6px;">🤍</button>
+      </div>
+
+      <div class="spotify-bar-center">
+        <div class="spotify-controls-mid">
+          <button class="spotify-ctrl-btn" id="spotShuffleBtn" title="Shuffle">🔀</button>
+          <button class="spotify-ctrl-btn" id="spotPenBtn" title="Reynolds Pen Rewind">🖊️</button>
+          <button class="spotify-ctrl-btn" id="spotPrevBtn" title="Previous">⏮</button>
+          <button class="spotify-play-btn-large" id="spotPlayBtn" title="Play/Pause">▶</button>
+          <button class="spotify-ctrl-btn" id="spotNextBtn" title="Next">⏭</button>
+          <button class="spotify-ctrl-btn" id="spotRepeatBtn" title="Repeat">🔁</button>
+        </div>
+        <div style="display:flex; align-items:center; gap:8px; width:100%; font-size:11px; color:#888;">
+          <span id="spotCurTime">0:00</span>
+          <div class="dock-scrub-track" id="spotScrubTrack" style="flex:1;">
+            <div class="dock-scrub-fill" id="spotScrubFill" style="background:#1ed760;"></div>
+          </div>
+          <span id="spotTotalTime">0:00</span>
+        </div>
+      </div>
+
+      <div class="spotify-bar-right">
+        <span style="font-size:14px; opacity:0.8;">🔊</span>
+        <input type="range" class="spotify-vol-slider" id="spotVolSlider" min="0" max="1" step="0.05" value="1">
+        <button class="overhead-pill" id="spotLyricsBtn" style="padding:4px 10px; font-size:11px;">📜 Lyrics</button>
+      </div>
+    </div>
+  </div>
 </div>
 
 <!-- Native Audio Element -->
@@ -1412,6 +2035,24 @@
       filter.connect(gain);
       gain.connect(ctx.destination);
       noise.start(now);
+    },
+    playPenRewind() {
+      const ctx = this.getCtx();
+      if (!ctx) return;
+      const now = ctx.currentTime;
+      for (let i = 0; i < 16; i++) {
+        const t = now + i * 0.05;
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        osc.type = 'sawtooth';
+        osc.frequency.setValueAtTime(280 + (i % 3) * 60, t);
+        gain.gain.setValueAtTime(0.12, t);
+        gain.gain.exponentialRampToValueAtTime(0.001, t + 0.04);
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+        osc.start(t);
+        osc.stop(t + 0.042);
+      }
     },
     playChime() {
       const ctx = this.getCtx();
@@ -2977,6 +3618,10 @@ an unforgettable memory.`
     } else if (e.key.toLowerCase() === 'p') {
       e.preventDefault();
       prevTrack();
+    } else if (e.key.toLowerCase() === 'm') {
+      e.preventDefault();
+      if (spotifyModal.classList.contains('open')) closeSpotifyPlayer();
+      else openSpotifyPlayer('now-playing');
     } else if (e.key === '/') {
       e.preventDefault();
       openShelfModal('search');
@@ -2984,7 +3629,7 @@ an unforgettable memory.`
   });
 
   if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('sw.js?v=3').catch(() => {});
+    navigator.serviceWorker.register('sw.js?v=5').catch(() => {});
   }
 </script>
 
