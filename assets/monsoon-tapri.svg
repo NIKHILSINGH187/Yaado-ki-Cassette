@@ -1,0 +1,89 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" width="100%" height="100%">
+  <defs>
+    <linearGradient id="monsoonSky" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#141e30"/>
+      <stop offset="45%" stop-color="#243b55"/>
+      <stop offset="85%" stop-color="#192a3e"/>
+      <stop offset="100%" stop-color="#0f1924"/>
+    </linearGradient>
+    <linearGradient id="tapriRoof" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#2c3e50"/>
+      <stop offset="50%" stop-color="#34495e"/>
+      <stop offset="100%" stop-color="#1a252f"/>
+    </linearGradient>
+    <radialGradient id="bulbGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#ffeaa7" stop-opacity="0.95"/>
+      <stop offset="25%" stop-color="#fdcb6e" stop-opacity="0.6"/>
+      <stop offset="60%" stop-color="#e17055" stop-opacity="0.2"/>
+      <stop offset="100%" stop-color="#192a3e" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="chaiGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#d35400"/>
+      <stop offset="100%" stop-color="#962d00"/>
+    </linearGradient>
+    <linearGradient id="puddleReflect" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#ffeaa7" stop-opacity="0.35"/>
+      <stop offset="100%" stop-color="#0f1924" stop-opacity="0.8"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Sky & Overcast Atmosphere -->
+  <rect width="1920" height="1080" fill="url(#monsoonSky)"/>
+
+  <!-- Distant Moody Monsoon Trees & Mist -->
+  <path d="M0,750 Q180,680 380,720 T780,700 T1200,730 T1600,690 T1920,740 L1920,1080 L0,1080 Z" fill="#13202e" opacity="0.85"/>
+  <path d="M0,820 Q240,770 520,800 T1040,780 T1500,810 T1920,790 L1920,1080 L0,1080 Z" fill="#0c1620" opacity="0.95"/>
+
+  <!-- Wet Ground with Light Reflections -->
+  <rect y="860" width="1920" height="220" fill="#080e14"/>
+  <ellipse cx="960" cy="980" rx="480" ry="45" fill="url(#puddleReflect)" opacity="0.45"/>
+
+  <!-- The Chai Tapri Stall Structure -->
+  <!-- Wooden Pillars -->
+  <rect x="360" y="320" width="28" height="600" fill="#2d1d13" rx="4"/>
+  <rect x="1530" y="320" width="28" height="600" fill="#24170e" rx="4"/>
+  <rect x="740" y="320" width="22" height="600" fill="#2b1c12" rx="3"/>
+
+  <!-- Corrugated Tin Roof with Rain Angle -->
+  <polygon points="260,340 1660,260 1620,210 240,290" fill="url(#tapriRoof)"/>
+  <line x1="260" y1="340" x2="1660" y2="260" stroke="#4a627a" stroke-width="4"/>
+
+  <!-- Warm Tungsten Bulb Hanging from Roof -->
+  <line x1="960" y1="290" x2="960" y2="460" stroke="#111" stroke-width="3"/>
+  <circle cx="960" cy="480" r="140" fill="url(#bulbGlow)"/>
+  <circle cx="960" cy="480" r="12" fill="#fffbe8"/>
+
+  <!-- Stall Wooden Counter / Table -->
+  <rect x="420" y="680" width="1080" height="200" fill="#2e1d13" rx="8"/>
+  <rect x="420" y="680" width="1080" height="22" fill="#422c1d" rx="4"/>
+
+  <!-- Steaming Clay Kulhad (Chai Cup) -->
+  <g transform="translate(930, 610)">
+    <path d="M10,20 L18,70 Q30,75 42,70 L50,20 Z" fill="#c06c4b" stroke="#8b4513" stroke-width="2"/>
+    <ellipse cx="30" cy="20" rx="20" ry="6" fill="url(#chaiGradient)"/>
+    <!-- Steam particles -->
+    <path d="M22,12 Q28,-5 20,-20 T26,-40" stroke="rgba(255,255,255,0.4)" stroke-width="3" fill="none" stroke-linecap="round"/>
+    <path d="M34,14 Q38,-2 32,-18 T38,-38" stroke="rgba(255,255,255,0.3)" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+  </g>
+
+  <!-- Hanging Brass Kettle -->
+  <g transform="translate(680, 560)">
+    <ellipse cx="40" cy="50" rx="35" ry="30" fill="#b38728" stroke="#8a671a" stroke-width="2"/>
+    <path d="M15,45 Q-15,35 10,20" stroke="#8a671a" stroke-width="5" fill="none"/>
+    <path d="M65,40 Q85,45 80,60" stroke="#8a671a" stroke-width="4" fill="none"/>
+    <ellipse cx="40" cy="22" rx="18" ry="6" fill="#8a671a"/>
+  </g>
+
+  <!-- Old Parle-G Biscuit Jar -->
+  <g transform="translate(1220, 565)">
+    <rect x="0" y="10" width="55" height="90" fill="rgba(255,255,255,0.2)" stroke="rgba(255,255,255,0.4)" stroke-width="2" rx="6"/>
+    <ellipse cx="27" cy="10" rx="26" ry="7" fill="#c0392b"/>
+    <rect x="10" y="35" width="35" height="40" fill="#f39c12" rx="3"/>
+  </g>
+
+  <!-- Rain Overlays & Streaks -->
+  <line x1="400" y1="100" x2="360" y2="400" stroke="rgba(255,255,255,0.12)" stroke-width="1.5"/>
+  <line x1="750" y1="50" x2="710" y2="380" stroke="rgba(255,255,255,0.12)" stroke-width="1.5"/>
+  <line x1="1200" y1="80" x2="1160" y2="450" stroke="rgba(255,255,255,0.12)" stroke-width="1.5"/>
+  <line x1="1500" y1="120" x2="1460" y2="480" stroke="rgba(255,255,255,0.12)" stroke-width="1.5"/>
+</svg>

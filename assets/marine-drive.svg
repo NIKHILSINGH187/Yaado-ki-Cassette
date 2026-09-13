@@ -1,0 +1,96 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" width="100%" height="100%">
+  <defs>
+    <linearGradient id="sunsetSky" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#2c1654"/>
+      <stop offset="35%" stop-color="#7a285a"/>
+      <stop offset="65%" stop-color="#d35445"/>
+      <stop offset="85%" stop-color="#f39c12"/>
+      <stop offset="100%" stop-color="#fed330"/>
+    </linearGradient>
+    <linearGradient id="seaWater" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#c0392b"/>
+      <stop offset="30%" stop-color="#8e44ad"/>
+      <stop offset="70%" stop-color="#2c3e50"/>
+      <stop offset="100%" stop-color="#1a252f"/>
+    </linearGradient>
+    <radialGradient id="sunGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#fff5cc" stop-opacity="1"/>
+      <stop offset="40%" stop-color="#f39c12" stop-opacity="0.8"/>
+      <stop offset="85%" stop-color="#c0392b" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="promenadeRoad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#1e1814"/>
+      <stop offset="50%" stop-color="#2a201a"/>
+      <stop offset="100%" stop-color="#140f0c"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Gorgeous Pink-Orange-Violet Sunset Sky -->
+  <rect width="1920" height="1080" fill="url(#sunsetSky)"/>
+
+  <!-- Giant Golden Setting Sun Sinking into the Arabian Sea -->
+  <circle cx="1080" cy="560" r="160" fill="url(#sunGlow)"/>
+
+  <!-- Arabian Sea Surface with Sunset Glistening Reflections -->
+  <rect y="620" width="1920" height="460" fill="url(#seaWater)"/>
+  <ellipse cx="1080" cy="650" rx="320" ry="16" fill="#ffeaa7" opacity="0.6"/>
+  <ellipse cx="1080" cy="690" rx="240" ry="12" fill="#fdcb6e" opacity="0.45"/>
+  <ellipse cx="1080" cy="740" rx="160" ry="8" fill="#e17055" opacity="0.35"/>
+
+  <!-- Distant Malabar Hill / Nariman Point Art Deco Skyline Silhouettes -->
+  <path d="M0,620 L0,520 L80,520 L80,480 L160,480 L160,540 L280,540 L340,510 L440,510 L500,560 L620,560 L700,600 L850,620 Z" fill="#201224" opacity="0.9"/>
+
+  <!-- Sweeping Queen's Necklace Promenade Curve -->
+  <path d="M0,740 Q600,720 1100,780 T1920,860 L1920,1080 L0,1080 Z" fill="url(#promenadeRoad)"/>
+
+  <!-- Marine Drive Concrete Sea-Wall Promenade -->
+  <path d="M0,735 Q600,715 1100,775 T1920,855 L1920,875 Q1100,795 0,755 Z" fill="#4a3e35" stroke="#2e251e" stroke-width="2"/>
+
+  <!-- Iconic Tetrapods on the Waterfront -->
+  <g fill="#1a1410" stroke="#2a201a" stroke-width="1.5">
+    <polygon points="120,740 140,710 160,740 140,755"/>
+    <polygon points="150,750 170,720 190,750 170,765"/>
+    <polygon points="210,745 230,715 250,745 230,760"/>
+    <polygon points="270,755 295,720 320,755 295,770"/>
+    <polygon points="340,750 365,715 390,750 365,765"/>
+    <polygon points="430,758 460,720 490,758 460,775"/>
+    <polygon points="560,765 590,725 620,765 590,780"/>
+    <polygon points="720,775 750,735 780,775 750,790"/>
+    <polygon points="880,785 910,745 940,785 910,800"/>
+  </g>
+
+  <!-- Glowing Queen's Necklace Street Lamps -->
+  <g stroke="#ffda79" stroke-width="3">
+    <!-- Lamp 1 -->
+    <line x1="260" y1="740" x2="260" y2="610" stroke="#1a1410" stroke-width="5"/>
+    <circle cx="260" cy="605" r="14" fill="#fff5cc" opacity="0.9"/>
+    <circle cx="260" cy="605" r="30" fill="#ffda79" opacity="0.25"/>
+    <!-- Lamp 2 -->
+    <line x1="620" y1="755" x2="620" y2="635" stroke="#1a1410" stroke-width="5"/>
+    <circle cx="620" cy="630" r="14" fill="#fff5cc" opacity="0.9"/>
+    <circle cx="620" cy="630" r="30" fill="#ffda79" opacity="0.25"/>
+    <!-- Lamp 3 -->
+    <line x1="1020" y1="780" x2="1020" y2="670" stroke="#1a1410" stroke-width="5"/>
+    <circle cx="1020" cy="665" r="14" fill="#fff5cc" opacity="0.9"/>
+    <circle cx="1020" cy="665" r="30" fill="#ffda79" opacity="0.25"/>
+    <!-- Lamp 4 -->
+    <line x1="1480" y1="830" x2="1480" y2="725" stroke="#1a1410" stroke-width="5"/>
+    <circle cx="1480" cy="720" r="14" fill="#fff5cc" opacity="0.9"/>
+    <circle cx="1480" cy="720" r="30" fill="#ffda79" opacity="0.25"/>
+  </g>
+
+  <!-- Silhouettes of People / Couples Sitting on Promenade Wall -->
+  <g fill="#120d0a">
+    <!-- Couple 1 -->
+    <circle cx="440" cy="725" r="7"/>
+    <circle cx="456" cy="726" r="6.5"/>
+    <rect x="435" y="732" width="28" height="22" rx="4"/>
+    <!-- Person gazing at sunset -->
+    <circle cx="820" cy="745" r="7"/>
+    <rect x="814" y="752" width="14" height="25" rx="3"/>
+    <!-- Tea Vendor with Thermos flask -->
+    <circle cx="1260" cy="770" r="8"/>
+    <rect x="1252" y="778" width="16" height="40" rx="3"/>
+    <rect x="1275" y="795" width="10" height="20" fill="#b33939" rx="2"/>
+  </g>
+</svg>

@@ -3,833 +3,691 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>यादों की कैसेट — Yaado Ki Cassette | Vintage Mixtape & Retro Music Player</title>
-<meta name="description" content="यादों की कैसेट (Yaado Ki Cassette) — A nostalgic, ad-free retro cassette player with Spotify-grade features: live search, custom queue, liked songs, lyrics, and warm lo-fi tape hiss.">
-<meta name="keywords" content="yaado ki cassette, retro hindi player, vintage cassette tape, purane gaane, old bollywood songs, lofi hindi, kishore kumar, lata mangeshkar, jagjit singh, cassette player online">
+<title>यादों की कैसेट — Yaado Ki Cassette | A Nostalgic Retro Indian Audio Journey</title>
+<meta name="description" content="यादों की कैसेट (Yaado Ki Cassette) — A warm, peaceful retro Indian audio retreat. Step into four living 80s memories with evergreen Bollywood classics, rain mood, and unhurried nostalgia. Crafted by Nikhil Singh.">
+<meta name="keywords" content="yaado ki cassette, nikhil singh, retro hindi songs, purane gaane, old bollywood radio, 80s india aesthetic, deluxe saloon, monsoon chai lofi, kishore kumar, jagjit singh, lata mangeshkar">
 <meta name="author" content="Nikhil Singh">
 <link rel="canonical" href="https://nikhilsingh187.github.io/Yaado-ki-Cassette/">
 
+<!-- Social Open Graph & Twitter Meta -->
 <meta property="og:type" content="website">
-<meta property="og:title" content="यादों की कैसेट — Yaado Ki Cassette">
-<meta property="og:description" content="Play nostalgic Hindi cassette classics in a warm retro walkman aesthetic with search, queue, and lyrics.">
-<meta property="og:image" content="https://nikhilsingh187.github.io/Yaado-ki-Cassette/assets/hero-bg.png">
+<meta property="og:title" content="यादों की कैसेट — A Nostalgic 80s Indian Retreat">
+<meta property="og:description" content="Step into a time machine of warm memories, evergreen melodies, and peaceful rains. Crafted by Nikhil Singh.">
+<meta property="og:image" content="https://nikhilsingh187.github.io/Yaado-ki-Cassette/assets/deluxe-saloon.jpg">
 <meta property="og:url" content="https://nikhilsingh187.github.io/Yaado-ki-Cassette/">
-
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="यादों की कैसेट — Yaado Ki Cassette">
-<meta name="twitter:description" content="Play nostalgic Hindi cassette classics in a warm retro walkman aesthetic with Spotify-style search and lyrics.">
-<meta name="twitter:image" content="https://nikhilsingh187.github.io/Yaado-ki-Cassette/assets/hero-bg.png">
+<meta name="theme-color" content="#1a1410">
 <link rel="manifest" href="manifest.json">
-<meta name="theme-color" content="#c8963e">
 
-<!-- Google Fonts -->
+<!-- Google Fonts: Rozha One (Iconic Hindi Signboard Display), Kalam, Caveat, IBM Plex Mono, Special Elite -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=IBM+Plex+Mono:wght@400;500;600;700&family=Kalam:wght@400;700&family=Special+Elite&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=IBM+Plex+Mono:wght@400;500;600;700&family=Kalam:wght@400;700&family=Rozha+One&family=Special+Elite&display=swap" rel="stylesheet">
 
 <style>
   :root {
     --brass: #d4a359;
-    --brass-glow: rgba(212, 163, 89, 0.4);
+    --brass-glow: rgba(212, 163, 89, 0.45);
     --gold: #f3c267;
-    --paper: #f4ebd9;
-    --paper-dark: #dfd2b8;
-    --tape-body: #1e1b18;
-    --tape-border: #38322c;
-    --glass-bg: rgba(22, 15, 9, 0.65);
-    --glass-border: rgba(244, 235, 217, 0.2);
-    --red: #e63946;
-    --green: #2a9d8f;
-    --neon-green: #4ade80;
-    --amber-glow: #ffb703;
-    --crimson: #ff4d6d;
+    --paper: #f7f1e5;
+    --paper-muted: #d8cdba;
+    --glass-bg: rgba(18, 14, 11, 0.72);
+    --glass-border: rgba(247, 241, 229, 0.16);
+    --terracotta: #c0533b;
+    --crimson: #e63946;
+    --moss: #2a9d8f;
+    --amber-bulb: #ffb703;
+    --night-indigo: #0a1128;
+    --ease-peaceful: cubic-bezier(0.25, 1, 0.5, 1);
   }
 
   * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
 
   html, body {
     width: 100%;
+    height: 100%;
     min-height: 100vh;
     font-family: 'IBM Plex Mono', monospace;
     color: var(--paper);
-    background-color: #0d0906;
-    overflow-x: hidden;
+    background-color: #0b0806;
+    overflow: hidden;
+    user-select: none;
   }
 
-  /* Full-bleed responsive stage */
-  .stage {
+  /* Opening Tape Deck Warmup Overlay */
+  .warmup-overlay {
+    position: fixed;
+    inset: 0;
+    background: #080605;
+    z-index: 1000;
+    pointer-events: none;
+    opacity: 1;
+    transition: opacity 1.6s var(--ease-peaceful);
+  }
+  .warmup-overlay.faded {
+    opacity: 0;
+  }
+
+  /* ===== LIVING SCENIC STAGE ===== */
+  .scenic-stage {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    overflow: hidden;
+  }
+
+  .scene-backdrop {
+    position: absolute;
+    inset: -5%;
+    width: 110%;
+    height: 110%;
+    background-size: cover;
+    background-position: center;
+    opacity: 0;
+    filter: brightness(0.72) contrast(1.05) saturate(1.1);
+    transform: scale(1);
+    transition: opacity 1.2s var(--ease-peaceful), transform 32s ease-in-out infinite alternate;
+  }
+
+  .scene-backdrop.active {
+    opacity: 1;
+    animation: kenBurnsDrift 36s ease-in-out infinite alternate;
+  }
+
+  @keyframes kenBurnsDrift {
+    0% { transform: scale(1) translate(0, 0); }
+    50% { transform: scale(1.06) translate(-1.5%, -1%); }
+    100% { transform: scale(1.03) translate(1.5%, 1%); }
+  }
+
+  /* Warm Cinematic Vignette & Lighting Filter */
+  .cinematic-vignette {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: radial-gradient(circle at center, rgba(14, 10, 7, 0.1) 0%, rgba(10, 7, 5, 0.6) 75%, rgba(6, 4, 3, 0.9) 100%),
+                linear-gradient(180deg, rgba(8,6,4,0.45) 0%, rgba(8,6,4,0.05) 45%, rgba(8,6,4,0.85) 100%);
+    z-index: 1;
+  }
+
+  /* Live Falling Rain Canvas */
+  #rainCanvas {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 2;
+    opacity: 0;
+    transition: opacity 1.2s var(--ease-peaceful);
+  }
+  #rainCanvas.raining {
+    opacity: 0.85;
+  }
+
+  /* ===== FOREGROUND STAGE & MEMORY TITLE ===== */
+  .viewport-content {
     position: relative;
+    width: 100%;
+    height: 100%;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    padding: 16px 18px 20px;
-    z-index: 1;
-  }
-
-  /* Hero background */
-  .hero-link {
-    position: fixed;
-    inset: 0;
-    z-index: -2;
-    display: block;
-  }
-  .hero-img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center;
-    filter: brightness(0.62) saturate(1.15);
-  }
-  .hero-overlay {
-    position: fixed;
-    inset: 0;
-    z-index: -1;
-    pointer-events: none;
-    background: radial-gradient(circle at center, rgba(15, 10, 6, 0.25) 0%, rgba(10, 7, 4, 0.85) 100%),
-                linear-gradient(180deg, rgba(15,10,6,0.65) 0%, rgba(15,10,6,0.15) 40%, rgba(10,7,4,0.92) 100%);
+    padding: 24px 28px;
+    z-index: 10;
   }
 
   /* Top Navigation Bar */
-  .topbar {
+  .top-shelf {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    gap: 10px;
     width: 100%;
-    max-width: 960px;
-    margin: 0 auto 10px auto;
+    max-width: 1200px;
+    margin: 0 auto;
+    z-index: 20;
   }
 
-  .clock-badge {
-    font-size: 12.5px;
-    letter-spacing: 0.06em;
-    background: var(--glass-bg);
-    border: 1px solid var(--glass-border);
-    backdrop-filter: blur(10px);
-    padding: 6px 13px;
-    border-radius: 20px;
+  .brand-signature {
     display: flex;
     align-items: center;
-    gap: 6px;
+    gap: 12px;
   }
 
-  .live-pill {
+  .retro-badge {
+    font-size: 11.5px;
+    font-weight: 600;
+    color: var(--paper);
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    backdrop-filter: blur(14px);
+    padding: 7px 14px;
+    border-radius: 30px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45);
+  }
+
+  .badge-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #4ade80;
+    box-shadow: 0 0 10px #4ade80;
+    animation: gentlePulse 2.4s ease-in-out infinite;
+  }
+  @keyframes gentlePulse { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.35; transform: scale(0.85); } }
+
+  .top-pills {
     display: flex;
     align-items: center;
     gap: 8px;
-    font-size: 12px;
-    background: var(--glass-bg);
-    border: 1px solid var(--glass-border);
-    backdrop-filter: blur(10px);
-    padding: 6px 13px;
-    border-radius: 20px;
-  }
-  .live-dot {
-    width: 7px;
-    height: 7px;
-    border-radius: 50%;
-    background: var(--neon-green);
-    box-shadow: 0 0 8px var(--neon-green);
-    animation: pulse 1.8s ease-in-out infinite;
-  }
-  @keyframes pulse { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.4; transform: scale(0.85); } }
-
-  .top-actions {
-    display: flex;
-    align-items: center;
-    gap: 7px;
     flex-wrap: wrap;
   }
-  .pill-btn {
+
+  .nav-pill {
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    backdrop-filter: blur(14px);
+    color: var(--paper);
+    padding: 7px 14px;
+    border-radius: 30px;
     font-size: 11.5px;
     font-weight: 600;
-    padding: 6px 12px;
-    border-radius: 20px;
-    border: 1px solid var(--glass-border);
-    background: var(--glass-bg);
-    backdrop-filter: blur(10px);
-    color: var(--paper);
     cursor: pointer;
     text-decoration: none;
     display: inline-flex;
     align-items: center;
-    gap: 6px;
-    transition: all 0.2s ease;
+    gap: 7px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45);
+    transition: all 0.3s var(--ease-peaceful);
   }
-  .pill-btn:hover {
+  .nav-pill:hover {
     background: rgba(212, 163, 89, 0.28);
     border-color: var(--brass);
-    transform: translateY(-1px);
+    transform: translateY(-2px);
+    color: var(--gold);
   }
-  .pill-btn.active {
+  .nav-pill.active {
     background: rgba(212, 163, 89, 0.4);
     border-color: var(--gold);
     color: var(--gold);
   }
-  .pill-btn.heart-pill.active {
-    color: var(--crimson);
-    border-color: rgba(255, 77, 109, 0.5);
-    background: rgba(255, 77, 109, 0.15);
-  }
-  .pill-btn.wa {
-    background: rgba(37, 211, 102, 0.18);
+  .nav-pill.wa {
+    background: rgba(37, 211, 102, 0.15);
     border-color: rgba(37, 211, 102, 0.35);
   }
 
-  /* ===== MAIN CASSETTE DECK SECTION ===== */
-  .player-stage {
+  /* ===== MONUMENTAL HAND-PAINTED HINDI TITLE ===== */
+  .hero-memory-center {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    max-width: 660px;
-    margin: 0 auto;
-    width: 100%;
-    gap: 16px;
-  }
-
-  /* 3D Cassette Container */
-  .cassette-perspective {
-    perspective: 1200px;
-    width: 100%;
-    max-width: 530px;
-    height: 310px;
-    position: relative;
-    cursor: pointer;
-    user-select: none;
-  }
-
-  .cassette-flipper {
-    width: 100%;
-    height: 100%;
-    position: relative;
-    transform-style: preserve-3d;
-    transition: transform 0.8s cubic-bezier(0.4, 0.2, 0.15, 1.0);
-    border-radius: 20px;
-  }
-
-  .cassette-flipper.is-flipped {
-    transform: rotateY(180deg);
-  }
-
-  .cassette-face {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    backface-visibility: hidden;
-    -webkit-backface-visibility: hidden;
-    background: linear-gradient(135deg, #2b2520 0%, #15110d 65%, #0e0b08 100%);
-    border: 3px solid #4a3e33;
-    border-radius: 20px;
-    box-shadow: 0 24px 45px rgba(0, 0, 0, 0.85), inset 0 2px 4px rgba(255, 255, 255, 0.1), inset 0 -4px 10px rgba(0,0,0,0.7);
-    padding: 18px 22px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-  }
-
-  .cassette-face.back-side {
-    transform: rotateY(180deg);
-    background: linear-gradient(135deg, #24201c 0%, #13100d 65%, #0b0907 100%);
-  }
-
-  /* Screws in four corners */
-  .screw {
-    position: absolute;
-    width: 9px;
-    height: 9px;
-    border-radius: 50%;
-    background: radial-gradient(circle, #8a7a6b 20%, #3e332a 80%);
-    border: 1px solid #1a140f;
-    box-shadow: inset 0 1px 1px rgba(255,255,255,0.3);
-  }
-  .screw::after {
-    content: "";
-    position: absolute;
-    top: 3.5px;
-    left: 1px;
-    width: 7px;
-    height: 1.2px;
-    background: #1a140f;
-  }
-  .screw.tl { top: 9px; left: 9px; }
-  .screw.tr { top: 9px; right: 9px; }
-  .screw.bl { bottom: 9px; left: 9px; }
-  .screw.br { bottom: 9px; right: 9px; }
-
-  /* Vintage Paper Sticker Label */
-  .tape-sticker {
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(180deg, #f7efe1 0%, #ebdcc4 100%);
-    border-radius: 12px;
-    border: 2px solid #3d3126;
-    padding: 12px 16px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    box-shadow: inset 0 0 16px rgba(110, 85, 55, 0.25), 0 3px 6px rgba(0,0,0,0.35);
-    color: #2b2118;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .tape-sticker::before {
-    content: "";
-    position: absolute;
-    top: 0; left: 0; right: 0; height: 5px;
-    background: repeating-linear-gradient(90deg, #c84b31 0, #c84b31 16px, #2d4263 16px, #2d4263 32px, #f3c267 32px, #f3c267 48px);
-  }
-
-  .sticker-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-bottom: 2px solid #4a3828;
-    padding-bottom: 5px;
-    margin-top: 2px;
-  }
-
-  .side-tag {
-    font-size: 15px;
-    font-weight: 800;
-    font-family: 'Special Elite', monospace;
-    background: #2b2118;
-    color: #f7efe1;
-    padding: 2px 9px;
-    border-radius: 4px;
-    letter-spacing: 0.08em;
-  }
-
-  .tape-title {
-    font-family: 'Kalam', cursive;
-    font-size: 21px;
-    font-weight: 700;
-    color: #8c2d19;
-    letter-spacing: 0.02em;
     text-align: center;
-    flex: 1;
-    padding: 0 8px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-
-  .cassette-brand {
-    font-family: 'Special Elite', monospace;
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 0.08em;
-    color: #5a4b3d;
-  }
-
-  /* Song Meta with Heart Like Button */
-  .song-meta-wrap {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 8px;
-  }
-  .song-text-block {
-    flex: 1;
-    min-width: 0;
-  }
-
-  .handwritten-song {
-    font-family: 'Caveat', cursive;
-    font-size: 22px;
-    font-weight: 700;
-    color: #1a1612;
-    line-height: 1.15;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-
-  .handwritten-artist {
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 11.5px;
-    font-weight: 500;
-    color: #5c4b3c;
-    margin-top: 2px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-
-  /* Tape Heart Like Button */
-  .tape-heart-btn {
-    background: rgba(43, 33, 24, 0.08);
-    border: 1px solid rgba(43, 33, 24, 0.2);
-    width: 36px;
-    height: 36px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 18px;
-    cursor: pointer;
-    transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    flex-shrink: 0;
-  }
-  .tape-heart-btn:hover {
-    transform: scale(1.15);
-    background: rgba(255, 77, 109, 0.18);
-    border-color: var(--crimson);
-  }
-  .tape-heart-btn.liked {
-    animation: heartPulse 0.4s ease forwards;
-    background: rgba(255, 77, 109, 0.2);
-    border-color: var(--crimson);
-  }
-  @keyframes heartPulse {
-    0% { transform: scale(0.9); }
-    50% { transform: scale(1.3); }
-    100% { transform: scale(1.1); }
-  }
-
-  /* Tape Window with Spools */
-  .tape-window {
-    width: 100%;
-    height: 74px;
-    background: #0f0c09;
-    border-radius: 10px;
-    border: 2px solid #3a2e22;
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0 44px;
-    box-shadow: inset 0 4px 10px rgba(0,0,0,0.9), 0 1px 2px rgba(255,255,255,0.2);
-    overflow: hidden;
-  }
-
-  .tape-bridge {
-    position: absolute;
-    left: 20%;
-    right: 20%;
-    top: 50%;
-    height: 18px;
-    transform: translateY(-50%);
-    background: rgba(30, 24, 18, 0.7);
-    border: 1px dashed rgba(244, 235, 217, 0.15);
-    border-radius: 3px;
+    margin: auto;
+    max-width: 900px;
+    transition: all 1.4s var(--ease-peaceful);
     pointer-events: none;
-    z-index: 1;
+    transform: translateY(0);
+    opacity: 1;
   }
 
-  /* Reels / Spools */
-  .tape-spool-wrap {
+  .hero-memory-center.receded {
+    transform: translateY(-16px) scale(0.92);
+    opacity: 0.78;
+  }
+
+  .hindi-signboard-title {
+    font-family: 'Rozha One', serif;
+    font-size: clamp(46px, 8.5vw, 108px);
+    line-height: 1.05;
+    letter-spacing: 0.04em;
+    color: #ffffff;
+    text-shadow: 0 6px 18px rgba(0, 0, 0, 0.85),
+                 0 0 35px rgba(243, 194, 103, 0.35),
+                 0 2px 4px rgba(0,0,0,0.9);
     position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 2;
+    display: inline-block;
+    animation: gentleGlint 6s ease-in-out infinite alternate;
   }
 
-  .tape-roll {
-    position: absolute;
-    border-radius: 50%;
-    background: radial-gradient(circle, #3d2b1f 35%, #241912 70%, #150f0a 100%);
-    box-shadow: 0 0 6px rgba(0,0,0,0.8);
-    transition: width 0.3s ease, height 0.3s ease;
+  @keyframes gentleGlint {
+    0% { text-shadow: 0 6px 18px rgba(0, 0, 0, 0.85), 0 0 30px rgba(243, 194, 103, 0.25); }
+    100% { text-shadow: 0 6px 18px rgba(0, 0, 0, 0.85), 0 0 55px rgba(255, 235, 178, 0.55); }
   }
 
-  .cog-wheel {
-    width: 44px;
-    height: 44px;
-    border-radius: 50%;
-    background: #e6ded1;
-    border: 2px solid #4a3e33;
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: inset 0 2px 4px rgba(0,0,0,0.3), 0 2px 4px rgba(0,0,0,0.5);
+  .hindi-signboard-sub {
+    font-family: 'Kalam', cursive;
+    font-size: clamp(15px, 2.2vw, 24px);
+    color: var(--paper-muted);
+    letter-spacing: 0.08em;
+    margin-top: 10px;
+    text-shadow: 0 4px 10px rgba(0,0,0,0.9);
+    opacity: 0.9;
   }
 
-  .is-playing .cog-wheel {
-    animation: spin 3.2s linear infinite;
-  }
-  .is-flipped .is-playing .cog-wheel {
-    animation: spin-reverse 3.2s linear infinite;
-  }
-
-  @keyframes spin { 100% { transform: rotate(360deg); } }
-  @keyframes spin-reverse { 100% { transform: rotate(-360deg); } }
-
-  .cog-spokes {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    border-radius: 50%;
-    background: repeating-conic-gradient(#e6ded1 0deg 30deg, #3d3126 30deg 60deg);
-    opacity: 0.85;
-    mask: radial-gradient(circle, transparent 40%, black 41%);
-    -webkit-mask: radial-gradient(circle, transparent 40%, black 41%);
-  }
-
-  .cog-center-hole {
-    width: 14px;
-    height: 14px;
-    background: #0f0c09;
-    border-radius: 50%;
-    border: 2px solid #5a4b3d;
-    z-index: 3;
-  }
-
-  .sticker-footer {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-size: 8.5px;
-    font-weight: 700;
-    color: #6a5847;
-    letter-spacing: 0.05em;
-    border-top: 1px solid #4a3828;
-    padding-top: 4px;
-  }
-
-  /* ===== WALKMAN / DECK CONTROLS ===== */
-  .deck-controls {
-    width: 100%;
-    background: linear-gradient(180deg, rgba(30, 23, 16, 0.85) 0%, rgba(18, 14, 10, 0.95) 100%);
-    border: 2px solid var(--tape-border);
-    border-radius: 20px;
-    padding: 16px 20px 18px;
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.75), inset 0 1px 1px rgba(255,255,255,0.08);
-    backdrop-filter: blur(12px);
-    display: flex;
-    flex-direction: column;
-    gap: 14px;
-  }
-
-  /* VU Meters & Tape Counter */
-  .deck-top-row {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 14px;
-  }
-
-  .vu-meter-box {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
-    background: #110d0a;
-    padding: 7px 12px;
-    border-radius: 10px;
-    border: 1px solid #3d3023;
-  }
-
-  .vu-channel {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    font-size: 9px;
-    font-weight: 700;
+  .scene-location-pill {
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
     color: var(--brass);
-  }
-  .vu-label { width: 26px; }
-
-  .vu-bar-track {
-    flex: 1;
-    height: 7px;
-    background: #201710;
-    border-radius: 4px;
-    overflow: hidden;
-    position: relative;
-  }
-
-  .vu-bar-fill {
-    height: 100%;
-    width: 20%;
-    background: linear-gradient(90deg, #2a9d8f 0%, #e9c46a 65%, #e76f51 88%, #e63946 100%);
-    border-radius: 4px;
-    transition: width 0.08s ease;
+    background: rgba(14, 10, 7, 0.65);
+    border: 1px solid var(--brass-glow);
+    backdrop-filter: blur(10px);
+    padding: 5px 14px;
+    border-radius: 20px;
+    margin-top: 14px;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.5);
   }
 
-  .counter-box {
+  /* ===== THE FLOATING WALKMAN PLAYER DOCK (Matching Reference Image) ===== */
+  .walkman-dock-wrapper {
+    width: 100%;
+    max-width: 820px;
+    margin: 0 auto;
     display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    z-index: 30;
+  }
+
+  /* Floating Mood Bar Above Dock (Rain Mood & WhatsApp Banner) */
+  .dock-overhead-bar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    flex-wrap: wrap;
+  }
+
+  .overhead-pill {
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    backdrop-filter: blur(16px);
+    padding: 6px 16px;
+    border-radius: 30px;
+    font-size: 11.5px;
+    font-weight: 600;
+    color: var(--paper);
+    cursor: pointer;
+    display: inline-flex;
     align-items: center;
     gap: 8px;
-    background: #110d0a;
-    padding: 7px 14px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.5);
+    transition: all 0.3s var(--ease-peaceful);
+  }
+  .overhead-pill:hover {
+    transform: translateY(-2px);
+    border-color: var(--brass);
+  }
+  .overhead-pill.active {
+    background: rgba(59, 130, 246, 0.25);
+    border-color: #60a5fa;
+    color: #93c5fd;
+    box-shadow: 0 0 16px rgba(96, 165, 250, 0.35);
+  }
+
+  .status-tag {
+    font-size: 9.5px;
+    font-weight: 700;
+    padding: 2px 7px;
     border-radius: 10px;
-    border: 1px solid #3d3023;
+    background: #33271d;
+    color: var(--paper-muted);
+  }
+  .overhead-pill.active .status-tag {
+    background: #2563eb;
+    color: #fff;
   }
 
-  .counter-display {
-    font-family: 'Special Elite', monospace;
-    font-size: 18px;
-    font-weight: 700;
-    letter-spacing: 0.18em;
-    color: var(--gold);
-    background: #000;
-    padding: 2px 8px;
-    border-radius: 4px;
-    border: 1px solid #2a2016;
+  /* Main Sleek Frosted Glass Walkman Player Dock */
+  .walkman-dock {
+    width: 100%;
+    background: linear-gradient(180deg, rgba(26, 19, 14, 0.88) 0%, rgba(13, 10, 8, 0.94) 100%);
+    border: 1px solid rgba(212, 163, 89, 0.32);
+    border-radius: 24px;
+    padding: 12px 18px;
+    backdrop-filter: blur(20px);
+    box-shadow: 0 24px 50px rgba(0, 0, 0, 0.85),
+                inset 0 1px 1px rgba(255, 255, 255, 0.12);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    transition: all 0.4s var(--ease-peaceful);
   }
 
-  .counter-reset {
-    font-size: 9px;
-    font-weight: 700;
-    padding: 4px 8px;
-    background: #34271c;
-    color: var(--paper);
-    border: 1px solid #55402f;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: all 0.15s;
-  }
-  .counter-reset:hover { background: #483626; }
-
-  /* Scrubber Progress */
-  .scrubber-section {
+  /* Left: Mini Spinning Cassette Reel Thumbnail */
+  .dock-left-art {
     display: flex;
     align-items: center;
     gap: 12px;
-    font-size: 11.5px;
-    color: var(--paper-dark);
+    flex-shrink: 0;
   }
 
-  .time-text { width: 36px; font-weight: 600; text-align: center; }
+  .mini-cassette-art {
+    width: 54px;
+    height: 54px;
+    background: #0f0c09;
+    border: 2px solid #4a3c2c;
+    border-radius: 12px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: inset 0 2px 6px rgba(0,0,0,0.8);
+    cursor: pointer;
+    overflow: hidden;
+  }
 
-  .scrubber-track {
+  .mini-reel {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: #ded5c5;
+    border: 2px solid #3d3126;
+    position: relative;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.6);
+  }
+  .is-playing .mini-reel {
+    animation: miniReelSpin 3.2s linear infinite;
+  }
+  @keyframes miniReelSpin { 100% { transform: rotate(360deg); } }
+
+  .mini-reel::after {
+    content: "";
+    position: absolute;
+    inset: 9px;
+    background: #0f0c09;
+    border-radius: 50%;
+  }
+
+  /* Middle: Track Info & Live Scrubber Bar */
+  .dock-track-info {
     flex: 1;
-    height: 8px;
-    background: #150f0a;
-    border-radius: 5px;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+
+  .track-text-row {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 8px;
+  }
+
+  .track-title {
+    font-family: 'Kalam', cursive;
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--paper);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .track-artist {
+    font-size: 11px;
+    color: var(--paper-muted);
+    opacity: 0.75;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  /* Scrubber Track */
+  .dock-scrubber-wrap {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 10.5px;
+    color: var(--paper-muted);
+  }
+
+  .dock-scrub-track {
+    flex: 1;
+    height: 5px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 3px;
     position: relative;
     cursor: pointer;
-    border: 1px solid #36291e;
   }
 
-  .scrubber-fill {
+  .dock-scrub-fill {
     height: 100%;
     width: 0%;
     background: linear-gradient(90deg, var(--brass) 0%, var(--gold) 100%);
-    border-radius: 5px;
-    position: relative;
+    border-radius: 3px;
     box-shadow: 0 0 10px var(--brass-glow);
+    position: relative;
   }
 
-  .scrubber-fill::after {
+  .dock-scrub-fill::after {
     content: "";
     position: absolute;
-    right: -5px;
+    right: -4px;
     top: 50%;
     transform: translateY(-50%);
-    width: 14px;
-    height: 14px;
+    width: 11px;
+    height: 11px;
     border-radius: 50%;
     background: #fff;
     border: 2px solid var(--brass);
-    box-shadow: 0 0 8px rgba(0,0,0,0.8);
-  }
-
-  /* Mechanical Push Buttons */
-  .buttons-dock {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 8px;
-    flex-wrap: wrap;
-  }
-
-  .mech-btn {
-    flex: 1;
-    min-width: 48px;
-    height: 48px;
-    background: linear-gradient(180deg, #3e3023 0%, #201811 100%);
-    border: 1px solid #5a4634;
-    border-radius: 10px;
-    color: var(--paper);
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 11px;
-    font-weight: 700;
-    cursor: pointer;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 2px;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.6), inset 0 1px 1px rgba(255,255,255,0.12);
-    transition: all 0.12s ease;
-    user-select: none;
-    position: relative;
-  }
-
-  .mech-btn:hover {
-    background: linear-gradient(180deg, #4f3d2d 0%, #2a2016 100%);
-    border-color: var(--brass);
-    transform: translateY(-1px);
-  }
-
-  .mech-btn:active {
-    transform: translateY(2px);
-    box-shadow: 0 1px 2px rgba(0,0,0,0.8), inset 0 2px 4px rgba(0,0,0,0.6);
-  }
-
-  .mech-btn.play-master {
-    flex: 1.4;
-    background: linear-gradient(180deg, #d4a359 0%, #8c6328 100%);
-    color: #120d08;
-    border-color: #f3c267;
-    box-shadow: 0 4px 12px rgba(212, 163, 89, 0.4), inset 0 1px 2px rgba(255,255,255,0.4);
-  }
-  .mech-btn.play-master:hover {
-    background: linear-gradient(180deg, #f3c267 0%, #9e7130 100%);
-  }
-
-  .mech-btn.active {
-    background: linear-gradient(180deg, #2a9d8f 0%, #15574f 100%);
-    color: #ffffff;
-    border-color: #4ade80;
-    box-shadow: 0 0 10px rgba(74, 222, 128, 0.4);
-  }
-
-  .btn-label {
-    font-size: 9px;
-    letter-spacing: 0.05em;
-    opacity: 0.85;
-  }
-
-  /* Extra Controls Row: Tape Hiss, Lo-Fi, Sleep Timer, Volume */
-  .extras-row {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 12px;
-    flex-wrap: wrap;
-    border-top: 1px dashed rgba(244, 235, 217, 0.12);
-    padding-top: 12px;
-  }
-
-  .toggle-wrap {
-    display: flex;
-    gap: 8px;
-    flex-wrap: wrap;
-  }
-
-  .toggle-btn {
-    font-size: 11px;
-    font-weight: 600;
-    padding: 6px 12px;
-    background: #18120d;
-    border: 1px solid #3e3023;
-    border-radius: 8px;
-    color: var(--paper-dark);
-    cursor: pointer;
-    transition: all 0.15s;
-    display: inline-flex;
-    align-items: center;
-    gap: 5px;
-  }
-  .toggle-btn:hover { background: #261c14; border-color: var(--brass); }
-  .toggle-btn.active {
-    background: rgba(212, 163, 89, 0.25);
-    border-color: var(--gold);
-    color: var(--gold);
-  }
-
-  .vol-wrap {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    font-size: 13px;
-  }
-
-  .slider-custom {
-    -webkit-appearance: none;
-    appearance: none;
-    width: 95px;
-    height: 6px;
-    background: #150f0a;
-    border-radius: 3px;
-    border: 1px solid #36291e;
-    outline: none;
-  }
-  .slider-custom::-webkit-slider-thumb {
-    -webkit-appearance: none;
-    appearance: none;
-    width: 14px;
-    height: 14px;
-    border-radius: 50%;
-    background: var(--brass);
-    border: 1px solid #fff;
-    cursor: pointer;
     box-shadow: 0 0 6px rgba(0,0,0,0.8);
   }
 
-  /* ===== TAPE SHELF & DISCOVERY MODAL (Spotify-style Tabs) ===== */
-  .tape-shelf-drawer {
+  /* Right: Tactile Audio Controls */
+  .dock-controls-right {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-shrink: 0;
+  }
+
+  .dock-btn {
+    background: none;
+    border: none;
+    color: var(--paper);
+    font-size: 15px;
+    cursor: pointer;
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s var(--ease-peaceful);
+    opacity: 0.8;
+  }
+  .dock-btn:hover {
+    opacity: 1;
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--gold);
+    transform: scale(1.1);
+  }
+  .dock-btn.heart-btn.liked {
+    color: var(--crimson);
+    opacity: 1;
+  }
+
+  .dock-play-master {
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #f3c267 0%, #d4a359 60%, #9e7130 100%);
+    border: 2px solid #fff2d1;
+    color: #1a1208;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 6px 18px rgba(212, 163, 89, 0.45);
+    transition: all 0.25s var(--ease-peaceful);
+  }
+  .dock-play-master:hover {
+    transform: scale(1.08);
+    box-shadow: 0 8px 24px rgba(212, 163, 89, 0.65);
+  }
+  .dock-play-master:active {
+    transform: scale(0.96);
+  }
+
+  /* Bottom Signature (Like in an old photo corner) */
+  .signature-bar {
+    width: 100%;
+    max-width: 1200px;
+    margin: 6px auto 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 11px;
+    color: var(--paper-muted);
+    opacity: 0.75;
+    padding: 0 4px;
+  }
+  .signature-bar a {
+    color: var(--gold);
+    text-decoration: none;
+    transition: all 0.2s;
+  }
+  .signature-bar a:hover {
+    text-decoration: underline;
+    color: #fff;
+  }
+
+  /* ===== SCENIC THEME SELECTOR MODAL ===== */
+  .theme-modal, .shelf-modal, .lyrics-modal {
     position: fixed;
     inset: 0;
-    background: rgba(8, 6, 4, 0.85);
-    backdrop-filter: blur(14px);
+    background: rgba(8, 6, 4, 0.88);
+    backdrop-filter: blur(16px);
     display: none;
-    z-index: 100;
+    z-index: 200;
     align-items: center;
     justify-content: center;
     padding: 16px;
   }
-  .tape-shelf-drawer.open {
+  .theme-modal.open, .shelf-modal.open, .lyrics-modal.open {
     display: flex;
   }
 
-  .shelf-content {
-    background: #1a1511;
-    border: 2px solid #5a4b3a;
+  .modal-card {
+    background: #191410;
+    border: 2px solid #4d3d2e;
     border-radius: 20px;
-    max-width: 560px;
+    max-width: 580px;
     width: 100%;
-    max-height: 88vh;
+    max-height: 86vh;
     overflow-y: auto;
-    padding: 20px;
+    padding: 22px;
     box-shadow: 0 25px 60px rgba(0, 0, 0, 0.95);
     display: flex;
     flex-direction: column;
     gap: 14px;
   }
 
-  .shelf-header {
+  .modal-head {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    border-bottom: 1px dashed #4e3d2f;
+    padding-bottom: 10px;
   }
-  .shelf-header h3 {
-    font-size: 16px;
+  .modal-head h3 {
+    font-size: 17px;
     font-weight: 700;
     color: var(--gold);
     display: flex;
     align-items: center;
     gap: 8px;
   }
-  .close-shelf-btn {
+
+  .close-modal-btn {
     background: none;
     border: none;
     color: var(--paper);
-    font-size: 22px;
+    font-size: 20px;
     cursor: pointer;
     opacity: 0.7;
-    transition: opacity 0.15s;
+    transition: opacity 0.2s;
   }
-  .close-shelf-btn:hover { opacity: 1; color: var(--gold); }
+  .close-modal-btn:hover { opacity: 1; color: var(--gold); }
 
-  /* Shelf Navigation Tabs */
-  .shelf-tabs {
+  /* Scene Theme Cards Grid */
+  .theme-cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    gap: 12px;
+    margin-top: 4px;
+  }
+
+  .scene-card {
+    background: linear-gradient(145deg, #282018 0%, #15100c 100%);
+    border: 1px solid #463626;
+    border-radius: 14px;
+    padding: 14px;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    transition: all 0.25s var(--ease-peaceful);
+  }
+  .scene-card:hover, .scene-card.selected {
+    border-color: var(--gold);
+    background: #33271c;
+    transform: translateY(-2px);
+    box-shadow: 0 10px 24px rgba(0,0,0,0.6);
+  }
+
+  .scene-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .scene-card-title {
+    font-family: 'Kalam', cursive;
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--paper);
+  }
+  .scene-card-desc {
+    font-size: 11.5px;
+    color: var(--paper-muted);
+    opacity: 0.8;
+    line-height: 1.45;
+  }
+  .scene-card-tag {
+    font-size: 10px;
+    padding: 3px 8px;
+    border-radius: 10px;
+    background: var(--brass);
+    color: #120e09;
+    font-weight: 700;
+  }
+
+  /* Search & Queue Drawer Tabs */
+  .drawer-tabs {
     display: flex;
     gap: 6px;
     border-bottom: 1px dashed #4e3d2f;
     padding-bottom: 10px;
     overflow-x: auto;
   }
-  .shelf-tab-btn {
-    background: #251c15;
+  .drawer-tab-btn {
+    background: #241c15;
     border: 1px solid #4a3828;
     color: var(--paper);
     padding: 6px 12px;
@@ -838,94 +696,36 @@
     font-weight: 600;
     cursor: pointer;
     white-space: nowrap;
-    transition: all 0.15s;
+    transition: all 0.2s;
   }
-  .shelf-tab-btn:hover { background: #35281e; border-color: var(--brass); }
-  .shelf-tab-btn.active {
+  .drawer-tab-btn.active {
     background: var(--brass);
     color: #120e09;
     border-color: var(--gold);
   }
 
-  /* Search Input */
-  .search-wrap {
-    position: relative;
+  .retro-input {
     width: 100%;
-  }
-  .retro-search-input {
-    width: 100%;
-    background: #0f0c09;
+    background: #0e0a07;
     border: 2px solid #4a3a2a;
     border-radius: 12px;
-    padding: 10px 38px 10px 14px;
+    padding: 10px 14px;
     color: var(--paper);
     font-family: 'IBM Plex Mono', monospace;
     font-size: 13px;
     outline: none;
     transition: border-color 0.2s;
   }
-  .retro-search-input:focus {
+  .retro-input:focus {
     border-color: var(--gold);
-    box-shadow: 0 0 10px var(--brass-glow);
-  }
-  .clear-search-btn {
-    position: absolute;
-    right: 12px;
-    top: 50%;
-    transform: translateY(-50%);
-    background: none;
-    border: none;
-    color: var(--paper-dark);
-    cursor: pointer;
-    font-size: 14px;
-    display: none;
   }
 
-  /* List Items inside Modals */
-  .cassette-box-item {
-    background: linear-gradient(145deg, #2a221a 0%, #17120e 100%);
-    border: 1px solid #4d3c2c;
-    border-radius: 12px;
-    padding: 12px 14px;
-    cursor: pointer;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    transition: all 0.2s ease;
-  }
-  .cassette-box-item:hover, .cassette-box-item.selected {
-    border-color: var(--brass);
-    background: #33271d;
-    transform: translateX(4px);
-  }
-  .box-meta .box-title {
-    font-family: 'Kalam', cursive;
-    font-size: 16px;
-    font-weight: 700;
-    color: var(--paper);
-  }
-  .box-meta .box-desc {
-    font-size: 11px;
-    opacity: 0.65;
-    margin-top: 2px;
-  }
-  .box-tag {
-    font-size: 10px;
-    padding: 3px 8px;
-    border-radius: 10px;
-    background: var(--brass);
-    color: #120e09;
-    font-weight: 700;
-    flex-shrink: 0;
-  }
-
-  /* Track Row */
-  .track-list-drawer {
+  .track-drawer-list {
     display: flex;
     flex-direction: column;
     gap: 6px;
   }
-  .track-row {
+  .track-item {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -935,50 +735,16 @@
     background: rgba(255, 255, 255, 0.03);
     cursor: pointer;
     transition: background 0.15s;
-    gap: 10px;
+    gap: 8px;
   }
-  .track-row:hover, .track-row.active-track {
+  .track-item:hover, .track-item.active-item {
     background: rgba(212, 163, 89, 0.22);
     color: var(--gold);
   }
-  .track-row .num { opacity: 0.5; width: 20px; flex-shrink: 0; }
-  .track-row .title { flex: 1; font-weight: 500; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-  .track-row .dur { opacity: 0.6; font-size: 11px; flex-shrink: 0; }
-  .track-row-actions {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    flex-shrink: 0;
-  }
-  .row-action-btn {
-    background: none;
-    border: none;
-    color: var(--paper);
-    font-size: 13px;
-    cursor: pointer;
-    opacity: 0.6;
-    padding: 3px 5px;
-    border-radius: 4px;
-    transition: all 0.15s;
-  }
-  .row-action-btn:hover { opacity: 1; background: rgba(255,255,255,0.1); color: var(--gold); }
-  .row-action-btn.liked { color: var(--crimson); opacity: 1; }
+  .track-item .t-title { flex: 1; font-weight: 500; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 
-  /* ===== LYRICS MODAL ===== */
-  .lyrics-modal {
-    position: fixed;
-    inset: 0;
-    background: rgba(10, 7, 5, 0.88);
-    backdrop-filter: blur(14px);
-    display: none;
-    z-index: 110;
-    align-items: center;
-    justify-content: center;
-    padding: 16px;
-  }
-  .lyrics-modal.open { display: flex; }
-
-  .lyrics-content {
+  /* Vintage Lyrics Sheet */
+  .parchment-lyrics {
     background: #f4ebd9;
     color: #241c14;
     border: 3px solid #6b553e;
@@ -992,7 +758,7 @@
     position: relative;
     font-family: 'Special Elite', monospace;
   }
-  .lyrics-content::before {
+  .parchment-lyrics::before {
     content: "";
     position: absolute;
     top: 0; left: 0; right: 0; height: 6px;
@@ -1000,47 +766,29 @@
     border-top-left-radius: 12px;
     border-top-right-radius: 12px;
   }
-  .lyrics-header {
-    border-bottom: 2px solid #5a4b3d;
-    padding-bottom: 12px;
-    margin-bottom: 16px;
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-  }
-  .lyrics-header h3 {
-    font-size: 20px;
-    font-weight: 700;
-    color: #8c2d19;
-  }
-  .lyrics-header p {
-    font-size: 12px;
-    color: #554433;
-    margin-top: 3px;
-  }
   .lyrics-body {
-    font-size: 14px;
-    line-height: 1.8;
+    font-size: 14.5px;
+    line-height: 1.85;
     white-space: pre-line;
     color: #2b2219;
   }
 
-  /* ===== FLOATING RETRO TOAST ===== */
+  /* Floating Toast */
   .retro-toast {
     position: fixed;
-    bottom: 24px;
+    bottom: 96px;
     left: 50%;
-    transform: translateX(-50%) translateY(100px);
-    background: #1a140f;
+    transform: translateX(-50%) translateY(80px);
+    background: rgba(26, 20, 15, 0.95);
     border: 1px solid var(--gold);
     color: var(--paper);
-    padding: 10px 20px;
+    padding: 9px 20px;
     border-radius: 25px;
-    font-size: 12.5px;
+    font-size: 12px;
     font-weight: 600;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.8), 0 0 15px var(--brass-glow);
-    z-index: 200;
-    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.3s;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.8), 0 0 16px var(--brass-glow);
+    z-index: 300;
+    transition: transform 0.3s var(--ease-peaceful), opacity 0.3s;
     opacity: 0;
     pointer-events: none;
     display: flex;
@@ -1052,444 +800,337 @@
     opacity: 1;
   }
 
-  /* Footer Links */
-  .stage-footer {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 12px;
-    width: 100%;
-    max-width: 960px;
-    margin: 10px auto 0 auto;
-    font-size: 11px;
-    opacity: 0.75;
-  }
-  .footer-links {
-    display: flex;
-    gap: 14px;
-  }
-  .footer-links a {
-    color: var(--paper);
-    text-decoration: none;
-    transition: color 0.15s;
-  }
-  .footer-links a:hover { color: var(--brass); }
-
-  /* Mobile Tweaks */
-  @media (max-width: 600px) {
-    .stage { padding: 12px 14px 16px; }
-    .topbar { flex-direction: column; gap: 8px; }
-    .cassette-perspective { height: 270px; }
-    .tape-title { font-size: 17px; }
-    .handwritten-song { font-size: 18px; }
-    .handwritten-artist { font-size: 11px; }
-    .tape-window { height: 56px; padding: 0 28px; }
-    .cog-wheel { width: 36px; height: 36px; }
-    .mech-btn { height: 44px; font-size: 10px; }
-    .deck-controls { padding: 14px; border-radius: 16px; }
-    .stage-footer { justify-content: center; text-align: center; }
+  /* Responsive Mobile Tweaks */
+  @media (max-width: 650px) {
+    .viewport-content { padding: 16px 16px 18px; }
+    .top-shelf { flex-direction: column; gap: 8px; }
+    .hindi-signboard-title { font-size: 52px; }
+    .walkman-dock { padding: 10px 14px; gap: 10px; }
+    .mini-cassette-art { width: 44px; height: 44px; }
+    .mini-reel { width: 26px; height: 26px; }
+    .dock-btn { width: 30px; height: 30px; font-size: 13px; }
+    .dock-play-master { width: 40px; height: 40px; font-size: 14px; }
+    .track-title { font-size: 15px; }
   }
 </style>
 </head>
 <body>
 
-<div class="stage">
+<!-- Opening Warming Up Sepia Overlay -->
+<div class="warmup-overlay" id="warmupOverlay"></div>
 
-  <!-- Background Image -->
-  <a class="hero-link" href="assets/hero-bg.png" target="_blank" rel="noopener" aria-label="Open background image">
-    <img class="hero-img" src="assets/hero-bg.png" alt="Yaado Ki Cassette sunset background" loading="eager">
-  </a>
-  <div class="hero-overlay"></div>
+<!-- SCENIC LIVING BACKDROP (Four Memories) -->
+<div class="scenic-stage" id="scenicStage">
+  <!-- Scene 1: 80s Bazaar & Saloon (User's Exact Uploaded Reference) -->
+  <div class="scene-backdrop active" id="sceneBazaar" style="background-image: url('assets/deluxe-saloon.jpg');"></div>
+  
+  <!-- Scene 2: Monsoon Chai Tapri -->
+  <div class="scene-backdrop" id="sceneMonsoon" style="background-image: url('assets/monsoon-tapri.svg');"></div>
+  
+  <!-- Scene 3: Raat Ka Safar (Night Train) -->
+  <div class="scene-backdrop" id="sceneTrain" style="background-image: url('assets/night-train.svg');"></div>
+  
+  <!-- Scene 4: Marine Drive Bombay Sunset -->
+  <div class="scene-backdrop" id="sceneSunset" style="background-image: url('assets/marine-drive.svg');"></div>
 
-  <!-- Top Bar -->
-  <header class="topbar">
-    <div class="clock-badge" id="liveClock">
-      <span>📻</span>
-      <span id="clockTime">--:-- --</span>
+  <!-- Cinematic Lighting Vignette -->
+  <div class="cinematic-vignette"></div>
+
+  <!-- Live Rain Canvas Engine -->
+  <canvas id="rainCanvas"></canvas>
+</div>
+
+<!-- FOREGROUND INTERACTIVE VIEWPORT -->
+<div class="viewport-content">
+
+  <!-- Top Navigation & Brand Header -->
+  <header class="top-shelf">
+    <div class="brand-signature">
+      <div class="retro-badge" id="listenerBadge">
+        <span class="badge-dot"></span>
+        <span id="listenerCount">348</span> <span>सुन्ने वाले साथ हैं</span>
+      </div>
     </div>
 
-    <div class="live-pill">
-      <span class="live-dot"></span>
-      <span id="listenerCount">348</span><span>सुन्ने वाले साथ हैं</span>
-    </div>
-
-    <div class="top-actions">
-      <button class="pill-btn" id="openSearchBtn" title="Search songs across all mixtapes (Press /)">
+    <div class="top-pills">
+      <button class="nav-pill" id="openThemeBtn" title="Switch between 4 Living Memories">
+        <span>🎭 Scene: <strong id="currentSceneName" style="color:var(--gold);">80s Bazaar</strong></span>
+      </button>
+      <button class="nav-pill" id="openSearchBtn" title="Search Songs across all tapes (Press /)">
         <span>🔍 Search</span>
       </button>
-      <button class="pill-btn heart-pill" id="openLikedBtn" title="View Liked Songs">
-        <span>❤️</span><span id="likedCountBadge">0</span>
+      <button class="nav-pill" id="openFavoritesBtn" title="View Liked Songs">
+        <span>❤️</span> <span id="favPillCount">0</span>
       </button>
-      <button class="pill-btn" id="openQueueBtn" title="View playback queue">
-        <span>📑 Queue</span>
-      </button>
-      <button class="pill-btn" id="openDrawerBtn" title="Open Cassette Shelf">
+      <button class="nav-pill" id="openDrawerBtn" title="View All Mixtapes & Tracks">
         <span>📼 Shelf</span>
       </button>
-      <a class="pill-btn wa" href="https://chat.whatsapp.com/EMituq2F5HLGZnK8CxME5d" target="_blank" rel="noopener">
-        <span>💬 WA</span>
+      <a class="nav-pill wa" href="https://chat.whatsapp.com/EMituq2F5HLGZnK8CxME5d" target="_blank" rel="noopener">
+        <span>💬 WhatsApp</span>
       </a>
     </div>
   </header>
 
-  <!-- Main Player Stage -->
-  <main class="player-stage">
+  <!-- Monumental Hand-Painted Hindi Title -->
+  <div class="hero-memory-center" id="heroTitleCenter">
+    <h1 class="hindi-signboard-title" id="mainHindiTitle">यादों की कैसेट</h1>
+    <p class="hindi-signboard-sub" id="mainHindiSub">पुराने नगमे • भूली बिसरी यादें</p>
+    <div class="scene-location-pill" id="sceneLocationPill">
+      <span>💈 डी ल क्स सैलून • 1980s Small Town Radio</span>
+    </div>
+  </div>
 
-    <!-- 3D Flippable Cassette Tape -->
-    <div class="cassette-perspective" id="cassetteDeck" title="Click anywhere on cassette to Flip (Side A ⇄ Side B)">
-      <div class="cassette-flipper" id="cassetteBody">
+  <!-- Floating Walkman-Style Player Dock (Matching Screenshot) -->
+  <div class="walkman-dock-wrapper">
 
-        <!-- SIDE A FACE -->
-        <div class="cassette-face front-side">
-          <div class="screw tl"></div>
-          <div class="screw tr"></div>
-          <div class="screw bl"></div>
-          <div class="screw br"></div>
+    <!-- Overhead Mood Bar (Rain Mood Toggle + WhatsApp Channel) -->
+    <div class="dock-overhead-bar">
+      <button class="overhead-pill" id="rainMoodBtn" title="Toggle peaceful ambient rain sound and falling droplets">
+        <span>🌧️ Rain Mood</span>
+        <span class="status-tag" id="rainStatusTag">OFF</span>
+      </button>
 
-          <div class="tape-sticker">
-            <div class="sticker-header">
-              <span class="side-tag" id="labelSideTag">SIDE A</span>
-              <span class="tape-title" id="labelTapeTitle">यादों की कैसेट</span>
-              <span class="cassette-brand">STEREO 90</span>
-            </div>
+      <button class="overhead-pill" id="openLyricsBtn" title="Read lyrics on vintage parchment (Press L)">
+        <span>📜 Lyrics</span>
+      </button>
 
-            <div class="song-meta-wrap">
-              <div class="song-text-block">
-                <div class="handwritten-song" id="labelSongTitle">Pal Pal Dil Ke Paas</div>
-                <div class="handwritten-artist" id="labelArtist">Kishore Kumar • Blackmail</div>
-              </div>
-              <button class="tape-heart-btn" id="heartBtnA" title="Like / Save to Favorites (Press L)">🤍</button>
-            </div>
+      <button class="overhead-pill" id="lofiMoodBtn" title="Toggle dreamy slowed+reverb cassette pitch">
+        <span>✨ Slowed Lo-Fi</span>
+        <span class="status-tag" id="lofiStatusTag">OFF</span>
+      </button>
 
-            <!-- Tape Window with Reels -->
-            <div class="tape-window">
-              <div class="tape-bridge"></div>
+      <button class="overhead-pill" id="tapeHissBtn" title="Warm analog tape hiss">
+        <span>📻 Tape Hiss</span>
+        <span class="status-tag" id="hissStatusTag">OFF</span>
+      </button>
+    </div>
 
-              <!-- Left Spool -->
-              <div class="tape-spool-wrap">
-                <div class="tape-roll" id="leftTapeRoll" style="width: 60px; height: 60px;"></div>
-                <div class="cog-wheel">
-                  <div class="cog-spokes"></div>
-                  <div class="cog-center-hole"></div>
-                </div>
-              </div>
+    <!-- The Sleek Frosted Walkman Dock -->
+    <div class="walkman-dock" id="walkmanDock">
 
-              <!-- Right Spool -->
-              <div class="tape-spool-wrap">
-                <div class="tape-roll" id="rightTapeRoll" style="width: 24px; height: 24px;"></div>
-                <div class="cog-wheel">
-                  <div class="cog-spokes"></div>
-                  <div class="cog-center-hole"></div>
-                </div>
-              </div>
-            </div>
+      <!-- Left: Mini Rotating Cassette Reel Art -->
+      <div class="dock-left-art" id="cassetteThumbnail" title="Click to view tape shelf">
+        <div class="mini-cassette-art">
+          <div class="mini-reel"></div>
+        </div>
+      </div>
 
-            <div class="sticker-footer">
-              <span>TYPE I (NORMAL) BIAS</span>
-              <span>TAP CASSETTE TO FLIP ⇄</span>
-              <span>HIGH RESOLUTION AUDIO</span>
-            </div>
+      <!-- Middle: Song Meta & Live Scrubber -->
+      <div class="dock-track-info">
+        <div class="track-text-row">
+          <div class="track-title" id="dockSongTitle">Pal Pal Dil Ke Paas</div>
+          <div class="track-artist" id="dockArtistName">Kishore Kumar • Blackmail (1973)</div>
+        </div>
+
+        <div class="dock-scrubber-wrap">
+          <span id="dockCurTime">0:00</span>
+          <div class="dock-scrub-track" id="dockScrubTrack">
+            <div class="dock-scrub-fill" id="dockScrubFill"></div>
           </div>
-        </div>
-
-        <!-- SIDE B FACE -->
-        <div class="cassette-face back-side">
-          <div class="screw tl"></div>
-          <div class="screw tr"></div>
-          <div class="screw bl"></div>
-          <div class="screw br"></div>
-
-          <div class="tape-sticker" style="background: linear-gradient(180deg, #ede2ce 0%, #dacaba 100%);">
-            <div class="sticker-header">
-              <span class="side-tag" id="labelSideTagB" style="color: #2b5876; border-color: #2b5876;">SIDE B</span>
-              <span class="tape-title" id="labelTapeTitleB">यादों की कैसेट</span>
-              <span class="cassette-brand">RETRO TDK</span>
-            </div>
-
-            <div class="song-meta-wrap">
-              <div class="song-text-block">
-                <div class="handwritten-song" id="labelSongTitleB">Humein Tumse Pyar Kitna</div>
-                <div class="handwritten-artist" id="labelArtistB">Kishore Kumar • Kudrat</div>
-              </div>
-              <button class="tape-heart-btn" id="heartBtnB" title="Like / Save to Favorites (Press L)">🤍</button>
-            </div>
-
-            <!-- Tape Window with Reels -->
-            <div class="tape-window">
-              <div class="tape-bridge"></div>
-
-              <div class="tape-spool-wrap">
-                <div class="tape-roll" id="leftTapeRollB" style="width: 60px; height: 60px;"></div>
-                <div class="cog-wheel">
-                  <div class="cog-spokes"></div>
-                  <div class="cog-center-hole"></div>
-                </div>
-              </div>
-
-              <div class="tape-spool-wrap">
-                <div class="tape-roll" id="rightTapeRollB" style="width: 24px; height: 24px;"></div>
-                <div class="cog-wheel">
-                  <div class="cog-spokes"></div>
-                  <div class="cog-center-hole"></div>
-                </div>
-              </div>
-            </div>
-
-            <div class="sticker-footer">
-              <span>120µs EQUALIZATION</span>
-              <span>TAP CASSETTE TO FLIP ⇄</span>
-              <span>YAADO KI CASSETTE</span>
-            </div>
-          </div>
-        </div>
-
-      </div>
-    </div>
-
-    <!-- Boombox / Walkman Deck Controls -->
-    <div class="deck-controls">
-      
-      <!-- Top Row: VU Meters & Tape Counter -->
-      <div class="deck-top-row">
-        <!-- Dual Glowing VU Meters -->
-        <div class="vu-meter-box">
-          <div class="vu-channel">
-            <span class="vu-label">VU L</span>
-            <div class="vu-bar-track">
-              <div class="vu-bar-fill" id="vuLeft"></div>
-            </div>
-          </div>
-          <div class="vu-channel">
-            <span class="vu-label">VU R</span>
-            <div class="vu-bar-track">
-              <div class="vu-bar-fill" id="vuRight"></div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Mechanical Tape Counter -->
-        <div class="counter-box">
-          <div class="counter-display" id="tapeCounter">000</div>
-          <button class="counter-reset" id="resetCounterBtn" title="Reset Counter">RESET</button>
+          <span id="dockTotalTime">5:30</span>
         </div>
       </div>
 
-      <!-- Scrubber Progress Bar -->
-      <div class="scrubber-section">
-        <span class="time-text" id="currentTimeLabel">0:00</span>
-        <div class="scrubber-track" id="scrubTrack">
-          <div class="scrubber-fill" id="scrubFill"></div>
-        </div>
-        <span class="time-text" id="totalDurationLabel">0:00</span>
-      </div>
+      <!-- Right: Tactile Audio Controls -->
+      <div class="dock-controls-right">
+        <!-- Like Song Heart -->
+        <button class="dock-btn heart-btn" id="dockLikeBtn" title="Save to Liked Songs (Press L)">🤍</button>
 
-      <!-- Heavy Mechanical Push Buttons with Spotify-Style Shuffle & Repeat -->
-      <div class="buttons-dock">
-        <button class="mech-btn" id="shuffleBtn" title="Toggle Shuffle Mode (Press S)">
-          <span>🔀</span>
-          <span class="btn-label" id="shuffleLabel">SHFL</span>
+        <!-- Previous Track -->
+        <button class="dock-btn" id="dockPrevBtn" title="Previous Song (Press P)">⏮</button>
+
+        <!-- Master Circular Play/Pause -->
+        <button class="dock-play-master" id="dockPlayBtn" title="Play / Pause (Press Space)">
+          <span id="dockPlayIcon">▶</span>
         </button>
 
-        <button class="mech-btn" id="rewindBtn" title="Rewind 10 seconds (Press ←)">
-          <span>◄◄</span>
-          <span class="btn-label">REW</span>
-        </button>
+        <!-- Next Track -->
+        <button class="dock-btn" id="dockNextBtn" title="Next Song (Press N)">⏭</button>
 
-        <button class="mech-btn" id="prevTrackBtn" title="Previous Song (Press P)">
-          <span>|◄</span>
-          <span class="btn-label">PREV</span>
-        </button>
+        <!-- Shuffle Toggle -->
+        <button class="dock-btn" id="dockShuffleBtn" title="Toggle Shuffle Mode (Press S)">🔀</button>
 
-        <button class="mech-btn play-master" id="playPauseBtn" title="Play / Pause (Press Space)">
-          <span id="playIconSymbol" style="font-size: 16px;">▶</span>
-          <span class="btn-label" id="playBtnLabel">PLAY</span>
-        </button>
-
-        <button class="mech-btn" id="nextTrackBtn" title="Next Song (Press N)">
-          <span>►|</span>
-          <span class="btn-label">NEXT</span>
-        </button>
-
-        <button class="mech-btn" id="fastFwdBtn" title="Fast Forward 10 seconds (Press →)">
-          <span>►►</span>
-          <span class="btn-label">FFWD</span>
-        </button>
-
-        <button class="mech-btn" id="repeatBtn" title="Toggle Repeat Mode: All / One / Off (Press R)">
-          <span id="repeatIcon">🔁</span>
-          <span class="btn-label" id="repeatLabel">ALL</span>
-        </button>
-
-        <button class="mech-btn" id="flipBtn" title="Flip Side A / Side B (Press F)">
-          <span>↻</span>
-          <span class="btn-label">FLIP</span>
-        </button>
-
-        <button class="mech-btn" id="ejectBtn" title="Eject / Open Mixtape Shelf">
-          <span>⏏</span>
-          <span class="btn-label">EJECT</span>
-        </button>
-      </div>
-
-      <!-- Extra Controls Row: Tape Hiss, Lo-Fi Mood, Lyrics, Volume -->
-      <div class="extras-row">
-        <div class="toggle-wrap">
-          <button class="toggle-btn" id="tapeHissBtn" title="Toggle warm analog tape hiss">
-            <span>📻 Hiss</span>
-          </button>
-          
-          <button class="toggle-btn" id="lofiMoodBtn" title="Toggle dreamy Slowed + Reverb mode">
-            <span>✨ Slowed Lo-Fi</span>
-          </button>
-
-          <button class="toggle-btn" id="openLyricsBtnDeck" title="Read lyrics (Press L)">
-            <span>📜 Lyrics</span>
-          </button>
-
-          <button class="toggle-btn" id="sleepTimerBtn" title="Set sleep timer">
-            <span id="sleepTimerLabel">⏱️ Timer</span>
-          </button>
-        </div>
-
-        <!-- Volume Slider -->
-        <div class="vol-wrap">
-          <span>🔊</span>
-          <input type="range" class="slider-custom" id="volumeSlider" min="0" max="1" step="0.05" value="0.85">
-        </div>
+        <!-- Repeat Toggle -->
+        <button class="dock-btn" id="dockRepeatBtn" title="Repeat: All / One / Off (Press R)">🔁</button>
       </div>
 
     </div>
 
-  </main>
-
-  <!-- Footer -->
-  <footer class="stage-footer">
-    <div>यादों की कैसेट • Timeless Bollywood, Ghazals & Memories 24/7</div>
-    <div class="footer-links">
-      <a href="https://open.spotify.com/search/yaado%20ki%20cassette" target="_blank" rel="noopener">Spotify</a>
-      <span>•</span>
-      <a href="https://music.youtube.com/search?q=yaado%20ki%20cassette" target="_blank" rel="noopener">YT Music</a>
-      <span>•</span>
-      <a href="https://github.com/NIKHILSINGH187/Yaado-ki-Cassette" target="_blank" rel="noopener">GitHub</a>
-    </div>
-  </footer>
-
-</div>
-
-<!-- Tape Shelf & Music Discovery Drawer (Spotify-style Tabs) -->
-<div class="tape-shelf-drawer" id="tapeShelfModal">
-  <div class="shelf-content">
-    
-    <div class="shelf-header">
-      <h3 id="shelfTitle">📼 Your Cassette Deck</h3>
-      <button class="close-shelf-btn" id="closeShelfBtn">✕</button>
-    </div>
-
-    <!-- Tabs Navigation -->
-    <div class="shelf-tabs">
-      <button class="shelf-tab-btn active" data-tab="mixtapes">📼 Mixtapes</button>
-      <button class="shelf-tab-btn" data-tab="search">🔍 Search Songs</button>
-      <button class="shelf-tab-btn" data-tab="queue">📑 Up Next Queue (<span id="queueTabCount">0</span>)</button>
-      <button class="shelf-tab-btn" data-tab="favorites">❤️ Liked Songs (<span id="favTabCount">0</span>)</button>
-    </div>
-
-    <!-- TAB 1: MIXTAPES -->
-    <div id="tabMixtapesPanel" class="tab-panel">
-      <p style="font-size: 11.5px; opacity: 0.75; margin-bottom: 8px;">Select a cassette to insert into the deck:</p>
-      <div id="mixtapesList" style="display: flex; flex-direction: column; gap: 10px;"></div>
-
-      <div style="margin-top: 14px; border-top: 1px dashed #5a4b3a; padding-top: 10px;">
-        <div style="font-size: 12.5px; font-weight: 700; color: var(--gold); margin-bottom: 8px;">
-          📜 Tracks on Active Cassette:
-        </div>
-        <div class="track-list-drawer" id="activeTracklist"></div>
-      </div>
-
-      <!-- Local MP3 Loader -->
-      <div style="margin-top: 10px; border-top: 1px dashed #5a4b3a; padding-top: 12px;">
-        <div style="font-size: 12px; font-weight: 600; color: var(--brass); margin-bottom: 6px;">
-          ➕ Play Local MP3 (Custom Tape):
-        </div>
-        <input type="file" id="localMp3Input" accept="audio/*" style="display: none;">
-        <button class="pill-btn" id="loadLocalFileBtn" style="width: 100%; justify-content: center; padding: 8px;">
-          📁 Choose Audio File from Device
-        </button>
-      </div>
-    </div>
-
-    <!-- TAB 2: SEARCH SONGS (Spotify-Style) -->
-    <div id="tabSearchPanel" class="tab-panel" style="display: none;">
-      <div class="search-wrap">
-        <input type="text" class="retro-search-input" id="songSearchInput" placeholder="Search by song, singer, movie, or mood...">
-        <button class="clear-search-btn" id="clearSearchBtn">✕</button>
-      </div>
-      <div style="margin-top: 12px;">
-        <div style="font-size: 12px; opacity: 0.75; margin-bottom: 8px;" id="searchResultsHeader">
-          Type to search Kishore, Rafi, Lata, Jagjit, or 90s...
-        </div>
-        <div class="track-list-drawer" id="searchResultsList"></div>
-      </div>
-    </div>
-
-    <!-- TAB 3: UP NEXT QUEUE -->
-    <div id="tabQueuePanel" class="tab-panel" style="display: none;">
-      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
-        <span style="font-size: 12px; opacity: 0.75;">Upcoming tracks in queue:</span>
-        <button class="counter-reset" id="clearQueueBtn" style="font-size: 10px;">Clear Queue</button>
-      </div>
-      <div class="track-list-drawer" id="queueTracksList"></div>
-    </div>
-
-    <!-- TAB 4: LIKED SONGS (Meri Pasand) -->
-    <div id="tabFavoritesPanel" class="tab-panel" style="display: none;">
-      <p style="font-size: 11.5px; opacity: 0.75; margin-bottom: 8px;">Your saved songs (saved in your browser):</p>
-      <div class="track-list-drawer" id="favoritesTracksList"></div>
+    <!-- The Signature in the Corner of an Old Photograph -->
+    <div class="signature-bar">
+      <span>यादों की कैसेट • Timeless Indian Nostalgia</span>
+      <span>Crafted with ❤️ by <a href="https://github.com/NIKHILSINGH187" target="_blank" rel="noopener">Nikhil Singh</a></span>
     </div>
 
   </div>
+
 </div>
 
-<!-- Lyrics Modal Sheet -->
+<!-- ===== MODAL 1: LIVING SCENIC MEMORIES PICKER ===== -->
+<div class="theme-modal" id="themeModal">
+  <div class="modal-card">
+    <div class="modal-head">
+      <h3>🎭 Choose Your Living Memory</h3>
+      <button class="close-modal-btn" id="closeThemeBtn">✕</button>
+    </div>
+    <p style="font-size: 12px; opacity: 0.8; line-height: 1.5;">Step into an authentic Indian moment with matching atmosphere & music:</p>
+
+    <div class="theme-cards-grid">
+      <!-- Theme 1 -->
+      <div class="scene-card selected" data-scene="bazaar">
+        <div class="scene-card-header">
+          <span class="scene-card-title">💈 80s Bazaar & Saloon</span>
+          <span class="scene-card-tag">Kishore Kumar</span>
+        </div>
+        <p class="scene-card-desc">Sunlit small-town afternoon street, barber humming along to golden melodies. Warm gold and dusty orange tones.</p>
+      </div>
+
+      <!-- Theme 2 -->
+      <div class="scene-card" data-scene="monsoon">
+        <div class="scene-card-header">
+          <span class="scene-card-title">🌧️ Monsoon Chai Tapri</span>
+          <span class="scene-card-tag">Acoustic Lo-Fi</span>
+        </div>
+        <p class="scene-card-desc">Rain tapping a tin roof, steam rising off a clay kulhad. Cool moody blues and warm amber glow.</p>
+      </div>
+
+      <!-- Theme 3 -->
+      <div class="scene-card" data-scene="train">
+        <div class="scene-card-header">
+          <span class="scene-card-title">🚂 Raat Ka Safar</span>
+          <span class="scene-card-tag">Jagjit Singh</span>
+        </div>
+        <p class="scene-card-desc">Night sleeper train window, village lights blinking in the dark, soulful ghazals under the stars.</p>
+      </div>
+
+      <!-- Theme 4 -->
+      <div class="scene-card" data-scene="sunset">
+        <div class="scene-card-header">
+          <span class="scene-card-title">🌅 Marine Drive Sunset</span>
+          <span class="scene-card-tag">Lata & Rafi</span>
+        </div>
+        <p class="scene-card-desc">The sea breeze, silhouettes of couples, pink-orange sunset bleeding into waves with classic duets.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== MODAL 2: CASSETTE SHELF & SEARCH DRAWER ===== -->
+<div class="shelf-modal" id="shelfModal">
+  <div class="modal-card">
+    <div class="modal-head">
+      <h3 id="shelfModalTitle">📼 Cassette Shelf & Discovery</h3>
+      <button class="close-modal-btn" id="closeShelfBtn">✕</button>
+    </div>
+
+    <!-- Navigation Tabs -->
+    <div class="drawer-tabs">
+      <button class="drawer-tab-btn active" data-tab="tapes">📼 Mixtapes</button>
+      <button class="drawer-tab-btn" data-tab="search">🔍 Search Songs</button>
+      <button class="drawer-tab-btn" data-tab="queue">📑 Queue (<span id="queueBadge">0</span>)</button>
+      <button class="drawer-tab-btn" data-tab="liked">❤️ Liked (<span id="likedBadge">0</span>)</button>
+    </div>
+
+    <!-- Tab Panels -->
+    <div id="panelTapes" class="tab-content">
+      <div id="mixtapesContainer" style="display:flex; flex-direction:column; gap:8px; margin-top:8px;"></div>
+      <div style="margin-top: 14px; border-top: 1px dashed #4e3d2f; padding-top: 10px;">
+        <div style="font-size: 12px; font-weight:700; color:var(--gold); margin-bottom: 6px;">Songs on Active Cassette:</div>
+        <div class="track-drawer-list" id="activeTapeTracks"></div>
+      </div>
+    </div>
+
+    <div id="panelSearch" class="tab-content" style="display:none;">
+      <input type="text" class="retro-input" id="searchInput" placeholder="Search by song, singer (Kishore, Lata, Jagjit), film...">
+      <div style="font-size: 11.5px; opacity:0.7; margin: 8px 0;" id="searchHeader">Type to find your favorite memories...</div>
+      <div class="track-drawer-list" id="searchResultsList"></div>
+    </div>
+
+    <div id="panelQueue" class="tab-content" style="display:none;">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+        <span style="font-size: 12px; opacity:0.75;">Upcoming tracks in queue:</span>
+        <button id="clearQueueBtn" style="background:none; border:none; color:var(--gold); cursor:pointer; font-size:11px;">Clear Queue</button>
+      </div>
+      <div class="track-drawer-list" id="queueList"></div>
+    </div>
+
+    <div id="panelLiked" class="tab-content" style="display:none;">
+      <div style="font-size: 12px; opacity:0.75; margin-bottom:8px;">Your saved songs (saved in browser):</div>
+      <div class="track-drawer-list" id="likedList"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== MODAL 3: VINTAGE TYPEWRITER LYRICS ===== -->
 <div class="lyrics-modal" id="lyricsModal">
-  <div class="lyrics-content">
-    <div class="lyrics-header">
+  <div class="parchment-lyrics">
+    <div style="display:flex; justify-content:space-between; align-items:flex-start; border-bottom:2px solid #5a4b3d; padding-bottom:10px; margin-bottom:14px;">
       <div>
-        <h3 id="lyricsTitle">Pal Pal Dil Ke Paas</h3>
-        <p id="lyricsArtist">Kishore Kumar • Blackmail (1973)</p>
+        <h3 id="lyricSongTitle" style="font-size: 20px; font-weight: 700; color: #8c2d19;">Pal Pal Dil Ke Paas</h3>
+        <p id="lyricArtistName" style="font-size: 12px; color: #554433; margin-top: 3px;">Kishore Kumar • Blackmail (1973)</p>
       </div>
-      <button class="close-shelf-btn" id="closeLyricsBtn" style="color: #241c14;">✕</button>
+      <button class="close-modal-btn" id="closeLyricsBtn" style="color:#241c14;">✕</button>
     </div>
-    <div class="lyrics-body" id="lyricsBody">
-      Loading lyrics...
-    </div>
+    <div class="lyrics-body" id="lyricBodyText">Loading lyrics...</div>
   </div>
 </div>
 
-<!-- Floating Retro Toast -->
+<!-- Floating Toast -->
 <div class="retro-toast" id="retroToast">
   <span id="toastIcon">✨</span>
   <span id="toastText">Playing</span>
 </div>
 
-<!-- Native HTML5 Audio Element for Bulletproof, Ad-Free Playback -->
+<!-- Native Audio Element -->
 <audio id="audioEngine" preload="auto"></audio>
 
 <script>
-  // ===== 1. EXPANDED SPOTIFY-GRADE MIXTAPES DATABASE WITH LYRICS =====
+  // ===== 1. THE FOUR LIVING MEMORIES (THEMES) =====
+  const SCENE_THEMES = {
+    bazaar: {
+      id: 'bazaar',
+      name: '80s Bazaar',
+      location: '💈 डी ल क्स सैलून • 1980s Small Town Radio',
+      backdropId: 'sceneBazaar',
+      tapeIdx: 0 // Kishore Kumar
+    },
+    monsoon: {
+      id: 'monsoon',
+      name: 'Monsoon Chai',
+      location: '🌧️ बारिश और चाय की टपरी • Cozy Monsoon Chill',
+      backdropId: 'sceneMonsoon',
+      tapeIdx: 3 // Lo-Fi Monsoon
+    },
+    train: {
+      id: 'train',
+      name: 'Raat Ka Safar',
+      location: '🚂 रात का सफ़र • Indian Sleeper Window & Stars',
+      backdropId: 'sceneTrain',
+      tapeIdx: 2 // Jagjit Singh Ghazals
+    },
+    sunset: {
+      id: 'sunset',
+      name: 'Marine Drive',
+      location: '🌅 मरीन ड्राइव की शाम • Queen\'s Necklace Sunset',
+      backdropId: 'sceneSunset',
+      tapeIdx: 1 // Lata & Rafi
+    }
+  };
+
+  let currentSceneKey = 'bazaar';
+
+  // ===== 2. CURATED MIXTAPES DATABASE WITH LYRICS =====
   const MIXTAPES = [
     {
       id: 'tape-kishore',
       name: 'Kishore Kumar & 70s Gold',
       hindiName: 'किशोर कुमार की यादें',
       desc: 'Evergreen romance & melodies from the golden era',
-      sideA: [
+      tracks: [
         {
           id: 'pal-pal-dil',
           title: 'Pal Pal Dil Ke Paas',
           artist: 'Kishore Kumar • Blackmail (1973)',
-          movie: 'Blackmail',
-          year: '1973',
           src: 'https://archive.org/download/KishoreKumarRomanticsHindyugm/PalPalDilKes.mp3',
           duration: '5:30',
           lyrics: `Pal pal dil ke paas tum rehti ho
@@ -1507,8 +1148,6 @@ Pal pal dil ke paas tum rehti ho...`
           id: 'chukar-mere-man',
           title: 'Chukar Mere Man Ko',
           artist: 'Kishore Kumar • Yaarana (1981)',
-          movie: 'Yaarana',
-          year: '1981',
           src: 'https://archive.org/download/KishoreKumarRomanticsHindyugm/ChukarMereManKos.mp3',
           duration: '4:14',
           lyrics: `Chhookar mere man ko kiya toone kya ishaara
@@ -1524,8 +1163,6 @@ Chhookar mere man ko kiya toone kya ishaara...`
           id: 'pyar-diwana',
           title: 'Pyar Diwana Hota Hai',
           artist: 'Kishore Kumar • Kati Patang (1970)',
-          movie: 'Kati Patang',
-          year: '1970',
           src: 'https://archive.org/download/KishoreKumarRomanticsHindyugm/PyarDiwanaHotaHai-KatiPatang.mp3',
           duration: '4:47',
           lyrics: `Pyaar deewana hota hai, mastana hota hai
@@ -1537,29 +1174,9 @@ Woh nahin sunta usko jal jaana hota hai
 Pyaar deewana hota hai, mastana hota hai...`
         },
         {
-          id: 'mere-dil-ke-chain',
-          title: 'O Mere Dil Ke Chain',
-          artist: 'Kishore Kumar • Mere Jeevan Saathi (1972)',
-          movie: 'Mere Jeevan Saathi',
-          year: '1972',
-          src: 'https://archive.org/download/KishoreKumarRomanticsHindyugm/PalPalDilKes.mp3',
-          duration: '4:35',
-          lyrics: `O mere dil ke chain
-Chain aaye mere dil ko dua keejiye
-
-Apna hi saaya dekh ke tum jaane jahan sharma gaye
-Abhi to yeh pehli manzil hai, tum to abhi se ghabra gaye
-Mera kya hoga socho toh zara
-O mere dil ke chain, chain aaye mere dil ko dua keejiye...`
-        }
-      ],
-      sideB: [
-        {
           id: 'humein-tumse-pyar',
           title: 'Humein Tumse Pyar Kitna',
           artist: 'Kishore Kumar • Kudrat (1981)',
-          movie: 'Kudrat',
-          year: '1981',
           src: 'https://archive.org/download/KishoreKumarRomanticsHindyugm/HumeinTumsePyarKitnas.mp3',
           duration: '4:16',
           lyrics: `Humein tumse pyaar kitna yeh hum nahin jaante
@@ -1575,27 +1192,12 @@ Humein tumse pyaar kitna yeh hum nahin jaante...`
           id: 'palbhar-ke-liye',
           title: 'Palbhar Ke Liye Koi Hamein',
           artist: 'Kishore Kumar • Johny Mera Naam (1970)',
-          movie: 'Johny Mera Naam',
-          year: '1970',
           src: 'https://archive.org/download/KishoreKumarRomanticsHindyugm/PalbharKeLiyeKoiHameins.mp3',
           duration: '4:47',
           lyrics: `Pal bhar ke liye koyi humein pyaar kar le
 Jhootha hi sahi
 Do din ke liye koyi ikraar kar le
 Jhootha hi sahi...`
-        },
-        {
-          id: 'yeh-jo-mohabbat-hai',
-          title: 'Yeh Jo Mohabbat Hai',
-          artist: 'Kishore Kumar • Kati Patang (1970)',
-          movie: 'Kati Patang',
-          year: '1970',
-          src: 'https://archive.org/download/KishoreKumarRomanticsHindyugm/PyarDiwanaHotaHai-KatiPatang.mp3',
-          duration: '4:08',
-          lyrics: `Yeh jo mohabbat hai, yeh unka hai kaam
-Mehboob ka jo bas lete hue naam
-Mar jaayein, mit jaayein, ho jaayein badnaam
-Rehne do, chhodo bhi jaane do yaar, hum na karenge pyaar...`
         }
       ]
     },
@@ -1604,13 +1206,11 @@ Rehne do, chhodo bhi jaane do yaar, hum na karenge pyaar...`
       name: 'Lata & Rafi - Golden Duets',
       hindiName: 'लता और रफ़ी के नगमे',
       desc: 'Soul-stirring romantic poetry & unforgettable symphonies',
-      sideA: [
+      tracks: [
         {
           id: 'lag-ja-gale',
           title: 'Lag Ja Gale',
           artist: 'Lata Mangeshkar • Woh Kaun Thi (1964)',
-          movie: 'Woh Kaun Thi',
-          year: '1964',
           src: 'https://ia800300.us.archive.org/1/items/HothonSeChhuLoTum_201602/Hothon%20Se%20Chhu%20Lo%20Tum.mp3',
           duration: '4:15',
           lyrics: `Lag ja gale ke phir yeh haseen raat ho na ho
@@ -1626,8 +1226,6 @@ Lag ja gale...`
           id: 'aap-ki-nazron-ne',
           title: 'Aap Ki Nazron Ne Samjha',
           artist: 'Lata Mangeshkar • Anpadh (1962)',
-          movie: 'Anpadh',
-          year: '1962',
           src: 'https://ia800508.us.archive.org/15/items/JhukiJhukiSiNazar_201602/Jhuki%20Jhuki%20Si%20Nazar.mp3',
           duration: '3:56',
           lyrics: `Aap ki nazron ne samjha pyaar ke qaabil mujhe
@@ -1642,8 +1240,6 @@ Do jahaan ki aaj khushiyan ho gayi haasil mujhe...`
           id: 'chaudhvin-ka-chand',
           title: 'Chaudhvin Ka Chand Ho',
           artist: 'Mohammed Rafi • Chaudhvin Ka Chand (1960)',
-          movie: 'Chaudhvin Ka Chand',
-          year: '1960',
           src: 'https://archive.org/download/KishoreKumarRomanticsHindyugm/ChukarMereManKos.mp3',
           duration: '3:40',
           lyrics: `Chaudhvin ka chand ho ya aaftab ho?
@@ -1653,37 +1249,17 @@ Zulfein hain jaise kaandhe pe baadal jhuke hue
 Aankhen hain jaise may ke pyaale bhare hue
 Masti hai jismein pyaar ki tum woh sharaab ho
 Chaudhvin ka chand ho ya aaftab ho...`
-        }
-      ],
-      sideB: [
+        },
         {
           id: 'likhe-jo-khat-tujhe',
           title: 'Likhe Jo Khat Tujhe',
           artist: 'Mohammed Rafi • Kanyadaan (1968)',
-          movie: 'Kanyadaan',
-          year: '1968',
           src: 'https://archive.org/download/KishoreKumarRomanticsHindyugm/PalPalDilKes.mp3',
           duration: '4:32',
           lyrics: `Likhe jo khat tujhe woh teri yaad mein
 Hazaaron rang ke nazaare ban gaye
 Savera jab hua toh phool ban gaye
 Jo raat aayi toh sitaare ban gaye...`
-        },
-        {
-          id: 'tere-bina-zindagi',
-          title: 'Tere Bina Zindagi Se Koyi',
-          artist: 'Lata & Kishore • Aandhi (1975)',
-          movie: 'Aandhi',
-          year: '1975',
-          src: 'https://archive.org/download/KishoreKumarRomanticsHindyugm/HumeinTumsePyarKitnas.mp3',
-          duration: '5:50',
-          lyrics: `Tere bina zindagi se koyi shikwa toh nahin
-Shikwa nahin, shikwa toh nahin
-Tere bina zindagi bhi lekin zindagi toh nahin...
-
-Kaash aisa ho tere qadmon se chun ke manzil chalein
-Aur kahin door hum dono sang chalein
-Tere bina zindagi se koyi shikwa toh nahin...`
         }
       ]
     },
@@ -1692,13 +1268,11 @@ Tere bina zindagi se koyi shikwa toh nahin...`
       name: 'Late Night Ghazals & Sukoon',
       hindiName: 'जगजीत सिंह और गज़लें',
       desc: 'Soulful acoustic poetry & ghazals for quiet nights',
-      sideA: [
+      tracks: [
         {
           id: 'hothon-se-chhu-lo',
           title: 'Hothon Se Chhu Lo Tum',
           artist: 'Jagjit Singh • Prem Geet (1981)',
-          movie: 'Prem Geet',
-          year: '1981',
           src: 'https://ia800300.us.archive.org/1/items/HothonSeChhuLoTum_201602/Hothon%20Se%20Chhu%20Lo%20Tum.mp3',
           duration: '4:58',
           lyrics: `Hothon se chhu lo tum, mera geet amar kar do
@@ -1713,8 +1287,6 @@ Hothon se chhu lo tum...`
           id: 'jhuki-jhuki-si',
           title: 'Jhuki Jhuki Si Nazar',
           artist: 'Jagjit Singh • Arth (1982)',
-          movie: 'Arth',
-          year: '1982',
           src: 'https://ia800508.us.archive.org/15/items/JhukiJhukiSiNazar_201602/Jhuki%20Jhuki%20Si%20Nazar.mp3',
           duration: '5:02',
           lyrics: `Jhuki jhuki si nazar beqaraar hai ke nahin
@@ -1725,28 +1297,9 @@ Meri nigaah ka tujhpe khumaar hai ke nahin
 Jhuki jhuki si nazar beqaraar hai ke nahin...`
         },
         {
-          id: 'tum-ko-dekha',
-          title: 'Tum Ko Dekha Toh Yeh Khayal',
-          artist: 'Jagjit Singh • Saath Saath (1982)',
-          movie: 'Saath Saath',
-          year: '1982',
-          src: 'https://ia800707.us.archive.org/24/items/YehDaulatBhiLeLo_201602/Yeh%20Daulat%20Bhi%20Le%20Lo.mp3',
-          duration: '4:50',
-          lyrics: `Tum ko dekha toh yeh khayal aaya
-Zindagi dhoop tum ghana saaya
-
-Aaj phir dil ne ik tamanna ki
-Aaj phir dil ko humne samjhaya
-Zindagi dhoop tum ghana saaya...`
-        }
-      ],
-      sideB: [
-        {
           id: 'yeh-daulat-bhi',
           title: 'Yeh Daulat Bhi Le Lo',
           artist: 'Jagjit Singh • Live in Concert',
-          movie: 'Concert',
-          year: '1984',
           src: 'https://ia800707.us.archive.org/24/items/YehDaulatBhiLeLo_201602/Yeh%20Daulat%20Bhi%20Le%20Lo.mp3',
           duration: '5:15',
           lyrics: `Yeh daulat bhi le lo, yeh shohrat bhi le lo
@@ -1758,8 +1311,6 @@ Woh kaagaz ki kashti, woh baarish ka paani...`
           id: 'chithi-na-koi',
           title: 'Chithi Na Koi Sandesh',
           artist: 'Jagjit Singh • Dushman (1998)',
-          movie: 'Dushman',
-          year: '1998',
           src: 'https://ia800902.us.archive.org/11/items/ChithiNaKoiSandesh_201602/Chithi%20Na%20Koi%20Sandesh.mp3',
           duration: '6:42',
           lyrics: `Chitthi na koyi sandesh, jaane woh kaun sa desh
@@ -1777,13 +1328,11 @@ Kahan tum chale gaye...`
       name: 'Retro Monsoon Lo-Fi & Beats',
       hindiName: 'मानसून लो-फाई यादें',
       desc: 'Relaxing nostalgic Indian acoustic chill & tape beats',
-      sideA: [
+      tracks: [
         {
           id: 'delhi-rain-lofi',
           title: 'Old Delhi Rain & Nostalgia',
           artist: 'Yaado Ki Cassette Lo-Fi Lab',
-          movie: 'Monsoon Chill',
-          year: '2026',
           src: 'https://ia801509.us.archive.org/15/items/chill-lofi-song/Chill%20lofi%20song.mp3',
           duration: '2:45',
           lyrics: `[Acoustic Guitar, Warm Tape Hiss & Gentle Drops on Windowpane]
@@ -1795,23 +1344,17 @@ warm memories echoing through the rain...`
           id: 'midnight-chai-lofi',
           title: 'Midnight Chai & Memories',
           artist: 'Acoustic Retro Instrumentals',
-          movie: 'Night Sessions',
-          year: '2026',
           src: 'https://ia802909.us.archive.org/14/items/lofi-study-chill-relax-instrumental/lofi-study.mp3',
           duration: '3:12',
           lyrics: `[Soft Piano, Vinyl Crackles & Nostalgic Harmonium Chords]
 
 Late night reflections, studying under a warm desk lamp,
 pure peace and analog warmth.`
-        }
-      ],
-      sideB: [
+        },
         {
           id: 'marine-drive-lofi',
           title: 'Sunset at Marine Drive',
           artist: 'Tape Hiss & Sitar Chills',
-          movie: 'Bombay Waves',
-          year: '2026',
           src: 'https://ia801509.us.archive.org/15/items/chill-lofi-song/Chill%20lofi%20song.mp3',
           duration: '2:45',
           lyrics: `[Sitar Harmonics, Ocean Breeze & Soft Percussion]
@@ -1823,73 +1366,56 @@ an unforgettable memory.`
     }
   ];
 
-  // ===== 2. SPOTIFY-GRADE STATE MANAGEMENT =====
+  // ===== 3. STATE & REFS =====
   let currentTapeIndex = 0;
-  let currentSide = 'A';
   let currentTrackIndex = 0;
   let isPlaying = false;
   let isShuffle = false;
   let repeatMode = 'all'; // 'all', 'one', 'off'
   let playbackQueue = [];
-  let currentActiveTrack = null;
+  let isRainOn = false;
+  let isSlowedMood = false;
+  let isTapeHiss = false;
 
-  // Liked Songs Storage
+  // Liked Songs
   let likedSongIds = new Set();
   try {
     const saved = localStorage.getItem('yaado_liked_tracks_v1');
     if (saved) likedSongIds = new Set(JSON.parse(saved));
   } catch (e) {}
 
-  let tapeCounter = 0;
-  let tapeCounterTimer = null;
-  let isTapeHissOn = false;
-  let isSlowedMoodOn = false;
-  let sleepTimer = null;
-
-  // DOM Elements
   const audio = document.getElementById('audioEngine');
-  const cassetteBody = document.getElementById('cassetteBody');
-  const playPauseBtn = document.getElementById('playPauseBtn');
-  const playIconSymbol = document.getElementById('playIconSymbol');
-  const playBtnLabel = document.getElementById('playBtnLabel');
+  const warmupOverlay = document.getElementById('warmupOverlay');
+  const heroTitleCenter = document.getElementById('heroTitleCenter');
+  const currentSceneName = document.getElementById('currentSceneName');
+  const sceneLocationPill = document.getElementById('sceneLocationPill');
 
-  const labelSideTag = document.getElementById('labelSideTag');
-  const labelSideTagB = document.getElementById('labelSideTagB');
-  const labelTapeTitle = document.getElementById('labelTapeTitle');
-  const labelSongTitle = document.getElementById('labelSongTitle');
-  const labelArtist = document.getElementById('labelArtist');
-  const labelTapeTitleB = document.getElementById('labelTapeTitleB');
-  const labelSongTitleB = document.getElementById('labelSongTitleB');
-  const labelArtistB = document.getElementById('labelArtistB');
+  const dockSongTitle = document.getElementById('dockSongTitle');
+  const dockArtistName = document.getElementById('dockArtistName');
+  const dockCurTime = document.getElementById('dockCurTime');
+  const dockTotalTime = document.getElementById('dockTotalTime');
+  const dockScrubTrack = document.getElementById('dockScrubTrack');
+  const dockScrubFill = document.getElementById('dockScrubFill');
+  const dockPlayBtn = document.getElementById('dockPlayBtn');
+  const dockPlayIcon = document.getElementById('dockPlayIcon');
+  const dockLikeBtn = document.getElementById('dockLikeBtn');
+  const dockShuffleBtn = document.getElementById('dockShuffleBtn');
+  const dockRepeatBtn = document.getElementById('dockRepeatBtn');
+  const walkmanDock = document.getElementById('walkmanDock');
 
-  const heartBtnA = document.getElementById('heartBtnA');
-  const heartBtnB = document.getElementById('heartBtnB');
-  const likedCountBadge = document.getElementById('likedCountBadge');
-  const favTabCount = document.getElementById('favTabCount');
-  const queueTabCount = document.getElementById('queueTabCount');
+  const rainMoodBtn = document.getElementById('rainMoodBtn');
+  const rainStatusTag = document.getElementById('rainStatusTag');
+  const lofiMoodBtn = document.getElementById('lofiMoodBtn');
+  const lofiStatusTag = document.getElementById('lofiStatusTag');
+  const tapeHissBtn = document.getElementById('tapeHissBtn');
+  const hissStatusTag = document.getElementById('hissStatusTag');
 
-  const scrubTrack = document.getElementById('scrubTrack');
-  const scrubFill = document.getElementById('scrubFill');
-  const currentTimeLabel = document.getElementById('currentTimeLabel');
-  const totalDurationLabel = document.getElementById('totalDurationLabel');
-  const volumeSlider = document.getElementById('volumeSlider');
-  const vuLeft = document.getElementById('vuLeft');
-  const vuRight = document.getElementById('vuRight');
-  const tapeCounterEl = document.getElementById('tapeCounter');
+  const favPillCount = document.getElementById('favPillCount');
+  const queueBadge = document.getElementById('queueBadge');
+  const likedBadge = document.getElementById('likedBadge');
 
-  const leftTapeRoll = document.getElementById('leftTapeRoll');
-  const rightTapeRoll = document.getElementById('rightTapeRoll');
-  const leftTapeRollB = document.getElementById('leftTapeRollB');
-  const rightTapeRollB = document.getElementById('rightTapeRollB');
-
-  const shuffleBtn = document.getElementById('shuffleBtn');
-  const shuffleLabel = document.getElementById('shuffleLabel');
-  const repeatBtn = document.getElementById('repeatBtn');
-  const repeatIcon = document.getElementById('repeatIcon');
-  const repeatLabel = document.getElementById('repeatLabel');
-
-  // Modals & Drawers
-  const tapeShelfModal = document.getElementById('tapeShelfModal');
+  const themeModal = document.getElementById('themeModal');
+  const shelfModal = document.getElementById('shelfModal');
   const lyricsModal = document.getElementById('lyricsModal');
   const retroToast = document.getElementById('retroToast');
   const toastText = document.getElementById('toastText');
@@ -1903,207 +1429,174 @@ an unforgettable memory.`
   }
 
   let toastTimer = null;
-  function showToast(msg, icon = '📻') {
+  function showToast(msg, icon = '✨') {
     toastIcon.textContent = icon;
     toastText.textContent = msg;
     retroToast.classList.add('show');
     if (toastTimer) clearTimeout(toastTimer);
     toastTimer = setTimeout(() => {
       retroToast.classList.remove('show');
-    }, 2200);
+    }, 2400);
   }
 
-  function getAllSongs() {
-    const all = [];
-    MIXTAPES.forEach((tape, tapeIdx) => {
-      tape.sideA.forEach((t, i) => all.push({ ...t, tapeIdx, side: 'A', trackIdx: i, tapeName: tape.name }));
-      tape.sideB.forEach((t, i) => all.push({ ...t, tapeIdx, side: 'B', trackIdx: i, tapeName: tape.name }));
+  // ===== 4. LIVING MEMORY SCENE SWITCHER =====
+  function switchScene(sceneKey) {
+    if (!SCENE_THEMES[sceneKey]) return;
+    currentSceneKey = sceneKey;
+    const scene = SCENE_THEMES[sceneKey];
+
+    // Smooth crossfade backdrops
+    document.querySelectorAll('.scene-backdrop').forEach(el => el.classList.remove('active'));
+    const targetBackdrop = document.getElementById(scene.backdropId);
+    if (targetBackdrop) targetBackdrop.classList.add('active');
+
+    // Update scene metadata
+    currentSceneName.textContent = scene.name;
+    sceneLocationPill.textContent = scene.location;
+
+    // Highlight selected card in modal
+    document.querySelectorAll('.scene-card').forEach(card => {
+      card.classList.toggle('selected', card.dataset.scene === sceneKey);
     });
-    return all;
+
+    // Auto-load matching curated tape for this memory
+    loadTrack(scene.tapeIdx, 0, isPlaying);
+    showToast(`Stepped into: ${scene.name}`, '🎭');
   }
 
-  function getActiveTracklist() {
-    const tape = MIXTAPES[currentTapeIndex];
-    return currentSide === 'A' ? tape.sideA : tape.sideB;
-  }
+  document.querySelectorAll('.scene-card').forEach(card => {
+    card.addEventListener('click', () => {
+      switchScene(card.dataset.scene);
+      themeModal.classList.remove('open');
+    });
+  });
 
-  function persistLikedSongs() {
-    try {
-      localStorage.setItem('yaado_liked_tracks_v1', JSON.stringify([...likedSongIds]));
-    } catch (e) {}
-    likedCountBadge.textContent = likedSongIds.size;
-    favTabCount.textContent = likedSongIds.size;
-  }
+  document.getElementById('openThemeBtn').addEventListener('click', () => {
+    themeModal.classList.add('open');
+  });
+  document.getElementById('closeThemeBtn').addEventListener('click', () => {
+    themeModal.classList.remove('open');
+  });
+  themeModal.addEventListener('click', (e) => {
+    if (e.target === themeModal) themeModal.classList.remove('open');
+  });
 
-  function toggleLikeCurrentSong() {
-    if (!currentActiveTrack) return;
-    playClickSound(550);
-    const id = currentActiveTrack.id || currentActiveTrack.title;
-    if (likedSongIds.has(id)) {
-      likedSongIds.delete(id);
-      showToast('Removed from Liked Songs', '🤍');
-    } else {
-      likedSongIds.add(id);
-      showToast(`Liked: ${currentActiveTrack.title}`, '❤️');
-    }
-    persistLikedSongs();
-    updateHeartButtons();
-    renderFavoritesTab();
-  }
-
-  function updateHeartButtons() {
-    if (!currentActiveTrack) return;
-    const id = currentActiveTrack.id || currentActiveTrack.title;
-    const isLiked = likedSongIds.has(id);
-    heartBtnA.textContent = isLiked ? '❤️' : '🤍';
-    heartBtnB.textContent = isLiked ? '❤️' : '🤍';
-    heartBtnA.classList.toggle('liked', isLiked);
-    heartBtnB.classList.toggle('liked', isLiked);
-  }
-
-  heartBtnA.addEventListener('click', (e) => { e.stopPropagation(); toggleLikeCurrentSong(); });
-  heartBtnB.addEventListener('click', (e) => { e.stopPropagation(); toggleLikeCurrentSong(); });
-
-  function updateMediaSession(track, tape) {
-    if ('mediaSession' in navigator) {
-      try {
-        navigator.mediaSession.metadata = new MediaMetadata({
-          title: track.title,
-          artist: track.artist,
-          album: tape.name || 'यादों की कैसेट',
-          artwork: [
-            { src: 'assets/hero-bg.png', sizes: '512x512', type: 'image/png' }
-          ]
-        });
-
-        navigator.mediaSession.setActionHandler('play', () => togglePlay());
-        navigator.mediaSession.setActionHandler('pause', () => togglePlay());
-        navigator.mediaSession.setActionHandler('previoustrack', () => prevTrack());
-        navigator.mediaSession.setActionHandler('nexttrack', () => nextTrack());
-        navigator.mediaSession.setActionHandler('seekbackward', () => {
-          audio.currentTime = Math.max(0, audio.currentTime - 10);
-        });
-        navigator.mediaSession.setActionHandler('seekforward', () => {
-          audio.currentTime = Math.min(audio.duration || 0, audio.currentTime + 10);
-        });
-        navigator.mediaSession.setActionHandler('seekto', (details) => {
-          if (details.seekTime && audio.duration) {
-            audio.currentTime = details.seekTime;
-          }
-        });
-      } catch (e) {}
-    }
-  }
-
-  function loadTrack(tapeIdx, side, trackIdx, autoPlay = false) {
-    currentTapeIndex = tapeIdx;
-    currentSide = side;
-    currentTrackIndex = trackIdx;
-
-    const tape = MIXTAPES[currentTapeIndex];
-    const tracks = getActiveTracklist();
-    const track = tracks[currentTrackIndex] || tracks[0];
-    currentActiveTrack = track;
-
-    labelTapeTitle.textContent = tape.hindiName || tape.name;
-    labelTapeTitleB.textContent = tape.hindiName || tape.name;
-    labelSideTag.textContent = `SIDE ${currentSide}`;
-    labelSideTagB.textContent = `SIDE ${currentSide}`;
-
-    labelSongTitle.textContent = track.title;
-    labelArtist.textContent = track.artist;
-    labelSongTitleB.textContent = track.title;
-    labelArtistB.textContent = track.artist;
-
-    updateHeartButtons();
-
-    audio.src = track.src;
-    audio.playbackRate = isSlowedMoodOn ? 0.85 : 1.0;
-    scrubFill.style.width = '0%';
-    currentTimeLabel.textContent = '0:00';
-    totalDurationLabel.textContent = track.duration || '0:00';
-
-    updateCassetteRolls(0);
-    updateActiveTracklistUI();
-    updateMediaSession(track, tape);
-
-    if (autoPlay) {
-      audio.play().then(() => {
-        isPlaying = true;
-        cassetteBody.classList.add('is-playing');
-        playIconSymbol.textContent = '⏸';
-        playBtnLabel.textContent = 'PAUSE';
-        startTapeCounter();
-        if ('mediaSession' in navigator) navigator.mediaSession.playbackState = 'playing';
-      }).catch(() => {});
-    }
-  }
-
-  function playDirectTrack(track) {
-    currentActiveTrack = track;
-    if (track.tapeIdx !== undefined) {
-      currentTapeIndex = track.tapeIdx;
-      currentSide = track.side || 'A';
-      currentTrackIndex = track.trackIdx || 0;
-    }
-    const tape = MIXTAPES[currentTapeIndex];
-
-    labelTapeTitle.textContent = tape.hindiName || tape.name;
-    labelTapeTitleB.textContent = tape.hindiName || tape.name;
-    labelSideTag.textContent = `SIDE ${currentSide}`;
-    labelSideTagB.textContent = `SIDE ${currentSide}`;
-
-    labelSongTitle.textContent = track.title;
-    labelArtist.textContent = track.artist;
-    labelSongTitleB.textContent = track.title;
-    labelArtistB.textContent = track.artist;
-
-    updateHeartButtons();
-
-    audio.src = track.src;
-    audio.playbackRate = isSlowedMoodOn ? 0.85 : 1.0;
-    scrubFill.style.width = '0%';
-    currentTimeLabel.textContent = '0:00';
-    totalDurationLabel.textContent = track.duration || '0:00';
-
-    updateCassetteRolls(0);
-    updateActiveTracklistUI();
-    updateMediaSession(track, tape);
-
-    audio.play().then(() => {
-      isPlaying = true;
-      cassetteBody.classList.add('is-playing');
-      playIconSymbol.textContent = '⏸';
-      playBtnLabel.textContent = 'PAUSE';
-      startTapeCounter();
-      showToast(`Playing: ${track.title}`, '▶');
-    }).catch(() => {});
-  }
-
+  // ===== 5. WEB AUDIO BINAURAL RAIN GENERATOR & RAIN CANVAS =====
   let audioCtx = null;
-  function playClickSound(pitch = 400) {
+  let rainGain = null;
+  let rainSource = null;
+
+  function initRainSound() {
     try {
       const AudioCtx = window.AudioContext || window.webkitAudioContext;
       if (!audioCtx && AudioCtx) audioCtx = new AudioCtx();
       if (!audioCtx) return;
       if (audioCtx.state === 'suspended') audioCtx.resume();
 
-      const osc = audioCtx.createOscillator();
-      const gain = audioCtx.createGain();
-      osc.type = 'triangle';
-      osc.frequency.setValueAtTime(pitch, audioCtx.currentTime);
-      osc.frequency.exponentialRampToValueAtTime(80, audioCtx.currentTime + 0.03);
+      const bufferSize = audioCtx.sampleRate * 2;
+      const noiseBuffer = audioCtx.createBuffer(1, bufferSize, audioCtx.sampleRate);
+      const output = noiseBuffer.getChannelData(0);
+      let lastOut = 0.0;
+      for (let i = 0; i < bufferSize; i++) {
+        const white = Math.random() * 2 - 1;
+        output[i] = (lastOut + (0.02 * white)) / 1.02; // Brown noise for deep soothing rain
+        lastOut = output[i];
+        output[i] *= 3.5;
+      }
 
-      gain.gain.setValueAtTime(0.3, audioCtx.currentTime);
-      gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.035);
+      rainSource = audioCtx.createBufferSource();
+      rainSource.buffer = noiseBuffer;
+      rainSource.loop = true;
 
-      osc.connect(gain);
-      gain.connect(audioCtx.destination);
-      osc.start();
-      osc.stop(audioCtx.currentTime + 0.04);
+      const filter = audioCtx.createBiquadFilter();
+      filter.type = 'lowpass';
+      filter.frequency.value = 850;
+
+      rainGain = audioCtx.createGain();
+      rainGain.gain.setValueAtTime(0, audioCtx.currentTime);
+
+      rainSource.connect(filter);
+      filter.connect(rainGain);
+      rainGain.connect(audioCtx.destination);
+      rainSource.start(0);
     } catch (e) {}
   }
 
+  function toggleRainMood() {
+    isRainOn = !isRainOn;
+    rainMoodBtn.classList.toggle('active', isRainOn);
+    rainStatusTag.textContent = isRainOn ? 'ON' : 'OFF';
+
+    const canvas = document.getElementById('rainCanvas');
+    canvas.classList.toggle('raining', isRainOn);
+
+    if (isRainOn) {
+      if (!rainGain) initRainSound();
+      if (rainGain && audioCtx) {
+        rainGain.gain.cancelScheduledValues(audioCtx.currentTime);
+        rainGain.gain.linearRampToValueAtTime(0.25, audioCtx.currentTime + 1.2);
+      }
+      showToast('Rain Mood: ON (Warm rain falling)', '🌧️');
+    } else {
+      if (rainGain && audioCtx) {
+        rainGain.gain.cancelScheduledValues(audioCtx.currentTime);
+        rainGain.gain.linearRampToValueAtTime(0, audioCtx.currentTime + 0.8);
+      }
+      showToast('Rain Mood: OFF', '☀️');
+    }
+  }
+
+  rainMoodBtn.addEventListener('click', toggleRainMood);
+
+  // Canvas Raindrops Animation Loop
+  const rainCanvas = document.getElementById('rainCanvas');
+  const ctx = rainCanvas.getContext('2d');
+  let raindrops = [];
+
+  function resizeRainCanvas() {
+    rainCanvas.width = window.innerWidth;
+    rainCanvas.height = window.innerHeight;
+  }
+  window.addEventListener('resize', resizeRainCanvas);
+  resizeRainCanvas();
+
+  for (let i = 0; i < 90; i++) {
+    raindrops.push({
+      x: Math.random() * rainCanvas.width,
+      y: Math.random() * rainCanvas.height,
+      len: Math.random() * 24 + 16,
+      speed: Math.random() * 4 + 5,
+      opacity: Math.random() * 0.35 + 0.15
+    });
+  }
+
+  function drawRain() {
+    if (isRainOn) {
+      ctx.clearRect(0, 0, rainCanvas.width, rainCanvas.height);
+      ctx.strokeStyle = 'rgba(235, 245, 255, 0.4)';
+      ctx.lineWidth = 1.2;
+      ctx.lineCap = 'round';
+
+      for (let i = 0; i < raindrops.length; i++) {
+        const d = raindrops[i];
+        ctx.beginPath();
+        ctx.moveTo(d.x, d.y);
+        ctx.lineTo(d.x - 3, d.y + d.len);
+        ctx.stroke();
+
+        d.y += d.speed;
+        d.x -= 1.2;
+        if (d.y > rainCanvas.height) {
+          d.y = -20;
+          d.x = Math.random() * rainCanvas.width;
+        }
+      }
+    }
+    requestAnimationFrame(drawRain);
+  }
+  drawRain();
+
+  // ===== 6. TAPE HISS & SLOWED MOOD =====
   let hissGain = null;
   function initTapeHiss() {
     try {
@@ -2120,7 +1613,7 @@ an unforgettable memory.`
         b0 = 0.99886 * b0 + white * 0.0555179;
         b1 = 0.99332 * b1 + white * 0.0750759;
         b2 = 0.96900 * b2 + white * 0.1538520;
-        output[i] = (b0 + b1 + b2 + white * 0.5362) * 0.02;
+        output[i] = (b0 + b1 + b2 + white * 0.5362) * 0.015;
       }
 
       const whiteNoise = audioCtx.createBufferSource();
@@ -2129,7 +1622,7 @@ an unforgettable memory.`
 
       const filter = audioCtx.createBiquadFilter();
       filter.type = 'lowpass';
-      filter.frequency.value = 2400;
+      filter.frequency.value = 2200;
 
       hissGain = audioCtx.createGain();
       hissGain.gain.value = 0;
@@ -2141,43 +1634,138 @@ an unforgettable memory.`
     } catch (e) {}
   }
 
-  function togglePlay() {
-    playClickSound(500);
+  tapeHissBtn.addEventListener('click', () => {
+    if (!hissGain) initTapeHiss();
+    isTapeHiss = !isTapeHiss;
+    tapeHissBtn.classList.toggle('active', isTapeHiss);
+    hissStatusTag.textContent = isTapeHiss ? 'ON' : 'OFF';
+    if (hissGain && audioCtx) {
+      hissGain.gain.setValueAtTime(isTapeHiss ? 0.28 : 0, audioCtx.currentTime);
+    }
+    showToast(isTapeHiss ? 'Tape Hiss: ON' : 'Tape Hiss: OFF', '📻');
+  });
 
-    if (audio.paused) {
-      const playPromise = audio.play();
-      if (playPromise !== undefined) {
-        playPromise.then(() => {
-          isPlaying = true;
-          cassetteBody.classList.add('is-playing');
-          playIconSymbol.textContent = '⏸';
-          playBtnLabel.textContent = 'PAUSE';
-          startTapeCounter();
-          if ('mediaSession' in navigator) navigator.mediaSession.playbackState = 'playing';
-          showToast('Playing', '▶');
-        }).catch(() => {});
-      }
+  lofiMoodBtn.addEventListener('click', () => {
+    isSlowedMood = !isSlowedMood;
+    lofiMoodBtn.classList.toggle('active', isSlowedMood);
+    lofiStatusTag.textContent = isSlowedMood ? 'ON' : 'OFF';
+    audio.playbackRate = isSlowedMood ? 0.86 : 1.0;
+    showToast(isSlowedMood ? 'Slowed + Reverb: ON' : 'Normal Playback', '✨');
+  });
+
+  // ===== 7. CORE AUDIO ENGINE & MEDIA SESSION =====
+  function getCurrentTrack() {
+    const tape = MIXTAPES[currentTapeIndex];
+    return tape.tracks[currentTrackIndex] || tape.tracks[0];
+  }
+
+  function updateHeartBtn() {
+    const track = getCurrentTrack();
+    const isLiked = likedSongIds.has(track.id || track.title);
+    dockLikeBtn.textContent = isLiked ? '❤️' : '🤍';
+    dockLikeBtn.classList.toggle('liked', isLiked);
+  }
+
+  function persistLiked() {
+    try {
+      localStorage.setItem('yaado_liked_tracks_v1', JSON.stringify([...likedSongIds]));
+    } catch (e) {}
+    favPillCount.textContent = likedSongIds.size;
+    likedBadge.textContent = likedSongIds.size;
+  }
+
+  function toggleLikeCurrent() {
+    const track = getCurrentTrack();
+    const id = track.id || track.title;
+    if (likedSongIds.has(id)) {
+      likedSongIds.delete(id);
+      showToast('Removed from Liked Songs', '🤍');
     } else {
-      audio.pause();
-      isPlaying = false;
-      cassetteBody.classList.remove('is-playing');
-      playIconSymbol.textContent = '▶';
-      playBtnLabel.textContent = 'PLAY';
-      stopTapeCounter();
-      if ('mediaSession' in navigator) navigator.mediaSession.playbackState = 'paused';
-      showToast('Paused', '⏸');
+      likedSongIds.add(id);
+      showToast(`Liked: ${track.title}`, '❤️');
+    }
+    persistLiked();
+    updateHeartBtn();
+    renderLikedList();
+  }
+  dockLikeBtn.addEventListener('click', toggleLikeCurrent);
+
+  function updateMediaSession(track, tape) {
+    if ('mediaSession' in navigator) {
+      try {
+        navigator.mediaSession.metadata = new MediaMetadata({
+          title: track.title,
+          artist: track.artist,
+          album: tape.name,
+          artwork: [{ src: 'assets/deluxe-saloon.jpg', sizes: '512x512', type: 'image/jpeg' }]
+        });
+        navigator.mediaSession.setActionHandler('play', togglePlay);
+        navigator.mediaSession.setActionHandler('pause', togglePlay);
+        navigator.mediaSession.setActionHandler('previoustrack', prevTrack);
+        navigator.mediaSession.setActionHandler('nexttrack', nextTrack);
+      } catch (e) {}
     }
   }
 
-  playPauseBtn.addEventListener('click', togglePlay);
+  function loadTrack(tapeIdx, trackIdx, autoPlay = false) {
+    currentTapeIndex = tapeIdx;
+    currentTrackIndex = trackIdx;
+    const tape = MIXTAPES[currentTapeIndex];
+    const track = tape.tracks[currentTrackIndex] || tape.tracks[0];
+
+    dockSongTitle.textContent = track.title;
+    dockArtistName.textContent = track.artist;
+    dockCurTime.textContent = '0:00';
+    dockTotalTime.textContent = track.duration || '0:00';
+    dockScrubFill.style.width = '0%';
+
+    updateHeartBtn();
+
+    audio.src = track.src;
+    audio.playbackRate = isSlowedMood ? 0.86 : 1.0;
+
+    updateMediaSession(track, tape);
+    renderActiveTapeTracks();
+
+    if (autoPlay) {
+      audio.play().then(() => {
+        isPlaying = true;
+        walkmanDock.classList.add('is-playing');
+        dockPlayIcon.textContent = '⏸';
+      }).catch(() => {});
+    }
+  }
+
+  function togglePlay() {
+    if (audio.paused) {
+      audio.play().then(() => {
+        isPlaying = true;
+        walkmanDock.classList.add('is-playing');
+        dockPlayIcon.textContent = '⏸';
+        showToast('Playing', '▶');
+      }).catch(() => {});
+    } else {
+      audio.pause();
+      isPlaying = false;
+      walkmanDock.classList.remove('is-playing');
+      dockPlayIcon.textContent = '▶';
+      showToast('Paused', '⏸');
+    }
+  }
+  dockPlayBtn.addEventListener('click', togglePlay);
 
   function nextTrack() {
-    playClickSound(600);
-
     if (playbackQueue.length > 0) {
       const nextUp = playbackQueue.shift();
       updateQueueUI();
-      playDirectTrack(nextUp);
+      dockSongTitle.textContent = nextUp.title;
+      dockArtistName.textContent = nextUp.artist;
+      audio.src = nextUp.src;
+      audio.play().then(() => {
+        isPlaying = true;
+        walkmanDock.classList.add('is-playing');
+        dockPlayIcon.textContent = '⏸';
+      }).catch(() => {});
       return;
     }
 
@@ -2187,465 +1775,255 @@ an unforgettable memory.`
       return;
     }
 
-    const tracks = getActiveTracklist();
-
+    const tape = MIXTAPES[currentTapeIndex];
     if (isShuffle) {
-      let randIdx = Math.floor(Math.random() * tracks.length);
-      if (tracks.length > 1 && randIdx === currentTrackIndex) {
-        randIdx = (randIdx + 1) % tracks.length;
-      }
-      loadTrack(currentTapeIndex, currentSide, randIdx, isPlaying);
+      let randIdx = Math.floor(Math.random() * tape.tracks.length);
+      if (tape.tracks.length > 1 && randIdx === currentTrackIndex) randIdx = (randIdx + 1) % tape.tracks.length;
+      loadTrack(currentTapeIndex, randIdx, isPlaying);
       return;
     }
 
     let nextIdx = currentTrackIndex + 1;
-    if (nextIdx >= tracks.length) {
+    if (nextIdx >= tape.tracks.length) {
       if (repeatMode === 'off') {
         audio.pause();
         isPlaying = false;
-        cassetteBody.classList.remove('is-playing');
-        playIconSymbol.textContent = '▶';
-        playBtnLabel.textContent = 'PLAY';
-        stopTapeCounter();
+        walkmanDock.classList.remove('is-playing');
+        dockPlayIcon.textContent = '▶';
         return;
       }
       nextIdx = 0;
     }
-    loadTrack(currentTapeIndex, currentSide, nextIdx, isPlaying);
+    loadTrack(currentTapeIndex, nextIdx, isPlaying);
   }
-  document.getElementById('nextTrackBtn').addEventListener('click', nextTrack);
+  document.getElementById('dockNextBtn').addEventListener('click', nextTrack);
 
   function prevTrack() {
-    playClickSound(400);
     if (audio.currentTime > 3) {
       audio.currentTime = 0;
       return;
     }
-    const tracks = getActiveTracklist();
+    const tape = MIXTAPES[currentTapeIndex];
     let prevIdx = currentTrackIndex - 1;
-    if (prevIdx < 0) prevIdx = tracks.length - 1;
-    loadTrack(currentTapeIndex, currentSide, prevIdx, isPlaying);
+    if (prevIdx < 0) prevIdx = tape.tracks.length - 1;
+    loadTrack(currentTapeIndex, prevIdx, isPlaying);
   }
-  document.getElementById('prevTrackBtn').addEventListener('click', prevTrack);
+  document.getElementById('dockPrevBtn').addEventListener('click', prevTrack);
 
-  document.getElementById('fastFwdBtn').addEventListener('click', () => {
-    playClickSound(750);
-    audio.currentTime = Math.min(audio.duration || 0, audio.currentTime + 10);
-    showToast('+10s', '►►');
-  });
-
-  document.getElementById('rewindBtn').addEventListener('click', () => {
-    playClickSound(300);
-    audio.currentTime = Math.max(0, audio.currentTime - 10);
-    showToast('-10s', '◄◄');
-  });
-
-  function toggleShuffle() {
-    playClickSound(460);
+  // Shuffle & Repeat
+  dockShuffleBtn.addEventListener('click', () => {
     isShuffle = !isShuffle;
-    shuffleBtn.classList.toggle('active', isShuffle);
-    shuffleLabel.textContent = isShuffle ? 'ON' : 'SHFL';
+    dockShuffleBtn.style.color = isShuffle ? 'var(--gold)' : 'inherit';
     showToast(isShuffle ? 'Shuffle: ON 🔀' : 'Shuffle: OFF', '🔀');
-  }
-  shuffleBtn.addEventListener('click', toggleShuffle);
+  });
 
-  function toggleRepeat() {
-    playClickSound(480);
+  dockRepeatBtn.addEventListener('click', () => {
     if (repeatMode === 'all') {
       repeatMode = 'one';
-      repeatIcon.textContent = '🔂';
-      repeatLabel.textContent = 'ONE';
-      repeatBtn.classList.add('active');
-      showToast('Repeat: Current Track 🔂', '🔂');
+      dockRepeatBtn.textContent = '🔂';
+      showToast('Repeat: One Song 🔂', '🔂');
     } else if (repeatMode === 'one') {
       repeatMode = 'off';
-      repeatIcon.textContent = '🔁';
-      repeatLabel.textContent = 'OFF';
-      repeatBtn.classList.remove('active');
+      dockRepeatBtn.textContent = '⏹';
       showToast('Repeat: OFF', '⏹');
     } else {
       repeatMode = 'all';
-      repeatIcon.textContent = '🔁';
-      repeatLabel.textContent = 'ALL';
-      repeatBtn.classList.add('active');
-      showToast('Repeat: All Tracks 🔁', '🔁');
+      dockRepeatBtn.textContent = '🔁';
+      showToast('Repeat: All 🔁', '🔁');
     }
-  }
-  repeatBtn.addEventListener('click', toggleRepeat);
+  });
 
-  function flipCassette() {
-    playClickSound(350);
-    currentSide = currentSide === 'A' ? 'B' : 'A';
-    cassetteBody.classList.toggle('is-flipped', currentSide === 'B');
-    loadTrack(currentTapeIndex, currentSide, 0, isPlaying);
-    showToast(`Flipped to Side ${currentSide}`, '↻');
-  }
-  document.getElementById('flipBtn').addEventListener('click', flipCassette);
-  cassetteBody.addEventListener('click', flipCassette);
-
-  function updateCassetteRolls(pct) {
-    const leftSize = Math.max(22, Math.round(62 - (pct * 38)));
-    const rightSize = Math.max(22, Math.round(24 + (pct * 38)));
-
-    leftTapeRoll.style.width = `${leftSize}px`;
-    leftTapeRoll.style.height = `${leftSize}px`;
-    rightTapeRoll.style.width = `${rightSize}px`;
-    rightTapeRoll.style.height = `${rightSize}px`;
-
-    leftTapeRollB.style.width = `${rightSize}px`;
-    leftTapeRollB.style.height = `${rightSize}px`;
-    rightTapeRollB.style.width = `${leftSize}px`;
-    rightTapeRollB.style.height = `${leftSize}px`;
-  }
-
+  // Scrubber Updates
   audio.addEventListener('timeupdate', () => {
     const cur = audio.currentTime || 0;
     const dur = audio.duration || 0;
-    const pct = dur > 0 ? (cur / dur) : 0;
-
-    scrubFill.style.width = `${pct * 100}%`;
-    currentTimeLabel.textContent = formatTime(cur);
-    if (dur > 0) totalDurationLabel.textContent = formatTime(dur);
-
-    updateCassetteRolls(pct);
-
-    if (isPlaying) {
-      const baseL = Math.sin(cur * 8) * 22 + 42 + Math.random() * 25;
-      const baseR = Math.cos(cur * 7) * 22 + 42 + Math.random() * 25;
-      vuLeft.style.width = `${Math.min(100, Math.max(15, baseL))}%`;
-      vuRight.style.width = `${Math.min(100, Math.max(15, baseR))}%`;
-    }
-
-    if ('mediaSession' in navigator && 'setPositionState' in navigator.mediaSession) {
-      try {
-        if (dur > 0) {
-          navigator.mediaSession.setPositionState({
-            duration: dur,
-            playbackRate: audio.playbackRate || 1,
-            position: Math.min(cur, dur)
-          });
-        }
-      } catch (e) {}
+    dockCurTime.textContent = formatTime(cur);
+    if (dur > 0) {
+      dockTotalTime.textContent = formatTime(dur);
+      dockScrubFill.style.width = `${(cur / dur) * 100}%`;
     }
   });
 
   audio.addEventListener('ended', nextTrack);
 
-  scrubTrack.addEventListener('click', (e) => {
-    const rect = scrubTrack.getBoundingClientRect();
+  dockScrubTrack.addEventListener('click', (e) => {
+    const rect = dockScrubTrack.getBoundingClientRect();
     const clickPct = (e.clientX - rect.left) / rect.width;
     if (audio.duration) {
       audio.currentTime = clickPct * audio.duration;
     }
   });
 
-  volumeSlider.addEventListener('input', (e) => {
-    audio.volume = parseFloat(e.target.value);
-  });
-
-  function startTapeCounter() {
-    stopTapeCounter();
-    tapeCounterTimer = setInterval(() => {
-      tapeCounter++;
-      tapeCounterEl.textContent = String(tapeCounter).padStart(3, '0');
-    }, 1000);
-  }
-  function stopTapeCounter() {
-    if (tapeCounterTimer) clearInterval(tapeCounterTimer);
-  }
-  document.getElementById('resetCounterBtn').addEventListener('click', () => {
-    playClickSound(800);
-    tapeCounter = 0;
-    tapeCounterEl.textContent = '000';
-  });
-
-  const tapeHissBtn = document.getElementById('tapeHissBtn');
-  tapeHissBtn.addEventListener('click', () => {
-    playClickSound(420);
-    if (!hissGain) initTapeHiss();
-    isTapeHissOn = !isTapeHissOn;
-    tapeHissBtn.classList.toggle('active', isTapeHissOn);
-    if (hissGain) {
-      hissGain.gain.setValueAtTime(isTapeHissOn ? 0.35 : 0, audioCtx.currentTime);
-    }
-    showToast(isTapeHissOn ? 'Tape Hiss: ON' : 'Tape Hiss: OFF', '📻');
-  });
-
-  const lofiMoodBtn = document.getElementById('lofiMoodBtn');
-  lofiMoodBtn.addEventListener('click', () => {
-    playClickSound(380);
-    isSlowedMoodOn = !isSlowedMoodOn;
-    lofiMoodBtn.classList.toggle('active', isSlowedMoodOn);
-    audio.playbackRate = isSlowedMoodOn ? 0.85 : 1.0;
-    showToast(isSlowedMoodOn ? 'Slowed + Reverb: ON' : 'Normal Speed', '✨');
-  });
-
-  const sleepTimerBtn = document.getElementById('sleepTimerBtn');
-  const sleepTimerLabel = document.getElementById('sleepTimerLabel');
-  const sleepDurations = [0, 15, 30, 45, 60];
-  let sleepDurationIndex = 0;
-
-  sleepTimerBtn.addEventListener('click', () => {
-    playClickSound(450);
-    sleepDurationIndex = (sleepDurationIndex + 1) % sleepDurations.length;
-    const mins = sleepDurations[sleepDurationIndex];
-
-    if (sleepTimer) clearTimeout(sleepTimer);
-
-    if (mins === 0) {
-      sleepTimerBtn.classList.remove('active');
-      sleepTimerLabel.textContent = '⏱️ Timer';
-      showToast('Sleep Timer: OFF', '⏱️');
-    } else {
-      sleepTimerBtn.classList.add('active');
-      sleepTimerLabel.textContent = `⏱️ ${mins}m`;
-      showToast(`Sleep timer set: ${mins} mins`, '⏱️');
-      sleepTimer = setTimeout(() => {
-        if (isPlaying) togglePlay();
-        sleepTimerBtn.classList.remove('active');
-        sleepTimerLabel.textContent = '⏱️ Timer';
-        sleepDurationIndex = 0;
-        showToast('Goodnight! Tape stopped 😴', '🌙');
-      }, mins * 60 * 1000);
-    }
-  });
-
-  // ===== 3. CASSETTE SHELF & SPOTIFY TABS LOGIC =====
-  const openDrawerBtn = document.getElementById('openDrawerBtn');
-  const ejectBtn = document.getElementById('ejectBtn');
-  const closeShelfBtn = document.getElementById('closeShelfBtn');
-  const mixtapesList = document.getElementById('mixtapesList');
-  const activeTracklist = document.getElementById('activeTracklist');
-
-  function openShelf(defaultTab = 'mixtapes') {
-    playClickSound(300);
-    switchTab(defaultTab);
-    renderShelf();
-    updateActiveTracklistUI();
-    renderFavoritesTab();
-    updateQueueUI();
-    tapeShelfModal.classList.add('open');
-  }
-  function closeShelf() {
-    playClickSound(400);
-    tapeShelfModal.classList.remove('open');
-  }
-
-  openDrawerBtn.addEventListener('click', () => openShelf('mixtapes'));
-  ejectBtn.addEventListener('click', () => openShelf('mixtapes'));
-  closeShelfBtn.addEventListener('click', closeShelf);
-  tapeShelfModal.addEventListener('click', (e) => {
-    if (e.target === tapeShelfModal) closeShelf();
-  });
-
-  const tabBtns = document.querySelectorAll('.shelf-tab-btn');
+  // ===== 8. CASSETTE SHELF & SEARCH MODAL =====
+  const mixtapesContainer = document.getElementById('mixtapesContainer');
+  const activeTapeTracks = document.getElementById('activeTapeTracks');
+  const drawerTabBtns = document.querySelectorAll('.drawer-tab-btn');
   const tabPanels = {
-    mixtapes: document.getElementById('tabMixtapesPanel'),
-    search: document.getElementById('tabSearchPanel'),
-    queue: document.getElementById('tabQueuePanel'),
-    favorites: document.getElementById('tabFavoritesPanel')
+    tapes: document.getElementById('panelTapes'),
+    search: document.getElementById('panelSearch'),
+    queue: document.getElementById('panelQueue'),
+    liked: document.getElementById('panelLiked')
   };
 
-  function switchTab(tabKey) {
-    tabBtns.forEach(btn => {
-      btn.classList.toggle('active', btn.dataset.tab === tabKey);
-    });
-    Object.keys(tabPanels).forEach(key => {
-      tabPanels[key].style.display = key === tabKey ? 'block' : 'none';
-    });
-    if (tabKey === 'search') {
-      setTimeout(() => document.getElementById('songSearchInput').focus(), 100);
-    }
+  function switchDrawerTab(tabKey) {
+    drawerTabBtns.forEach(btn => btn.classList.toggle('active', btn.dataset.tab === tabKey));
+    Object.keys(tabPanels).forEach(key => tabPanels[key].style.display = key === tabKey ? 'block' : 'none');
+    if (tabKey === 'search') setTimeout(() => document.getElementById('searchInput').focus(), 100);
   }
 
-  tabBtns.forEach(btn => {
-    btn.addEventListener('click', () => {
-      playClickSound(420);
-      switchTab(btn.dataset.tab);
-    });
+  drawerTabBtns.forEach(btn => {
+    btn.addEventListener('click', () => switchDrawerTab(btn.dataset.tab));
   });
 
-  document.getElementById('openSearchBtn').addEventListener('click', () => openShelf('search'));
-  document.getElementById('openQueueBtn').addEventListener('click', () => openShelf('queue'));
-  document.getElementById('openLikedBtn').addEventListener('click', () => openShelf('favorites'));
+  function openShelfModal(tab = 'tapes') {
+    switchDrawerTab(tab);
+    renderMixtapesList();
+    renderActiveTapeTracks();
+    renderLikedList();
+    updateQueueUI();
+    shelfModal.classList.add('open');
+  }
 
-  function renderShelf() {
-    mixtapesList.innerHTML = '';
+  document.getElementById('openDrawerBtn').addEventListener('click', () => openShelfModal('tapes'));
+  document.getElementById('openSearchBtn').addEventListener('click', () => openShelfModal('search'));
+  document.getElementById('openFavoritesBtn').addEventListener('click', () => openShelfModal('liked'));
+  document.getElementById('cassetteThumbnail').addEventListener('click', () => openShelfModal('tapes'));
+  document.getElementById('closeShelfBtn').addEventListener('click', () => shelfModal.classList.remove('open'));
+  shelfModal.addEventListener('click', (e) => {
+    if (e.target === shelfModal) shelfModal.classList.remove('open');
+  });
+
+  function renderMixtapesList() {
+    mixtapesContainer.innerHTML = '';
     MIXTAPES.forEach((tape, idx) => {
       const item = document.createElement('div');
-      item.className = `cassette-box-item ${idx === currentTapeIndex ? 'selected' : ''}`;
+      item.className = 'track-item';
+      if (idx === currentTapeIndex) item.classList.add('active-item');
       item.innerHTML = `
-        <div class="box-meta">
-          <div class="box-title">📼 ${tape.name}</div>
-          <div class="box-desc">${tape.desc}</div>
+        <span style="font-size:16px;">📼</span>
+        <div style="flex:1; min-width:0;">
+          <div style="font-weight:700; color:var(--paper);">${tape.name}</div>
+          <div style="font-size:11px; opacity:0.65;">${tape.desc}</div>
         </div>
-        <span class="box-tag">${tape.sideA.length + tape.sideB.length} Songs</span>
+        <span style="font-size:10px; padding:3px 8px; border-radius:10px; background:var(--brass); color:#110e0a; font-weight:700;">
+          ${tape.tracks.length} Songs
+        </span>
       `;
       item.addEventListener('click', () => {
-        loadTrack(idx, 'A', 0, isPlaying);
-        renderShelf();
-        updateActiveTracklistUI();
+        loadTrack(idx, 0, isPlaying);
+        renderMixtapesList();
+        renderActiveTapeTracks();
         showToast(`Selected: ${tape.name}`, '📼');
       });
-      mixtapesList.appendChild(item);
+      mixtapesContainer.appendChild(item);
     });
   }
 
-  function updateActiveTracklistUI() {
-    activeTracklist.innerHTML = '';
-    const tracks = getActiveTracklist();
-    tracks.forEach((t, idx) => {
+  function renderActiveTapeTracks() {
+    activeTapeTracks.innerHTML = '';
+    const tape = MIXTAPES[currentTapeIndex];
+    tape.tracks.forEach((t, idx) => {
       const row = document.createElement('div');
-      row.className = `track-row ${idx === currentTrackIndex ? 'active-track' : ''}`;
+      row.className = 'track-item';
+      if (idx === currentTrackIndex) row.classList.add('active-item');
       const isLiked = likedSongIds.has(t.id || t.title);
       row.innerHTML = `
-        <span class="num">${idx + 1}.</span>
-        <span class="title">${t.title} <small style="opacity:0.65;">(${t.artist.split('•')[0].trim()})</small></span>
-        <span class="dur">${t.duration || ''}</span>
-        <div class="track-row-actions">
-          <button class="row-action-btn ${isLiked ? 'liked' : ''}" title="Like">♥</button>
-          <button class="row-action-btn add-q" title="Add to Queue">+</button>
-        </div>
+        <span style="opacity:0.6; width:18px;">${idx + 1}.</span>
+        <span class="t-title">${t.title} <small style="opacity:0.65;">(${t.artist.split('•')[0].trim()})</small></span>
+        <span style="opacity:0.6; font-size:11px;">${t.duration}</span>
+        <button class="dock-btn add-q-btn" style="width:24px; height:24px; font-size:11px;" title="Add to queue">+Q</button>
       `;
-      row.querySelector('.title').addEventListener('click', () => {
-        loadTrack(currentTapeIndex, currentSide, idx, true);
-        closeShelf();
+      row.querySelector('.t-title').addEventListener('click', () => {
+        loadTrack(currentTapeIndex, idx, true);
+        shelfModal.classList.remove('open');
       });
-      row.querySelector('.row-action-btn:not(.add-q)').addEventListener('click', (e) => {
-        e.stopPropagation();
-        const id = t.id || t.title;
-        if (likedSongIds.has(id)) likedSongIds.delete(id);
-        else likedSongIds.add(id);
-        persistLikedSongs();
-        updateHeartButtons();
-        updateActiveTracklistUI();
-        renderFavoritesTab();
-      });
-      row.querySelector('.add-q').addEventListener('click', (e) => {
+      row.querySelector('.add-q-btn').addEventListener('click', (e) => {
         e.stopPropagation();
         playbackQueue.push(t);
         updateQueueUI();
         showToast(`Added to Queue: ${t.title}`, '📑');
       });
-      activeTracklist.appendChild(row);
+      activeTapeTracks.appendChild(row);
     });
   }
 
-  // ===== 4. SPOTIFY-STYLE LIVE SEARCH =====
-  const songSearchInput = document.getElementById('songSearchInput');
-  const clearSearchBtn = document.getElementById('clearSearchBtn');
+  // Live Search
+  const searchInput = document.getElementById('searchInput');
   const searchResultsList = document.getElementById('searchResultsList');
-  const searchResultsHeader = document.getElementById('searchResultsHeader');
+  const searchHeader = document.getElementById('searchHeader');
 
-  songSearchInput.addEventListener('input', (e) => {
+  function getAllTracks() {
+    const all = [];
+    MIXTAPES.forEach((tape, tapeIdx) => {
+      tape.tracks.forEach((t, trackIdx) => {
+        all.push({ ...t, tapeIdx, trackIdx, tapeName: tape.name });
+      });
+    });
+    return all;
+  }
+
+  searchInput.addEventListener('input', (e) => {
     const q = e.target.value.trim().toLowerCase();
-    clearSearchBtn.style.display = q ? 'block' : 'none';
     if (!q) {
-      searchResultsHeader.textContent = 'Type to search Kishore, Rafi, Lata, Jagjit, or 90s...';
+      searchHeader.textContent = 'Type to find your favorite memories...';
       searchResultsList.innerHTML = '';
       return;
     }
-
-    const all = getAllSongs();
+    const all = getAllTracks();
     const matches = all.filter(s =>
       s.title.toLowerCase().includes(q) ||
       s.artist.toLowerCase().includes(q) ||
-      (s.movie && s.movie.toLowerCase().includes(q)) ||
       (s.lyrics && s.lyrics.toLowerCase().includes(q))
     );
-
-    searchResultsHeader.textContent = `Found ${matches.length} song${matches.length === 1 ? '' : 's'}:`;
+    searchHeader.textContent = `Found ${matches.length} song${matches.length === 1 ? '' : 's'}:`;
     searchResultsList.innerHTML = '';
-
-    if (matches.length === 0) {
-      searchResultsList.innerHTML = '<div style="padding: 12px; font-size: 12px; opacity: 0.6; text-align: center;">No matches found. Try searching for singer, film, or title.</div>';
-      return;
-    }
-
-    matches.forEach((t, i) => {
+    matches.forEach(t => {
       const row = document.createElement('div');
-      row.className = 'track-row';
-      const isLiked = likedSongIds.has(t.id || t.title);
+      row.className = 'track-item';
       row.innerHTML = `
-        <span class="num">${i + 1}.</span>
-        <div style="flex: 1; min-width: 0;">
-          <div style="font-weight: 600;">${t.title}</div>
-          <div style="font-size: 11px; opacity: 0.65;">${t.artist}</div>
+        <div style="flex:1; min-width:0;">
+          <div style="font-weight:600;">${t.title}</div>
+          <div style="font-size:11px; opacity:0.65;">${t.artist}</div>
         </div>
-        <div class="track-row-actions">
-          <button class="row-action-btn ${isLiked ? 'liked' : ''}" title="Like">♥</button>
-          <button class="row-action-btn add-q" title="Add to Queue">+Q</button>
-          <button class="row-action-btn play-btn" title="Play Now" style="color: var(--gold);">▶</button>
-        </div>
+        <button class="dock-btn add-q" style="width:26px; height:26px; font-size:11px;" title="Queue">+Q</button>
+        <button class="dock-btn play-now" style="width:26px; height:26px; font-size:13px; color:var(--gold);" title="Play">▶</button>
       `;
-
-      row.querySelector('.play-btn').addEventListener('click', () => {
-        playDirectTrack(t);
-        closeShelf();
+      row.querySelector('.play-now').addEventListener('click', () => {
+        loadTrack(t.tapeIdx, t.trackIdx, true);
+        shelfModal.classList.remove('open');
       });
       row.querySelector('.add-q').addEventListener('click', (e) => {
         e.stopPropagation();
         playbackQueue.push(t);
         updateQueueUI();
         showToast(`Added to Queue: ${t.title}`, '📑');
-      });
-      row.querySelector('.row-action-btn:not(.add-q):not(.play-btn)').addEventListener('click', (e) => {
-        e.stopPropagation();
-        const id = t.id || t.title;
-        if (likedSongIds.has(id)) likedSongIds.delete(id);
-        else likedSongIds.add(id);
-        persistLikedSongs();
-        updateHeartButtons();
-        row.querySelector('.row-action-btn').classList.toggle('liked', likedSongIds.has(id));
       });
       searchResultsList.appendChild(row);
     });
   });
 
-  clearSearchBtn.addEventListener('click', () => {
-    songSearchInput.value = '';
-    clearSearchBtn.style.display = 'none';
-    searchResultsHeader.textContent = 'Type to search Kishore, Rafi, Lata, Jagjit, or 90s...';
-    searchResultsList.innerHTML = '';
-    songSearchInput.focus();
-  });
-
-  // ===== 5. UP NEXT QUEUE & FAVORITES LOGIC =====
-  const queueTracksList = document.getElementById('queueTracksList');
-  const favoritesTracksList = document.getElementById('favoritesTracksList');
-
   function updateQueueUI() {
-    queueTabCount.textContent = playbackQueue.length;
-    queueTracksList.innerHTML = '';
-
+    queueBadge.textContent = playbackQueue.length;
+    const queueList = document.getElementById('queueList');
+    queueList.innerHTML = '';
     if (playbackQueue.length === 0) {
-      queueTracksList.innerHTML = '<div style="padding: 16px; font-size: 12px; opacity: 0.6; text-align: center;">Your queue is empty. Tap "+Q" on any song to add it!</div>';
+      queueList.innerHTML = '<div style="padding:16px; font-size:12px; opacity:0.6; text-align:center;">Your queue is empty. Tap "+Q" on any song to add it!</div>';
       return;
     }
-
-    playbackQueue.forEach((t, idx) => {
+    playbackQueue.forEach((t, i) => {
       const row = document.createElement('div');
-      row.className = 'track-row';
+      row.className = 'track-item';
       row.innerHTML = `
-        <span class="num">${idx + 1}.</span>
-        <span class="title">${t.title} <small style="opacity:0.65;">(${t.artist.split('•')[0].trim()})</small></span>
-        <div class="track-row-actions">
-          <button class="row-action-btn remove-q" title="Remove from queue">✕</button>
-        </div>
+        <span style="opacity:0.6; width:18px;">${i + 1}.</span>
+        <span class="t-title">${t.title}</span>
+        <button class="dock-btn remove-btn" style="width:24px; height:24px; font-size:11px;">✕</button>
       `;
-      row.querySelector('.title').addEventListener('click', () => {
-        playbackQueue.splice(idx, 1);
-        playDirectTrack(t);
-        updateQueueUI();
-        closeShelf();
-      });
-      row.querySelector('.remove-q').addEventListener('click', (e) => {
-        e.stopPropagation();
-        playbackQueue.splice(idx, 1);
+      row.querySelector('.remove-btn').addEventListener('click', () => {
+        playbackQueue.splice(i, 1);
         updateQueueUI();
         showToast('Removed from queue', '📑');
       });
-      queueTracksList.appendChild(row);
+      queueList.appendChild(row);
     });
   }
 
@@ -2655,104 +2033,91 @@ an unforgettable memory.`
     showToast('Queue cleared', '🗑️');
   });
 
-  function renderFavoritesTab() {
-    favTabCount.textContent = likedSongIds.size;
-    likedCountBadge.textContent = likedSongIds.size;
-    favoritesTracksList.innerHTML = '';
-
-    const all = getAllSongs();
+  function renderLikedList() {
+    favPillCount.textContent = likedSongIds.size;
+    likedBadge.textContent = likedSongIds.size;
+    const likedList = document.getElementById('likedList');
+    likedList.innerHTML = '';
+    const all = getAllTracks();
     const liked = all.filter(s => likedSongIds.has(s.id || s.title));
 
     if (liked.length === 0) {
-      favoritesTracksList.innerHTML = '<div style="padding: 16px; font-size: 12px; opacity: 0.6; text-align: center;">No liked songs yet. Tap the 🤍 heart on any track to save your favorites!</div>';
+      likedList.innerHTML = '<div style="padding:16px; font-size:12px; opacity:0.6; text-align:center;">No liked songs yet. Tap the 🤍 heart to save your favorites!</div>';
       return;
     }
-
-    liked.forEach((t, idx) => {
+    liked.forEach((t, i) => {
       const row = document.createElement('div');
-      row.className = 'track-row';
+      row.className = 'track-item';
       row.innerHTML = `
-        <span class="num">${idx + 1}.</span>
-        <span class="title">${t.title} <small style="opacity:0.65;">(${t.artist.split('•')[0].trim()})</small></span>
-        <div class="track-row-actions">
-          <button class="row-action-btn liked" title="Remove from liked">♥</button>
-          <button class="row-action-btn add-q" title="Add to Queue">+Q</button>
-        </div>
+        <span style="opacity:0.6; width:18px;">${i + 1}.</span>
+        <span class="t-title">${t.title} <small style="opacity:0.65;">(${t.artist.split('•')[0].trim()})</small></span>
+        <button class="dock-btn add-q" style="width:24px; height:24px; font-size:11px;">+Q</button>
+        <button class="dock-btn un-like" style="width:24px; height:24px; font-size:12px; color:var(--crimson);">♥</button>
       `;
-      row.querySelector('.title').addEventListener('click', () => {
-        playDirectTrack(t);
-        closeShelf();
+      row.querySelector('.t-title').addEventListener('click', () => {
+        loadTrack(t.tapeIdx, t.trackIdx, true);
+        shelfModal.classList.remove('open');
       });
-      row.querySelector('.row-action-btn.liked').addEventListener('click', (e) => {
-        e.stopPropagation();
+      row.querySelector('.un-like').addEventListener('click', () => {
         likedSongIds.delete(t.id || t.title);
-        persistLikedSongs();
-        updateHeartButtons();
-        renderFavoritesTab();
-        updateActiveTracklistUI();
+        persistLiked();
+        updateHeartBtn();
+        renderLikedList();
       });
-      row.querySelector('.add-q').addEventListener('click', (e) => {
-        e.stopPropagation();
+      row.querySelector('.add-q').addEventListener('click', () => {
         playbackQueue.push(t);
         updateQueueUI();
         showToast(`Added to Queue: ${t.title}`, '📑');
       });
-      favoritesTracksList.appendChild(row);
+      likedList.appendChild(row);
     });
   }
 
-  // ===== 6. VINTAGE LYRICS SHEET =====
-  const lyricsTitle = document.getElementById('lyricsTitle');
-  const lyricsArtist = document.getElementById('lyricsArtist');
-  const lyricsBody = document.getElementById('lyricsBody');
-  const closeLyricsBtn = document.getElementById('closeLyricsBtn');
+  // ===== 9. PARCHMENT LYRICS MODAL =====
+  const lyricSongTitle = document.getElementById('lyricSongTitle');
+  const lyricArtistName = document.getElementById('lyricArtistName');
+  const lyricBodyText = document.getElementById('lyricBodyText');
 
-  function openLyrics() {
-    playClickSound(380);
-    if (!currentActiveTrack) {
-      showToast('Play a song first to view lyrics', '📜');
-      return;
-    }
-    lyricsTitle.textContent = currentActiveTrack.title;
-    lyricsArtist.textContent = currentActiveTrack.artist;
-    lyricsBody.textContent = currentActiveTrack.lyrics || 'Lyrics not available for this track yet.';
+  function openLyricsModal() {
+    const track = getCurrentTrack();
+    lyricSongTitle.textContent = track.title;
+    lyricArtistName.textContent = track.artist;
+    lyricBodyText.textContent = track.lyrics || 'Lyrics not available for this track yet.';
     lyricsModal.classList.add('open');
   }
 
-  document.getElementById('openLyricsBtnDeck').addEventListener('click', openLyrics);
-  closeLyricsBtn.addEventListener('click', () => {
-    playClickSound(400);
-    lyricsModal.classList.remove('open');
-  });
+  document.getElementById('openLyricsBtn').addEventListener('click', openLyricsModal);
+  document.getElementById('closeLyricsBtn').addEventListener('click', () => lyricsModal.classList.remove('open'));
   lyricsModal.addEventListener('click', (e) => {
     if (e.target === lyricsModal) lyricsModal.classList.remove('open');
   });
 
-  // Custom Local MP3 Loading
-  const localMp3Input = document.getElementById('localMp3Input');
-  const loadLocalFileBtn = document.getElementById('loadLocalFileBtn');
-  loadLocalFileBtn.addEventListener('click', () => localMp3Input.click());
+  // ===== 10. GENTLE INTRO FADE & KEYBOARD SHORTCUTS =====
+  window.addEventListener('DOMContentLoaded', () => {
+    // 1. Fade sepia warmup overlay after 400ms
+    setTimeout(() => {
+      warmupOverlay.classList.add('faded');
+    }, 400);
 
-  localMp3Input.addEventListener('change', (e) => {
-    const file = e.target.files[0];
-    if (file) {
-      const customUrl = URL.createObjectURL(file);
-      const cleanName = file.name.replace(/\.[^/.]+$/, '');
-      const customTrack = {
-        id: 'custom-' + Date.now(),
-        title: cleanName,
-        artist: 'My Custom Tape • Local Audio',
-        src: customUrl,
-        duration: 'Local File',
-        lyrics: 'Custom uploaded local track.'
-      };
-      MIXTAPES[0].sideA.unshift(customTrack);
-      loadTrack(0, 'A', 0, true);
-      closeShelf();
-    }
+    // 2. Let the monumental title settle, then gently recede after 5 seconds
+    setTimeout(() => {
+      heroTitleCenter.classList.add('receded');
+    }, 5200);
+
+    persistLiked();
+    loadTrack(0, 0, false);
   });
 
-  // ===== 7. GLOBAL KEYBOARD SHORTCUTS (Spotify-Style) =====
+  // Drifting listener count
+  let listeners = 348;
+  const listenerEl = document.getElementById('listenerCount');
+  setInterval(() => {
+    listeners += Math.floor(Math.random() * 5) - 2;
+    if (listeners < 290) listeners = 290;
+    listenerEl.textContent = listeners;
+  }, 4800);
+
+  // Keyboard Shortcuts (Space, Arrows, L, S, R, N, P, /)
   window.addEventListener('keydown', (e) => {
     if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
 
@@ -2767,62 +2132,26 @@ an unforgettable memory.`
       e.preventDefault();
       audio.currentTime = Math.max(0, audio.currentTime - 5);
       showToast('-5s', '◄◄');
-    } else if (e.key === 'ArrowUp') {
-      e.preventDefault();
-      audio.volume = Math.min(1, audio.volume + 0.05);
-      volumeSlider.value = audio.volume;
-      showToast(`Volume: ${Math.round(audio.volume * 100)}%`, '🔊');
-    } else if (e.key === 'ArrowDown') {
-      e.preventDefault();
-      audio.volume = Math.max(0, audio.volume - 0.05);
-      volumeSlider.value = audio.volume;
-      showToast(`Volume: ${Math.round(audio.volume * 100)}%`, '🔉');
     } else if (e.key.toLowerCase() === 'l') {
       e.preventDefault();
-      toggleLikeCurrentSong();
+      toggleLikeCurrent();
     } else if (e.key.toLowerCase() === 's') {
       e.preventDefault();
-      toggleShuffle();
+      dockShuffleBtn.click();
     } else if (e.key.toLowerCase() === 'r') {
       e.preventDefault();
-      toggleRepeat();
+      dockRepeatBtn.click();
     } else if (e.key.toLowerCase() === 'n') {
       e.preventDefault();
       nextTrack();
     } else if (e.key.toLowerCase() === 'p') {
       e.preventDefault();
       prevTrack();
-    } else if (e.key.toLowerCase() === 'f') {
-      e.preventDefault();
-      flipCassette();
     } else if (e.key === '/') {
       e.preventDefault();
-      openShelf('search');
+      openShelfModal('search');
     }
   });
-
-  // ===== 8. AMBIENCE & LIVE CLOCK =====
-  function updateClock() {
-    const now = new Date();
-    let h = now.getHours();
-    const m = String(now.getMinutes()).padStart(2, '0');
-    const ampm = h >= 12 ? 'PM' : 'AM';
-    h = h % 12; if (h === 0) h = 12;
-    document.getElementById('clockTime').textContent = `${h}:${m} ${ampm}`;
-  }
-  updateClock();
-  setInterval(updateClock, 30000);
-
-  let listeners = 348;
-  const listenerEl = document.getElementById('listenerCount');
-  setInterval(() => {
-    listeners += Math.floor(Math.random() * 5) - 2;
-    if (listeners < 280) listeners = 280;
-    listenerEl.textContent = listeners;
-  }, 4500);
-
-  persistLikedSongs();
-  loadTrack(0, 'A', 0, false);
 
   if ('serviceWorker' in navigator) {
     navigator.serviceWorker.register('sw.js').catch(() => {});
