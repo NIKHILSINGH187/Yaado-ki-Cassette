@@ -80,26 +80,19 @@
 
   .scene-backdrop {
     position: absolute;
-    inset: -5%;
-    width: 110%;
-    height: 110%;
+    inset: 0;
+    width: 100%;
+    height: 100%;
     background-size: cover;
     background-position: center;
     opacity: 0;
-    filter: brightness(0.72) contrast(1.05) saturate(1.1);
-    transform: scale(1);
-    transition: opacity 1.2s var(--ease-peaceful), transform 32s ease-in-out infinite alternate;
+    filter: brightness(0.82) contrast(1.04) saturate(1.06);
+    transition: opacity 1.2s var(--ease-peaceful);
   }
 
   .scene-backdrop.active {
     opacity: 1;
-    animation: kenBurnsDrift 36s ease-in-out infinite alternate;
-  }
-
-  @keyframes kenBurnsDrift {
-    0% { transform: scale(1) translate(0, 0); }
-    50% { transform: scale(1.06) translate(-1.5%, -1%); }
-    100% { transform: scale(1.03) translate(1.5%, 1%); }
+    /* Clean, stable & sharp without distracting wobble */
   }
 
   /* Warm Cinematic Vignette & Lighting Filter */
@@ -222,75 +215,238 @@
     border-color: rgba(37, 211, 102, 0.35);
   }
 
-  /* ===== MONUMENTAL HAND-PAINTED HINDI TITLE ===== */
-  .hero-memory-center {
+  /* ===== BRAND SIGNATURE & TOP STYLING ===== */
+  .brand-logo-group {
+    display: flex;
+    flex-direction: column;
+    text-decoration: none;
+    cursor: default;
+  }
+
+  .brand-logo-title {
+    font-family: 'Rozha One', serif;
+    font-size: clamp(22px, 3.2vw, 32px);
+    letter-spacing: 0.04em;
+    line-height: 1.1;
+    color: var(--paper);
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.9), 0 0 25px rgba(243, 194, 103, 0.45);
+    background: linear-gradient(135deg, #ffffff 40%, var(--gold) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .brand-logo-tag {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    color: var(--brass);
+    text-transform: uppercase;
+    margin-top: 1px;
+    opacity: 0.85;
+  }
+
+  /* ===== INTERACTIVE STORY HOTSPOTS LAYER ===== */
+  .interactive-hotspots-layer {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 5;
+  }
+
+  .scene-hotspot {
+    position: absolute;
+    pointer-events: auto;
+    cursor: pointer;
+    transform: translate(-50%, -50%);
     display: flex;
     flex-direction: column;
     align-items: center;
+    transition: transform 0.3s var(--ease-peaceful);
+    z-index: 6;
+  }
+
+  .scene-hotspot:hover {
+    transform: translate(-50%, -50%) scale(1.15);
+  }
+
+  .scene-hotspot:active {
+    transform: translate(-50%, -50%) scale(0.95);
+  }
+
+  .hotspot-beacon {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: rgba(22, 16, 12, 0.88);
+    border: 2px solid var(--gold);
+    color: #fff;
+    display: flex;
+    align-items: center;
     justify-content: center;
-    text-align: center;
-    margin: auto;
-    max-width: 900px;
-    transition: all 1.4s var(--ease-peaceful);
-    pointer-events: none;
-    transform: translateY(0);
-    opacity: 1;
-  }
-
-  .hero-memory-center.receded {
-    transform: translateY(-28px) scale(0.88);
-    opacity: 0.25;
-    transition: all 1.8s var(--ease-peaceful);
-  }
-  .hero-memory-center:hover {
-    opacity: 1 !important;
-    transform: translateY(-10px) scale(1) !important;
-  }
-
-  .hindi-signboard-title {
-    font-family: 'Rozha One', serif;
-    font-size: clamp(46px, 8.5vw, 108px);
-    line-height: 1.05;
-    letter-spacing: 0.04em;
-    color: #ffffff;
-    text-shadow: 0 6px 18px rgba(0, 0, 0, 0.85),
-                 0 0 35px rgba(243, 194, 103, 0.35),
-                 0 2px 4px rgba(0,0,0,0.9);
+    font-size: 20px;
+    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.8), 0 0 15px rgba(243, 194, 103, 0.5);
     position: relative;
-    display: inline-block;
-    animation: gentleGlint 6s ease-in-out infinite alternate;
+    user-select: none;
   }
 
-  @keyframes gentleGlint {
-    0% { text-shadow: 0 6px 18px rgba(0, 0, 0, 0.85), 0 0 30px rgba(243, 194, 103, 0.25); }
-    100% { text-shadow: 0 6px 18px rgba(0, 0, 0, 0.85), 0 0 55px rgba(255, 235, 178, 0.55); }
+  .hotspot-beacon::after {
+    content: '';
+    position: absolute;
+    inset: -6px;
+    border-radius: 50%;
+    border: 1.5px solid var(--gold);
+    opacity: 0.8;
+    animation: beaconPulse 2.4s ease-out infinite;
   }
 
-  .hindi-signboard-sub {
+  @keyframes beaconPulse {
+    0% { transform: scale(0.85); opacity: 0.9; }
+    100% { transform: scale(1.55); opacity: 0; }
+  }
+
+  .hotspot-label {
+    margin-top: 6px;
     font-family: 'Kalam', cursive;
-    font-size: clamp(15px, 2.2vw, 24px);
-    color: var(--paper-muted);
-    letter-spacing: 0.08em;
-    margin-top: 10px;
-    text-shadow: 0 4px 10px rgba(0,0,0,0.9);
-    opacity: 0.9;
+    font-size: 13px;
+    color: var(--paper);
+    background: rgba(14, 10, 7, 0.88);
+    border: 1px solid rgba(212, 163, 89, 0.4);
+    padding: 2px 10px;
+    border-radius: 12px;
+    white-space: nowrap;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.8);
+    backdrop-filter: blur(8px);
+    pointer-events: none;
+    transition: opacity 0.3s ease;
   }
 
-  .scene-location-pill {
-    font-size: 11px;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--brass);
-    background: rgba(14, 10, 7, 0.65);
-    border: 1px solid var(--brass-glow);
-    backdrop-filter: blur(10px);
-    padding: 5px 14px;
+  /* ===== STORY DIALOGUE / INTERACTION BUBBLE ===== */
+  .story-dialogue-card {
+    position: fixed;
+    bottom: 125px;
+    left: 50%;
+    transform: translateX(-50%) translateY(20px);
+    width: 90%;
+    max-width: 520px;
+    background: rgba(20, 15, 12, 0.95);
+    border: 1.5px solid var(--brass);
+    backdrop-filter: blur(20px);
     border-radius: 20px;
-    margin-top: 14px;
+    padding: 16px 20px;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.9), 0 0 30px rgba(212, 163, 89, 0.25);
+    z-index: 50;
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.35s var(--ease-peaceful);
+  }
+
+  .story-dialogue-card.visible {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+    pointer-events: auto;
+  }
+
+  .dialogue-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 8px;
+  }
+
+  .dialogue-title-group {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .dialogue-icon {
+    font-size: 22px;
+  }
+
+  .dialogue-title {
+    font-family: 'Kalam', cursive;
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--gold);
+  }
+
+  .dialogue-close {
+    background: transparent;
+    border: none;
+    color: var(--paper-muted);
+    font-size: 18px;
+    cursor: pointer;
+    padding: 2px 6px;
+    line-height: 1;
+  }
+  .dialogue-close:hover {
+    color: #fff;
+  }
+
+  .dialogue-text {
+    font-family: 'Kalam', cursive;
+    font-size: 15.5px;
+    line-height: 1.5;
+    color: var(--paper);
+    margin-bottom: 12px;
+  }
+
+  .dialogue-actions {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+
+  .dialogue-action-btn {
+    background: rgba(212, 163, 89, 0.2);
+    border: 1px solid var(--brass);
+    color: var(--paper);
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 12.5px;
+    font-family: 'Kalam', cursive;
+    font-weight: 700;
+    cursor: pointer;
     display: inline-flex;
     align-items: center;
     gap: 6px;
-    box-shadow: 0 4px 14px rgba(0,0,0,0.5);
+    transition: all 0.2s ease;
+  }
+
+  .dialogue-action-btn:hover {
+    background: var(--brass);
+    color: #0b0806;
+    transform: translateY(-2px);
+  }
+
+  /* Touch hint banner at bottom of scene */
+  .scene-touch-hint {
+    position: fixed;
+    top: 76px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(18, 14, 11, 0.78);
+    border: 1px solid rgba(212, 163, 89, 0.35);
+    backdrop-filter: blur(12px);
+    padding: 6px 18px;
+    border-radius: 30px;
+    font-family: 'Kalam', cursive;
+    font-size: 13.5px;
+    color: var(--gold);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.5);
+    z-index: 15;
+    pointer-events: none;
+    animation: hintFadeOut 10s forwards ease-in-out;
+  }
+
+  @keyframes hintFadeOut {
+    0%, 75% { opacity: 0.95; transform: translateX(-50%) translateY(0); }
+    100% { opacity: 0; transform: translateX(-50%) translateY(-10px); pointer-events: none; }
   }
 
   /* ===== THE FLOATING WALKMAN PLAYER DOCK (Matching Reference Image) ===== */
@@ -805,17 +961,30 @@
     opacity: 1;
   }
 
-  /* Responsive Mobile Tweaks */
-  @media (max-width: 650px) {
-    .viewport-content { padding: 16px 16px 18px; }
-    .top-shelf { flex-direction: column; gap: 8px; }
-    .hindi-signboard-title { font-size: 52px; }
-    .walkman-dock { padding: 10px 14px; gap: 10px; }
-    .mini-cassette-art { width: 44px; height: 44px; }
-    .mini-reel { width: 26px; height: 26px; }
-    .dock-btn { width: 30px; height: 30px; font-size: 13px; }
-    .dock-play-master { width: 40px; height: 40px; font-size: 14px; }
-    .track-title { font-size: 15px; }
+  /* Responsive Mobile & Desktop Layout */
+  @media (max-width: 768px) {
+    .viewport-content { padding: 12px 14px; }
+    .top-shelf { flex-direction: row; gap: 8px; }
+    .brand-logo-title { font-size: 20px; }
+    .brand-logo-tag { display: none; }
+    .retro-badge { display: none; }
+    .top-pills { gap: 6px; }
+    .nav-pill { padding: 5px 10px; font-size: 11px; }
+    .nav-pill strong { display: none; }
+    .walkman-dock-wrapper { max-width: 100%; }
+    .dock-overhead-bar { gap: 6px; }
+    .overhead-pill { padding: 4px 10px; font-size: 10.5px; }
+    .walkman-dock { padding: 10px 12px; border-radius: 18px; gap: 8px; }
+    .mini-cassette-art { width: 40px; height: 40px; }
+    .mini-reel { width: 24px; height: 24px; }
+    .dock-btn { width: 30px; height: 30px; font-size: 12px; }
+    .dock-play-master { width: 38px; height: 38px; font-size: 13px; }
+    .track-title { font-size: 13.5px; }
+    .track-artist { font-size: 10.5px; }
+    .story-dialogue-card { bottom: 110px; width: 94%; padding: 14px 16px; }
+    .scene-touch-hint { top: 62px; font-size: 12px; padding: 4px 12px; }
+    .hotspot-beacon { width: 38px; height: 38px; font-size: 17px; }
+    .hotspot-label { font-size: 11.5px; padding: 2px 7px; }
   }
 </style>
 </head>
@@ -826,23 +995,26 @@
 
 <!-- SCENIC LIVING BACKDROP (Four Memories) -->
 <div class="scenic-stage" id="scenicStage">
-  <!-- Scene 1: 80s Bazaar & Saloon (User's Exact Uploaded Reference) -->
-  <div class="scene-backdrop active" id="sceneBazaar" style="background-image: url('assets/yaado-scene.jpg');"></div>
+  <!-- Scene 1: 80s Cassette & Radio Shop (Bespoke Artwork) -->
+  <div class="scene-backdrop active" id="sceneBazaar" style="background-image: url('assets/yaado-scene.jpg?v=3');"></div>
   
-  <!-- Scene 2: Monsoon Chai Tapri -->
-  <div class="scene-backdrop" id="sceneMonsoon" style="background-image: url('assets/monsoon-tapri.svg');"></div>
+  <!-- Scene 2: Monsoon Chai Tapri (Bespoke Artwork) -->
+  <div class="scene-backdrop" id="sceneMonsoon" style="background-image: url('assets/monsoon-scene.jpg?v=3');"></div>
   
-  <!-- Scene 3: Raat Ka Safar (Night Train) -->
-  <div class="scene-backdrop" id="sceneTrain" style="background-image: url('assets/night-train.svg');"></div>
+  <!-- Scene 3: Raat Ka Safar / Sleeper Train (Bespoke Artwork) -->
+  <div class="scene-backdrop" id="sceneTrain" style="background-image: url('assets/train-scene.jpg?v=3');"></div>
   
-  <!-- Scene 4: Marine Drive Bombay Sunset -->
-  <div class="scene-backdrop" id="sceneSunset" style="background-image: url('assets/marine-drive.svg');"></div>
+  <!-- Scene 4: Marine Drive Bombay Sunset (Bespoke Artwork) -->
+  <div class="scene-backdrop" id="sceneSunset" style="background-image: url('assets/marine-scene.jpg?v=3');"></div>
 
   <!-- Cinematic Lighting Vignette -->
   <div class="cinematic-vignette"></div>
 
   <!-- Live Rain Canvas Engine -->
   <canvas id="rainCanvas"></canvas>
+
+  <!-- Interactive Story Hotspots Layer -->
+  <div class="interactive-hotspots-layer" id="hotspotsLayer"></div>
 </div>
 
 <!-- FOREGROUND INTERACTIVE VIEWPORT -->
@@ -851,15 +1023,19 @@
   <!-- Top Navigation & Brand Header -->
   <header class="top-shelf">
     <div class="brand-signature">
+      <div class="brand-logo-group">
+        <span class="brand-logo-title">यादों की कैसेट</span>
+        <span class="brand-logo-tag">80s Nostalgia Radio</span>
+      </div>
       <div class="retro-badge" id="listenerBadge">
         <span class="badge-dot"></span>
-        <span id="listenerCount">348</span> <span>सुन्ने वाले साथ हैं</span>
+        <span id="listenerCount">348</span> <span>सुनने वाले साथ हैं</span>
       </div>
     </div>
 
     <div class="top-pills">
       <button class="nav-pill" id="openThemeBtn" title="Switch between 4 Living Memories">
-        <span>🎭 Scene: <strong id="currentSceneName" style="color:var(--gold);">80s Bazaar</strong></span>
+        <span>🎭 <strong id="currentSceneName" style="color:var(--gold);">80s Cassette Shop</strong></span>
       </button>
       <button class="nav-pill" id="openSearchBtn" title="Search Songs across all tapes (Press /)">
         <span>🔍 Search</span>
@@ -876,13 +1052,22 @@
     </div>
   </header>
 
-  <!-- Monumental Hand-Painted Hindi Title -->
-  <div class="hero-memory-center" id="heroTitleCenter">
-    <h1 class="hindi-signboard-title" id="mainHindiTitle">यादों की कैसेट</h1>
-    <p class="hindi-signboard-sub" id="mainHindiSub">पुराने नगमे • भूली बिसरी यादें</p>
-    <div class="scene-location-pill" id="sceneLocationPill">
-      <span>📻 यादों की कैसेट • 1980s Small-Town Cassette & Radio Stall</span>
+  <!-- Interactive Scene Touch Hint Banner (Gently fades) -->
+  <div class="scene-touch-hint" id="sceneTouchHint">
+    <span>✨ दृश्य में पात्रों और चीज़ों को छुएं (Tap items on screen to interact)</span>
+  </div>
+
+  <!-- Interactive Story Dialogue Bubble -->
+  <div class="story-dialogue-card" id="storyDialogueCard">
+    <div class="dialogue-header">
+      <div class="dialogue-title-group">
+        <span class="dialogue-icon" id="dialogueIcon">👴</span>
+        <span class="dialogue-title" id="dialogueTitle">काका की कैसेट दुकान</span>
+      </div>
+      <button class="dialogue-close" id="dialogueCloseBtn" title="Close">✕</button>
     </div>
+    <p class="dialogue-text" id="dialogueText"></p>
+    <div class="dialogue-actions" id="dialogueActions"></div>
   </div>
 
   <!-- Floating Walkman-Style Player Dock (Matching Screenshot) -->
@@ -1101,28 +1286,331 @@
     },
     monsoon: {
       id: 'monsoon',
-      name: 'Monsoon Chai',
-      location: '🌧️ बारिश और चाय की टपरी • Cozy Monsoon Chill',
+      name: 'Monsoon Chai Tapri',
+      location: '🌧️ शर्मा चाय स्टॉल • Cozy Monsoon Tapri & Chetak',
       backdropId: 'sceneMonsoon',
       tapeIdx: 3 // Lo-Fi Monsoon
     },
     train: {
       id: 'train',
       name: 'Raat Ka Safar',
-      location: '🚂 रात का सफ़र • Indian Sleeper Window & Stars',
+      location: '🚂 रात का सफ़र • Indian Railways Sleeper Coach & Moon',
       backdropId: 'sceneTrain',
       tapeIdx: 2 // Jagjit Singh Ghazals
     },
     sunset: {
       id: 'sunset',
-      name: 'Marine Drive',
-      location: '🌅 मरीन ड्राइव की शाम • Queen\'s Necklace Sunset',
+      name: 'Marine Drive Sunset',
+      location: '🌅 मरीन ड्राइव की शाम • Bombay Padmini Taxi & Arabian Waves',
       backdropId: 'sceneSunset',
       tapeIdx: 1 // Lata & Rafi
     }
   };
 
   let currentSceneKey = 'bazaar';
+
+  // ===== AUDIO SYNTHESIZER ENGINE (Web Audio API) =====
+  const SoundFX = {
+    _ctx: null,
+    getCtx() {
+      if (!this._ctx) {
+        const AudioCtx = window.AudioContext || window.webkitAudioContext;
+        if (AudioCtx) this._ctx = new AudioCtx();
+      }
+      if (this._ctx && this._ctx.state === 'suspended') {
+        this._ctx.resume().catch(() => {});
+      }
+      return this._ctx;
+    },
+    playCycleBell() {
+      const ctx = this.getCtx();
+      if (!ctx) return;
+      const now = ctx.currentTime;
+      [0, 0.12].forEach(offset => {
+        [2400, 3100].forEach(freq => {
+          const osc = ctx.createOscillator();
+          const gain = ctx.createGain();
+          osc.type = 'sine';
+          osc.frequency.setValueAtTime(freq, now + offset);
+          gain.gain.setValueAtTime(0.18, now + offset);
+          gain.gain.exponentialRampToValueAtTime(0.001, now + offset + 0.15);
+          osc.connect(gain);
+          gain.connect(ctx.destination);
+          osc.start(now + offset);
+          osc.stop(now + offset + 0.16);
+        });
+      });
+    },
+    playCarHorn() {
+      const ctx = this.getCtx();
+      if (!ctx) return;
+      const now = ctx.currentTime;
+      [0, 0.22].forEach(offset => {
+        [440, 554].forEach(freq => {
+          const osc = ctx.createOscillator();
+          const gain = ctx.createGain();
+          osc.type = 'sawtooth';
+          osc.frequency.setValueAtTime(freq, now + offset);
+          gain.gain.setValueAtTime(0.12, now + offset);
+          gain.gain.exponentialRampToValueAtTime(0.001, now + offset + 0.18);
+          osc.connect(gain);
+          gain.connect(ctx.destination);
+          osc.start(now + offset);
+          osc.stop(now + offset + 0.19);
+        });
+      });
+    },
+    playTrainWhistle() {
+      const ctx = this.getCtx();
+      if (!ctx) return;
+      const now = ctx.currentTime;
+      [311.13, 392.00, 466.16].forEach(freq => {
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        osc.type = 'triangle';
+        osc.frequency.setValueAtTime(freq, now);
+        osc.frequency.linearRampToValueAtTime(freq * 1.02, now + 1.2);
+        gain.gain.setValueAtTime(0.01, now);
+        gain.gain.linearRampToValueAtTime(0.18, now + 0.2);
+        gain.gain.exponentialRampToValueAtTime(0.001, now + 1.6);
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+        osc.start(now);
+        osc.stop(now + 1.65);
+      });
+    },
+    playRadioTune() {
+      const ctx = this.getCtx();
+      if (!ctx) return;
+      const now = ctx.currentTime;
+      const bufferSize = Math.floor(ctx.sampleRate * 0.35);
+      const buffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
+      const data = buffer.getChannelData(0);
+      for (let i = 0; i < bufferSize; i++) data[i] = Math.random() * 2 - 1;
+      const noise = ctx.createBufferSource();
+      noise.buffer = buffer;
+      const filter = ctx.createBiquadFilter();
+      filter.type = 'bandpass';
+      filter.frequency.setValueAtTime(800, now);
+      filter.frequency.linearRampToValueAtTime(2400, now + 0.3);
+      const gain = ctx.createGain();
+      gain.gain.setValueAtTime(0.15, now);
+      gain.gain.exponentialRampToValueAtTime(0.001, now + 0.35);
+      noise.connect(filter);
+      filter.connect(gain);
+      gain.connect(ctx.destination);
+      noise.start(now);
+
+      const osc = ctx.createOscillator();
+      const oscGain = ctx.createGain();
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(1400, now + 0.05);
+      osc.frequency.linearRampToValueAtTime(600, now + 0.28);
+      oscGain.gain.setValueAtTime(0.08, now + 0.05);
+      oscGain.gain.exponentialRampToValueAtTime(0.001, now + 0.3);
+      osc.connect(oscGain);
+      oscGain.connect(ctx.destination);
+      osc.start(now + 0.05);
+      osc.stop(now + 0.31);
+    },
+    playPour() {
+      const ctx = this.getCtx();
+      if (!ctx) return;
+      const now = ctx.currentTime;
+      const bufferSize = Math.floor(ctx.sampleRate * 0.45);
+      const buffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
+      const data = buffer.getChannelData(0);
+      for (let i = 0; i < bufferSize; i++) data[i] = Math.random() * 2 - 1;
+      const noise = ctx.createBufferSource();
+      noise.buffer = buffer;
+      const filter = ctx.createBiquadFilter();
+      filter.type = 'bandpass';
+      filter.frequency.setValueAtTime(1600, now);
+      filter.Q.value = 3;
+      const gain = ctx.createGain();
+      gain.gain.setValueAtTime(0.08, now);
+      gain.gain.exponentialRampToValueAtTime(0.001, now + 0.45);
+      noise.connect(filter);
+      filter.connect(gain);
+      gain.connect(ctx.destination);
+      noise.start(now);
+    },
+    playChime() {
+      const ctx = this.getCtx();
+      if (!ctx) return;
+      const now = ctx.currentTime;
+      [880, 1174, 1318].forEach((freq, idx) => {
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(freq, now + idx * 0.07);
+        gain.gain.setValueAtTime(0.12, now + idx * 0.07);
+        gain.gain.exponentialRampToValueAtTime(0.001, now + idx * 0.07 + 0.5);
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+        osc.start(now + idx * 0.07);
+        osc.stop(now + idx * 0.07 + 0.52);
+      });
+    }
+  };
+
+  // ===== INTERACTIVE STORY HOTSPOTS DEFINITION =====
+  const SCENE_HOTSPOTS = {
+    bazaar: [
+      {
+        id: 'cycle',
+        icon: '🚲',
+        label: 'एटलस साइकिल',
+        x: 18,
+        y: 65,
+        title: 'विंटेज एटलस साइकिल',
+        text: 'टुन-टुन! अरे भाई ज़रा बचके, ताज़ा अखबार और कड़क चाय लेकर गली में जा रहे हैं!',
+        audio: 'bell'
+      },
+      {
+        id: 'shopkeeper',
+        icon: '👴',
+        label: 'काका की दुकान',
+        x: 46,
+        y: 45,
+        title: 'काका की कैसेट दुकान',
+        text: 'नमस्ते बेटा! कहिए आज कौन सा कैसेट सुनेंगे? किशोर दा के नगमे या जगजीत साहब की ग़ज़ल?',
+        options: [
+          { text: 'किशोर दा चलाओ 🎵', tapeIdx: 0, trackIdx: 0 },
+          { text: 'जगजीत साहब 🌙', tapeIdx: 2, trackIdx: 0 },
+          { text: 'रफ़ी साहब के गीत ✨', tapeIdx: 1, trackIdx: 2 }
+        ],
+        audio: 'chime'
+      },
+      {
+        id: 'radio',
+        icon: '📻',
+        label: 'रेडियो ट्यून करें',
+        x: 68,
+        y: 42,
+        title: 'फिलिप्स ट्यूब रेडियो',
+        text: 'रेडियो ट्यून हो रहा है... विविध भारती पर अगला नगमा हाज़िर है!',
+        actionBtn: { text: 'अगला गाना चलाओ ⏭️', doNext: true },
+        audio: 'radio'
+      },
+      {
+        id: 'newspaper',
+        icon: '📰',
+        label: 'दैनिक अखबार',
+        x: 82,
+        y: 65,
+        title: 'सुबह का अखबार',
+        text: 'अरे भाई साहब! आज के अखबार में लता दीदी और किशोर दा के नए तराने की बड़ी चर्चा है!',
+        audio: 'chime'
+      }
+    ],
+    monsoon: [
+      {
+        id: 'kettle',
+        icon: '☕',
+        label: 'कड़क कुल्हड़ चाय',
+        x: 45,
+        y: 60,
+        title: 'शर्मा चाय स्टॉल',
+        text: 'एकदम कड़क अदरक-इलायची वाली कुल्हड़ चाय तैयार है... साथ में बारिश का खूबसूरत नगमा!',
+        options: [
+          { text: 'रिमझिम बारिश के गीत 🌧️', tapeIdx: 3, trackIdx: 0 }
+        ],
+        audio: 'pour'
+      },
+      {
+        id: 'scooter',
+        icon: '🛵',
+        label: 'बजाज चेतक',
+        x: 18,
+        y: 65,
+        title: 'हमारा बजाज',
+        text: 'पीं-पों! बुलंद भारत की बुलंद तस्वीर — हमारा बजाज! 80 के दशक की सबसे भरोसेमंद सवारी.',
+        audio: 'horn'
+      },
+      {
+        id: 'transistor',
+        icon: '📻',
+        label: 'टपरी रेडियो',
+        x: 88,
+        y: 42,
+        title: 'टपरी का ट्रांजिस्टर',
+        text: 'रिमझिम गिरे सावन, सुलग-सुलग जाए मन... बारिश में चाय की टपरी का अपना ही मज़ा है.',
+        actionBtn: { text: 'बारिश मूड चालू करें 🌧️', toggleRain: true },
+        audio: 'radio'
+      }
+    ],
+    train: [
+      {
+        id: 'train-window',
+        icon: '🚂',
+        label: 'रेल की खिड़की',
+        x: 24,
+        y: 42,
+        title: 'ट्रेन की खिड़की और रात',
+        text: 'कू-छुक-छुक! खिड़की से आती ठंडी रात की हवा और दूर किसी अनजान स्टेशन की पीली बत्ती...',
+        audio: 'train'
+      },
+      {
+        id: 'thermos',
+        icon: '🧳',
+        label: 'ईगल थर्मस',
+        x: 44,
+        y: 58,
+        title: 'ईगल का विंटेज थर्मस',
+        text: 'सफ़र की गरम चाय और जगजीत सिंह की ग़ज़ल... रात कटने का पता ही नहीं चलता साहब.',
+        options: [
+          { text: 'जगजीत सिंह की ग़ज़ल 🌙', tapeIdx: 2, trackIdx: 0 }
+        ],
+        audio: 'pour'
+      },
+      {
+        id: 'passenger',
+        icon: '✨',
+        label: 'सफ़र का हमराही',
+        x: 74,
+        y: 52,
+        title: 'सफ़र का हमसफ़र',
+        text: 'आराम से टेक लगाइए जनाब, ये रात बहुत लंबी और सुकून से भरी है...',
+        audio: 'chime'
+      }
+    ],
+    sunset: [
+      {
+        id: 'taxi',
+        icon: '🚕',
+        label: 'पद्मिनी टैक्सी',
+        x: 18,
+        y: 72,
+        title: 'काली-पीली पद्मिनी टैक्सी',
+        text: 'पीं-पों! मीटर चालू है बाबूजी! मरीन ड्राइव से नरीमन पॉइंट तक 80s के गाने सुनेंगे?',
+        audio: 'horn'
+      },
+      {
+        id: 'sea',
+        icon: '🌊',
+        label: 'अरब सागर',
+        x: 68,
+        y: 58,
+        title: 'मरीन ड्राइव की लहरें',
+        text: 'अरब सागर की लहरें, ठंडी समुद्री हवा और डूबते सूरज की सुनहरी किरणें...',
+        options: [
+          { text: 'लता-रफ़ी का गीत 🌅', tapeIdx: 1, trackIdx: 0 }
+        ],
+        audio: 'pour'
+      },
+      {
+        id: 'lamp',
+        icon: '🏮',
+        label: 'क्वींस नेकलेस लैंप',
+        x: 36,
+        y: 32,
+        title: 'विक्टोरियन स्ट्रीट लैंप',
+        text: 'शाम ढ़लते ही जल उठती हैं मरीन ड्राइव की ये सुनहरी बत्तियां... जैसे मोतियों का हार.',
+        audio: 'chime'
+      }
+    ]
+  };
 
   // ===== 2. CURATED MIXTAPES DATABASE WITH LYRICS =====
   const MIXTAPES = [
@@ -1194,6 +1682,31 @@ Din bhi yahan toh lage baras ke samaan
 Humein tumse pyaar kitna yeh hum nahin jaante...`
         },
         {
+          id: 'o-mere-dil-ke-chain',
+          title: 'O Mere Dil Ke Chain',
+          artist: 'Kishore Kumar • Mere Jeevan Saathi (1972)',
+          src: 'https://archive.org/download/KishoreKumarRomanticsHindyugm/PalPalDilKes.mp3',
+          duration: '4:35',
+          lyrics: `O mere dil ke chain, chain aaye mere dil ko dua kijiye
+Apna hi saaya dekh ke tum jaane jahan sharma gaye
+Abhi toh yeh pehli manzil hai, tum toh abhi se ghabra gaye
+Mera kya hoga socho toh zara...
+O mere dil ke chain!`
+        },
+        {
+          id: 'yeh-shaam-mastani',
+          title: 'Yeh Shaam Mastani',
+          artist: 'Kishore Kumar • Kati Patang (1970)',
+          src: 'https://archive.org/download/KishoreKumarRomanticsHindyugm/PyarDiwanaHotaHai-KatiPatang.mp3',
+          duration: '4:38',
+          lyrics: `Yeh shaam mastani, madhosh kiye jaaye
+Mujhe dor koyi kheenche, teri ore liye jaaye...
+
+Door badi udti hai zulfon ki yeh badli
+Chhupa loon main is dil mein, teri yeh pyari chhabi
+Yeh shaam mastani...`
+        },
+        {
           id: 'palbhar-ke-liye',
           title: 'Palbhar Ke Liye Koi Hamein',
           artist: 'Kishore Kumar • Johny Mera Naam (1970)',
@@ -1256,6 +1769,20 @@ Masti hai jismein pyaar ki tum woh sharaab ho
 Chaudhvin ka chand ho ya aaftab ho...`
         },
         {
+          id: 'tere-mere-milan',
+          title: 'Tere Mere Milan Ki Yeh Raina',
+          artist: 'Lata & Kishore • Abhimaan (1973)',
+          src: 'https://archive.org/download/KishoreKumarRomanticsHindyugm/PalPalDilKes.mp3',
+          duration: '4:54',
+          lyrics: `Tere mere milan ki yeh raina, naya koi gul khilayegi
+Tabhi toh chanchal hain tere naina, dekho na
+Dekho na, tere mere milan ki yeh raina...
+
+Nanhe man ki nirmal pyari si aankhein
+Pyaar ka yeh sandesa laayengi
+Tere mere milan ki yeh raina...`
+        },
+        {
           id: 'likhe-jo-khat-tujhe',
           title: 'Likhe Jo Khat Tujhe',
           artist: 'Mohammed Rafi • Kanyadaan (1968)',
@@ -1302,6 +1829,21 @@ Meri nigaah ka tujhpe khumaar hai ke nahin
 Jhuki jhuki si nazar beqaraar hai ke nahin...`
         },
         {
+          id: 'tum-itna-jo',
+          title: 'Tum Itna Jo Muskura Rahe Ho',
+          artist: 'Jagjit Singh • Arth (1982)',
+          src: 'https://ia800707.us.archive.org/24/items/YehDaulatBhiLeLo_201602/Yeh%20Daulat%20Bhi%20Le%20Lo.mp3',
+          duration: '5:18',
+          lyrics: `Tum itna jo muskura rahe ho
+Kya gham hai jisko chhupa rahe ho...
+
+Aankhon mein nami, hansi labon par
+Kya haal hai kya dikha rahe ho
+Ban jayenge zahar peete peete
+Yeh ashq jo peete ja rahe ho
+Tum itna jo muskura rahe ho...`
+        },
+        {
           id: 'yeh-daulat-bhi',
           title: 'Yeh Daulat Bhi Le Lo',
           artist: 'Jagjit Singh • Live in Concert',
@@ -1344,6 +1886,17 @@ Kahan tum chale gaye...`
 
 Vintage Indian street sounds, steaming chai in a clay kulhad,
 warm memories echoing through the rain...`
+        },
+        {
+          id: 'rimjhim-lofi',
+          title: 'Rimjhim Gire Sawan (Acoustic Lo-Fi)',
+          artist: 'Monsoon Chai Lounge',
+          src: 'https://ia802909.us.archive.org/14/items/lofi-study-chill-relax-instrumental/lofi-study.mp3',
+          duration: '3:20',
+          lyrics: `[Acoustic Harmonium, Rain Droplets & Ambient Chai Steam]
+
+Rimjhim gire sawan, sulag sulag jaaye man...
+Bheegi bheegi raaton mein, naya rang laye man.`
         },
         {
           id: 'midnight-chai-lofi',
@@ -1394,6 +1947,13 @@ an unforgettable memory.`
   const heroTitleCenter = document.getElementById('heroTitleCenter');
   const currentSceneName = document.getElementById('currentSceneName');
   const sceneLocationPill = document.getElementById('sceneLocationPill');
+
+  const storyDialogueCard = document.getElementById('storyDialogueCard');
+  const dialogueIcon = document.getElementById('dialogueIcon');
+  const dialogueTitle = document.getElementById('dialogueTitle');
+  const dialogueText = document.getElementById('dialogueText');
+  const dialogueActions = document.getElementById('dialogueActions');
+  const dialogueCloseBtn = document.getElementById('dialogueCloseBtn');
 
   const dockSongTitle = document.getElementById('dockSongTitle');
   const dockArtistName = document.getElementById('dockArtistName');
@@ -1456,17 +2016,108 @@ an unforgettable memory.`
     if (targetBackdrop) targetBackdrop.classList.add('active');
 
     // Update scene metadata
-    currentSceneName.textContent = scene.name;
-    sceneLocationPill.textContent = scene.location;
+    if (currentSceneName) currentSceneName.textContent = scene.name;
+    if (sceneLocationPill) sceneLocationPill.textContent = scene.location;
 
     // Highlight selected card in modal
     document.querySelectorAll('.scene-card').forEach(card => {
       card.classList.toggle('selected', card.dataset.scene === sceneKey);
     });
 
+    // Render interactive hotspots for this scene
+    renderSceneHotspots(sceneKey);
+    closeStoryDialogue();
+
     // Auto-load matching curated tape for this memory
     loadTrack(scene.tapeIdx, 0, isPlaying);
     showToast(`Stepped into: ${scene.name}`, '🎭');
+  }
+
+  // Hotspots and story dialogue functions
+  let dialogueTimer = null;
+  function showStoryDialogue(spot) {
+    if (!storyDialogueCard) return;
+    if (dialogueIcon) dialogueIcon.textContent = spot.icon || '✨';
+    if (dialogueTitle) dialogueTitle.textContent = spot.title || spot.label;
+    if (dialogueText) dialogueText.textContent = spot.text;
+    if (dialogueActions) {
+      dialogueActions.innerHTML = '';
+      if (spot.options && spot.options.length) {
+        spot.options.forEach(opt => {
+          const btn = document.createElement('button');
+          btn.className = 'dialogue-action-btn';
+          btn.textContent = opt.text;
+          btn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            loadTrack(opt.tapeIdx, opt.trackIdx, true);
+            closeStoryDialogue();
+            showToast(`Playing: ${opt.text}`, '🎵');
+          });
+          dialogueActions.appendChild(btn);
+        });
+      }
+      if (spot.actionBtn) {
+        const btn = document.createElement('button');
+        btn.className = 'dialogue-action-btn';
+        btn.textContent = spot.actionBtn.text;
+        btn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          if (spot.actionBtn.doNext) nextTrack();
+          if (spot.actionBtn.toggleRain) toggleRainMood();
+          closeStoryDialogue();
+        });
+        dialogueActions.appendChild(btn);
+      }
+    }
+    storyDialogueCard.classList.add('visible');
+    if (dialogueTimer) clearTimeout(dialogueTimer);
+    dialogueTimer = setTimeout(closeStoryDialogue, 8000);
+  }
+
+  function closeStoryDialogue() {
+    if (storyDialogueCard) storyDialogueCard.classList.remove('visible');
+    if (dialogueTimer) clearTimeout(dialogueTimer);
+  }
+
+  if (dialogueCloseBtn) {
+    dialogueCloseBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      closeStoryDialogue();
+    });
+  }
+
+  function renderSceneHotspots(sceneKey) {
+    const container = document.getElementById('hotspotsLayer');
+    if (!container) return;
+    container.innerHTML = '';
+    const spots = SCENE_HOTSPOTS[sceneKey] || [];
+    spots.forEach(spot => {
+      const el = document.createElement('div');
+      el.className = 'scene-hotspot';
+      el.style.left = spot.x + '%';
+      el.style.top = spot.y + '%';
+      el.setAttribute('title', spot.title || spot.label);
+      el.innerHTML = `
+        <div class="hotspot-beacon">${spot.icon}</div>
+        <div class="hotspot-label">${spot.label}</div>
+      `;
+      el.addEventListener('click', (e) => {
+        e.stopPropagation();
+        triggerHotspot(spot);
+      });
+      container.appendChild(el);
+    });
+  }
+
+  function triggerHotspot(spot) {
+    if (spot.audio === 'bell') SoundFX.playCycleBell();
+    else if (spot.audio === 'horn') SoundFX.playCarHorn();
+    else if (spot.audio === 'train') SoundFX.playTrainWhistle();
+    else if (spot.audio === 'radio') SoundFX.playRadioTune();
+    else if (spot.audio === 'pour') SoundFX.playPour();
+    else SoundFX.playChime();
+
+    showStoryDialogue(spot);
   }
 
   document.querySelectorAll('.scene-card').forEach(card => {
@@ -2101,13 +2752,11 @@ an unforgettable memory.`
   window.addEventListener('DOMContentLoaded', () => {
     // 1. Fade sepia warmup overlay after 400ms
     setTimeout(() => {
-      warmupOverlay.classList.add('faded');
+      if (warmupOverlay) warmupOverlay.classList.add('faded');
     }, 400);
 
-    // 2. Let the monumental title settle, then gently recede after 5 seconds
-    setTimeout(() => {
-      heroTitleCenter.classList.add('receded');
-    }, 5200);
+    // 2. Render initial interactive hotspots for 80s Cassette Shop
+    renderSceneHotspots('bazaar');
 
     persistLiked();
     loadTrack(0, 0, false);
