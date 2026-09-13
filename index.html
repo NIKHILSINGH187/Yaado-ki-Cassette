@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>यादों की कैसेट — Yaado Ki Cassette | A Nostalgic Retro Indian Audio Journey</title>
 <meta name="description" content="यादों की कैसेट (Yaado Ki Cassette) — A warm, peaceful retro Indian audio retreat. Step into four living 80s memories with evergreen Bollywood classics, rain mood, and unhurried nostalgia. Crafted by Nikhil Singh.">
-<meta name="keywords" content="yaado ki cassette, nikhil singh, retro hindi songs, purane gaane, old bollywood radio, 80s india aesthetic, deluxe saloon, monsoon chai lofi, kishore kumar, jagjit singh, lata mangeshkar">
+<meta name="keywords" content="yaado ki cassette, nikhil singh, retro hindi songs, purane gaane, old bollywood radio, 80s india aesthetic, cassette stall, radio shop, monsoon chai lofi, kishore kumar, jagjit singh, lata mangeshkar">
 <meta name="author" content="Nikhil Singh">
 <link rel="canonical" href="https://nikhilsingh187.github.io/Yaado-ki-Cassette/">
 
@@ -13,7 +13,7 @@
 <meta property="og:type" content="website">
 <meta property="og:title" content="यादों की कैसेट — A Nostalgic 80s Indian Retreat">
 <meta property="og:description" content="Step into a time machine of warm memories, evergreen melodies, and peaceful rains. Crafted by Nikhil Singh.">
-<meta property="og:image" content="https://nikhilsingh187.github.io/Yaado-ki-Cassette/assets/deluxe-saloon.jpg">
+<meta property="og:image" content="https://nikhilsingh187.github.io/Yaado-ki-Cassette/assets/yaado-scene.jpg">
 <meta property="og:url" content="https://nikhilsingh187.github.io/Yaado-ki-Cassette/">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="theme-color" content="#1a1410">
@@ -238,8 +238,13 @@
   }
 
   .hero-memory-center.receded {
-    transform: translateY(-16px) scale(0.92);
-    opacity: 0.78;
+    transform: translateY(-28px) scale(0.88);
+    opacity: 0.25;
+    transition: all 1.8s var(--ease-peaceful);
+  }
+  .hero-memory-center:hover {
+    opacity: 1 !important;
+    transform: translateY(-10px) scale(1) !important;
   }
 
   .hindi-signboard-title {
@@ -822,7 +827,7 @@
 <!-- SCENIC LIVING BACKDROP (Four Memories) -->
 <div class="scenic-stage" id="scenicStage">
   <!-- Scene 1: 80s Bazaar & Saloon (User's Exact Uploaded Reference) -->
-  <div class="scene-backdrop active" id="sceneBazaar" style="background-image: url('assets/deluxe-saloon.jpg');"></div>
+  <div class="scene-backdrop active" id="sceneBazaar" style="background-image: url('assets/yaado-scene.jpg');"></div>
   
   <!-- Scene 2: Monsoon Chai Tapri -->
   <div class="scene-backdrop" id="sceneMonsoon" style="background-image: url('assets/monsoon-tapri.svg');"></div>
@@ -876,7 +881,7 @@
     <h1 class="hindi-signboard-title" id="mainHindiTitle">यादों की कैसेट</h1>
     <p class="hindi-signboard-sub" id="mainHindiSub">पुराने नगमे • भूली बिसरी यादें</p>
     <div class="scene-location-pill" id="sceneLocationPill">
-      <span>💈 डी ल क्स सैलून • 1980s Small Town Radio</span>
+      <span>📻 यादों की कैसेट • 1980s Small-Town Cassette & Radio Stall</span>
     </div>
   </div>
 
@@ -979,10 +984,10 @@
       <!-- Theme 1 -->
       <div class="scene-card selected" data-scene="bazaar">
         <div class="scene-card-header">
-          <span class="scene-card-title">💈 80s Bazaar & Saloon</span>
+          <span class="scene-card-title">📻 80s Cassette & Radio Shop</span>
           <span class="scene-card-tag">Kishore Kumar</span>
         </div>
-        <p class="scene-card-desc">Sunlit small-town afternoon street, barber humming along to golden melodies. Warm gold and dusty orange tones.</p>
+        <p class="scene-card-desc">A sunlit small-town street with a vintage tape & radio shop. Warm red brick, tea on the porch, Kishore Kumar playing from the deck.</p>
       </div>
 
       <!-- Theme 2 -->
@@ -1089,8 +1094,8 @@
   const SCENE_THEMES = {
     bazaar: {
       id: 'bazaar',
-      name: '80s Bazaar',
-      location: '💈 डी ल क्स सैलून • 1980s Small Town Radio',
+      name: '80s Cassette Shop',
+      location: '📻 यादों की कैसेट • 1980s Small-Town Cassette & Radio Stall',
       backdropId: 'sceneBazaar',
       tapeIdx: 0 // Kishore Kumar
     },
@@ -1697,7 +1702,7 @@ an unforgettable memory.`
           title: track.title,
           artist: track.artist,
           album: tape.name,
-          artwork: [{ src: 'assets/deluxe-saloon.jpg', sizes: '512x512', type: 'image/jpeg' }]
+          artwork: [{ src: 'assets/yaado-scene.jpg', sizes: '512x512', type: 'image/jpeg' }]
         });
         navigator.mediaSession.setActionHandler('play', togglePlay);
         navigator.mediaSession.setActionHandler('pause', togglePlay);
