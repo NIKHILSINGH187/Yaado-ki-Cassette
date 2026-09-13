@@ -1,5 +1,5 @@
 // Yaado Ki Cassette Service Worker - v5.0
-const CACHE_NAME = 'yaado-v6';
+const CACHE_NAME = 'yaado-v7';
 
 self.addEventListener('install', (event) => {
   self.skipWaiting();
