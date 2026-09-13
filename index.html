@@ -88,8 +88,8 @@
     background-size: cover;
     background-position: center;
     opacity: 0;
-    filter: brightness(0.82) contrast(1.04) saturate(1.06);
-    transition: opacity 1.2s var(--ease-peaceful);
+    filter: brightness(1.04) contrast(1.1) saturate(1.25);
+    transition: opacity 1s var(--ease-peaceful);
   }
 
   .scene-backdrop.active {
@@ -97,13 +97,13 @@
     /* Clean, stable & sharp without distracting wobble */
   }
 
-  /* Warm Cinematic Vignette & Lighting Filter */
+  /* Soft Ambient Vignette - kept light so art stays vivid and colorful */
   .cinematic-vignette {
     position: absolute;
     inset: 0;
     pointer-events: none;
-    background: radial-gradient(circle at center, rgba(14, 10, 7, 0.1) 0%, rgba(10, 7, 5, 0.6) 75%, rgba(6, 4, 3, 0.9) 100%),
-                linear-gradient(180deg, rgba(8,6,4,0.45) 0%, rgba(8,6,4,0.05) 45%, rgba(8,6,4,0.85) 100%);
+    background: radial-gradient(circle at center, transparent 55%, rgba(6, 4, 3, 0.35) 100%),
+                linear-gradient(180deg, rgba(8,6,4,0.2) 0%, transparent 20%, transparent 80%, rgba(8,6,4,0.55) 100%);
     z-index: 1;
   }
 
@@ -120,6 +120,16 @@
   }
   #rainCanvas.raining {
     opacity: 0.85;
+  }
+
+  /* Continuous Living Ambient Animations Canvas */
+  #ambientFXCanvas {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 3;
   }
 
   /* ===== FOREGROUND STAGE & MEMORY TITLE ===== */
@@ -247,7 +257,7 @@
     opacity: 0.85;
   }
 
-  /* ===== INTERACTIVE STORY HOTSPOTS LAYER ===== */
+  /* ===== INTERACTIVE STORY TOUCH ZONES ===== */
   .interactive-hotspots-layer {
     position: absolute;
     inset: 0;
@@ -257,71 +267,35 @@
     z-index: 5;
   }
 
+  /* Completely transparent, natural touch zones — no ugly circles! */
   .scene-hotspot {
     position: absolute;
     pointer-events: auto;
     cursor: pointer;
     transform: translate(-50%, -50%);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    transition: transform 0.3s var(--ease-peaceful);
+    width: 110px;
+    height: 110px;
+    border-radius: 50%;
+    background: transparent;
     z-index: 6;
+    -webkit-tap-highlight-color: transparent;
   }
 
-  .scene-hotspot:hover {
-    transform: translate(-50%, -50%) scale(1.15);
-  }
-
-  .scene-hotspot:active {
-    transform: translate(-50%, -50%) scale(0.95);
-  }
-
-  .hotspot-beacon {
-    width: 44px;
-    height: 44px;
+  /* Ripple animation that only appears when touched */
+  .touch-ripple {
+    position: fixed;
     border-radius: 50%;
-    background: rgba(22, 16, 12, 0.88);
+    transform: translate(-50%, -50%) scale(0);
     border: 2px solid var(--gold);
-    color: #fff;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 20px;
-    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.8), 0 0 15px rgba(243, 194, 103, 0.5);
-    position: relative;
-    user-select: none;
-  }
-
-  .hotspot-beacon::after {
-    content: '';
-    position: absolute;
-    inset: -6px;
-    border-radius: 50%;
-    border: 1.5px solid var(--gold);
-    opacity: 0.8;
-    animation: beaconPulse 2.4s ease-out infinite;
-  }
-
-  @keyframes beaconPulse {
-    0% { transform: scale(0.85); opacity: 0.9; }
-    100% { transform: scale(1.55); opacity: 0; }
-  }
-
-  .hotspot-label {
-    margin-top: 6px;
-    font-family: 'Kalam', cursive;
-    font-size: 13px;
-    color: var(--paper);
-    background: rgba(14, 10, 7, 0.88);
-    border: 1px solid rgba(212, 163, 89, 0.4);
-    padding: 2px 10px;
-    border-radius: 12px;
-    white-space: nowrap;
-    text-shadow: 0 2px 4px rgba(0,0,0,0.8);
-    backdrop-filter: blur(8px);
+    background: radial-gradient(circle, rgba(243, 194, 103, 0.45) 0%, transparent 70%);
     pointer-events: none;
-    transition: opacity 0.3s ease;
+    z-index: 100;
+    animation: touchRippleAnim 0.75s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+  }
+
+  @keyframes touchRippleAnim {
+    0% { transform: translate(-50%, -50%) scale(0.1); opacity: 1; }
+    100% { transform: translate(-50%, -50%) scale(2.2); opacity: 0; }
   }
 
   /* ===== STORY DIALOGUE / INTERACTION BUBBLE ===== */
@@ -985,8 +959,7 @@
     .track-artist { font-size: 10.5px; }
     .story-dialogue-card { bottom: 110px; width: 94%; padding: 14px 16px; }
     .scene-touch-hint { top: 62px; font-size: 12px; padding: 4px 12px; }
-    .hotspot-beacon { width: 38px; height: 38px; font-size: 17px; }
-    .hotspot-label { font-size: 11.5px; padding: 2px 7px; }
+    .scene-hotspot { width: 80px; height: 80px; }
   }
 </style>
 </head>
@@ -998,22 +971,25 @@
 <!-- SCENIC LIVING BACKDROP (Four Memories) -->
 <div class="scenic-stage" id="scenicStage">
   <!-- Scene 1: 80s Cassette & Radio Shop (Bespoke Artwork) -->
-  <div class="scene-backdrop active" id="sceneBazaar" style="background-image: url('assets/yaado-scene.jpg?v=3');"></div>
+  <div class="scene-backdrop active" id="sceneBazaar" style="background-image: url('assets/yaado-scene.jpg?v=4');"></div>
   
   <!-- Scene 2: Monsoon Chai Tapri (Bespoke Artwork) -->
-  <div class="scene-backdrop" id="sceneMonsoon" style="background-image: url('assets/monsoon-scene.jpg?v=3');"></div>
+  <div class="scene-backdrop" id="sceneMonsoon" style="background-image: url('assets/monsoon-scene.jpg?v=4');"></div>
   
-  <!-- Scene 3: Raat Ka Safar / Sleeper Train (Bespoke Artwork) -->
-  <div class="scene-backdrop" id="sceneTrain" style="background-image: url('assets/train-scene.jpg?v=3');"></div>
+  <!-- Scene 3: Raat Ka Safar / Sleeper Train (Bespoke Borderless Artwork) -->
+  <div class="scene-backdrop" id="sceneTrain" style="background-image: url('assets/train-scene.jpg?v=4');"></div>
   
-  <!-- Scene 4: Marine Drive Bombay Sunset (Bespoke Artwork) -->
-  <div class="scene-backdrop" id="sceneSunset" style="background-image: url('assets/marine-scene.jpg?v=3');"></div>
+  <!-- Scene 4: Marine Drive Bombay Sunset (Bespoke Borderless Artwork) -->
+  <div class="scene-backdrop" id="sceneSunset" style="background-image: url('assets/marine-scene.jpg?v=4');"></div>
 
   <!-- Cinematic Lighting Vignette -->
   <div class="cinematic-vignette"></div>
 
   <!-- Live Rain Canvas Engine -->
   <canvas id="rainCanvas"></canvas>
+
+  <!-- Continuous Living Ambient Animations Canvas -->
+  <canvas id="ambientFXCanvas"></canvas>
 
   <!-- Interactive Story Hotspots Layer -->
   <div class="interactive-hotspots-layer" id="hotspotsLayer"></div>
@@ -1547,8 +1523,8 @@
         id: 'train-window',
         icon: '🚂',
         label: 'रेल की खिड़की',
-        x: 24,
-        y: 42,
+        x: 38,
+        y: 36,
         title: 'ट्रेन की खिड़की और रात',
         text: 'कू-छुक-छुक! खिड़की से आती ठंडी रात की हवा और दूर किसी अनजान स्टेशन की पीली बत्ती...',
         audio: 'train'
@@ -1557,8 +1533,8 @@
         id: 'thermos',
         icon: '🧳',
         label: 'ईगल थर्मस',
-        x: 44,
-        y: 58,
+        x: 42,
+        y: 64,
         title: 'ईगल का विंटेज थर्मस',
         text: 'सफ़र की गरम चाय और जगजीत सिंह की ग़ज़ल... रात कटने का पता ही नहीं चलता साहब.',
         options: [
@@ -1570,8 +1546,8 @@
         id: 'passenger',
         icon: '✨',
         label: 'सफ़र का हमराही',
-        x: 74,
-        y: 52,
+        x: 62,
+        y: 56,
         title: 'सफ़र का हमसफ़र',
         text: 'आराम से टेक लगाइए जनाब, ये रात बहुत लंबी और सुकून से भरी है...',
         audio: 'chime'
@@ -1582,8 +1558,8 @@
         id: 'taxi',
         icon: '🚕',
         label: 'पद्मिनी टैक्सी',
-        x: 18,
-        y: 72,
+        x: 32,
+        y: 76,
         title: 'काली-पीली पद्मिनी टैक्सी',
         text: 'पीं-पों! मीटर चालू है बाबूजी! मरीन ड्राइव से नरीमन पॉइंट तक 80s के गाने सुनेंगे?',
         audio: 'horn'
@@ -1592,8 +1568,8 @@
         id: 'sea',
         icon: '🌊',
         label: 'अरब सागर',
-        x: 68,
-        y: 58,
+        x: 75,
+        y: 60,
         title: 'मरीन ड्राइव की लहरें',
         text: 'अरब सागर की लहरें, ठंडी समुद्री हवा और डूबते सूरज की सुनहरी किरणें...',
         options: [
@@ -1605,8 +1581,8 @@
         id: 'lamp',
         icon: '🏮',
         label: 'क्वींस नेकलेस लैंप',
-        x: 36,
-        y: 32,
+        x: 54,
+        y: 30,
         title: 'विक्टोरियन स्ट्रीट लैंप',
         text: 'शाम ढ़लते ही जल उठती हैं मरीन ड्राइव की ये सुनहरी बत्तियां... जैसे मोतियों का हार.',
         audio: 'chime'
@@ -2099,16 +2075,23 @@ an unforgettable memory.`
       el.style.left = spot.x + '%';
       el.style.top = spot.y + '%';
       el.setAttribute('title', spot.title || spot.label);
-      el.innerHTML = `
-        <div class="hotspot-beacon">${spot.icon}</div>
-        <div class="hotspot-label">${spot.label}</div>
-      `;
+      // Clean, invisible natural hitbox — no annoying persistent circles!
       el.addEventListener('click', (e) => {
         e.stopPropagation();
+        createTouchRipple(e.clientX, e.clientY);
         triggerHotspot(spot);
       });
       container.appendChild(el);
     });
+  }
+
+  function createTouchRipple(x, y) {
+    const ripple = document.createElement('div');
+    ripple.className = 'touch-ripple';
+    ripple.style.left = (x || window.innerWidth / 2) + 'px';
+    ripple.style.top = (y || window.innerHeight / 2) + 'px';
+    document.body.appendChild(ripple);
+    setTimeout(() => ripple.remove(), 750);
   }
 
   function triggerHotspot(spot) {
@@ -2121,6 +2104,197 @@ an unforgettable memory.`
 
     showStoryDialogue(spot);
   }
+
+  // ===== CONTINUOUS AMBIENT LIVING ANIMATIONS ENGINE =====
+  const ambientCanvas = document.getElementById('ambientFXCanvas');
+  const ambCtx = ambientCanvas ? ambientCanvas.getContext('2d') : null;
+
+  function resizeAmbientCanvas() {
+    if (!ambientCanvas) return;
+    ambientCanvas.width = window.innerWidth;
+    ambientCanvas.height = window.innerHeight;
+  }
+  window.addEventListener('resize', resizeAmbientCanvas);
+  resizeAmbientCanvas();
+
+  // Living Ambient Particle States
+  const dustMotes = [];
+  for (let i = 0; i < 40; i++) {
+    dustMotes.push({
+      x: Math.random() * window.innerWidth,
+      y: Math.random() * window.innerHeight,
+      r: Math.random() * 2 + 0.8,
+      speedX: (Math.random() - 0.45) * 0.4,
+      speedY: -Math.random() * 0.45 - 0.2,
+      alpha: Math.random() * 0.55 + 0.2
+    });
+  }
+
+  const liveSteamPuffs = [];
+  const passingSignals = [];
+  let signalCounter = 0;
+
+  function animateAmbientLivingScenes() {
+    if (!ambCtx || !ambientCanvas) return;
+    ambCtx.clearRect(0, 0, ambientCanvas.width, ambientCanvas.height);
+    const w = ambientCanvas.width;
+    const h = ambientCanvas.height;
+
+    if (currentSceneKey === 'bazaar') {
+      // 1. Golden sunbeams & floating golden dust motes across the shop
+      ambCtx.fillStyle = 'rgba(255, 220, 140, 0.035)';
+      ambCtx.beginPath();
+      ambCtx.moveTo(w * 0.35, 0);
+      ambCtx.lineTo(w * 0.65, 0);
+      ambCtx.lineTo(w * 0.85, h);
+      ambCtx.lineTo(w * 0.25, h);
+      ambCtx.closePath();
+      ambCtx.fill();
+
+      // Floating sun motes
+      dustMotes.forEach(p => {
+        p.x += p.speedX;
+        p.y += p.speedY;
+        if (p.y < 0) p.y = h;
+        if (p.x < 0) p.x = w;
+        if (p.x > w) p.x = 0;
+
+        ambCtx.fillStyle = `rgba(255, 235, 170, ${p.alpha * 0.65})`;
+        ambCtx.beginPath();
+        ambCtx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+        ambCtx.fill();
+      });
+    } else if (currentSceneKey === 'monsoon') {
+      // 2. Continuous rising steam from chai kettle and glasses
+      if (Math.random() < 0.3) {
+        liveSteamPuffs.push({
+          x: w * 0.45 + (Math.random() * 20 - 10),
+          y: h * 0.62,
+          vx: (Math.random() - 0.4) * 0.5,
+          vy: -Math.random() * 1.2 - 0.8,
+          radius: 4,
+          maxRadius: 28,
+          alpha: 0.45
+        });
+      }
+      for (let i = liveSteamPuffs.length - 1; i >= 0; i--) {
+        const s = liveSteamPuffs[i];
+        s.x += s.vx + Math.sin(s.y * 0.05) * 0.4;
+        s.y += s.vy;
+        s.radius += 0.35;
+        s.alpha -= 0.007;
+        if (s.alpha <= 0) {
+          liveSteamPuffs.splice(i, 1);
+          continue;
+        }
+        const grad = ambCtx.createRadialGradient(s.x, s.y, 0, s.x, s.y, s.radius);
+        grad.addColorStop(0, `rgba(255, 255, 255, ${s.alpha})`);
+        grad.addColorStop(1, 'rgba(255, 255, 255, 0)');
+        ambCtx.fillStyle = grad;
+        ambCtx.beginPath();
+        ambCtx.arc(s.x, s.y, s.radius, 0, Math.PI * 2);
+        ambCtx.fill();
+      }
+    } else if (currentSceneKey === 'train') {
+      // 3. Sleeper Train window - twinkling stars & passing railway signal lights
+      const starTime = Date.now() * 0.002;
+      for (let i = 0; i < 24; i++) {
+        const sx = w * 0.22 + (i * 23 % (w * 0.36));
+        const sy = h * 0.22 + ((i * 37) % (h * 0.24));
+        const twinkle = (Math.sin(starTime + i) + 1) * 0.5;
+        ambCtx.fillStyle = `rgba(255, 255, 255, ${twinkle * 0.85})`;
+        ambCtx.beginPath();
+        ambCtx.arc(sx, sy, 1.3, 0, Math.PI * 2);
+        ambCtx.fill();
+      }
+
+      // Passing yellow signal lights drifting left (train forward motion!)
+      signalCounter++;
+      if (signalCounter % 130 === 0) {
+        passingSignals.push({
+          x: w * 0.58,
+          y: h * 0.38,
+          color: Math.random() < 0.75 ? 'rgba(255, 195, 45,' : 'rgba(74, 222, 128,',
+          alpha: 0.95,
+          radius: 6
+        });
+      }
+      for (let i = passingSignals.length - 1; i >= 0; i--) {
+        const sig = passingSignals[i];
+        sig.x -= 3.8;
+        sig.radius += 0.04;
+        if (sig.x < w * 0.2) {
+          passingSignals.splice(i, 1);
+          continue;
+        }
+        const grad = ambCtx.createRadialGradient(sig.x, sig.y, 0, sig.x, sig.y, sig.radius * 3.2);
+        grad.addColorStop(0, sig.color + `${sig.alpha})`);
+        grad.addColorStop(0.4, sig.color + `${sig.alpha * 0.35})`);
+        grad.addColorStop(1, 'transparent');
+        ambCtx.fillStyle = grad;
+        ambCtx.beginPath();
+        ambCtx.arc(sig.x, sig.y, sig.radius * 3.2, 0, Math.PI * 2);
+        ambCtx.fill();
+      }
+
+      // Gentle steam from chai glass on table
+      if (Math.random() < 0.22) {
+        liveSteamPuffs.push({
+          x: w * 0.505 + (Math.random() * 6 - 3),
+          y: h * 0.69,
+          vx: (Math.random() - 0.5) * 0.2,
+          vy: -Math.random() * 0.8 - 0.4,
+          radius: 2.5,
+          maxRadius: 15,
+          alpha: 0.35
+        });
+      }
+      for (let i = liveSteamPuffs.length - 1; i >= 0; i--) {
+        const s = liveSteamPuffs[i];
+        s.x += s.vx + Math.sin(s.y * 0.04) * 0.3;
+        s.y += s.vy;
+        s.radius += 0.22;
+        s.alpha -= 0.008;
+        if (s.alpha <= 0) {
+          liveSteamPuffs.splice(i, 1);
+          continue;
+        }
+        ambCtx.fillStyle = `rgba(255, 255, 255, ${s.alpha * 0.55})`;
+        ambCtx.beginPath();
+        ambCtx.arc(s.x, s.y, s.radius, 0, Math.PI * 2);
+        ambCtx.fill();
+      }
+    } else if (currentSceneKey === 'sunset') {
+      // 4. Marine Drive Sunset - Arabian Sea water reflections & Victorian lamp glow
+      const time = Date.now() * 0.003;
+      // Ocean wave golden shimmer
+      for (let i = 0; i < 14; i++) {
+        const wx = w * 0.6 + Math.sin(time + i) * 60 + i * 26;
+        const wy = h * 0.55 + (i * 12) + Math.cos(time + i * 0.5) * 4;
+        const waveAlpha = (Math.sin(time * 2 + i) + 1) * 0.25;
+        ambCtx.fillStyle = `rgba(255, 220, 140, ${waveAlpha})`;
+        ambCtx.beginPath();
+        ambCtx.ellipse(wx, wy, 24 + i * 3, 3.5, 0, 0, Math.PI * 2);
+        ambCtx.fill();
+      }
+
+      // Victorian streetlamp warm pulsating glow
+      const lampGlow = (Math.sin(time * 1.5) + 1) * 0.15 + 0.35;
+      const lx = w * 0.535;
+      const ly = h * 0.17;
+      const lampGrad = ambCtx.createRadialGradient(lx, ly, 0, lx, ly, 45);
+      lampGrad.addColorStop(0, `rgba(255, 220, 100, ${lampGlow})`);
+      lampGrad.addColorStop(0.5, `rgba(255, 180, 50, ${lampGlow * 0.3})`);
+      lampGrad.addColorStop(1, 'transparent');
+      ambCtx.fillStyle = lampGrad;
+      ambCtx.beginPath();
+      ambCtx.arc(lx, ly, 45, 0, Math.PI * 2);
+      ambCtx.fill();
+    }
+
+    requestAnimationFrame(animateAmbientLivingScenes);
+  }
+  requestAnimationFrame(animateAmbientLivingScenes);
 
   document.querySelectorAll('.scene-card').forEach(card => {
     card.addEventListener('click', () => {
