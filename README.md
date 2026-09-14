@@ -61,4 +61,4 @@
 - HTML5 Audio API (ad-free playback with sub-second buffer response)
 - Web Media Session API (lock-screen controls & metadata display)
 - Web App Manifest + Service Worker (PWA installable)
-- GitHub Pages
+- GitHub Pages.
